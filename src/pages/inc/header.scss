@@ -1,0 +1,9 @@
+.nav-link {
+  color: #666666;
+  &:hover{
+    color: #333333;
+  }
+  &.active {
+    font-weight: bold;
+  }
+}

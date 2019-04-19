@@ -1,0 +1,11 @@
+*INSTALL
+
+;run rm -rf package-lock.json
+https://react-bootstrap.github.io/getting-started/introduction
+
+npm install --save redux react-redux
+npm install sass-loader node-sass --save-dev
+npm install --save-dev style-loader css-loader
+
+
+
