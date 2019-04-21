@@ -4,8 +4,17 @@
 https://react-bootstrap.github.io/getting-started/introduction
 
 npm install --save redux react-redux
+npm install --save-dev nodemon
+npm install --save redux-thunk
+npm install --save classnames // className에 여러개의 클래스를 적용할때
+
+
 npm install sass-loader node-sass --save-dev
 npm install --save-dev style-loader css-loader
 
 
 
+
+
+*메인폰트컬러
+#22741C

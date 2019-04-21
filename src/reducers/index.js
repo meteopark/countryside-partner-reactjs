@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-// import {searchLists} from './search';
+import {mainLists} from './main';
 
 export const reducers = combineReducers({
-    // search: searchLists
+    mains: mainLists // state.mains 값은 reducers/index.js 의 키값과 같아야 한다
 });

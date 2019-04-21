@@ -1,0 +1,31 @@
+
+.nav-link {
+  color: #666666;
+  &:hover{
+    color: #333333;
+  }
+  &.active {
+    font-weight: bold;
+  }
+}
+
+body{
+  font-family: 'Batang_Bold', sans-serif;
+}
+
+
+.header-title {
+  font-family: 'Batang_Bold', sans-serif;
+}
+.header-menu {
+  font-family: 'Batang_Bold', sans-serif;
+}
+
+.sub-title {
+  font-family: 'Batang_Bold', sans-serif;
+  color: #22741C;
+}
+.sub-title-menu {
+  font-size: 1.9em;
+}
+

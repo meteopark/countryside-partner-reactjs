@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+
+
+@font-face{
+    font-family:'Title_Medium';
+    src:url('fonts/Title_Medium.otf'),
+        url('fonts/woff/Title_Medium.woff') format('woff');
+}
+
+@font-face{
+    font-family:'Title_Light';
+    src:url('fonts/Title_Light.otf');
+    src:url('fonts/woff/Title_Light.woff') format('woff');
+}
+
+@font-face{font-family:'Batang_Bold'; src:url('fonts/woff/Batang_Bold.woff') format('woff')}
+@font-face{font-family:'Batang_Regular'; src:url('fonts/woff/Batang_Regular.woff') format('woff')}
+@font-face{font-family:'Title_Bold'; src:url('fonts/woff/Title_Bold.woff') format('woff')}
+@font-face{font-family:'TitleV'; src:url('fonts/woff/TitleV.woff') format('woff')}
+
+
