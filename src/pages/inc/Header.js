@@ -22,7 +22,7 @@ export class Header extends Component {
             <div className="container">
                 <Navbar bg="light" variant="light" expand="lg" className="justify-content-center">
                     <Navbar.Brand className={styles['header-title']} href="/" >
-                        <div className={styles['header-title']}>우리마을체험</div>
+                        <div className={styles['header-title']}><img src="./images/logo.png" width="300" alt="우리마을체험"/></div>
                     </Navbar.Brand>
 
                 </Navbar>

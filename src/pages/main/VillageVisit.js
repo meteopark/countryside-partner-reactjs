@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Card, CardColumns } from 'react-bootstrap';
 import {connect} from "react-redux";
-import styles from '../inc/Header.module.scss';
+import styles from './Main.module.scss';
+import classNames from 'classnames';
+
 
 export class VillageVisit extends Component {
 
@@ -13,9 +15,9 @@ export class VillageVisit extends Component {
     render() {
 
         return (
-            <div className="container">
+            <div className={classNames('container', styles['in-container'])}>
                 <h5>
-                    <div className={styles['sub-title']}>우리마을에 놀러와요.</div>
+                    <div className={styles['sub-title']}>우리마을에 놀러와요</div>
                 </h5>
                 <CardColumns>
                     {this.props.mains.lists.map((village, i) => (

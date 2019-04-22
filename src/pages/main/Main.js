@@ -1,13 +1,20 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Header} from "../inc/Header";
-import VillageVisit from "./VillageVisit";
-import {ControlledCarousel} from "../inc/ControlledCarousel";
-import { bindActionCreators } from 'redux';
+import Footer from "../inc/Footer";
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
+import styles from './Main.module.scss';
+
+// inc main
+import SideNav from "../inc/SideNav";
+import VillageVisit from "./VillageVisit";
+import {ControlledCarousel} from "./ControlledCarousel";
 
 
-class Main extends React.Component {
+
+
+class Main extends Component {
 
     constructor(props) {
 
@@ -19,16 +26,29 @@ class Main extends React.Component {
         const { mains } = this.props;
 
         return (
+
             <div>
                 <Header />
-                <hr/>
-                <VillageVisit/>
-                <br/>
-                <ControlledCarousel/>
+
+                <div className={styles['full-container']}>
+
+
+                    <SideNav />
+                    <hr/>
+
+                    <ControlledCarousel/>
+                    <br/>
+                    <VillageVisit />
+                    <br/>
+
+                </div>
+
+                <Footer />
             </div>
+
         );
     }
-
+// <ControlledCarousel/>
     componentDidMount() {
 
         const { getMains } = this.props;

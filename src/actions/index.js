@@ -2,7 +2,8 @@ import axios from 'axios';
 import * as types from './ActionTypes';
 
 
-const apiMains = 'http://villageexperiencelaravel.test/api/main';
+const apiMains = 'http://villageexperience.test/api/main';
+// const apiMains = 'http://villageexperiencelaravel.test/api/main'; // HOME
 
 export const mainLists = () => {
 
