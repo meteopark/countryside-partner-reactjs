@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Card, CardColumns } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import {connect} from "react-redux";
 import styles from './Main.module.scss';
 import classNames from 'classnames';
@@ -23,6 +24,7 @@ export class VillageVisit extends Component {
                     {this.props.mains.lists.map((village, i) => (
 
                         <Card key={i}>
+                            <Link className={styles['link']} to={`/villages/${village.VILAGE_ID}`}>
                             <Card.Img variant="top" src={village.THUMB_URL_COURS1} />
                             <Card.Body>
                                 <Card.Title>{village.VILAGE_NM}</Card.Title>
@@ -30,7 +32,9 @@ export class VillageVisit extends Component {
                                     {village.VILAGE_SLGN}
                                 </Card.Text>
                             </Card.Body>
+                            </Link>
                         </Card>
+
                      ))}
                 </CardColumns>
             </div>
@@ -40,7 +44,7 @@ export class VillageVisit extends Component {
 
 const mapStateToProps = (state) => ({
 
-    mains: state.mains // state.mains 는 reducers/index.js 의 키값과 같아야 한다
+    mains: state.mains // state.mains 는 reducers/Village.jsjs 의 키값과 같아야 한다
 })
 
 export default connect(mapStateToProps)(VillageVisit);

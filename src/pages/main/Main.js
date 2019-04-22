@@ -23,19 +23,14 @@ class Main extends Component {
 
     render() {
 
-        const { mains } = this.props;
-
         return (
 
             <div>
                 <Header />
 
                 <div className={styles['full-container']}>
-
-
                     <SideNav />
                     <hr/>
-
                     <ControlledCarousel/>
                     <br/>
                     <VillageVisit />
@@ -58,7 +53,7 @@ class Main extends Component {
 
 const mapStateToProps = (state) => ({
 
-    mains: state.mains // state.mains 는 reducers/index.js 의 키값과 같아야 한다
+    mains: state.mains // state.mains 는 reducers/Village.jsjs 의 키값과 같아야 한다
 })
 
 const mapDispatchToProps = (dispatch) => ({

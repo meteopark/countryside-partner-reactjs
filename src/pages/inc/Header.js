@@ -32,7 +32,7 @@ export class Header extends Component {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <NavLink to="/village" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>마을</div></NavLink>
+                            <NavLink to="/village1" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>마을</div></NavLink>
                             <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>숙박예약</div></NavLink>
                             <NavLink to="#hoddme" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>특산물</div></NavLink>
                         </Nav>
@@ -43,11 +43,6 @@ export class Header extends Component {
                     </Navbar.Collapse>
                 </Navbar>
 
-
-                <Switch>
-                    <Route exact path="/village" component={Main} />
-                    <Route exact path="/village2" component={Main2}/>
-                </Switch>
             </div>
 
 
