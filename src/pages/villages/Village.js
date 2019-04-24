@@ -1,35 +1,20 @@
 import React, {Component} from 'react';
-import {Header} from "../inc/Header";
-import Footer from "../inc/Footer";
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as importActions from '../../actions';
 import styles from './Village.module.scss';
-import SideNav from "../inc/SideNav";
-import {ControlledCarousel} from "../main/ControlledCarousel";
-import VillageVisit from "../main/VillageVisit";
 
 import {Carousel, Row, Col, Tabs, Tab} from "react-bootstrap";
 import classNames from "classnames";
 
 class Village extends Component {
 
-// <Badge pill variant="success">
-// Success
-// </Badge>
+
     render() {
 
         return (
 
-
             <div>
-                <Header />
 
-                <div className={styles['full-container']}>
-                    <SideNav />
-                    <hr/>
 
-                    <div className={classNames('container', styles['in-container'])}>
+                <div className={classNames('container', styles['in-container'])}>
                     <Row>
                         <Col><h2>익산 산들강웅포마을 (뱃지 넣어야 함 Pill )</h2></Col>
                     </Row>
@@ -100,12 +85,7 @@ class Village extends Component {
 
                 </div>
 
-                <Footer />
-                </div>
             </div>
-
-
-
 
 
         )

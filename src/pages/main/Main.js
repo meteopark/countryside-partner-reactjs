@@ -1,46 +1,23 @@
 import React, {Component} from 'react';
-import {Header} from "../inc/Header";
-import Footer from "../inc/Footer";
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-import styles from './Main.module.scss';
-
-// inc main
-import SideNav from "../inc/SideNav";
 import VillageVisit from "./VillageVisit";
 import {ControlledCarousel} from "./ControlledCarousel";
 
 
-
-
 class Main extends Component {
-
-    constructor(props) {
-
-        super(props);
-    }
 
     render() {
 
         return (
 
             <div>
-                <Header />
-
-                <div className={styles['full-container']}>
-                    <SideNav />
-                    <hr/>
-                    <ControlledCarousel/>
-                    <br/>
-                    <VillageVisit />
-                    <br/>
-
-                </div>
-
-                <Footer />
+                <ControlledCarousel/>
+                <br/>
+                <VillageVisit />
+                <br/>
             </div>
-
         );
     }
 

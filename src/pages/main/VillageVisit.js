@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, CardColumns } from 'react-bootstrap';
+import {Card, CardColumns, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {connect} from "react-redux";
 import styles from './Main.module.scss';
@@ -8,11 +8,9 @@ import classNames from 'classnames';
 
 export class VillageVisit extends Component {
 
-    constructor(props) {
-
+    constructor(props){
         super(props);
     }
-
     render() {
 
         return (
@@ -25,16 +23,18 @@ export class VillageVisit extends Component {
 
                         <Card key={i}>
                             <Link className={styles['link']} to={`/villages/${village.VILAGE_ID}`}>
-                            <Card.Img variant="top" src={village.THUMB_URL_COURS1} />
-                            <Card.Body>
-                                <Card.Title>{village.VILAGE_NM}</Card.Title>
-                                <Card.Text>
-                                    {village.VILAGE_SLGN}
-                                </Card.Text>
-                            </Card.Body>
+                                <div className={styles['image-container']}>
+                                    <Card.Img variant="top" className={styles['image-blank']} src={village.THUMB_URL_COURS1 ? village.THUMB_URL_COURS1 : '/images/no-image.png' } />
+                                    <Badge pill variant="success" className={styles['tag']} >{village.THEMA_NM}</Badge>
+                                </div>
+                                <Card.Body>
+                                    <Card.Title>{village.VILAGE_NM}</Card.Title>
+                                    <Card.Text>
+                                        {village.VILAGE_SLGN}
+                                    </Card.Text>
+                                </Card.Body>
                             </Link>
                         </Card>
-
                      ))}
                 </CardColumns>
             </div>
