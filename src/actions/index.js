@@ -2,8 +2,8 @@ import axios from 'axios';
 import * as types from './ActionTypes';
 
 
-const apiMains = 'http://villageexperience.test/api/main'; // 회사
-// const apiMains = 'http://villageexperiencelaravel.test/api/main'; // HOME
+// const apiMains = 'http://villageexperience.test/api/main'; // 회사
+const apiMains = 'http://villageexperiencelaravel.test/api/main'; // HOME
 
 export const mainLists = () => {
 
@@ -17,7 +17,7 @@ export const mainLists = () => {
             })
             .catch(error => {
 
-                console.log("mainLists() " , error);
+                console.log("error : mainLists() " , error);
                 throw(error);
 
             });
