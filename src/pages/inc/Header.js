@@ -10,8 +10,6 @@ import {
 import styles from './Header.module.scss';
 import classNames from 'classnames';
 import '../../gg-font.css';
-import Main from "../main/Main";
-import {Main2} from "../main/Main2";
 
 
 export class Header extends Component {

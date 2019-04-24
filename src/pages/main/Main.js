@@ -43,7 +43,7 @@ class Main extends Component {
 
         );
     }
-// <ControlledCarousel/>
+
     componentDidMount() {
 
         const { getMains } = this.props;
