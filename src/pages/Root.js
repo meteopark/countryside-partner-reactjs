@@ -13,9 +13,9 @@ export class Root extends React.Component {
     render() {
         return (
             <BrowserRouter>
-                <Header />
+                {/*<Header />*/}
                 <div className={styles['full-container']}>
-                    <SideNav />
+                    {/*<SideNav />*/}
                     <hr/>
                     <Switch>
                         <Route exact path="/" component={Main} />

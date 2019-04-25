@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styles from './Village.module.scss';
 
-import {Carousel, Row, Col, Tabs, Tab} from "react-bootstrap";
+import {Carousel, Row, Col, Tabs, Tab, TabPane, Gri, Panel, Nav} from "react-bootstrap";
 import classNames from "classnames";
 
 class Village extends Component {
@@ -26,7 +26,7 @@ class Village extends Component {
                                     <img
                                         height="300px"
                                         className="d-block w-100"
-                                        src="http://www.welchon.com/upload/2013/05/18/79869481845947687247_thumbnail1.jpg"
+                                        src="http://www.welchon.com/upload/2013/05/18/79869481845947687247_thumbnail1.jpg@"
                                         alt="First slide"
                                     />
                                 </Carousel.Item>
@@ -34,7 +34,7 @@ class Village extends Component {
                                     <img
                                         height="300px"
                                         className="d-block w-100"
-                                        src="http://www.welchon.com/upload/2013/04/09/79869590845248258632_thumbnail1.jpg"
+                                        src="http://www.welchon.com/upload/2013/04/09/79869590845248258632_thumbnail1.jpg@"
                                         alt="Second slide"
                                     />
                                 </Carousel.Item>
@@ -69,19 +69,54 @@ class Village extends Component {
 
                         </Col>
                     </Row>
+                    <Tab.Container defaultActiveKey="introduce" transition={false} id="noanim-tab-example">
+                        <Row>
+                            <Col>
+                                <Nav fill variant="tabs" className={styles['tabs']}>
+                                    <Nav.Item className={styles['tab']}>
+                                        <Nav.Link eventKey="introduce">마을소개</Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item className={styles['tab']}>
+                                        <Nav.Link eventKey="experience">체험안내</Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item className={styles['tab']}>
+                                        <Nav.Link eventKey="review">체험후기</Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item className={styles['tab']}>
+                                        <Nav.Link eventKey="blog_review">블로그 리뷰</Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item className={styles['tab']}>
+                                        <Nav.Link eventKey="map">오시는 길</Nav.Link>
+                                    </Nav.Item>
+                                </Nav>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <br/>
+                                <Tab.Content>
+                                    <Tab.Pane eventKey="introduce">
+                                        Goood<br/>
+                                        Goood<br/>
+                                        Goood<br/>
+                                        Goood<br/><br/><br/><br/><br/>
+                                    </Tab.Pane>
+                                    <Tab.Pane eventKey="experience">
+                                        hihihi
+                                    </Tab.Pane>
 
+                                </Tab.Content>
+                            </Col>
+                        </Row>
 
-                    <Tabs defaultActiveKey="home" transition={false} id="noanim-tab-example">
-                        <Tab eventKey="home" title="마을소개">
-                            test1
-                        </Tab>
-                        <Tab eventKey="profile" title="체험안내">
-                            test2
-                        </Tab>
-                        <Tab eventKey="profile33" title="교통안내">
-                            test3
-                        </Tab>
-                    </Tabs>
+                        {/*<Tab eventKey="home" title="마을소개" className={styles['tab']}>*/}
+                        {/*<Tab eventKey="profile" title="체험안내" bsClass={styles['tab']}>*/}
+                        {/*    test2*/}
+                        {/*</Tab>*/}
+                        {/*<Tab eventKey="profile33" title="교통안내" bsClass={styles['tab']}>*/}
+                        {/*    test3test2*/}
+                        {/*</Tab>*/}
+                    </Tab.Container>
 
                 </div>
 

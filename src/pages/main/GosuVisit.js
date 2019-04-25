@@ -6,7 +6,7 @@ import styles from './Main.module.scss';
 import classNames from 'classnames';
 
 
-export class VillageVisit extends Component {
+export class GosuVisit extends Component {
 
     constructor(props){
         super(props);
@@ -16,7 +16,7 @@ export class VillageVisit extends Component {
         return (
             <div className={classNames('container', styles['in-container'])}>
                 <h5>
-                    <div className={styles['sub-title']}>우리마을에 놀러와요</div>
+                    <div className={styles['sub-title']}>멘토를 소개 합니다</div>
                 </h5>
                 <CardColumns>
                     {this.props.mains.lists.map((village, i) => (
@@ -47,5 +47,5 @@ const mapStateToProps = (state) => ({
     mains: state.mains // state.mains 는 reducers/Village.jsjs 의 키값과 같아야 한다
 })
 
-export default connect(mapStateToProps)(VillageVisit);
+export default connect(mapStateToProps)(GosuVisit);
 

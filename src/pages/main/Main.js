@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-import VillageVisit from "./VillageVisit";
+import GosuVisit from "./GosuVisit";
 import {ControlledCarousel} from "./ControlledCarousel";
 
 
@@ -15,7 +15,7 @@ class Main extends Component {
             <div>
                 <ControlledCarousel/>
                 <br/>
-                <VillageVisit />
+                <GosuVisit />
                 <br/>
             </div>
         );
