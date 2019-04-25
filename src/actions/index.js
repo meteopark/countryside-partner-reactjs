@@ -2,8 +2,7 @@ import axios from 'axios';
 import * as types from './ActionTypes';
 
 
-const apiMains = 'http://villageexperience.test/api/main'; // 회사
-// const apiMains = 'http://villageexperiencelaravel.test/api/main'; // HOME
+const apiMains = 'http://countryside-partner-laravel.test/api/main';
 
 export const mainLists = () => {
 
