@@ -1,0 +1,13 @@
+@import "../../index.module";
+
+
+.user-create-container {
+}
+@media (min-width: 1200px) {
+  .user-create-container {
+    padding-left:15%;
+    padding-right:15%;
+    background: #ffffff;
+  }
+}
+

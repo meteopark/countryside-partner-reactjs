@@ -17,30 +17,29 @@ export class Header extends Component {
     render() {
 
         return (
-            <div className="container">
-                <Navbar bg="light" variant="light" expand="lg" className="justify-content-center">
-                    <Navbar.Brand className={styles['header-title']} href="/" >
-                        <div className={styles['header-title']}><img src="./images/logo.png" width="300" alt="우리마을체험"/></div>
-                    </Navbar.Brand>
+            <div className={classNames('container-fluid', styles['custom-container-fluid'])}>
+                <div className="container">
+                    <Navbar bg="light" variant="light" expand="lg" className="justify-content-center">
+                        <Navbar.Brand className={styles['header-title']} href="/" >
+                            <div className={styles['header-title']}><img src="./images/logo.png" width="300" alt="도시쥐 & 시골쥐"/></div>
+                        </Navbar.Brand>
 
-                </Navbar>
-
-
-                <Navbar sticky="top" bg="light" variant="light" expand="lg">
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
-                            <NavLink to="/village1" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>마을</div></NavLink>
-                            <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>숙박예약</div></NavLink>
-                            <NavLink to="#hoddme" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>특산물</div></NavLink>
-                        </Nav>
-                        <Form inline>
-                            <FormControl type="text" placeholder="찾고싶은 마을 검색해보세요" className="mr-sm-2" />
-                            <Button variant="outline-success">검색</Button>
-                        </Form>
-                    </Navbar.Collapse>
-                </Navbar>
-
+                    </Navbar>
+                    <Navbar sticky="top" bg="light" variant="light" expand="lg">
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="mr-auto">
+                                <NavLink to="/village1" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>마을</div></NavLink>
+                                <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>숙박예약</div></NavLink>
+                                <NavLink to="#hoddme" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>특산물</div></NavLink>
+                            </Nav>
+                            <Form inline>
+                                <FormControl type="text" placeholder="찾고싶은 마을 검색해보세요" className="mr-sm-2" />
+                                <Button variant="outline-success">검색</Button>
+                            </Form>
+                        </Navbar.Collapse>
+                    </Navbar>
+                </div>
             </div>
 
 

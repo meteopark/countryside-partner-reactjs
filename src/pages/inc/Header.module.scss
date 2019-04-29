@@ -1,3 +1,4 @@
+@import "../../index.module";
 
 .nav-link {
   color: #666666;
@@ -21,13 +22,16 @@ body{
   font-family: 'Batang_Bold', sans-serif;
 }
 
-
 .footer{
-
+  margin-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   padding-top:20px;
   padding-bottom:20px;
   font-size: 14px;
+  height: 100px;
+  background: #fff;
 }
+
 
 

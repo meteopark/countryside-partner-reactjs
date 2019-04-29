@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import styles from './Header.module.scss';
-import classNames from 'classnames';
-
 const Footer = () => {
 
     return (

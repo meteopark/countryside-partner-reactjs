@@ -1,0 +1,23 @@
+$container-background: #F6F6F6;
+
+.custom-container-fluid {
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.full-width {
+  padding-left:0;
+  padding-right:0;
+}
+.in-container {
+
+  margin-top: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  padding-top:15px;
+  padding-bottom: 5rem;
+
+  .end-button-top {
+
+    padding-top: 3vw;
+  }
+}

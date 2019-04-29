@@ -9,7 +9,7 @@ export class ControlledCarousel extends Component {
     render() {
 
         return (
-            <div className={classNames('container', styles['full-container'], styles['f-width'])}>
+            <div className={classNames('container', styles['full-width'])}>
                 <Carousel>
                     <Carousel.Item>
                         <img
