@@ -9,6 +9,10 @@ npm install --save redux-thunk
 npm install --save classnames // className에 여러개의 클래스를 적용할때
 npm install react-sticky // 우측 고정 메뉴
 npm install --save react-router
+npm install formik --save
+npm install -S yup
+
+
 
 
 
