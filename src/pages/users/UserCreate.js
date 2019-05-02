@@ -6,7 +6,7 @@ import DaumPostcode from 'react-daum-postcode';
 import {Formik} from "formik";
 import * as yup from 'yup';
 import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
-
+import axios from 'axios';
 
 const schema = yup.object({
     id: yup.string().min(5, '아이디를 5자 이상 넣어 주세요.').max(20, '아이디를 20자 이하로 넣어주세요').required('아이디를 입력해 주세요.'),
@@ -14,19 +14,10 @@ const schema = yup.object({
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     sex: yup.string().required('성별을 선택해 주세요.'),
-    // address: yup.string().required('주소를 입력해 주세요.'),
-    // farm_name: yup.string().required('주소를 입력해 주세요.'),
+
 });
 
-// let schemaDefaultValue = {
-//     id: 'Test123',
-//     password: 'Test123',
-//     name: 'Test123',
-//     birthday: '1984-11-24',
-//     sex: '',
-//     phone: '',
-//     address: '',
-// };
+const apiUserCreate = 'http://countryside-partner-laravel.test/api/v1/mento/create';
 
 class UserCreate extends Component {
 
@@ -37,21 +28,22 @@ class UserCreate extends Component {
             daumPostOpen: false,
             schemaDefaultValue : {
                 id: 'Test123',
+                profile_image: '',
                 password: 'Test123',
                 name: 'Test123',
                 birthday: '1984-11-24',
-                sex: '',
-                phone: '',
-                address: '',
-                farm_name: '',
+                sex: 'male',
+                phone: '123',
+                address: '123',
+                farm_name: '123',
+                career: '123',
+                introduce: '123',
+                crops: '123',
             }
         }
-
     }
 
-
     handleDaumPost = () => {
-        console.log("----", this.state.schemaDefaultValue );
         this.state.daumPostOpen ? this.setState({daumPostOpen: false}) : this.setState({daumPostOpen: true});
     }
 
@@ -66,8 +58,6 @@ class UserCreate extends Component {
         }
         this.handleDaumPost();
 
-        // schemaDefaultValue.address = fullAddress;
-
         this.setState(prevState => ({
             ...prevState,
             schemaDefaultValue: {
@@ -77,14 +67,36 @@ class UserCreate extends Component {
         }));
     }
 
-
     handleText = (e) => {
-
         const schemaDefaultValue = {...this.state.schemaDefaultValue};
         schemaDefaultValue[e.target.name] = e.target.value;
         this.setState({schemaDefaultValue})
     }
+    handleSelector = (e) => {
+        // console.log(e.target.value, e.target.checked);
+        // const sex = {
+        //     male: false,
+        //     female: false
+        // }
+        // sex[e.target.value] = e.target.checked;
+        //
+        // this.setState({sex})
+    }
 
+    handleUserCreate = () => {
+
+        console.log(this.state);
+        return axios.post(`${apiUserCreate}`, this.state.schemaDefaultValue)
+
+            .then(response => {
+
+                console.log("res", response.status);
+
+            })
+            .catch(error => {
+
+            });
+    }
 
     render() {
 
@@ -101,22 +113,18 @@ class UserCreate extends Component {
                         initialValues={this.state.schemaDefaultValue}
                         onSubmit={(values, {setSubmitting}) => {
 
-                            console.log("gggg");
-                            setTimeout(() => {
-                                alert(JSON.stringify(this.state.schemaDefaultValue, null, 2));
-                                setSubmitting(false);
-                            }, 500);
+                            // setTimeout(() => {
+                            //     alert(JSON.stringify(this.state.schemaDefaultValue, null, 2));
+                            //     setSubmitting(false);
+                            // }, 500);
+                            this.handleUserCreate();
                         }}
-
-
                         render={({
                                      handleSubmit,
                                      handleChange,
                                      handleBlur,
                                      values,
-                                     touched,
-                                     errors,
-                                     setFieldValue
+                                     errors
                                  }) => (
 
                             <Form
@@ -133,8 +141,8 @@ class UserCreate extends Component {
                                         <Form.Control
                                             type="text"
                                             name="id"
-                                            value={values.id}
-                                            onChange={handleChange}
+                                            value={this.state.schemaDefaultValue.id}
+                                            onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.id}
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -148,8 +156,8 @@ class UserCreate extends Component {
                                         <Form.Control
                                             type="password"
                                             name="password"
-                                            value={values.password}
-                                            onChange={handleChange}
+                                            value={this.state.schemaDefaultValue.password}
+                                            onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.password}
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -163,7 +171,7 @@ class UserCreate extends Component {
                                         <Form.Control
                                             type="text"
                                             name="name"
-                                            value={values.name}
+                                            value={this.state.schemaDefaultValue.name}
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.name}
                                         />
@@ -196,7 +204,7 @@ class UserCreate extends Component {
                                                 type="hidden"
                                                 id="sex"
                                                 name="sex"
-                                                value={values.sex}
+                                                value={this.state.schemaDefaultValue.sex}
                                                 onChange={(e) => this.handleText(e)}
                                                 isInvalid={!!errors.sex}
                                             />
@@ -234,12 +242,28 @@ class UserCreate extends Component {
                                             type="text"
                                             name="farm_name"
                                             placeholder=""
-                                            value={values.farm_name}
-                                            // onChange={(e) => this.handleText(e)}
+                                            value={this.state.schemaDefaultValue.farm_name}
+                                            onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.farm_name}
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {errors.farm_name}
+                                        </Form.Control.Feedback>
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Row} controlId="birthday">
+                                    <Form.Label column sm="2">농장소개</Form.Label>
+                                    <Col sm="10">
+                                        <Form.Control
+                                            type="text"
+                                            placeholder=""
+                                            name="introduce"
+                                            value={this.state.schemaDefaultValue.introduce}
+                                            onChange={(e) => this.handleText(e)}
+                                            isInvalid={!!errors.introduce}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.introduce}
                                         </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
@@ -251,8 +275,8 @@ class UserCreate extends Component {
                                                 type="text"
                                                 name="address"
                                                 placeholder=""
-                                                value={values.address}
                                                 readOnly
+                                                value={this.state.schemaDefaultValue.address}
                                                 onChange={(e) => this.handleText(e)}
                                                 isInvalid={!!errors.address}
                                             />
@@ -273,20 +297,40 @@ class UserCreate extends Component {
                                 <Form.Group as={Row} controlId="career">
                                     <Form.Label column sm="2">업종경력</Form.Label>
                                     <Col sm="10">
-                                        <Form.Control as="select" name="career">
-                                            <option value="1-3">1년 ~ 3년</option>
-                                            <option value="5-9">5년 ~ 9년</option>
-                                            <option value="10-14">10년 ~ 14년</option>
-                                            <option value="15-0">15년 이상</option>
+                                        <Form.Control
+                                            as="select"
+                                            name="career"
+                                            value={this.state.schemaDefaultValue.career}
+                                            onChange={(e) => this.handleText(e)}
+                                            isInvalid={!!errors.career}
+                                        >
+                                            <option value="" label="선택해 주세요."/>
+                                            <option value="1-3" label="1년 ~ 3년" />
+                                            <option value="5-9" label="5년 ~ 9년"/>
+                                            <option value="10-14" label="10년 ~ 14년"/>
+                                            <option value="15-0" label="15년 이상" />
                                         </Form.Control>
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.career}
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="crops">
                                     <Form.Label column sm="2">주요작물</Form.Label>
                                     <Col sm="10">
-                                        <Form.Control as="select" name="crops">
-                                            <option value="콩">콩</option>
+                                        <Form.Control
+                                            as="select"
+                                            name="crops"
+                                            value={this.state.schemaDefaultValue.crops}
+                                            onChange={(e) => this.handleText(e)}
+                                            isInvalid={!!errors.crops}
+                                        >
+                                            <option value="" label="선택해 주세요."/>
+                                            <option value="콩" label="콩"/>
                                         </Form.Control>
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.crops}
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
 
@@ -296,7 +340,15 @@ class UserCreate extends Component {
                                 <Form.Group as={Row} controlId="profile_image">
                                     <Form.Label column sm="2">프로필 이미지</Form.Label>
                                     <Col sm="10">
-                                        <Form.Control type="file" name="profile_image"/>
+                                        <Form.Control
+                                            type="file"
+                                            name="profile_image"
+                                            value={this.state.schemaDefaultValue.profile_image}
+                                            onChange={(e) => this.handleText(e)}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.profile_image}
+                                        </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="phone">
@@ -306,7 +358,7 @@ class UserCreate extends Component {
                                             type="text"
                                             placeholder="010-1234-5678"
                                             name="phone"
-                                            value={values.phone}
+                                            value={this.state.schemaDefaultValue.phone}
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.phone}
                                         />
@@ -326,8 +378,6 @@ class UserCreate extends Component {
                         )}/>
                 </div>
             </div>
-
-
         )
     }
 }
