@@ -18,15 +18,15 @@ const schema = yup.object({
     // farm_name: yup.string().required('주소를 입력해 주세요.'),
 });
 
-// let schemaDefaultValue = {
-//     id: 'Test123',
-//     password: 'Test123',
-//     name: 'Test123',
-//     birthday: '1984-11-24',
-//     sex: '',
-//     phone: '',
-//     address: '',
-// };
+let schemaDefaultValue = {
+    id: 'Test123',
+    password: 'Test123',
+    name: 'Test123',
+    birthday: '1984-11-24',
+    sex: '',
+    phone: '',
+    address: '',
+};
 
 class UserCreate extends Component {
 
@@ -35,23 +35,23 @@ class UserCreate extends Component {
         this.state = {
             test: '',
             daumPostOpen: false,
-            schemaDefaultValue : {
-                id: 'Test123',
-                password: 'Test123',
-                name: 'Test123',
-                birthday: '1984-11-24',
-                sex: '',
-                phone: '',
-                address: '',
-                farm_name: '',
-            }
+            // schemaDefaultValue : {
+            //     id: 'Test123',
+            //     password: 'Test123',
+            //     name: 'Test123',
+            //     birthday: '1984-11-24',
+            //     sex: '',
+            //     phone: '',
+            //     address: '',
+            //     farm_name: '',
+            // }
         }
 
     }
 
 
     handleDaumPost = () => {
-        console.log("----", this.state.schemaDefaultValue );
+        console.log("----", schemaDefaultValue );
         this.state.daumPostOpen ? this.setState({daumPostOpen: false}) : this.setState({daumPostOpen: true});
     }
 
@@ -66,24 +66,18 @@ class UserCreate extends Component {
         }
         this.handleDaumPost();
 
-        // schemaDefaultValue.address = fullAddress;
+        schemaDefaultValue.address = fullAddress;
 
-        this.setState(prevState => ({
-            ...prevState,
-            schemaDefaultValue: {
-                ...prevState.schemaDefaultValue,
-                address: fullAddress
-            }
-        }));
+        // this.setState(prevState => ({
+        //     ...prevState,
+        //     schemaDefaultValue: {
+        //         ...prevState.schemaDefaultValue,
+        //         address: fullAddress
+        //     }
+        // }));
     }
 
 
-    handleText = (e) => {
-
-        const schemaDefaultValue = {...this.state.schemaDefaultValue};
-        schemaDefaultValue[e.target.name] = e.target.value;
-        this.setState({schemaDefaultValue})
-    }
 
 
     render() {
@@ -98,12 +92,12 @@ class UserCreate extends Component {
                     <Formik
                         enableReinitialize={true}
                         validationSchema={schema}
-                        initialValues={this.state.schemaDefaultValue}
+                        initialValues={schemaDefaultValue}
                         onSubmit={(values, {setSubmitting}) => {
 
                             console.log("gggg");
                             setTimeout(() => {
-                                alert(JSON.stringify(this.state.schemaDefaultValue, null, 2));
+                                alert(JSON.stringify(values, null, 2));
                                 setSubmitting(false);
                             }, 500);
                         }}
@@ -164,7 +158,7 @@ class UserCreate extends Component {
                                             type="text"
                                             name="name"
                                             value={values.name}
-                                            onChange={(e) => this.handleText(e)}
+                                            onChange={handleChange}
                                             isInvalid={!!errors.name}
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -179,8 +173,9 @@ class UserCreate extends Component {
                                             type="text"
                                             placeholder="Ex : 1984-11-24"
                                             name="birthday"
-                                            value={this.state.schemaDefaultValue.birthday}
-                                            onChange={(e) => this.handleText(e)}
+                                            value={values.birthday}
+                                            onChange={handleChange}
+                                            // onChange={e => setFieldValue('birthday', e.target.value)}
                                             isInvalid={!!errors.birthday}
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -197,7 +192,7 @@ class UserCreate extends Component {
                                                 id="sex"
                                                 name="sex"
                                                 value={values.sex}
-                                                onChange={(e) => this.handleText(e)}
+                                                onChange={handleChange}
                                                 isInvalid={!!errors.sex}
                                             />
                                             <Form.Check
@@ -206,7 +201,7 @@ class UserCreate extends Component {
                                                 value="male"
                                                 label="남"
                                                 name="sex"
-                                                onChange={(e) => this.handleText(e)}
+                                                onChange={handleChange}
                                                 id="sex1"
                                             />
                                             <Form.Check
@@ -215,7 +210,7 @@ class UserCreate extends Component {
                                                 value="female"
                                                 label="여"
                                                 name="sex"
-                                                onChange={(e) => this.handleText(e)}
+                                                onChange={handleChange}
                                                 id="sex2"
                                             />
                                             <Form.Control.Feedback type="invalid">
@@ -235,7 +230,7 @@ class UserCreate extends Component {
                                             name="farm_name"
                                             placeholder=""
                                             value={values.farm_name}
-                                            // onChange={(e) => this.handleText(e)}
+                                            // onChange={handleChange}
                                             isInvalid={!!errors.farm_name}
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -253,7 +248,7 @@ class UserCreate extends Component {
                                                 placeholder=""
                                                 value={values.address}
                                                 readOnly
-                                                onChange={(e) => this.handleText(e)}
+                                                onChange={handleChange}
                                                 isInvalid={!!errors.address}
                                             />
                                             <InputGroup.Append>
@@ -267,7 +262,14 @@ class UserCreate extends Component {
                                                 {errors.address}
                                             </Form.Control.Feedback>
                                         </InputGroup>
-                                        {this.state.daumPostOpen ? <DaumPostcode onComplete={this.handleAddress}/> : ''}
+
+                                        {
+                                            this.state.daumPostOpen ?
+                                                <DaumPostcode
+                                                    onComplete={this.handleAddress}
+                                                    // autoClose={true}
+                                                /> : ''
+                                        }
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="career">
@@ -307,7 +309,7 @@ class UserCreate extends Component {
                                             placeholder="010-1234-5678"
                                             name="phone"
                                             value={values.phone}
-                                            onChange={(e) => this.handleText(e)}
+                                            onChange={handleChange}
                                             isInvalid={!!errors.phone}
                                         />
                                         <Form.Control.Feedback type="invalid">
