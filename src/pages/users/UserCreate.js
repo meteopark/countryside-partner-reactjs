@@ -8,6 +8,10 @@ import * as yup from 'yup';
 import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
 import axios from 'axios';
 
+import { useAlert } from 'react-alert'
+
+
+
 const schema = yup.object({
     id: yup.string().min(5, '아이디를 5자 이상 넣어 주세요.').max(20, '아이디를 20자 이하로 넣어주세요').required('아이디를 입력해 주세요.'),
     password: yup.string().required('비밀번호를 입력해 주세요.'),
@@ -22,6 +26,7 @@ const apiUserCreate = 'http://countryside-partner-laravel.test/api/v1/mento/crea
 class UserCreate extends Component {
 
     constructor(props) {
+
         super(props);
         this.state = {
             test: '',
@@ -67,40 +72,64 @@ class UserCreate extends Component {
         }));
     }
 
-    handleText = (e) => {
+    handleText = (e, type = 'text') => {
         const schemaDefaultValue = {...this.state.schemaDefaultValue};
-        schemaDefaultValue[e.target.name] = e.target.value;
+
+        if(type === "text"){
+
+            schemaDefaultValue[e.target.name] = e.target.value;
+        }else{
+
+            schemaDefaultValue[e.target.name] = e.target.files[0];
+        }
+
         this.setState({schemaDefaultValue})
     }
-    handleSelector = (e) => {
-        // console.log(e.target.value, e.target.checked);
-        // const sex = {
-        //     male: false,
-        //     female: false
-        // }
-        // sex[e.target.value] = e.target.checked;
-        //
-        // this.setState({sex})
-    }
+
+
 
     handleUserCreate = () => {
 
-        console.log(this.state);
-        return axios.post(`${apiUserCreate}`, this.state.schemaDefaultValue)
 
-            .then(response => {
+        let formData = new FormData();
+        formData.append('id', this.state.schemaDefaultValue.id);
+        formData.append('profile_image', this.state.schemaDefaultValue.profile_image);
+        formData.append('password', this.state.schemaDefaultValue.password);
+        formData.append('name', this.state.schemaDefaultValue.name);
+        formData.append('birthday', this.state.schemaDefaultValue.birthday);
+        formData.append('sex', this.state.schemaDefaultValue.sex);
+        formData.append('phone', this.state.schemaDefaultValue.phone);
+        formData.append('address', this.state.schemaDefaultValue.address);
+        formData.append('farm_name', this.state.schemaDefaultValue.farm_name);
+        formData.append('career', this.state.schemaDefaultValue.career);
+        formData.append('introduce', this.state.schemaDefaultValue.introduce);
+        formData.append('crops', this.state.schemaDefaultValue.crops);
 
-                console.log("res", response.status);
+        console.log(this.state.schemaDefaultValue);
 
-            })
-            .catch(error => {
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+            }
+        };
 
-            });
+        return axios.post(`${apiUserCreate}`, formData, config)
+                .then(response => {
+
+                    useAlert().show('hihihi');
+                })
+                .catch(error => {
+
+                    console.log("error", error.toLocaleString());
+                });
+
+
     }
 
     render() {
 
         return (
+
 
             <div className={classNames('container', styles['in-container'])}>
 
@@ -113,10 +142,6 @@ class UserCreate extends Component {
                         initialValues={this.state.schemaDefaultValue}
                         onSubmit={(values, {setSubmitting}) => {
 
-                            // setTimeout(() => {
-                            //     alert(JSON.stringify(this.state.schemaDefaultValue, null, 2));
-                            //     setSubmitting(false);
-                            // }, 500);
                             this.handleUserCreate();
                         }}
                         render={({
@@ -251,7 +276,7 @@ class UserCreate extends Component {
                                         </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
-                                <Form.Group as={Row} controlId="birthday">
+                                <Form.Group as={Row} controlId="introduce">
                                     <Form.Label column sm="2">농장소개</Form.Label>
                                     <Col sm="10">
                                         <Form.Control
@@ -343,8 +368,7 @@ class UserCreate extends Component {
                                         <Form.Control
                                             type="file"
                                             name="profile_image"
-                                            value={this.state.schemaDefaultValue.profile_image}
-                                            onChange={(e) => this.handleText(e)}
+                                            onChange={(e) => this.handleText(e, 'file')}
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {errors.profile_image}
@@ -378,6 +402,8 @@ class UserCreate extends Component {
                         )}/>
                 </div>
             </div>
+
+
         )
     }
 }

@@ -5,13 +5,28 @@ import {Provider} from "react-redux";
 import {store} from "./store";
 import {Root} from "./pages/Root";
 
-import classNames from 'classnames';
-
-// import 'bootstrap/dist/css/bootstrap.css';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
 import './gg-font.css';
 import './bootstrap.css';
 import './index.css';
 
-ReactDOM.render(<Provider store={store}><Root /></Provider>, document.getElementById('root'));
+const options = {
+    // you can also just use 'bottom center'
+    position: positions.BOTTOM_CENTER,
+    timeout: 5000,
+    offset: '30px',
+    // you can also just use 'scale'
+    transition: transitions.SCALE
+}
+
+ReactDOM.render(
+    <Provider store={store}>
+        <AlertProvider template={AlertTemplate} {...options}>
+            <Root />
+        </AlertProvider>
+    </Provider>,
+    document.getElementById('root')
+);
 
 serviceWorker.unregister();
