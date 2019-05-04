@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 
-import styles from './UserCreate.module.scss';
+import styles from '../User.module.scss';
 import classNames from "classnames";
 import DaumPostcode from 'react-daum-postcode';
 import {Formik} from "formik";
 import * as yup from 'yup';
 import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
 import axios from 'axios';
-
-import { useAlert } from 'react-alert'
-
+import { withAlert } from 'react-alert'
+import history from '../../history';
 
 
 const schema = yup.object({
@@ -21,7 +20,7 @@ const schema = yup.object({
 
 });
 
-const apiUserCreate = 'http://countryside-partner-laravel.test/api/v1/mento/create';
+const apiUserCreate = 'http://countryside-partner-laravel.test/api/v1/users/mento';
 
 class UserCreate extends Component {
 
@@ -32,18 +31,18 @@ class UserCreate extends Component {
             test: '',
             daumPostOpen: false,
             schemaDefaultValue : {
-                id: 'Test123',
+                id: 'Bot-'+Date.now(),
                 profile_image: '',
-                password: 'Test123',
-                name: 'Test123',
+                password: '1111',
+                name: 'Bot-'+Date.now(),
                 birthday: '1984-11-24',
                 sex: 'male',
-                phone: '123',
-                address: '123',
-                farm_name: '123',
-                career: '123',
-                introduce: '123',
-                crops: '123',
+                phone: '010-1234-5678',
+                address: '경기도 의정부시 장암 1동',
+                farm_name: '김농장',
+                career: '1년~3년',
+                introduce: '공기좋은 농장 입니다.',
+                crops: '콩',
             }
         }
     }
@@ -90,7 +89,6 @@ class UserCreate extends Component {
 
     handleUserCreate = () => {
 
-
         let formData = new FormData();
         formData.append('id', this.state.schemaDefaultValue.id);
         formData.append('profile_image', this.state.schemaDefaultValue.profile_image);
@@ -116,17 +114,18 @@ class UserCreate extends Component {
         return axios.post(`${apiUserCreate}`, formData, config)
                 .then(response => {
 
-                    useAlert().show('hihihi');
+                    this.props.alert.show('등록 되었습니다.');
+                    history.push("/");
                 })
                 .catch(error => {
 
                     console.log("error", error.toLocaleString());
                 });
-
-
     }
 
+
     render() {
+
 
         return (
 
@@ -408,4 +407,5 @@ class UserCreate extends Component {
     }
 }
 
-export default UserCreate
+// export default UserCreate
+export default withAlert()(UserCreate)
