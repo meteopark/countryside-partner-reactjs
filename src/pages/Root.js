@@ -5,11 +5,12 @@ import {Header} from "./inc/Header";
 import Footer from "./inc/Footer";
 import styles from "../index.module.scss";
 import SideNav from "./inc/SideNav";
-
+import history from './history';
 
 import Village from "./villages/Village";
-import MentoCreate from "./users/mento/MentoCreate";
-import history from './history';
+import MentorCreate from "./users/mentor/MentorCreate";
+import Mentors from "./mentors/Mentors";
+
 
 
 export class Root extends React.Component {
@@ -17,13 +18,18 @@ export class Root extends React.Component {
     render() {
         return (
             <Router history={history}>
-                {/*<Header />*/}
+                <Header />
                 <div>
                     {/*<SideNav />*/}
                     <Switch>
                         <Route exact path="/" component={Main} />
+                        <Route exact path="/mentors" component={Mentors} />
+                        <Route exact path="/users/mentor/create" component={MentorCreate} />
+
+
+
+
                         <Route exact path="/villages/:village_code" component={Village} />
-                        <Route exact path="/users/mento/create" component={MentoCreate} />
                     </Switch>
                 </div>
                 <Footer />

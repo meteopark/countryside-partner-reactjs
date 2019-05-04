@@ -16,17 +16,15 @@ export const mainLists = (state = initialState, action) => {
                 ]
             };
 
+        case types.MENTORS:
 
-
-        // case types.MAIN_LISTS:
-        //
-        //     return {
-        //         // ...state,
-        //         lists: [
-        //             // ...state.lists,
-        //             ...action.payload.datas
-        //         ]
-        //     };
+            return {
+                // ...state,
+                lists: [
+                    // ...state.lists,
+                    ...action.payload.datas
+                ]
+            };
 
 
 

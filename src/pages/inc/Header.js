@@ -29,9 +29,10 @@ export class Header extends Component {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
-                                <NavLink to="/village1" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>마을</div></NavLink>
-                                <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>숙박예약</div></NavLink>
-                                <NavLink to="#hoddme" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>특산물</div></NavLink>
+                                <NavLink to="/village1" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>멘토소개</div></NavLink>
+                                <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>멘티소개</div></NavLink>
+                                <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>농업용어</div></NavLink>
+                                <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>전국 농기계 현황</div></NavLink>
                             </Nav>
                             <Form inline>
                                 <FormControl type="text" placeholder="찾고싶은 마을 검색해보세요" className="mr-sm-2" />

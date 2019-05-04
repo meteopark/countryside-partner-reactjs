@@ -20,9 +20,9 @@ const schema = yup.object({
 
 });
 
-const apiUserCreate = 'http://countryside-partner-laravel.test/api/v1/users/mento';
+const apiUserCreate = 'http://countryside-partner-laravel.test/api/v1/users/mentor';
 
-class UserCreate extends Component {
+class MentorCreate extends Component {
 
     constructor(props) {
 
@@ -408,4 +408,4 @@ class UserCreate extends Component {
 }
 
 // export default UserCreate
-export default withAlert()(UserCreate)
+export default withAlert()(MentorCreate)
