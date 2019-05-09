@@ -2,8 +2,9 @@ import axios from 'axios';
 import * as types from './ActionTypes';
 
 
-const apiMains = 'http://countryside-partner-laravel.test/api/v1/main';
-const apiMentors = 'http://countryside-partner-laravel.test/api/v1/main';
+const apiMains      = 'http://countryside-partner-laravel.test/api/v1/main';
+const apiMentors    = 'http://countryside-partner-laravel.test/api/v1/main';
+const apiMentor     = 'http://countryside-partner-laravel.test/api/v1/mentors';
 
 export const mainLists = () => {
 
@@ -43,6 +44,25 @@ export const mentorLists = () => {
     }
 }
 
+export const getMentor = (mentor) => {
+
+    return (dispatch) => {
+
+        return axios.get(`${apiMentor}/${mentor}`)
+
+            .then(response => {
+
+                dispatch(mainListsSuccess(response.data, types.MENTOR))
+
+            })
+            .catch(error => {
+
+                console.log("error : mentors() " , error);
+                throw(error);
+
+            });
+    }
+}
 
 export const mainListsSuccess = (datas, type) => {
 
