@@ -3,7 +3,6 @@ import * as types from './ActionTypes';
 
 
 const apiMains      = 'http://countryside-partner-laravel.test/api/v1/main';
-const apiMentors    = 'http://countryside-partner-laravel.test/api/v1/main';
 const apiMentor     = 'http://countryside-partner-laravel.test/api/v1/mentors';
 
 export const mainLists = () => {
@@ -29,7 +28,7 @@ export const mentorLists = () => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMentors}`)
+        return axios.get(`${apiMentor}`)
 
             .then(response => {
 

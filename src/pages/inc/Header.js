@@ -29,7 +29,7 @@ export class Header extends Component {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
-                                <NavLink to="/village1" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>멘토소개</div></NavLink>
+                                <NavLink to="/mentors" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>멘토소개</div></NavLink>
                                 <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>멘티소개</div></NavLink>
                                 <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>농업용어</div></NavLink>
                                 <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'], styles['sub-title-menu'])}>전국 농기계 현황</div></NavLink>

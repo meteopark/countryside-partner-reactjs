@@ -25,3 +25,6 @@ npm install --save-dev style-loader css-loader
 
 *메인폰트컬러
 #22741C
+
+*아이콘
+https://react-icons.netlify.com/#/

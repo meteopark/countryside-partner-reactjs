@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import styles from '../User.module.scss';
+import styles from './User.module.scss';
 import classNames from "classnames";
 import DaumPostcode from 'react-daum-postcode';
 import {Formik} from "formik";
@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
 import axios from 'axios';
 import { withAlert } from 'react-alert'
-import history from '../../history';
+import history from '../history';
 
 
 const schema = yup.object({
@@ -17,12 +17,13 @@ const schema = yup.object({
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     sex: yup.string().required('성별을 선택해 주세요.'),
+    target_area: yup.string().required('관심지역을 선택해 주세요.'),
 
 });
 
 const apiUserCreate = 'http://countryside-partner-laravel.test/api/v1/users/mentor';
 
-class MentorCreate extends Component {
+class MenteeCreate extends Component {
 
     constructor(props) {
 
@@ -39,10 +40,10 @@ class MentorCreate extends Component {
                 sex: 'male',
                 phone: '010-1234-5678',
                 address: '경기도 의정부시 장암 1동',
-                farm_name: '김농장',
-                career: '1년~3년',
-                introduce: '공기좋은 농장 입니다.',
+                introduce: '영농 꿈나무 입니다.',
                 crops: '콩',
+                target_area: '전라남도',
+
             }
         }
     }
@@ -98,10 +99,11 @@ class MentorCreate extends Component {
         formData.append('sex', this.state.schemaDefaultValue.sex);
         formData.append('phone', this.state.schemaDefaultValue.phone);
         formData.append('address', this.state.schemaDefaultValue.address);
-        formData.append('farm_name', this.state.schemaDefaultValue.farm_name);
-        formData.append('career', this.state.schemaDefaultValue.career);
         formData.append('introduce', this.state.schemaDefaultValue.introduce);
         formData.append('crops', this.state.schemaDefaultValue.crops);
+        formData.append('target_area', this.state.schemaDefaultValue.target_area);
+
+
 
         console.log(this.state.schemaDefaultValue);
 
@@ -133,7 +135,7 @@ class MentorCreate extends Component {
             <div className={classNames('container', styles['in-container'])}>
 
                 <div className={styles['user-create-container']}>
-                    <h3>회원가입 - 멘토</h3>
+                    <h3>회원가입 - 멘티</h3>
                     <br/>
                     <Formik
                         enableReinitialize={true}
@@ -145,9 +147,6 @@ class MentorCreate extends Component {
                         }}
                         render={({
                                      handleSubmit,
-                                     handleChange,
-                                     handleBlur,
-                                     values,
                                      errors
                                  }) => (
 
@@ -256,43 +255,8 @@ class MentorCreate extends Component {
                                         </Col>
                                     </Form.Group>
                                 </fieldset>
-                                <br/><br/>
-                                <h5>*농장정보</h5>
-                                <hr/>
-                                <Form.Group as={Row} controlId="farm_name">
-                                    <Form.Label column sm="2">농장명</Form.Label>
-                                    <Col sm="10">
-                                        <Form.Control
-                                            type="text"
-                                            name="farm_name"
-                                            placeholder=""
-                                            value={this.state.schemaDefaultValue.farm_name}
-                                            onChange={(e) => this.handleText(e)}
-                                            isInvalid={!!errors.farm_name}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.farm_name}
-                                        </Form.Control.Feedback>
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="introduce">
-                                    <Form.Label column sm="2">농장소개</Form.Label>
-                                    <Col sm="10">
-                                        <Form.Control
-                                            type="text"
-                                            placeholder=""
-                                            name="introduce"
-                                            value={this.state.schemaDefaultValue.introduce}
-                                            onChange={(e) => this.handleText(e)}
-                                            isInvalid={!!errors.introduce}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.introduce}
-                                        </Form.Control.Feedback>
-                                    </Col>
-                                </Form.Group>
                                 <Form.Group as={Row} controlId="address">
-                                    <Form.Label column sm="2">농장주소</Form.Label>
+                                    <Form.Label column sm="2">주소</Form.Label>
                                     <Col sm="10">
                                         <InputGroup>
                                             <Form.Control
@@ -318,29 +282,30 @@ class MentorCreate extends Component {
                                         {this.state.daumPostOpen ? <DaumPostcode onComplete={this.handleAddress}/> : ''}
                                     </Col>
                                 </Form.Group>
-                                <Form.Group as={Row} controlId="career">
-                                    <Form.Label column sm="2">업종경력</Form.Label>
+
+                                <br/><br/>
+
+                                <h5>*맞춤정보</h5>
+                                <small className="text-muted">선택하신 정보를 통해 맞춤 멘토가 추천 됩니다.</small>
+                                <hr/>
+                                <Form.Group as={Row} controlId="introduce">
+                                    <Form.Label column sm="2">자기소개</Form.Label>
                                     <Col sm="10">
                                         <Form.Control
-                                            as="select"
-                                            name="career"
-                                            value={this.state.schemaDefaultValue.career}
+                                            type="text"
+                                            placeholder=""
+                                            name="introduce"
+                                            value={this.state.schemaDefaultValue.introduce}
                                             onChange={(e) => this.handleText(e)}
-                                            isInvalid={!!errors.career}
-                                        >
-                                            <option value="" label="선택해 주세요."/>
-                                            <option value="1-3" label="1년 ~ 3년" />
-                                            <option value="5-9" label="5년 ~ 9년"/>
-                                            <option value="10-14" label="10년 ~ 14년"/>
-                                            <option value="15-0" label="15년 이상" />
-                                        </Form.Control>
+                                            isInvalid={!!errors.introduce}
+                                        />
                                         <Form.Control.Feedback type="invalid">
-                                            {errors.career}
+                                            {errors.introduce}
                                         </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="crops">
-                                    <Form.Label column sm="2">주요작물</Form.Label>
+                                    <Form.Label column sm="2">관심 작물</Form.Label>
                                     <Col sm="10">
                                         <Form.Control
                                             as="select"
@@ -357,6 +322,35 @@ class MentorCreate extends Component {
                                         </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
+                                <Form.Group as={Row} controlId="target_area">
+                                    <Form.Label column sm="2">관심 지역</Form.Label>
+                                    <Col sm="10">
+                                        <Form.Control
+                                            as="select"
+                                            name="target_area"
+                                            value={this.state.schemaDefaultValue.target_area}
+                                            onChange={(e) => this.handleText(e)}
+                                            isInvalid={!!errors.crops}
+                                        >
+                                            <option value="" label="선택해 주세요."/>
+                                            <option value="경기도" label="경기도"/>
+                                            <option value="강원도" label="강원도"/>
+                                            <option value="제주도" label="제주도"/>
+                                            <option value="충청북도" label="충청북도"/>
+                                            <option value="충청남도" label="충청남도"/>
+                                            <option value="경상북도" label="경상북도"/>
+                                            <option value="경상남도" label="경상남도"/>
+                                            <option value="전라북도" label="전라북도"/>
+                                            <option value="전라남도" label="전라남도"/>
+                                        </Form.Control>
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.target_area}
+                                        </Form.Control.Feedback>
+                                    </Col>
+                                </Form.Group>
+
+
+
 
                                 <br/><br/>
                                 <h5>선택항목</h5>
@@ -408,4 +402,4 @@ class MentorCreate extends Component {
 }
 
 // export default UserCreate
-export default withAlert()(MentorCreate)
+export default withAlert()(MenteeCreate)

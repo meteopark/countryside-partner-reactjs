@@ -4,87 +4,135 @@ import {connect} from 'react-redux';
 import * as importActions from '../../actions';
 import styles from './Mentors.module.scss';
 import {Link} from 'react-router-dom';
-import {Figure, Container, Row, Col, Card, Button, Image, CardColumns, Badge} from 'react-bootstrap';
+import {Container, Row, Col, Image, Jumbotron, Button} from 'react-bootstrap';
 import classNames from "classnames";
+import * as reactIconIo from "react-icons/io";
+import * as reactIconFa from "react-icons/fa";
 
 
 class Mentor extends Component {
 
     render() {
 
-        let mentorName = null;
-        let mentorId = null;
-
-
-
-
         let testArray = [
-            0,1,2,3,4,5,6,7,8,9,10,11,12
+            0, 1, 2, 3, 4
         ];
 
         return (
             <div>
-                <div className={classNames('container')}>
-                    {this.props.mapStateToPropsMentor.data.map((mentor, i) => {
 
-                        mentorName = mentor.name;
-                        mentorId = mentor.id;
+                <div className={styles['blog-container-fluid']}>
+                    {this.props.mapStateToPropsMentor.data.map((mentor) => {
+
+                        const jumbotronStyle = {
+                            backgroundImage: 'url(/images/bg/profile-bg.png)',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                        };
+                        const jumbotronContentsStyle = {
+                            // opacity: 0.5
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            color: '#ffffff'
+                        };
 
                         return (
+                            <div style={jumbotronStyle}>
 
-                            <Row className={styles['cards-container']} key={i}>
-                                <Col sm={3} className={styles['card-image-col']}>
-                                    <Image className={styles['card-image']}
-                                           roundedCircle
-                                           src1={mentor.profile_image ? mentor.profile_image : '/images/no-image.png'}/>
-                                </Col>
-                                <Col sm={9}>
-                                    <div className={styles['card-contents-container']}>
-                                        <h3>{mentor.farm_name}</h3>
-                                        <h5 className={styles['card-contents']}>
-                                            <p>이름 : {mentor.name}</p>
-                                            <p>주소 : {mentor.address}</p>
-                                            <p>주요작물 : {mentor.crops}</p>
-                                            <p>경력 : {mentor.career}</p>
-                                        </h5>
-                                    </div>
-                                </Col>
-                            </Row>
+                                <Jumbotron fluid style={jumbotronContentsStyle}>
+                                    <Container>
+                                        <Row>
+                                            <Col sm={3} className={styles['profile-container']}>
+                                                <Image
+                                                    className={styles['profile-image']}
+                                                    roundedCircle
+                                                    src={mentor.profile_image ? mentor.profile_image : '/images/no-image.png'}
+                                                />
+                                                <br/>
+                                                <Button variant="success" className={styles['mentoring-button']}>
+                                                    <reactIconFa.FaPaperPlane className={styles['icon']}/>
+                                                    멘토링 요청
+                                                </Button>
+                                            </Col>
+                                            <Col className={styles['profile-info']}>
+                                                <h1>{mentor.farm_name}</h1>
+                                                <p>
+                                                    <reactIconFa.FaUserAlt className={styles['icon']}/>
+                                                    {mentor.name} ({mentor.id})
+                                                </p>
+                                                <p>
+                                                    <reactIconFa.FaHome className={styles['icon']}/>
+                                                    {mentor.address}
+                                                </p>
+                                                <p>
+                                                    <reactIconFa.FaSeedling className={styles['icon']}/>
+                                                    {mentor.crops}
+                                                </p>
+                                                <p>
+                                                    <reactIconFa.FaTractor className={styles['icon']}/>
+                                                    {mentor.career}
+                                                </p>
+                                                <p>
+                                                    <reactIconFa.FaPiedPiperHat className={styles['icon']}/>
+                                                    {mentor.homi}개
+                                                </p>
+                                                <p>
+                                                    <reactIconFa.FaUserFriends className={styles['icon']}/>
+                                                    멘토링 {mentor.mentoring_count}회
+                                                </p>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                </Jumbotron>
+                            </div>
                         )
                     })}
-                </div>
-                <div className={styles['blog-container-fluid']}>
                     <div className={classNames('container', styles['blog-container'])}>
-                        <h5 className={styles['blog-title']}>{mentorName} ({mentorId})님의 블로그</h5>
 
-
+                        <p className={styles['blog-header']}>농업일지</p>
 
                         {/*{this.props.mapStateToPropsMentor.data.map((mentor, i) => {*/}
-                        {testArray.map((mentor, i) => {
 
-                            return (
+                        {
+                            testArray.length > 0 ?
 
-                                <Row className={styles['blog-post']}>
-                                    <Col sm={9}>
-                                        <div className={styles['card-contents-container']}>
-                                            <h4>아름다운 블로그</h4>
-                                            <p className={styles['card-contents']}>
-                                                2019.04.25 12:25
-                                            </p>
-                                            <p className={styles['card-contents']}>
-                                                아벤느 클렌징 워터
-                                                요즘 미세먼지가 심해서 모공속 까지 클렌징 해주는 제품이 필요했는데 세안 후 당김없이 촉촉하게 클렌징 할 수 있는 아벤느제품이라 매일 자극 없이 사용하기에 만족스럽습니다
-                                                요즘 미세먼지가 심해서 모공속 까지 클렌징 해주는 제품이 필요했는데 세안 후 당김없이 촉촉하게 클렌징 할 수 있는 아벤느제품이라 매일 자극 없이 사용하기에 만족스럽습니다
-                                            </p>
-                                        </div>
-                                    </Col>
-                                    <Col sm={3}>
-                                        <Image className={styles['post-image']}
-                                               src='https://i.ytimg.com/vi/L-3LCCaOmvA/maxresdefault.jpg'/>
+                                testArray.map((mentor, i) => {
+
+                                    return (
+
+                                        <Row
+                                            className={classNames('justify-content-md-center', styles['blog-post-container'])}>
+                                            <Col lg={{span: 3, order: 2}}>
+                                                <Image
+                                                    src='https://cdn.pixabay.com/photo/2015/07/30/21/49/nature-868401_960_720.jpg'
+                                                    className={styles['blog-image']}
+                                                    fluid
+                                                />
+                                            </Col>
+                                            <Col lg={{span: 7, order: 1}}>
+                                                <div className={styles['blog-post']}>
+                                                    <h5 className={styles['blog-title']}>아름다운 블로그</h5>
+                                                    <p className={styles['blog-post-contents']}>
+                                                        아벤느 클렌징 워터
+                                                        요즘 미세먼지가 심해서 모공속 까지 클렌징 해주는 제품이 필요했
+                                                        는데 세안 후 당김없이 촉촉하게 클렌징 할 수 있는 아벤느제품이라 매일 자극 없이 사용하기에 만족스럽습니다
+                                                        는데 세안 후 당김없이 촉촉하게 클렌징 할 수 있는 아벤느제품이라 매일 자극 없이
+                                                    </p>
+                                                </div>
+                                                <p className={styles['timestamp']}>2019.04.25 12:25</p>
+                                            </Col>
+                                        </Row>
+                                    )
+                                })
+                                :
+                                <Row className={styles['empty-content']}>
+                                    <Col>
+                                        등록 된 일지가 없습니다.
                                     </Col>
                                 </Row>
-                            )
-                        })}
+                        }
                     </div>
                 </div>
             </div>

@@ -4,37 +4,36 @@ import {connect} from 'react-redux';
 import * as importActions from '../../actions';
 import styles from './Mentors.module.scss';
 import {Link} from 'react-router-dom';
-import {Row, Col, Image} from 'react-bootstrap';
+import {CardColumns, Card, Col} from 'react-bootstrap';
 import classNames from "classnames";
-
+import * as reactIconFa from "react-icons/fa";
 
 class Mentors extends Component {
 
     render() {
 
         return (
+
             <div className={classNames('container')}>
+                <CardColumns bsPrefix={'card-columns-custom'}>
                 {this.props.mains.lists.map((mentors, i) => (
+
                     <Link className={styles['link']} to={`/mentors/${mentors.mentor_srl}`} key={i}>
-                        <Row className={styles['cards-container']}>
-                            <Col sm={3} className={styles['card-image-col']}>
-                                <Image className={styles['card-image']}
-                                       src={mentors.profile_image ? mentors.profile_image : '/images/no-image.png'}/>
-                            </Col>
-                            <Col sm={9}>
-                                <div className={styles['card-contents-container']}>
-                                    <h3>{mentors.farm_name}</h3>
-                                    <h5 className={styles['card-contents']}>
-                                        <p>이름 : {mentors.name}</p>
-                                        <p>주소 : {mentors.address}</p>
-                                        <p>주요작물 : {mentors.crops}</p>
-                                        <p>경력 : {mentors.career}</p>
-                                    </h5>
-                                </div>
-                            </Col>
-                        </Row>
+                        <Card>
+                            {mentors.profile_image ? <Card.Img src={mentors.profile_image} /> : ""}
+                            <Card.Body>
+                                <Card.Title>{mentors.farm_name}</Card.Title>
+                                <Card.Text>
+                                    <p><reactIconFa.FaUserAlt className={styles['icon']} />{mentors.name}</p>
+                                    <p><reactIconFa.FaHome className={styles['icon']} />{mentors.address}</p>
+                                    <p><reactIconFa.FaSeedling className={styles['icon']} />{mentors.crops}</p>
+                                    <p><reactIconFa.FaTractor className={styles['icon']} />{mentors.career}</p>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
                     </Link>
                 ))}
+                </CardColumns>
             </div>
         );
     }
