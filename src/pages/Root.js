@@ -14,6 +14,7 @@ import MenteeCreate from "./join/MenteeCreate";
 
 import Mentors from "./mentors/Mentors";
 import Mentor from "./mentors/Mentor";
+import SelectJoin from "./join/SelectJoin";
 
 
 
@@ -24,13 +25,14 @@ export class Root extends React.Component {
             <Router history={history}>
                 <Header />
                 <div>
-                    <SideNav />
+                    {/*<SideNav />*/}
                     <Switch>
                         <Route exact path="/" component={Main} />
 
                         <Route exact path="/mentors" component={Mentors} />
                         <Route exact path="/mentors/:mentor" component={Mentor} />
 
+                        <Route exact path="/join" component={SelectJoin} />
                         <Route exact path="/join/mentor" component={MentorCreate} />
                         <Route exact path="/join/mentee" component={MenteeCreate} />
 
