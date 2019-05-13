@@ -1,0 +1,88 @@
+@import "../../index.module";
+
+
+.join-title {
+
+  font-size: 1.5em;
+  padding-top: 20px;
+
+}
+.join-warning {
+  border-radius: 5px;
+  margin-top:12px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:20px;
+  font-size: 0.9em;
+  background: $container-background;
+  li { padding-top: 10px;}
+}
+
+.join-card {
+
+  margin-top:10px;
+  border-radius: 5px;
+  text-align: center;
+  //line-height: 80px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  .card-title{
+    font-size: 1.7em;
+    font-weight: bold;
+  }
+  .card-summary{
+    font-size: 0.9em;
+  }
+}
+
+.mentor {
+
+  color:#ffffff;
+  background: #22741C;
+}
+.mentee {
+
+  background: #E5D85C;
+}
+
+
+.user-create-container {
+}
+
+
+@media (min-width: 576px) {
+
+
+  .join-card {
+
+    border-radius: 5px;
+    text-align: center;
+    height: 200px;
+    width: 400px;
+    line-height: 20px;
+    display: table-cell;
+    vertical-align: middle;
+
+    .card-title{
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .card-summary{
+      margin-top: 30px;
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+
+
+  .user-create-container {
+    padding-left:15%;
+    padding-right:15%;
+    background: #ffffff;
+  }
+}
+

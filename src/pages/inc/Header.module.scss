@@ -14,6 +14,16 @@ body{
   font-family: 'Batang_Bold', sans-serif;
 }
 
+.top-bar {
+  margin: 0;
+  text-align: right;
+  font-size: 13px;
+  padding-top:7px;
+  color:#000000;
+  line-height: 18px;
+  height: 18px;
+}
+
 
 .header-title {
   font-family: 'Batang_Bold', sans-serif;
@@ -34,8 +44,23 @@ body{
 }
 
 .member-bar {
+  margin: 0;
+  padding:0;
   text-align: right;
-  background: red;
+  background: #d3d9df;
 }
 
+
+
+@media (min-width: 576px) {
+
+  .top-bar {
+    margin: 0;
+    text-align: right;
+    font-size: 13px;
+    padding-top:7px;
+    padding-bottom:7px;
+    color:#000000;
+  }
+}
 

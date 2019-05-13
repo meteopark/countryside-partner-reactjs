@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import styles from './User.module.scss';
+import styles from './Join.module.scss';
 import classNames from "classnames";
 import DaumPostcode from 'react-daum-postcode';
 import {Formik} from "formik";
@@ -9,7 +9,7 @@ import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
 import axios from 'axios';
 import { withAlert } from 'react-alert'
 import history from '../history';
-
+import {GlobalsContext} from '../../pages/globals';
 
 const schema = yup.object({
     id: yup.string().min(5, '아이디를 5자 이상 넣어 주세요.').max(20, '아이디를 20자 이하로 넣어주세요').required('아이디를 입력해 주세요.'),
@@ -20,15 +20,14 @@ const schema = yup.object({
 
 });
 
-const apiUserCreate = 'http://countryside-partner-laravel.test/api/v1/users/mentor';
 
 class MentorCreate extends Component {
 
-    constructor(props) {
+    constructor(props, context) {
 
         super(props);
         this.state = {
-            test: '',
+            apiUserCreate: context.server_host + '/api/v1/join/mentor',
             daumPostOpen: false,
             schemaDefaultValue : {
                 id: 'Bot-'+Date.now(),
@@ -111,7 +110,7 @@ class MentorCreate extends Component {
             }
         };
 
-        return axios.post(`${apiUserCreate}`, formData, config)
+        return axios.post(`${this.state.apiUserCreate}`, formData, config)
                 .then(response => {
 
                     this.props.alert.show('등록 되었습니다.');
@@ -328,11 +327,11 @@ class MentorCreate extends Component {
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.career}
                                         >
-                                            <option value="" label="선택해 주세요."/>
-                                            <option value="1-3" label="1년 ~ 3년" />
-                                            <option value="5-9" label="5년 ~ 9년"/>
-                                            <option value="10-14" label="10년 ~ 14년"/>
-                                            <option value="15-0" label="15년 이상" />
+                                            <option value="">선택해 주세요.</option>
+                                            <option value="1-3">1년 ~ 3년</option>
+                                            <option value="5-9">5년 ~ 9년</option>
+                                            <option value="10-14">10년 ~ 14년</option>
+                                            <option value="15-0">15년 이상</option>
                                         </Form.Control>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.career}
@@ -407,5 +406,5 @@ class MentorCreate extends Component {
     }
 }
 
-// export default UserCreate
+MentorCreate.contextType = GlobalsContext;
 export default withAlert()(MentorCreate)

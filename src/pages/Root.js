@@ -1,6 +1,7 @@
 import React from 'react';
-import {BrowserRouter,Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter,Router, Route, Switch, withRouter} from "react-router-dom";
 import Main from "./main/Main";
+import {TopBar} from "./inc/TopBar";
 import {Header} from "./inc/Header";
 import Footer from "./inc/Footer";
 import styles from "../index.module.scss";
@@ -15,6 +16,8 @@ import MenteeCreate from "./join/MenteeCreate";
 import Mentors from "./mentors/Mentors";
 import Mentor from "./mentors/Mentor";
 import SelectJoin from "./join/SelectJoin";
+import {connect} from "react-redux";
+
 
 
 
@@ -23,7 +26,8 @@ export class Root extends React.Component {
     render() {
         return (
             <Router history={history}>
-                <Header />
+                <TopBar />
+                {/*<Header/>*/}
                 <div>
                     {/*<SideNav />*/}
                     <Switch>
@@ -48,3 +52,4 @@ export class Root extends React.Component {
         );
     }
 }
+

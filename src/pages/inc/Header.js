@@ -19,12 +19,9 @@ export class Header extends Component {
         return (
             <div className={classNames('container-fluid', styles['custom-container-fluid'])}>
                 <div className="container">
-                    <div className={styles['member-bar']}>
-                        <p><a href="">회원가입</a></p>
-                    </div>
                     <Navbar bg="light" variant="light" expand="lg" className="justify-content-center">
                         <Navbar.Brand className={styles['header-title']} href="/" >
-                            <div className={styles['header-title']}><img src="./images/logo.png" width="300" alt="도시쥐 & 시골쥐"/></div>
+                            <div className={styles['header-title']}><img src="" alt=""/></div>
                         </Navbar.Brand>
                     </Navbar>
                     <Navbar sticky="top" bg="light" variant="light" expand="lg">

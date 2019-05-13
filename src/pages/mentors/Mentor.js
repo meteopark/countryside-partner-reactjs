@@ -3,10 +3,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
 import styles from './Mentors.module.scss';
-import {Link} from 'react-router-dom';
 import {Container, Row, Col, Image, Jumbotron, Button} from 'react-bootstrap';
 import classNames from "classnames";
-import * as reactIconIo from "react-icons/io";
 import * as reactIconFa from "react-icons/fa";
 
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import styles from './User.module.scss';
+import styles from './Join.module.scss';
 import classNames from "classnames";
 import DaumPostcode from 'react-daum-postcode';
 import {Formik} from "formik";
@@ -9,6 +9,7 @@ import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
 import axios from 'axios';
 import { withAlert } from 'react-alert'
 import history from '../history';
+import {GlobalsContext} from '../../pages/globals';
 
 
 const schema = yup.object({
@@ -21,15 +22,16 @@ const schema = yup.object({
 
 });
 
-const apiUserCreate = 'http://countryside-partner-laravel.test/api/v1/users/mentor';
+
 
 class MenteeCreate extends Component {
 
-    constructor(props) {
+    constructor(props, context) {
 
         super(props);
+
         this.state = {
-            test: '',
+            apiUserCreate: context.server_host + '/api/v1/join/mentee',
             daumPostOpen: false,
             schemaDefaultValue : {
                 id: 'Bot-'+Date.now(),
@@ -43,7 +45,6 @@ class MenteeCreate extends Component {
                 introduce: '영농 꿈나무 입니다.',
                 crops: '콩',
                 target_area: '전라남도',
-
             }
         }
     }
@@ -103,8 +104,6 @@ class MenteeCreate extends Component {
         formData.append('crops', this.state.schemaDefaultValue.crops);
         formData.append('target_area', this.state.schemaDefaultValue.target_area);
 
-
-
         console.log(this.state.schemaDefaultValue);
 
         const config = {
@@ -113,7 +112,7 @@ class MenteeCreate extends Component {
             }
         };
 
-        return axios.post(`${apiUserCreate}`, formData, config)
+        return axios.post(`${this.state.apiUserCreate}`, formData, config)
                 .then(response => {
 
                     this.props.alert.show('등록 되었습니다.');
@@ -128,10 +127,7 @@ class MenteeCreate extends Component {
 
     render() {
 
-
         return (
-
-
             <div className={classNames('container', styles['in-container'])}>
 
                 <div className={styles['user-create-container']}>
@@ -235,8 +231,8 @@ class MenteeCreate extends Component {
                                                 inline
                                                 type="radio"
                                                 value="male"
-                                                label="남"
                                                 name="sex"
+                                                label="남"
                                                 onChange={(e) => this.handleText(e)}
                                                 id="sex1"
                                             />
@@ -244,8 +240,8 @@ class MenteeCreate extends Component {
                                                 inline
                                                 type="radio"
                                                 value="female"
-                                                label="여"
                                                 name="sex"
+                                                label="여"
                                                 onChange={(e) => this.handleText(e)}
                                                 id="sex2"
                                             />
@@ -314,8 +310,8 @@ class MenteeCreate extends Component {
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.crops}
                                         >
-                                            <option value="" label="선택해 주세요."/>
-                                            <option value="콩" label="콩"/>
+                                            <option value="">선택해 주세요.</option>
+                                            <option value="콩">콩</option>
                                         </Form.Control>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.crops}
@@ -332,16 +328,16 @@ class MenteeCreate extends Component {
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.crops}
                                         >
-                                            <option value="" label="선택해 주세요."/>
-                                            <option value="경기도" label="경기도"/>
-                                            <option value="강원도" label="강원도"/>
-                                            <option value="제주도" label="제주도"/>
-                                            <option value="충청북도" label="충청북도"/>
-                                            <option value="충청남도" label="충청남도"/>
-                                            <option value="경상북도" label="경상북도"/>
-                                            <option value="경상남도" label="경상남도"/>
-                                            <option value="전라북도" label="전라북도"/>
-                                            <option value="전라남도" label="전라남도"/>
+                                            <option value="">선택해 주세요.</option>
+                                            <option value="경기도">경기도</option>
+                                            <option value="강원도" >강원도</option>
+                                            <option value="제주도" >제주도</option>
+                                            <option value="충청북도">충청북도</option>
+                                            <option value="충청남도">충청남도</option>
+                                            <option value="경상북도">경상북도</option>
+                                            <option value="경상남도">경상남도</option>
+                                            <option value="전라북도">전라북도</option>
+                                            <option value="전라남도">전라남도</option>
                                         </Form.Control>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.target_area}
@@ -363,10 +359,12 @@ class MenteeCreate extends Component {
                                             name="profile_image"
                                             onChange={(e) => this.handleText(e, 'file')}
                                         />
+                                        <small className="text-muted">프로필 사진을 업로드 시 멘토에게 우선적으로 노출됩니다.</small>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.profile_image}
                                         </Form.Control.Feedback>
                                     </Col>
+
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="phone">
                                     <Form.Label column sm="2">연락처</Form.Label>
@@ -400,6 +398,5 @@ class MenteeCreate extends Component {
         )
     }
 }
-
-// export default UserCreate
+MenteeCreate.contextType = GlobalsContext;
 export default withAlert()(MenteeCreate)
