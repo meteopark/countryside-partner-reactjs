@@ -19,7 +19,6 @@ const schema = yup.object({
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     sex: yup.string().required('성별을 선택해 주세요.'),
     target_area: yup.string().required('관심지역을 선택해 주세요.'),
-
 });
 
 
@@ -120,7 +119,7 @@ class MenteeCreate extends Component {
                 })
                 .catch(error => {
 
-                    console.log("error", error.toLocaleString());
+                    console.log("error", this.state.apiUserCreate+" @ " +error);
                 });
     }
 
