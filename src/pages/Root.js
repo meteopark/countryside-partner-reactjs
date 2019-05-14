@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter,Router, Route, Switch, withRouter} from "react-router-dom";
 import Main from "./main/Main";
-import {TopBar} from "./inc/TopBar";
+import TopBar from "./inc/TopBar";
 import {Header} from "./inc/Header";
 import Footer from "./inc/Footer";
 import styles from "../index.module.scss";
@@ -20,7 +20,6 @@ import {connect} from "react-redux";
 
 
 
-
 export class Root extends React.Component {
 
     render() {
@@ -33,16 +32,14 @@ export class Root extends React.Component {
                     <Switch>
                         <Route exact path="/" component={Main} />
 
+
                         <Route exact path="/mentors" component={Mentors} />
                         <Route exact path="/mentors/:mentor" component={Mentor} />
 
+                        {/*{localStorage.getItem('token') && <Route exact path="/join" component={SelectJoin} />}*/}
                         <Route exact path="/join" component={SelectJoin} />
                         <Route exact path="/join/mentor" component={MentorCreate} />
                         <Route exact path="/join/mentee" component={MenteeCreate} />
-
-
-
-
 
                         <Route exact path="/villages/:village_code" component={Village} />
                     </Switch>
@@ -52,4 +49,3 @@ export class Root extends React.Component {
         );
     }
 }
-

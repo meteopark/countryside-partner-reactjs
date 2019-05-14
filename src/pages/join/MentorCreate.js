@@ -9,7 +9,11 @@ import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
 import axios from 'axios';
 import { withAlert } from 'react-alert'
 import history from '../history';
+import { withRouter } from "react-router";
 import {GlobalsContext} from '../../pages/globals';
+import * as importActions from "../../actions";
+import {bindActionCreators, compose} from 'redux';
+import {connect} from "react-redux";
 
 const schema = yup.object({
     id: yup.string().min(5, '아이디를 5자 이상 넣어 주세요.').max(20, '아이디를 20자 이하로 넣어주세요').required('아이디를 입력해 주세요.'),
@@ -28,6 +32,7 @@ class MentorCreate extends Component {
         super(props);
         this.state = {
             apiUserCreate: context.server_host + '/api/v1/join/mentor',
+            isLoading: false,
             daumPostOpen: false,
             schemaDefaultValue : {
                 id: 'Bot-'+Date.now(),
@@ -85,6 +90,20 @@ class MentorCreate extends Component {
     }
 
 
+    handleClick = () => {
+
+        this.setState({ isLoading: true }, () => {
+            this.simulateNetworkRequest().then(() => {
+                this.setState({ isLoading: false });
+            });
+        });
+        this.handleUserCreate();
+    }
+    simulateNetworkRequest = () => {
+        return new Promise(resolve => setTimeout(resolve, 2000));
+    }
+
+
 
     handleUserCreate = () => {
 
@@ -113,12 +132,19 @@ class MentorCreate extends Component {
         return axios.post(`${this.state.apiUserCreate}`, formData, config)
                 .then(response => {
 
-                    this.props.alert.show('등록 되었습니다.');
-                    history.push("/");
+                    let res = response.data;
+
+                    if (res.stat < 1) {
+
+                        this.props.alert.show('등록 되었습니다.');
+                        localStorage.setItem('token', res.response.token);
+                        localStorage.setItem('name', res.response.name);
+                        this.props.actions.isLogged();
+                        history.push("/");
+                    }
                 })
                 .catch(error => {
-
-                    console.log("error", error.toLocaleString());
+                    console.log("error", error);
                 });
     }
 
@@ -138,10 +164,6 @@ class MentorCreate extends Component {
                         enableReinitialize={true}
                         validationSchema={schema}
                         initialValues={this.state.schemaDefaultValue}
-                        onSubmit={(values, {setSubmitting}) => {
-
-                            this.handleUserCreate();
-                        }}
                         render={({
                                      handleSubmit,
                                      handleChange,
@@ -393,7 +415,15 @@ class MentorCreate extends Component {
                                 <Row>
                                     <Col className={classNames("text-center", styles['end-button-top'])}>
                                         <hr/>
-                                        <Button variant="dark" type="submit">가입하기</Button>
+                                        <Button
+                                            variant="dark"
+                                            type="submit"
+                                            disabled={this.state.isLoading}
+                                            onClick={!this.state.isLoading ? this.handleClick : null}
+
+                                        >
+                                            {this.state.isLoading ? '처리 중' : '가입하기'}
+                                        </Button>
                                     </Col>
                                 </Row>
                             </Form>
@@ -407,4 +437,11 @@ class MentorCreate extends Component {
 }
 
 MentorCreate.contextType = GlobalsContext;
-export default withAlert()(MentorCreate)
+
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(importActions, dispatch),
+})
+
+export default withRouter(compose(withAlert(),connect(null, mapDispatchToProps))(MentorCreate));
+
+

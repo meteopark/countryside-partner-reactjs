@@ -10,6 +10,10 @@ import axios from 'axios';
 import { withAlert } from 'react-alert'
 import history from '../history';
 import {GlobalsContext} from '../../pages/globals';
+import * as importActions from "../../actions";
+import {withRouter} from "react-router";
+import {bindActionCreators, compose} from "redux";
+import {connect} from "react-redux";
 
 
 const schema = yup.object({
@@ -23,6 +27,9 @@ const schema = yup.object({
 
 
 
+
+
+
 class MenteeCreate extends Component {
 
     constructor(props, context) {
@@ -31,12 +38,13 @@ class MenteeCreate extends Component {
 
         this.state = {
             apiUserCreate: context.server_host + '/api/v1/join/mentee',
+            isLoading: false,
             daumPostOpen: false,
-            schemaDefaultValue : {
-                id: 'Bot-'+Date.now(),
+            schemaDefaultValue: {
+                id: 'Bot-' + Date.now(),
                 profile_image: '',
                 password: '1111',
-                name: 'Bot-'+Date.now(),
+                name: 'Bot-' + Date.now(),
                 birthday: '1984-11-24',
                 sex: 'male',
                 phone: '010-1234-5678',
@@ -47,6 +55,8 @@ class MenteeCreate extends Component {
             }
         }
     }
+
+
 
     handleDaumPost = () => {
         this.state.daumPostOpen ? this.setState({daumPostOpen: false}) : this.setState({daumPostOpen: true});
@@ -75,10 +85,10 @@ class MenteeCreate extends Component {
     handleText = (e, type = 'text') => {
         const schemaDefaultValue = {...this.state.schemaDefaultValue};
 
-        if(type === "text"){
+        if (type === "text") {
 
             schemaDefaultValue[e.target.name] = e.target.value;
-        }else{
+        } else {
 
             schemaDefaultValue[e.target.name] = e.target.files[0];
         }
@@ -87,8 +97,21 @@ class MenteeCreate extends Component {
     }
 
 
+    handleClick = () => {
+
+        this.setState({ isLoading: true }, () => {
+            this.simulateNetworkRequest().then(() => {
+                this.setState({ isLoading: false });
+            });
+        });
+        this.handleUserCreate();
+    }
+    simulateNetworkRequest = () => {
+        return new Promise(resolve => setTimeout(resolve, 2000));
+    }
 
     handleUserCreate = () => {
+
 
         let formData = new FormData();
         formData.append('id', this.state.schemaDefaultValue.id);
@@ -112,15 +135,23 @@ class MenteeCreate extends Component {
         };
 
         return axios.post(`${this.state.apiUserCreate}`, formData, config)
-                .then(response => {
+            .then(response => {
+
+                let res = response.data;
+
+                if (res.stat < 1) {
 
                     this.props.alert.show('등록 되었습니다.');
+                    localStorage.setItem('token', res.response.token);
+                    localStorage.setItem('name', res.response.name);
+                    this.props.actions.isLogged();
                     history.push("/");
-                })
-                .catch(error => {
+                }
+            })
+            .catch(error => {
 
-                    console.log("error", this.state.apiUserCreate+" @ " +error);
-                });
+                console.log("error", this.state.apiUserCreate + " @ " + error);
+            });
     }
 
 
@@ -136,10 +167,6 @@ class MenteeCreate extends Component {
                         enableReinitialize={true}
                         validationSchema={schema}
                         initialValues={this.state.schemaDefaultValue}
-                        onSubmit={(values, {setSubmitting}) => {
-
-                            this.handleUserCreate();
-                        }}
                         render={({
                                      handleSubmit,
                                      errors
@@ -329,8 +356,8 @@ class MenteeCreate extends Component {
                                         >
                                             <option value="">선택해 주세요.</option>
                                             <option value="경기도">경기도</option>
-                                            <option value="강원도" >강원도</option>
-                                            <option value="제주도" >제주도</option>
+                                            <option value="강원도">강원도</option>
+                                            <option value="제주도">제주도</option>
                                             <option value="충청북도">충청북도</option>
                                             <option value="충청남도">충청남도</option>
                                             <option value="경상북도">경상북도</option>
@@ -343,8 +370,6 @@ class MenteeCreate extends Component {
                                         </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
-
-
 
 
                                 <br/><br/>
@@ -385,7 +410,15 @@ class MenteeCreate extends Component {
                                 <Row>
                                     <Col className={classNames("text-center", styles['end-button-top'])}>
                                         <hr/>
-                                        <Button variant="dark" type="submit">가입하기</Button>
+                                        <Button
+                                            variant="dark"
+                                            type="submit"
+                                            disabled={this.state.isLoading}
+                                            onClick={!this.state.isLoading ? this.handleClick : null}
+
+                                        >
+                                            {this.state.isLoading ? '처리 중' : '가입하기'}
+                                        </Button>
                                     </Col>
                                 </Row>
                             </Form>
@@ -397,5 +430,11 @@ class MenteeCreate extends Component {
         )
     }
 }
+
 MenteeCreate.contextType = GlobalsContext;
-export default withAlert()(MenteeCreate)
+
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(importActions, dispatch),
+})
+
+export default withRouter(compose(withAlert(),connect(null, mapDispatchToProps))(MenteeCreate));

@@ -74,3 +74,17 @@ export const mainListsSuccess = (datas, type) => {
     }
 }
 
+
+// 로그인 상태 관리
+export const isLogged = () => {
+
+    let is_logged = false;
+
+    if(localStorage.getItem('token')) is_logged = true;
+
+    return {
+        type: types.IS_LOGGED,
+        is_logged: is_logged
+    }
+
+};
