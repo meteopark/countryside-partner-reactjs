@@ -140,11 +140,10 @@ class MenteeCreate extends Component {
                 let res = response.data;
 
                 if (res.stat < 1) {
-
+                    this.props.actions.isLogged();
                     this.props.alert.show('등록 되었습니다.');
                     localStorage.setItem('token', res.response.token);
                     localStorage.setItem('name', res.response.name);
-                    this.props.actions.isLogged();
                     history.push("/");
                 }
             })

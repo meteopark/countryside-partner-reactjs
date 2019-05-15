@@ -136,10 +136,10 @@ class MentorCreate extends Component {
 
                     if (res.stat < 1) {
 
+                        this.props.actions.isLogged();
                         this.props.alert.show('등록 되었습니다.');
                         localStorage.setItem('token', res.response.token);
                         localStorage.setItem('name', res.response.name);
-                        this.props.actions.isLogged();
                         history.push("/");
                     }
                 })
@@ -175,7 +175,6 @@ class MentorCreate extends Component {
                             <Form
                                 className="needs-validation"
                                 noValidate
-                                onSubmit={handleSubmit}
                             >
                                 <h5>*기본정보</h5>
                                 <hr/>
