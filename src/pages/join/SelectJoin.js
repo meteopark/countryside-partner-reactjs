@@ -19,7 +19,7 @@ class SelectJoin extends Component {
                 <h4 className={classNames('text-center', styles['join-title'])}>회원가입</h4>
                 <hr/>
 
-                <Row className="justify-content-md-center">
+                <Row className="text-center justify-content-md-center">
 
                     <Col md={3}>
                         <Link className={styles['link']} to={`/join/mentor`}>

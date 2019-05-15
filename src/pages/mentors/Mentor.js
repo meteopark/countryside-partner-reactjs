@@ -17,8 +17,8 @@ class Mentor extends Component {
         ];
 
         return (
-            <div>
 
+            <div>
                 <div className={styles['blog-container-fluid']}>
                     {this.props.mapStateToPropsMentor.data.map((mentor) => {
 
