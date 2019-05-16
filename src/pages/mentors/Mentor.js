@@ -32,8 +32,8 @@ class Mentor extends Component {
         };
 
         return (
-            <div>
 
+            <div>
                 <div className={styles['blog-container-fluid']}>
 
                     <div style={jumbotronStyle}>
