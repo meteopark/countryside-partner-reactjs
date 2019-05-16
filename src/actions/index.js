@@ -47,7 +47,7 @@ export const getMentor = (mentor) => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMentor}/${mentor}`)
+        return axios.get(`${apiMentor}/${mentor}?is_diary=true`)
 
             .then(response => {
 
