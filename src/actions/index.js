@@ -2,8 +2,9 @@ import axios from 'axios';
 import * as types from './ActionTypes';
 
 
-const apiMains      = 'http://countryside-partner-laravel.test/api/v1/main';
-const apiMentor     = 'http://countryside-partner-laravel.test/api/v1/mentors';
+const apiMains          = 'http://countryside-partner-laravel.test/api/v1/main';
+const apiMentor         = 'http://countryside-partner-laravel.test/api/v1/mentors';
+const apiMentorDiaries  = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors'; // /{mentor_srl}/articles
 
 export const mainLists = () => {
 
@@ -13,7 +14,7 @@ export const mainLists = () => {
 
             .then(response => {
 
-                dispatch(mainListsSuccess(response.data, types.MAIN_LISTS))
+                dispatch(Success(response.data, types.MAIN_LISTS))
             })
             .catch(error => {
 
@@ -32,7 +33,7 @@ export const mentorLists = () => {
 
             .then(response => {
 
-                dispatch(mainListsSuccess(response.data, types.MENTORS))
+                dispatch(Success(response.data, types.MENTORS))
             })
             .catch(error => {
 
@@ -47,11 +48,11 @@ export const getMentor = (mentor) => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMentor}/${mentor}?is_diary=true`)
+        return axios.get(`${apiMentor}/${mentor}`)
 
             .then(response => {
 
-                dispatch(mainListsSuccess(response.data, types.MENTOR))
+                dispatch(Success(response.data, types.MENTOR))
 
             })
             .catch(error => {
@@ -62,8 +63,27 @@ export const getMentor = (mentor) => {
             });
     }
 }
+export const getMentorDiaries = (mentor, page) => {
 
-export const mainListsSuccess = (datas, type) => {
+    return (dispatch) => {
+
+        return axios.get(`${apiMentorDiaries}/${mentor}/articles?page=${page}`)
+
+            .then(response => {
+
+                dispatch(Success(response.data, types.MENTOR_DIARIES));
+            })
+            .catch(error => {
+
+                console.log("error : getMentorDiaries() " , error);
+                throw(error);
+
+            });
+    }
+}
+
+
+export const Success = (datas, type) => {
 
     return {
 
@@ -73,7 +93,6 @@ export const mainListsSuccess = (datas, type) => {
         }
     }
 }
-
 
 // 로그인 상태 관리
 export const isLogged = () => {
