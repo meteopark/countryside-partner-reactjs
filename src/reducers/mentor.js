@@ -4,12 +4,9 @@ const initialState = {
 
     mentor: {},
     diaries: {
-        current_page: 1,
-        data: [],
-        hasMoreItems: true
+        current_page: 0,
+        data: []
     },
-
-
 };
 
 export const mentor = (state = initialState, action) => {
@@ -23,8 +20,7 @@ export const mentor = (state = initialState, action) => {
                 mentor: action.payload.datas,
                 diaries:{
                     current_page: 1,
-                    data: [],
-                    hasMoreItems: true
+                    data: []
                 },
 
             };
@@ -36,8 +32,6 @@ export const mentor = (state = initialState, action) => {
                 diaries: {
                     current_page: action.payload.datas.current_page,
                     data: [...action.payload.datas.data],
-                    // hasMoreItems: action.payload.datas.data.length > 0 ? true : false
-                    hasMoreItems: false
                 }
             };
 

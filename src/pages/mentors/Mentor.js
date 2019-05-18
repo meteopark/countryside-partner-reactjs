@@ -6,12 +6,9 @@ import styles from './Mentors.module.scss';
 import {Container, Row, Col, Image, Jumbotron, Button} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
-import InfiniteScroll from 'react-infinite-scroller';
-import axios from "axios";
-import * as types from "../../actions/ActionTypes";
-import {Success} from "../../actions";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-
+// https://www.npmjs.com/package/react-infinite-scroll-component
 class Mentor extends Component {
 
     constructor(props) {
@@ -28,39 +25,12 @@ class Mentor extends Component {
 
     loadItems = () => {
 
+        setTimeout(() => {
 
-        this.setState({
-            page: this.state.page + 1,
-        })
+        }, 1500);
 
-        const apiMentorDiaries = "http://countryside-partner-laravel.test/api/v1/diaries-mentors";
-
-        return axios.get(`${apiMentorDiaries}/${this.props.match.params.mentor}/articles?page=${this.state.page}`)
-
-            .then(res => {
-
-                if(res) {
-
-                    let tracks = this.state.tracks;
-                    let data = res.data.response.data;
-
-                    data.map((diary) => {
-
-                        tracks.push(diary);
-                    });
-
-                    if(data.length < 1){
-
-                        this.setState({hasMoreItems: false})
-                    }
-                }
-            })
-            .catch(error => {
-
-                console.log("error : getMentorDiaries() " , error);
-                throw(error);
-
-            });
+        const {actionMentor, match, mapStateToPropsMentorDiaries} = this.props;
+        actionMentor.getMentorDiaries(match.params.mentor, mapStateToPropsMentorDiaries.current_page + 1);
     }
 
     render() {
@@ -81,45 +51,12 @@ class Mentor extends Component {
             color: '#ffffff'
         };
 
-
-        let items = [];
-console.log("ggo", this.state.tracks);
-        this.state.tracks.map((diary) => {
-
-            items.push(
-                <Row
-                    key={diary.diary_srl}
-                    className={classNames('justify-content-md-center', styles['blog-post-container'])}>
-
-                    {
-                        diary.image ?
-                        <Col lg={{span: 3, order: 2}}>
-                            <Image
-                                src='https://cdn.pixabay.com/photo/2015/07/30/21/49/nature-868401_960_720.jpg'
-                                className={styles['blog-image']}
-                                fluid
-                            />
-                        </Col>
-                        : ""
-                    }
-                    <Col lg={{span: diary.image ? 7 : 10, order: 1}}>
-                        <div className={styles['blog-post']}>
-                            <h5 className={styles['blog-title']}>{diary.title}</h5>
-                            <p className={styles['blog-post-contents']}>{diary.contents}</p>
-                        </div>
-                        <p className={styles['timestamp']}>{diary.regdate}</p>
-                    </Col>
-                </Row>
-            )
-        });
-
         return (
 
             <div>
                 <div className={styles['blog-container-fluid']}>
 
                     {/*<div style={jumbotronStyle}>*/}
-
                     {/*    <Jumbotron fluid style={jumbotronContentsStyle}>*/}
                     {/*        <Container>*/}
                     {/*            <Row>*/}
@@ -166,26 +103,51 @@ console.log("ggo", this.state.tracks);
                     {/*        </Container>*/}
                     {/*    </Jumbotron>*/}
                     {/*</div>*/}
+
+
                     <div className={classNames('container', styles['blog-container'])}>
 
                         <p className={styles['blog-header']}>영농일지</p>
 
 
+                        <InfiniteScroll
+                            dataLength={15}
+                            next={this.loadItems}
+                            hasMore={true}
+                            loader={<h4>Loading...</h4>}
+                            endMessage={
+                                <p style={{textAlign: 'center'}}>
+                                    <b>Yay! You have seen it all</b>
+                                </p>
+                            }
+                        >
+                            {diaries.data.map((diary) => (
+                                <Row
+                                    key={diary.diary_srl}
+                                    className={classNames('justify-content-md-center', styles['blog-post-container'])}>
+                                    {
+                                        diary.image ?
+                                            <Col lg={{span: 3, order: 2}}>
+                                                <Image
+                                                    src='https://cdn.pixabay.com/photo/2015/07/30/21/49/nature-868401_960_720.jpg'
+                                                    className={styles['blog-image']}
+                                                    fluid
+                                                />
+                                            </Col>
+                                            : ""
+                                    }
+                                    <Col lg={{span: diary.image ? 7 : 10, order: 1}}>
+                                        <div className={styles['blog-post']}>
+                                            <h5 className={styles['blog-title']}>{diary.title}</h5>
+                                            <p className={styles['blog-post-contents']}>{diary.contents}</p>
+                                        </div>
+                                        <p className={styles['timestamp']}>{diary.regdate}</p>
+                                    </Col>
+                                </Row>
+                            ))}
+                        </InfiniteScroll>
 
-
-                            <div className={styles['scroll-container']}>
-                            <InfiniteScroll
-                                pageStart={0}
-                                loadMore={this.loadItems}
-                                hasMore={this.state.hasMoreItems}
-                                loader={<div className="loader" key={0}>Loading ...</div>}
-                                // useWindow={false}
-
-                            >
-                                {items}
-                            </InfiniteScroll>
-                            </div>
-                            {/*<Row className={styles['empty-content']}><Col>등록 된 일지가 없습니다.</Col></Row>*/}
+                        {/*<Row className={styles['empty-content']}><Col>등록 된 일지가 없습니다.</Col></Row>*/}
 
 
                     </div>
@@ -198,32 +160,21 @@ console.log("ggo", this.state.tracks);
 
         const {actionMentor, match} = this.props;
         actionMentor.getMentor(match.params.mentor);
-        // actionMentor.getMentorDiaries(match.params.mentor, this.state.page);
+        actionMentor.getMentorDiaries(match.params.mentor, this.state.page);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        // return false 하면 업데이트를 안함
-        // return this.props.checked !== nextProps.checked
 
-        console.log("shouldComponentUpdate", nextProps.mapStateToPropsMentorDiaries.data.length);
-
-        if(nextProps.mapStateToPropsMentorDiaries.data.length < 1)
-        {
-            // this.setState({hasMoreItems: false});
-            return false;
-        }
-
-        // this.setState({hasMoreItems: nextProps.mapStateToPropsMentorDiaries.data.length < 1 ? false : true});
+        // if(nextProps.mapStateToPropsMentorDiaries.data.length < 1) return false;
 
         return true;
     }
-
 
 }
 
 const mapStateToProps = (state) => ({
 
-    // mapStateToPropsMentor: state.mentor.mentor,
+    mapStateToPropsMentor: state.mentor.mentor,
     mapStateToPropsMentorDiaries: state.mentor.diaries
 })
 
