@@ -7,33 +7,51 @@ import {Spinner, Row, Col, Image, Jumbotron, Container, Button} from 'react-boot
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {Link} from "react-router-dom";
 
-class Mentor extends Component {
+// https://www.npmjs.com/package/react-infinite-scroll-component
+class Diary extends Component {
 
     constructor(props) {
 
         super(props);
         this.state = {
-            hasMore: true
+            hasMore: true,
+            isLoading: true
         }
+
+        window.onscroll = () => {
+
+            if (!this.state.hasMore) return false;
+
+            const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+            const body = document.body;
+            const html = document.documentElement;
+            const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+            const windowBottom = windowHeight + (window.pageYOffset);
+
+            if (windowBottom >= docHeight) this.loadItems();
+        };
     }
+
 
     loadItems = () => {
-
+console.log("@@@@@@@@");
         const {actionMentor, match, mapStateToPropsMentorDiaries} = this.props;
 
-        if (mapStateToPropsMentorDiaries.last_page === mapStateToPropsMentorDiaries.current_page) this.setState({hasMore: false});
+        if (mapStateToPropsMentorDiaries.last_page === mapStateToPropsMentorDiaries.current_page){
+            this.setState({
+                hasMore: false,
+                isLoading: false
+            });
+        }
 
-        setTimeout(() => {
-            actionMentor.getMentorDiaries(match.params.mentor, mapStateToPropsMentorDiaries.current_page + 1);
-        }, 1000);
+        actionMentor.getMentorDiaries(match.params.mentor, mapStateToPropsMentorDiaries.current_page + 1);
     }
+
 
     render() {
 
         const mentor = this.props.mapStateToPropsMentor;
-
         const diaries = this.props.mapStateToPropsMentorDiaries;
 
         const jumbotronStyle = {
@@ -45,14 +63,13 @@ class Mentor extends Component {
         const jumbotronContentsStyle = {
             width: '100%',
             height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
             color: '#ffffff'
         };
 
         return (
 
             <div>
-
                 <div className={styles['blog-container-fluid']}>
 
                     <div style={jumbotronStyle}>
@@ -72,7 +89,7 @@ class Mentor extends Component {
                                         </Button>
                                     </Col>
                                     <Col className={styles['profile-info']}>
-                                        <h1>{mentor.farm_name ? mentor.farm_name : "NULL"}</h1>
+                                        <h1>{mentor.farm_name}</h1>
                                         <p>
                                             <reactIconFa.FaUserAlt className={styles['icon']}/>
                                             {mentor.name} ({mentor.id})
@@ -106,55 +123,41 @@ class Mentor extends Component {
 
                     <div className={classNames('container', styles['blog-container'])}>
 
-                        <div id="scrollableDiv" className={styles['scroll-container']}>
+                        <p className={styles['blog-header']}>영농일지</p>
 
-                            <p className={styles['blog-header']}>영농일지</p>
-
-                            {diaries.data.length < 1 ?
-                                <Row className={styles['empty-content']}><Col>등록 된 일지가 없습니다.</Col></Row> : ""}
-
-                            <InfiniteScroll
-                                scrollableTarget="scrollableDiv"
-                                dataLength={diaries.data.length}
-                                next={this.loadItems}
-                                hasMore={diaries.data.length < 1 ? false : this.state.hasMore}
-                                loader={<div className={classNames("text-center", styles['infinite-loader'])}><Spinner
-                                    animation="border" variant="success"/></div>}
-                                endMessage={
-                                    <Row className="text-center">
-                                        <Col><img src="/images/ico/homi.png" className={styles['homi']}/></Col>
-                                    </Row>
+                        {diaries.data.map((diary) => (
+                            <Row
+                                key={diary.diary_srl}
+                                className={classNames('justify-content-md-center', styles['blog-post-container'])}>
+                                {
+                                    diary.image ?
+                                        <Col lg={{span: 3, order: 2}}>
+                                            <Image
+                                                src='https://cdn.pixabay.com/photo/2015/07/30/21/49/nature-868401_960_720.jpg'
+                                                className={styles['blog-image']}
+                                                fluid
+                                            />
+                                        </Col>
+                                        : ""
                                 }
-                            >
-                                {diaries.data.map((diary) => (
-                                    <Link className={styles['link']}
-                                          to={`/diaries-mentors/articles/${diary.diary_srl}`}>
-                                        <Row
-                                            key={diary.diary_srl}
-                                            className={classNames('justify-content-md-center', styles['blog-post-container'])}>
-                                            {
-                                                diary.image ?
-                                                    <Col lg={{span: 3, order: 2}}><Image
-                                                        src='https://cdn.pixabay.com/photo/2015/07/30/21/49/nature-868401_960_720.jpg'
-                                                        className={styles['blog-image']} fluid/></Col>
-                                                    : ""
-                                            }
-                                            <Col lg={{span: diary.image ? 7 : 10, order: 1}}>
-                                                <div className={styles['blog-post']}>
-                                                    <h5 className={styles['blog-title']}>{diary.title}</h5>
-                                                    <p className={styles['blog-post-contents']}>{diary.contents}</p>
-                                                </div>
-                                                <p className={styles['timestamp']}>{diary.regdate}</p>
-                                            </Col>
-                                        </Row>
-                                    </Link>
-                                ))}
-                            </InfiniteScroll>
-                        </div>
+                                <Col lg={{span: diary.image ? 7 : 10, order: 1}}>
+                                    <div className={styles['blog-post']}>
+                                        <h5 className={styles['blog-title']}>{diary.title}</h5>
+                                        <p className={styles['blog-post-contents']}>{diary.contents}</p>
+                                    </div>
+                                    <p className={styles['timestamp']}>{diary.regdate}</p>
+                                </Col>
+                            </Row>
+                        ))}
+                        {/*<Row className={styles['empty-content']}><Col>등록 된 일지가 없습니다.</Col></Row>*/}
+
+                        {this.state.isLoading && <div className={classNames("text-center", styles['infinite-loader'])}><Spinner animation="border" variant="success"/></div>}
+                        {!this.state.hasMore && <Row className="text-center"><Col><img src="/images/ico/homi.png" className={styles['homi']}/></Col></Row>}
                     </div>
                 </div>
             </div>
         );
+
     }
 
     componentDidMount() {
@@ -164,12 +167,16 @@ class Mentor extends Component {
         actionMentor.getMentorDiaries(match.params.mentor, 1);
     }
 
+
     shouldComponentUpdate(nextProps, nextState) {
 
-        // if(nextProps.mapStateToPropsMentor === undefined) return false;
-        // if(nextProps.mapStateToPropsMentorDiaries.data && nextProps.mapStateToPropsMentorDiaries.data.length < 1)return false;
+
+        if(nextProps.mapStateToPropsMentor === undefined) return false;
+        if(nextProps.mapStateToPropsMentorDiaries.data && nextProps.mapStateToPropsMentorDiaries.data.length < 1) return false;
+
         return true;
     }
+
 
 }
 
@@ -184,4 +191,4 @@ const mapDispatchToProps = (dispatch) => ({
     actionMentor: bindActionCreators(importActions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Mentor);
+export default connect(mapStateToProps, mapDispatchToProps)(Diary);

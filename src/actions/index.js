@@ -4,7 +4,9 @@ import * as types from './ActionTypes';
 
 const apiMains          = 'http://countryside-partner-laravel.test/api/v1/main';
 const apiMentor         = 'http://countryside-partner-laravel.test/api/v1/mentors';
-const apiMentorDiaries  = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors'; // /{mentor_srl}/articles
+const apiMentorDiaries  = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors'; // {mentor_srl}/articles
+const apiDiary          = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors/articles'; // {diary_srl}
+
 
 export const mainLists = () => {
 
@@ -82,9 +84,31 @@ export const getMentorDiaries = (mentor, page) => {
     }
 }
 
+export const getDiary = (diary_id) => {
+
+    console.log("-------getDiary ", `${apiDiary}/${diary_id}`);
+
+    return (dispatch) => {
+
+        return axios.get(`${apiDiary}/${diary_id}`)
+
+            .then(response => {
+
+                dispatch(Success(response.data, types.DIARY));
+            })
+            .catch(error => {
+
+                console.log("error : getDiary() " , error);
+                throw(error);
+
+            });
+    }
+}
+
 
 export const Success = (datas, type) => {
 
+    console.log("-------", datas.response);
     return {
 
         type: type,

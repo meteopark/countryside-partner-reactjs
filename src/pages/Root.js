@@ -8,13 +8,13 @@ import styles from "../index.module.scss";
 import SideNav from "./inc/SideNav";
 import history from './history';
 
-import Village from "./villages/Village";
 import MentorCreate from "./join/MentorCreate";
 import MenteeCreate from "./join/MenteeCreate";
 
 
 import Mentors from "./mentors/Mentors";
 import Mentor from "./mentors/Mentor";
+import Diary from "./diaries/Diary";
 import SelectJoin from "./join/SelectJoin";
 import {connect} from "react-redux";
 
@@ -26,7 +26,7 @@ export class Root extends React.Component {
         return (
             <Router history={history}>
                 <TopBar />
-                {/*<Header/>*/}
+                <Header/>
                 <div>
                     {/*<SideNav />*/}
                     <Switch>
@@ -41,7 +41,16 @@ export class Root extends React.Component {
                         <Route exact path="/join/mentor" component={MentorCreate} />
                         <Route exact path="/join/mentee" component={MenteeCreate} />
 
-                        <Route exact path="/villages/:village_code" component={Village} />
+                        <Route exact path="/diaries-mentors/articles/:diary_id" component={Diary} />
+
+
+                        {/*Route::get('diaries-mentors/articles/{diary_id}', array( //  멘토 - 영농일지 선택 조회*/}
+                        {/*'as' => 'diaries-mentors.articles.show',*/}
+                        {/*'uses' => 'MentorDiaryController@show'*/}
+                        {/*));*/}
+
+
+
                     </Switch>
                 </div>
                 <Footer />

@@ -4,6 +4,13 @@ $container-background: #F6F6F6;
 
 
 
+.scroll-container {
+  overflow: auto;
+  height: 500px;
+
+  //background: #0b2e13;
+}
+
 .blog-container-fluid {
 
   width: 100%;
@@ -12,8 +19,7 @@ $container-background: #F6F6F6;
 
 .blog-container {
   background: #ffffff;
-  //padding-top: 1.5rem;
-
+  padding-bottom: 30px;
 
   .blog-header {
     margin-top: 1rem;
@@ -35,6 +41,7 @@ $container-background: #F6F6F6;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     //background: #d39e00;
 
+
     .blog-image{
 
       width: 100%;
@@ -51,6 +58,7 @@ $container-background: #F6F6F6;
 
         padding-top: 10px;
         color: #5D5D5D;
+
       }
     }
 
@@ -100,10 +108,18 @@ $container-background: #F6F6F6;
   line-height: 80px;
   text-align: center;
 }
+
 .icon {
   //color:#000000;
   font-size: 1.1em;
   margin-right: 0.6em;
+}
+.homi {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width:40px;
+  height: 40px;
+  //font-size: 3.1em;
 }
 
 .link:hover {
