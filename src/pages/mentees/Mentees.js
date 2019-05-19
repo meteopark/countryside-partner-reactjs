@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-import styles from './Mentors.module.scss';
+import styles from '../mentors/Mentors.module.scss';
 import {Link} from 'react-router-dom';
-import {CardColumns, Card, Col} from 'react-bootstrap';
+import {CardColumns, Card} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
 
-class Mentors extends Component {
+class Mentees extends Component {
 
     render() {
 
@@ -17,8 +17,8 @@ class Mentors extends Component {
             <div className={classNames('container', styles['in-container'])}>
 
                 <p className={styles['header-container']}>
-                    <reactIconFa.FaRegLaugh className={styles['main-icon']}/>
-                    멘토소개
+                    <reactIconFa.FaRegKissWinkHeart className={styles['main-icon']}/>
+                    멘티소개
                 </p>
                 <CardColumns bsPrefix={'card-columns-custom'}>
                 {this.props.mains.lists.map((mentors, i) => (
@@ -59,4 +59,4 @@ const mapDispatchToProps = (dispatch) => ({
     getMains: bindActionCreators(importActions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Mentors);
+export default connect(mapStateToProps, mapDispatchToProps)(Mentees);

@@ -63,6 +63,11 @@ $under-line: #E7E7E7;
   font-size: 1.1em;
   margin-right: 0.6em;
 }
+.icons {
+
+  font-size: 0.9em;
+  margin-right: 0.8em;
+}
 .homi {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -78,4 +83,12 @@ $under-line: #E7E7E7;
 }
 .link {
   color: #000000;
+}
+
+.header-container{
+
+  font-family: 'Title_Medium', sans-serif;
+  font-size: 20px;
+  //padding-bottom: 15px;
+  //border-bottom: 1px solid $under-line;
 }

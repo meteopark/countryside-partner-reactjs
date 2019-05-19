@@ -18,60 +18,10 @@ class Diary extends Component {
 
     render() {
 
-        console.log("---", this.props.mapStateToPropsDiary.diary);
         return (
 
             <div className={classNames('container', styles['in-container'])}>
 
-                    {/*{mentor === undefined ? "" :*/}
-                    {/*    <div style={jumbotronStyle}>*/}
-                    {/*        <Jumbotron fluid style={jumbotronContentsStyle}>*/}
-                    {/*            <Container>*/}
-                    {/*                <Row>*/}
-                    {/*                    <Col sm={3} className={styles['profile-container']}>*/}
-                    {/*                        <Image*/}
-                    {/*                            className={styles['profile-image']}*/}
-                    {/*                            roundedCircle*/}
-                    {/*                            src={mentor.profile_image ? mentor.profile_image : '/images/no-image.png'}*/}
-                    {/*                        />*/}
-                    {/*                        <br/>*/}
-                    {/*                        <Button variant="success" className={styles['mentoring-button']}>*/}
-                    {/*                            <reactIconFa.FaPaperPlane className={styles['icon']}/>*/}
-                    {/*                            멘토링 요청*/}
-                    {/*                        </Button>*/}
-                    {/*                    </Col>*/}
-                    {/*                    <Col className={styles['profile-info']}>*/}
-                    {/*                        <h1>{mentor.farm_name ? mentor.farm_name : "NULL"}</h1>*/}
-                    {/*                        <p>*/}
-                    {/*                            <reactIconFa.FaUserAlt className={styles['icon']}/>*/}
-                    {/*                            {mentor.name} ({mentor.id})*/}
-                    {/*                        </p>*/}
-                    {/*                        <p>*/}
-                    {/*                            <reactIconFa.FaHome className={styles['icon']}/>*/}
-                    {/*                            {mentor.address}*/}
-                    {/*                        </p>*/}
-                    {/*                        <p>*/}
-                    {/*                            <reactIconFa.FaSeedling className={styles['icon']}/>*/}
-                    {/*                            {mentor.crops}*/}
-                    {/*                        </p>*/}
-                    {/*                        <p>*/}
-                    {/*                            <reactIconFa.FaTractor className={styles['icon']}/>*/}
-                    {/*                            {mentor.career}*/}
-                    {/*                        </p>*/}
-                    {/*                        <p>*/}
-                    {/*                            <reactIconFa.FaPiedPiperHat className={styles['icon']}/>*/}
-                    {/*                            {mentor.homi}개*/}
-                    {/*                        </p>*/}
-                    {/*                        <p>*/}
-                    {/*                            <reactIconFa.FaUserFriends className={styles['icon']}/>*/}
-                    {/*                            멘토링 {mentor.mentoring_count}회*/}
-                    {/*                        </p>*/}
-                    {/*                    </Col>*/}
-                    {/*                </Row>*/}
-                    {/*            </Container>*/}
-                    {/*        </Jumbotron>*/}
-                    {/*    </div>*/}
-                    {/*}*/}
                 {this.props.mapStateToPropsDiary.diary.map((diary, i) => (
 
                     <div className={styles['diary-container']} key={i}>

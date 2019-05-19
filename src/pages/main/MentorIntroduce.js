@@ -12,9 +12,12 @@ export class MentorIntroduce extends Component {
 
         return (
             <div className={classNames('container', styles['in-container'])}>
-                <h5>
-                    <div className={styles['sub-title']}><reactIconFa.FaChessQueen className={styles['main-icon']}/>금주의 베스트 멘토</div>
-                </h5>
+
+                <p className={styles['header-container']}>
+                    <reactIconFa.FaChessQueen className={styles['main-icon']}/>
+                    금주의 베스트 멘토
+                </p>
+
                 <CardColumns>
                     {this.props.mains.lists.map((mentors, i) => (
 

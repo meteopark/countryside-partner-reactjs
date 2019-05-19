@@ -13,6 +13,7 @@ import MenteeCreate from "./join/MenteeCreate";
 
 
 import Mentors from "./mentors/Mentors";
+import Mentees from "./mentees/Mentees";
 import Mentor from "./mentors/Mentor";
 import Diary from "./diaries/Diary";
 import SelectJoin from "./join/SelectJoin";
@@ -32,6 +33,8 @@ export class Root extends React.Component {
                     <Switch>
                         <Route exact path="/" component={Main} />
 
+
+                        <Route exact path="/mentees" component={Mentees} />
 
                         <Route exact path="/mentors" component={Mentors} />
                         <Route exact path="/mentors/:mentor" component={Mentor} />
