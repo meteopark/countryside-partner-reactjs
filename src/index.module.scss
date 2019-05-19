@@ -1,86 +1,31 @@
 $container-background: #F6F6F6;
-
+$main-color: #FFBB00;
+$under-line: #E7E7E7;
 
 
 
 
 .scroll-container {
   overflow: auto;
-  height: 500px;
+  height: 700px;
 
   //background: #0b2e13;
 }
-
-.blog-container-fluid {
-
+.custom-full-container {
   width: 100%;
   background: #ffffff;
 }
 
-.blog-container {
-  background: #ffffff;
-  padding-bottom: 30px;
 
-  .blog-header {
-    margin-top: 1rem;
-    padding-bottom: 1rem;
-    font-size: 1.5em;
-    border-bottom: 3px solid #22741C;
-  }
-
-  .blog-title {
-    margin-top: 1rem;
-    font-weight: bold;
-    margin-bottom: 0;
-  }
-
-  .blog-post-container {
-
-    padding-top: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    //background: #d39e00;
-
-
-    .blog-image{
-
-      width: 100%;
-      max-height: 160px;
-      height: 160px;
-    }
-    .blog-post{
-
-      //margin-top: 20px;
-      margin-left: 10px;
-      min-height: 110px;
-
-      .blog-post-contents{
-
-        padding-top: 10px;
-        color: #5D5D5D;
-
-      }
-    }
-
-
-    .timestamp {
-      margin-left: 10px;
-      color: #4e555b;
-      font-size: 0.8rem;
-    }
-
-  }
-}
-
-
-
-
-
-
-
-.custom-container-fluid {
+.custom-container-fluid-top {
   background: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding:17px;
+}
+.custom-container-fluid {
+  background: #fff;
+  border-bottom: 1px solid #C3C3C3;
 }
 .full-width {
   padding-left:0;
@@ -92,7 +37,6 @@ $container-background: #F6F6F6;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: #ffffff;
   padding-top:15px;
-  padding-bottom: 5rem;
 
   .end-button-top {
 
@@ -109,8 +53,13 @@ $container-background: #F6F6F6;
   text-align: center;
 }
 
+.main-icon {
+  color:$main-color;
+  font-size: 1.1em;
+  margin-right: 0.4em;
+}
 .icon {
-  //color:#000000;
+
   font-size: 1.1em;
   margin-right: 0.6em;
 }

@@ -86,8 +86,6 @@ export const getMentorDiaries = (mentor, page) => {
 
 export const getDiary = (diary_id) => {
 
-    console.log("-------getDiary ", `${apiDiary}/${diary_id}`);
-
     return (dispatch) => {
 
         return axios.get(`${apiDiary}/${diary_id}`)
@@ -108,7 +106,6 @@ export const getDiary = (diary_id) => {
 
 export const Success = (datas, type) => {
 
-    console.log("-------", datas.response);
     return {
 
         type: type,

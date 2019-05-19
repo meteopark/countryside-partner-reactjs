@@ -43,13 +43,6 @@ export const mentor = (state = initialState, action) => {
                 }
             };
 
-        case types.DIARY:
-
-            return {
-
-                mentor: action.payload.datas,
-            };
-
         default:
 
             return state;

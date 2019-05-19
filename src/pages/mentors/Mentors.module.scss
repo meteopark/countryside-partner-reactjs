@@ -1,27 +1,102 @@
 @import "../../index.module";
 
 
+.blog-container-fluid {
+
+  width: 100%;
+  background: #ffffff;
+}
+.blog-introduce{
+  width: 100%;
+  min-height: 300px;
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+.blog-container {
+  background: #ffffff;
+  padding-bottom: 30px;
+
+  .blog-header {
+    font-family: 'Title_Medium', sans-serif;
+    font-size: 20px;
+    margin-top: 1rem;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $under-line;
+  }
+
+  .blog-title {
+    margin-top: 1rem;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .blog-post-container {
+
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    //background: #d39e00;
+
+
+    .blog-image{
+
+      width: 100%;
+      max-height: 160px;
+      height: 160px;
+    }
+    .blog-post{
+
+      //margin-top: 20px;
+      margin-left: 10px;
+      min-height: 110px;
+
+      .blog-post-contents{
+
+        padding-top: 10px;
+        color: #5D5D5D;
+
+      }
+    }
+    .timestamp {
+      margin-left: 10px;
+      color: #4e555b;
+      font-size: 0.8rem;
+    }
+
+  }
+}
+
 .profile-container {
 
   text-align: center;
-  margin-bottom: 20px;
 
   .mentoring-button {
 
     margin-top: 20px;
   }
+
+  .profile-image-container {
+
+    margin-top:20px;
+
+    .profile-image{
+
+      border: 1.5px solid #ffffff;
+      width: 180px;
+      height: 180px;
+    }
+  }
+  .profile-info{
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 20px;
+    line-height: 30px;
+    padding-bottom:20px;
+  }
 }
 
-.profile-image{
 
-  border: 1.5px solid #ffffff;
-  width: 200px;
-  height: 200px;
-}
-.profile-info{
-  margin-top: 20px;
-  margin-left: 20px;
-}
+
 
 .infinite-loader {
 

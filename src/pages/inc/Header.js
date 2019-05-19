@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {NavLink, Route, Switch} from "react-router-dom";
+import {Link, NavLink, Route, Switch} from "react-router-dom";
 import {
     Form,
     FormControl,
@@ -17,13 +17,12 @@ export class Header extends Component {
     render() {
 
         return (
+            <div>
+            <div className={classNames('container-fluid', styles['custom-container-fluid-top'])}>
+                <Link to="/" className={styles['link']}><div className={styles['header-title']}><img src="/images/ico/apple-icon-76x76.png" alt=""/>시골짝꿍</div></Link>
+            </div>
             <div className={classNames('container-fluid', styles['custom-container-fluid'])}>
                 <div className="container">
-                    <Navbar bg="light" variant="light" expand="lg" className="justify-content-center">
-                        <Navbar.Brand className={styles['header-title']} href="/" >
-                            <div className={styles['header-title']}><img src="/images/ico/apple-icon-76x76.png" alt=""/>시골짝꿍</div>
-                        </Navbar.Brand>
-                    </Navbar>
                     <Navbar sticky="top" bg="light" variant="light" expand="lg">
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
@@ -40,6 +39,7 @@ export class Header extends Component {
                         </Navbar.Collapse>
                     </Navbar>
                 </div>
+            </div>
             </div>
 
 

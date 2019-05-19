@@ -27,9 +27,16 @@ body{
 
 .header-title {
   font-family: 'TitleV', sans-serif;
-  color:#FFBB00;
+  color:$main-color;
   font-weight: bold;
+  font-size: 5vh;
+
+  img {
+    //width: 35px;
+    height: 55px;
+  }
 }
+
 .header-menu {
   font-family: 'Title_Medium', sans-serif;
 }

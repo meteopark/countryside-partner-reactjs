@@ -9,6 +9,7 @@ import * as reactIconFa from "react-icons/fa";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {Link} from "react-router-dom";
 
+
 class Mentor extends Component {
 
     constructor(props) {
@@ -33,7 +34,6 @@ class Mentor extends Component {
     render() {
 
         const mentor = this.props.mapStateToPropsMentor;
-
         const diaries = this.props.mapStateToPropsMentorDiaries;
 
         const jumbotronStyle = {
@@ -42,24 +42,16 @@ class Mentor extends Component {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         };
-        const jumbotronContentsStyle = {
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
-            color: '#ffffff'
-        };
 
         return (
 
             <div>
-
                 <div className={styles['blog-container-fluid']}>
-
                     <div style={jumbotronStyle}>
-                        <Jumbotron fluid style={jumbotronContentsStyle}>
-                            <Container>
-                                <Row>
-                                    <Col sm={3} className={styles['profile-container']}>
+                        <div className={styles['blog-introduce']}>
+                            <Container className={styles['profile-container']}>
+                                <Row className="justify-content-md-center">
+                                    <Col sm={3} className={styles['profile-image-container']}>
                                         <Image
                                             className={styles['profile-image']}
                                             roundedCircle
@@ -73,43 +65,37 @@ class Mentor extends Component {
                                     </Col>
                                     <Col className={styles['profile-info']}>
                                         <h1>{mentor.farm_name ? mentor.farm_name : "NULL"}</h1>
-                                        <p>
-                                            <reactIconFa.FaUserAlt className={styles['icon']}/>
-                                            {mentor.name} ({mentor.id})
-                                        </p>
-                                        <p>
-                                            <reactIconFa.FaHome className={styles['icon']}/>
-                                            {mentor.address}
-                                        </p>
-                                        <p>
-                                            <reactIconFa.FaSeedling className={styles['icon']}/>
-                                            {mentor.crops}
-                                        </p>
-                                        <p>
-                                            <reactIconFa.FaTractor className={styles['icon']}/>
-                                            {mentor.career}
-                                        </p>
-                                        <p>
-                                            <reactIconFa.FaPiedPiperHat className={styles['icon']}/>
-                                            {mentor.homi}개
-                                        </p>
-                                        <p>
-                                            <reactIconFa.FaUserFriends className={styles['icon']}/>
-                                            멘토링 {mentor.mentoring_count}회
-                                        </p>
+                                        <reactIconFa.FaUserAlt className={styles['icon']}/>
+                                        {mentor.name} ({mentor.id})
+                                        <br/>
+                                        <reactIconFa.FaHome className={styles['icon']}/>
+                                        {mentor.address}
+                                        <br/>
+                                        <reactIconFa.FaSeedling className={styles['icon']}/>
+                                        {mentor.crops}
+                                        <br/>
+                                        <reactIconFa.FaTractor className={styles['icon']}/>
+                                        {mentor.career}
+                                        <br/>
+                                        <reactIconFa.FaPiedPiperHat className={styles['icon']}/>
+                                        {mentor.homi}개
+                                        <br/>
+                                        <reactIconFa.FaUserFriends className={styles['icon']}/>
+                                        멘토링 {mentor.mentoring_count}회
                                     </Col>
                                 </Row>
                             </Container>
-                        </Jumbotron>
+                        </div>
                     </div>
 
 
                     <div className={classNames('container', styles['blog-container'])}>
 
+                        <p className={styles['blog-header']}>
+                            <reactIconFa.FaPenNib className={styles['main-icon']}/>
+                            영농일지
+                        </p>
                         <div id="scrollableDiv" className={styles['scroll-container']}>
-
-                            <p className={styles['blog-header']}>영농일지</p>
-
                             {diaries.data.length < 1 ?
                                 <Row className={styles['empty-content']}><Col>등록 된 일지가 없습니다.</Col></Row> : ""}
 
@@ -127,8 +113,9 @@ class Mentor extends Component {
                                 }
                             >
                                 {diaries.data.map((diary) => (
-                                    <Link className={styles['link']}
-                                          to={`/diaries-mentors/articles/${diary.diary_srl}`}>
+                                    <Link
+                                        className={styles['link']}
+                                        to={`/diaries-mentors/articles/${diary.diary_srl}`}>
                                         <Row
                                             key={diary.diary_srl}
                                             className={classNames('justify-content-md-center', styles['blog-post-container'])}>

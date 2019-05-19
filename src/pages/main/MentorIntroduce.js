@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import {connect} from "react-redux";
 import styles from './Main.module.scss';
 import classNames from 'classnames';
-
+import * as reactIconFa from "react-icons/fa";
 
 export class MentorIntroduce extends Component {
 
@@ -13,7 +13,7 @@ export class MentorIntroduce extends Component {
         return (
             <div className={classNames('container', styles['in-container'])}>
                 <h5>
-                    <div className={styles['sub-title']}>멘토를 소개 합니다</div>
+                    <div className={styles['sub-title']}><reactIconFa.FaChessQueen className={styles['main-icon']}/>금주의 베스트 멘토</div>
                 </h5>
                 <CardColumns>
                     {this.props.mains.lists.map((mentors, i) => (
