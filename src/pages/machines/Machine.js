@@ -10,7 +10,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {Link} from "react-router-dom";
 
 
-class Mentor extends Component {
+class Machine extends Component {
 
     constructor(props) {
 
@@ -171,4 +171,7 @@ const mapDispatchToProps = (dispatch) => ({
     actionMentor: bindActionCreators(importActions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Mentor);
+export default connect(mapStateToProps, mapDispatchToProps)(Machine);
+
+//http://data.mafra.go.kr/opendata/data/indexOpenDataDetail.do?data_id=20141120000000000358&filter_ty=O&getBack=O&sort_id=rdcnt&s_data_nm=&instt_id=201410120001&cl_code=&shareYn=
+// http://211.237.50.150:7080/openapi/b4f371498f96c269899f61303f99cd9a4e1a9bcc6693ffb906eb4d12fc141174/json/Grid_20141119000000000080_1/1/10?YEAR=2014
