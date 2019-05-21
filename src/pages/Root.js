@@ -16,6 +16,7 @@ import Mentors from "./mentors/Mentors";
 import Mentees from "./mentees/Mentees";
 import Mentor from "./mentors/Mentor";
 import Diary from "./diaries/Diary";
+import Machine from "./machines/Machine";
 import SelectJoin from "./join/SelectJoin";
 import {connect} from "react-redux";
 
@@ -27,7 +28,7 @@ export class Root extends React.Component {
         return (
             <Router history={history}>
                 <TopBar />
-                <Header/>
+                {/*<Header/>*/}
                 <div>
                     {/*<SideNav />*/}
                     <Switch>
@@ -38,6 +39,9 @@ export class Root extends React.Component {
 
                         <Route exact path="/mentors" component={Mentors} />
                         <Route exact path="/mentors/:mentor" component={Mentor} />
+                        <Route exact path="/machines" component={Machine} />
+
+
 
                         {/*{localStorage.getItem('token') && <Route exact path="/join" component={SelectJoin} />}*/}
                         <Route exact path="/join" component={SelectJoin} />

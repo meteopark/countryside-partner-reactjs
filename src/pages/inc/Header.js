@@ -29,8 +29,8 @@ export class Header extends Component {
                             <Nav className="mr-auto">
                                 <NavLink to="/mentors" className="nav-link"><div className={classNames(styles['header-menu'])}>멘토소개</div></NavLink>
                                 <NavLink to="/mentees" className="nav-link"><div className={classNames(styles['header-menu'])}>멘티소개</div></NavLink>
+                                <NavLink to="/machine" className="nav-link"><div className={classNames(styles['header-menu'])}>전국 농기계 현황</div></NavLink>
                                 <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'])}>농업용어</div></NavLink>
-                                <NavLink to="/village2" className="nav-link"><div className={classNames(styles['header-menu'])}>전국 농기계 현황</div></NavLink>
                             </Nav>
                             {/*<Form inline>*/}
                             {/*    <FormControl type="text" placeholder="찾고싶은 마을 검색해보세요" className="mr-sm-2" />*/}

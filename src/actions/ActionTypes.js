@@ -7,4 +7,6 @@ export const DIARY = "DIARY";
 
 export const IS_LOGGED = "ISLOGGED";
 
+export const OPENAPI_MACHINE = "OPENAPI_MACHINE";
+
 
