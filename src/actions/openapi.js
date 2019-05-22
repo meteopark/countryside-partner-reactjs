@@ -9,32 +9,20 @@ export const machineLists = (search) => {
 
     return (dispatch) => {
 
-        // return $this->callApi(self::API_GRID_MACHINES, $request->type, $request->param);
+        let apiAdd = "?type=json&CTPRVN="+search.ctprvn;
 
+        if(search.fch_knd !== "") apiAdd += "&FCH_KND="+search.fch_knd;
 
-
-
-        let apiAdd = "";
-        if(search.ctprvn !== ""){
-
-            apiAdd += "?type=json";
-            apiAdd += "&param=";
-            // apiAdd += "&CTPRVN="+encodeURI(search.ctprvn)+"&FCH_KND="+encodeURI(search.fch_knd);
-        }
-
-        console.log("vvv", `${apiMachine}${apiAdd}`);
         return axios.get(`${apiMachine}${apiAdd}`)
             .then(response => {
-                dispatch(Success(response.data, types.OPENAPI_MACHINE));
 
-console.log("---'", response.data);
+                dispatch(Success(response.data, types.OPENAPI_MACHINE));
             })
             .catch(e => {
                 throw(e);
             });
     }
 }
-
 
 export const Success = (success, type) => {
 

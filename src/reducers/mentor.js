@@ -30,7 +30,6 @@ export const mentor = (state = initialState, action) => {
 
             return {
 
-
                 mentor: state.mentor,
                 diaries: {
                     ...state.diaries,
