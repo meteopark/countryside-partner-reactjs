@@ -2,55 +2,35 @@ import axios from 'axios';
 import * as types from './ActionTypes';
 
 
-const apiMachine = 'http://211.237.50.150:7080/openapi/b4f371498f96c269899f61303f99cd9a4e1a9bcc6693ffb906eb4d12fc141174/json/Grid_20141119000000000080_1/1/10?YEAR=2014';
-const apiMains          = 'http://countryside-partner-laravel.test/api/v1/mentors';
+const apiMachine = 'http://countryside-partner-laravel.test/api/openapi/machines';
 
 
-export const machineLists = () => {
+export const machineLists = (search) => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMains}`)
+        // return $this->callApi(self::API_GRID_MACHINES, $request->type, $request->param);
+
+
+
+
+        let apiAdd = "";
+        if(search.ctprvn !== ""){
+
+            apiAdd += "?type=json";
+            apiAdd += "&param=";
+            // apiAdd += "&CTPRVN="+encodeURI(search.ctprvn)+"&FCH_KND="+encodeURI(search.fch_knd);
+        }
+
+        console.log("vvv", `${apiMachine}${apiAdd}`);
+        return axios.get(`${apiMachine}${apiAdd}`)
             .then(response => {
+                dispatch(Success(response.data, types.OPENAPI_MACHINE));
 
-                // dispatch(Success(response.data, types.OPENAPI_MACHINE));
-
-
-                let sample= {
-                    'Grid_20141119000000000080_1' : {
-                        'row':
-                            [
-                                {'ROW_NUM': 1,
-                            'YEAR': "2014",
-                            'CTPRVN': new Date().getMilliseconds()+"경기도",
-                            'FCH_KND': "농용트랙터",
-                            'FCH_KND_DETAIL': "소형",
-                            'HOLD_STTUS': 410,},
-                                {'ROW_NUM': 2,
-                                    'YEAR': "2014",
-                                    'CTPRVN': (new Date().getMilliseconds()+3)+"세종특별자치시",
-                                    'FCH_KND': "농용트랙터",
-                                    'FCH_KND_DETAIL': "소형",
-                                    'HOLD_STTUS': 410,},
-                                {'ROW_NUM': 3,
-                                    'YEAR': "2014",
-                                    'CTPRVN': new Date().getMilliseconds()*2+"서울시",
-                                    'FCH_KND': "농용트랙터",
-                                    'FCH_KND_DETAIL': "소형",
-                                    'HOLD_STTUS': 410,}
-                                ]
-
-                    }
-                }
-                dispatch(Success(sample, types.OPENAPI_MACHINE));
-
-
-
-
+console.log("---'", response.data);
             })
-            .catch(error => {
-                console.log("error : machineLists() " , error);
-                throw(error);
+            .catch(e => {
+                throw(e);
             });
     }
 }

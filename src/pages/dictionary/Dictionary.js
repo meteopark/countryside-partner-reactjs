@@ -10,7 +10,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import history from "../history";
 
-class Machine extends Component {
+class Dictionary extends Component {
 
     constructor(props) {
 
@@ -37,6 +37,8 @@ class Machine extends Component {
     }
 
     render() {
+
+        console.log("vvv", this.props.mapStateToMachine.lists);
 
         return (
 
@@ -86,11 +88,10 @@ class Machine extends Component {
                 <Table responsive="sm" className={classNames("text-center", styles['table'] )}>
                     <thead>
                     <tr className={styles['table-thead']}>
-                        <th width={"10%"}>순번</th>
-                        <th width={"20%"}>지역</th>
-                        <th >기종</th>
-                        <th width={"20%"}>기종상세</th>
-                        <th width={"15%"}>보유현황</th>
+                        <th width={"10%"}>분류</th>
+                        <th width={"25%"}>기존용어</th>
+                        <th width={"25%"}>한저어(원어)</th>
+                        <th width={"25%"}>쉬운용용어</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -101,7 +102,6 @@ class Machine extends Component {
                         <td>{m.CTPRVN}</td>
                         <td>{m.FCH_KND}</td>
                         <td>{m.FCH_KND_DETAIL}</td>
-                        <td>{m.HOLD_STTUS}</td>
                     </tr>
                     ))}
                     </tbody>
@@ -128,4 +128,4 @@ const mapDispatchToProps = (dispatch) => ({
     actionMachine: bindActionCreators(importActionsOpenApi, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Machine);
+export default connect(mapStateToProps, mapDispatchToProps)(Dictionary);
