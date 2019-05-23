@@ -3,7 +3,7 @@ import {variableState} from './variableState';
 import {mainLists} from './main';
 import {mentor} from './mentor';
 import {diary} from './diary';
-import {machine} from './machine';
+import {openapi} from './openapi';
 
 
 export const reducers = combineReducers({
@@ -11,5 +11,5 @@ export const reducers = combineReducers({
     mains: mainLists, // state.mains 값은 reducers/* 의 키값과 같아야 한다
     mentor: mentor,
     diary: diary,
-    machine: machine,
+    openapi: openapi,
 });

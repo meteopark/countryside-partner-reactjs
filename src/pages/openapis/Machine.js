@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActionsOpenApi from '../../actions/openapi';
-import styles from './Machine.module.scss';
+import styles from './OpenApis.module.scss';
 import {Col, Button, Form, Table} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
@@ -89,7 +89,7 @@ class Machine extends Component {
                     <reactIconFa.FaSearch className={styles['icons']}/>
                     조회</Button>
                 </Form.Row>
-                <p className={styles['source']}>농림축산식품 공공데이터포털 OpenAPI (2014년 기준)</p>
+                <p className={styles['source']}>농림축산식품 공공데이터포털 OpenAPI (전국 농기계 현황)</p>
                 <Table responsive="sm" className={classNames("text-center", styles['table'])}>
                     <thead>
                     <tr className={styles['table-thead']}>
@@ -109,7 +109,7 @@ class Machine extends Component {
                                 <td>{m.CTPRVN}</td>
                                 <td>{m.FCH_KND}</td>
                                 <td>{m.FCH_KND_DETAIL}</td>
-                                <td>{m.HOLD_STTUS.toLocaleString(navigator.language, {minimumFractionDigits: 0})}</td>
+                                <td>{m.HOLD_STTUS ? m.HOLD_STTUS.toLocaleString(navigator.language, {minimumFractionDigits: 0}) : 0}</td>
                             </tr>
                         ))
                         :
@@ -134,7 +134,7 @@ class Machine extends Component {
 
 const mapStateToProps = (state) => ({
 
-    mapStateToMachine: state.machine,
+    mapStateToMachine: state.openapi,
 })
 
 const mapDispatchToProps = (dispatch) => ({
