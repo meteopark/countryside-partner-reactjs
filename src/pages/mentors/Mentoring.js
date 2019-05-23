@@ -10,7 +10,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {Link} from "react-router-dom";
 
 
-class Mentoring extends Component {
+class Mentor extends Component {
 
     constructor(props) {
 
@@ -91,19 +91,14 @@ class Mentoring extends Component {
 
                     <div className={classNames('container', styles['blog-container'])}>
 
-                        <Row className={styles['blog-header']}>
-                            <Col>
-                                <reactIconFa.FaPenNib className={styles['main-icon']}/>
+                        <p className={styles['blog-header']}>
+                            <reactIconFa.FaPenNib className={styles['main-icon']}/>
                             영농일지
-                            </Col>
-                            <Col className="text-right">
-                                <Button size="sm" variant="outline-dark" className={classNames(styles['mentoring-button'])}>글 쓰기</Button>
-                            </Col>
-                        </Row>
-
+                        </p>
                         <div id="scrollableDiv" className={styles['scroll-container']}>
                             {diaries.data.length < 1 ?
                                 <Row className={styles['empty-content']}><Col>등록 된 일지가 없습니다.</Col></Row> : ""}
+
                             <InfiniteScroll
                                 scrollableTarget="scrollableDiv"
                                 dataLength={diaries.data.length}
@@ -176,4 +171,4 @@ const mapDispatchToProps = (dispatch) => ({
     actionMentor: bindActionCreators(importActions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Mentoring);
+export default connect(mapStateToProps, mapDispatchToProps)(Mentor);

@@ -16,9 +16,9 @@ import Mentors from "./mentors/Mentors";
 import Mentees from "./mentees/Mentees";
 import Mentor from "./mentors/Mentor";
 import Diary from "./diaries/Diary";
-import Machine from "./machines/Machine";
+import Machine from "./openapis/Machine";
+import Dictionary from "./openapis/Dictionary";
 import SelectJoin from "./join/SelectJoin";
-import {connect} from "react-redux";
 
 
 
@@ -40,6 +40,7 @@ export class Root extends React.Component {
                         <Route exact path="/mentors" component={Mentors} />
                         <Route exact path="/mentors/:mentor" component={Mentor} />
                         <Route exact path="/machines" component={Machine} />
+                        <Route exact path="/dictionary" component={Dictionary} />
 
 
 
