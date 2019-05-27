@@ -50,7 +50,9 @@ export const getMentor = (mentor) => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMentor}/${mentor}`)
+        const url = `${apiMentor}/${mentor}`;
+
+        return axios.get(url)
 
             .then(response => {
 
@@ -110,7 +112,7 @@ export const Success = (datas, type) => {
 
         type: type,
         payload: {
-            datas: datas.response
+            datas: datas
         }
     }
 }

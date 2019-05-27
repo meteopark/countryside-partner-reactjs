@@ -19,6 +19,7 @@ import Diary from "./diaries/Diary";
 import Machine from "./openapis/Machine";
 import Dictionary from "./openapis/Dictionary";
 import SelectJoin from "./join/SelectJoin";
+import MentorDiary from "./mentors/MentorDiary";
 
 
 
@@ -28,7 +29,7 @@ export class Root extends React.Component {
         return (
             <Router history={history}>
                 <TopBar />
-                <Header/>
+                {/*<Header/>*/}
                 <div>
                     {/*<SideNav />*/}
                     <Switch>
@@ -39,6 +40,8 @@ export class Root extends React.Component {
 
                         <Route exact path="/mentors" component={Mentors} />
                         <Route exact path="/mentors/:mentor" component={Mentor} />
+                        <Route exact path="/mentors/:mentor/create" component={MentorDiary} />
+                        <Route exact path="/mentors/:mentor/diaries/:diary_id" component={Diary} />
                         <Route exact path="/machines" component={Machine} />
                         <Route exact path="/dictionary" component={Dictionary} />
 
@@ -49,7 +52,7 @@ export class Root extends React.Component {
                         <Route exact path="/join/mentor" component={MentorCreate} />
                         <Route exact path="/join/mentee" component={MenteeCreate} />
 
-                        <Route exact path="/diaries-mentors/articles/:diary_id" component={Diary} />
+
 
 
                         {/*Route::get('diaries-mentors/articles/{diary_id}', array( //  멘토 - 영농일지 선택 조회*/}

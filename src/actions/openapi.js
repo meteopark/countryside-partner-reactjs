@@ -10,7 +10,7 @@ export const machineLists = (search) => {
 
     return (dispatch) => {
 
-        let apiAdd = "?type=json&CTPRVN="+search.ctprvn;
+        let apiAdd = "?CTPRVN="+search.ctprvn;
 
         if(search.fch_knd !== "") apiAdd += "&FCH_KND="+search.fch_knd;
 
@@ -28,7 +28,7 @@ export const dictionaryLists = (cl_nm) => {
 
     return (dispatch) => {
 
-        let apiAdd = "?type=json&CL_NM="+cl_nm;
+        let apiAdd = "?CL_NM="+cl_nm;
 
         return axios.get(`${apiDicitionary}${apiAdd}`)
             .then(response => {

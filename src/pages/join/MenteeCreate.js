@@ -137,15 +137,12 @@ class MenteeCreate extends Component {
         return axios.post(`${this.state.apiUserCreate}`, formData, config)
             .then(response => {
 
-                let res = response.data;
-
-                if (res.stat < 1) {
-                    this.props.actions.isLogged();
-                    this.props.alert.show('등록 되었습니다.');
-                    localStorage.setItem('token', res.response.token);
-                    localStorage.setItem('name', res.response.name);
-                    history.push("/");
-                }
+                const res = response.data;
+                this.props.actions.isLogged();
+                this.props.alert.show('등록 되었습니다.');
+                localStorage.setItem('token', res.token);
+                localStorage.setItem('name', res.name);
+                history.push("/");
             })
             .catch(error => {
 

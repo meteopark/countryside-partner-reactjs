@@ -20,10 +20,14 @@
     font-family: 'Title_Medium', sans-serif;
     font-size: 20px;
     margin-top: 1rem;
+    padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid $under-line;
     width: 100%;
 
+  }
+  .write {
+    float:right;
   }
 
   .blog-title {
