@@ -126,9 +126,7 @@ class MenteeCreate extends Component {
         formData.append('crops', this.state.schemaDefaultValue.crops);
         formData.append('target_area', this.state.schemaDefaultValue.target_area);
 
-        console.log(this.state.schemaDefaultValue);
-
-        const config = {
+        let config = {
             headers: {
                 'content-type': 'multipart/form-data',
             }
@@ -141,7 +139,8 @@ class MenteeCreate extends Component {
                 this.props.actions.isLogged();
                 this.props.alert.show('등록 되었습니다.');
                 localStorage.setItem('token', res.token);
-                localStorage.setItem('name', res.name);
+                localStorage.setItem('user_type', 'mentee');
+                localStorage.setItem('srl', res.mentee_srl);
                 history.push("/");
             })
             .catch(error => {
@@ -160,6 +159,9 @@ class MenteeCreate extends Component {
                     <h3>회원가입 - 멘티</h3>
                     <br/>
                     <Formik
+                        onSubmit={(values, actions) => {
+                            this.handleClick()
+                        }}
                         enableReinitialize={true}
                         validationSchema={schema}
                         initialValues={this.state.schemaDefaultValue}
@@ -410,7 +412,7 @@ class MenteeCreate extends Component {
                                             variant="dark"
                                             type="submit"
                                             disabled={this.state.isLoading}
-                                            onClick={!this.state.isLoading ? this.handleClick : null}
+                                            onClick={!this.state.isLoading ? handleSubmit: null}
 
                                         >
                                             {this.state.isLoading ? '처리 중' : '가입하기'}

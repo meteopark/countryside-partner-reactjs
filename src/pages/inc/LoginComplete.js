@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from './Header.module.scss';
-import classNames from 'classnames';
 import {Link, withRouter} from "react-router-dom";
 import history from "../history";
 import * as importActions from "../../actions";
@@ -21,6 +20,7 @@ class LoginComplete extends Component {
 
         return (
             <div>
+                <Link className={styles['link']} to={`/${localStorage.getItem('user_type')}s/${localStorage.getItem('srl')}`}>영농일지</Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link className={styles['link']} to="/join">마이페이지</Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a className={styles['link']} onClick={this.handleLogOut}>로그아웃</a>
             </div>

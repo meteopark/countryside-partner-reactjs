@@ -3,10 +3,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
 import styles from './Diary.module.scss';
-import {Spinner, Row, Col, Image, Jumbotron, Container, Button} from 'react-bootstrap';
+import {Button, ButtonToolbar, Image} from 'react-bootstrap';
 import classNames from "classnames";
-import * as reactIconFa from "react-icons/fa";
-import InfiniteScroll from "react-infinite-scroll-component";
 import {Link} from "react-router-dom";
 
 class Diary extends Component {
@@ -33,12 +31,12 @@ class Diary extends Component {
                                 className={styles['link']}
                                 to={`/mentors/${diary.mentor_srl}`}
                             >
-                            <Image
-                                className={styles['profile']}
-                                roundedCircle
-                                src={diary.mentor.profile_image ? diary.mentor.profile_image : '/images/no-image.png'}
-                            />
-                            {diary.mentor.name}
+                                <Image
+                                    className={styles['profile']}
+                                    roundedCircle
+                                    src={diary.mentor.profile_image ? diary.mentor.profile_image : '/images/no-image.png'}
+                                />
+                                {diary.mentor.name}
                             </Link>
                             <span className={styles['timestamp']}>{diary.regdate}</span>
                         </div>
@@ -46,11 +44,38 @@ class Diary extends Component {
 
                         <div className={styles['diary-contents']}>
 
-                            <Image src='https://cdn.pixabay.com/photo/2015/07/30/21/49/nature-868401_960_720.jpg'
-                                   className={styles['diary-image']}/>
+                            {
+                                diary.image ?
+                                    <Image src={diary.image}
+                                           className={styles['diary-image']}/>
+                                    : ""
+                            }
+
                             <p className={styles['contents']}>{diary.contents}</p>
                         </div>
+                        {
 
+                            localStorage.getItem('srl') == diary.mentor_srl ?
+                                <div className={classNames('text-right', styles['button-group'])}>
+                                    <Link className={classNames(styles['link'])}
+                                          to={`/mentors/${diary.mentor_srl}`}>
+                                        <Button variant="secondary">목록</Button>
+                                    </Link>&nbsp;&nbsp;&nbsp;
+
+                                    <Link className={classNames(styles['link'])}
+                                          to={`/mentors/${diary.mentor_srl}/diaries/${diary.diary_srl}/modify`}
+                                    >
+                                        <Button variant="warning">수정</Button>
+                                    </Link>&nbsp;&nbsp;&nbsp;
+
+                                    <Link className={classNames(styles['link'])}
+                                          to={`/mentors/${diary.mentor_srl}/create`}
+                                    >
+                                        <Button variant="danger">삭제</Button>
+                                    </Link>
+                                </div>
+                                : ""
+                        }
                     </div>
                 ))}
             </div>

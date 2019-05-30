@@ -92,16 +92,12 @@ class MentorCreate extends Component {
     handleClick = () => {
 
         this.setState({ isLoading: true }, () => {
-            this.simulateNetworkRequest().then(() => {
+            return new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
                 this.setState({ isLoading: false });
             });
         });
         this.handleUserCreate();
     }
-    simulateNetworkRequest = () => {
-        return new Promise(resolve => setTimeout(resolve, 2000));
-    }
-
 
 
     handleUserCreate = () => {
@@ -136,6 +132,8 @@ class MentorCreate extends Component {
                     this.props.alert.show('등록 되었습니다.');
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('name', res.name);
+                    localStorage.setItem('user_type', 'mentor');
+                    localStorage.setItem('srl', res.mentor_srl);
                     history.push("/");
                 })
                 .catch(error => {
@@ -156,6 +154,9 @@ class MentorCreate extends Component {
                     <h3>회원가입 - 멘토</h3>
                     <br/>
                     <Formik
+                        onSubmit={(values, actions) => {
+                            this.handleClick()
+                        }}
                         enableReinitialize={true}
                         validationSchema={schema}
                         initialValues={this.state.schemaDefaultValue}
@@ -170,6 +171,7 @@ class MentorCreate extends Component {
                             <Form
                                 className="needs-validation"
                                 noValidate
+                                onSubmit={handleSubmit}
                             >
                                 <h5>*기본정보</h5>
                                 <hr/>
@@ -413,7 +415,7 @@ class MentorCreate extends Component {
                                             variant="dark"
                                             type="submit"
                                             disabled={this.state.isLoading}
-                                            onClick={!this.state.isLoading ? this.handleClick : null}
+                                            onClick={!this.state.isLoading ? handleSubmit : null}
 
                                         >
                                             {this.state.isLoading ? '처리 중' : '가입하기'}

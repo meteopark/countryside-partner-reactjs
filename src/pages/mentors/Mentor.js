@@ -44,13 +44,20 @@ class Mentoring extends Component {
                 <div className={classNames('container', styles['blog-container'])}>
 
                     <div className={styles['blog-header']}>
-                        <reactIconFa.FaPenNib className={styles['main-icon']}/>영농일지
-                        <div className={styles['write']}>
-                            <Link className={classNames(styles['link'])} to={`/mentors/${mentor.mentor_srl}/create`}>
-                                <Button size="sm" variant="outline-dark"
-                                        className={classNames(styles['mentoring-button'])}>글 쓰기</Button>
-                            </Link>
-                        </div>
+                        <reactIconFa.FaPenNib className={styles['main-icon']}/>
+                        영농일지
+
+                        {
+                            localStorage.getItem('srl') == mentor.mentor_srl ?
+                            <div className={styles['write']}>
+                                <Link className={classNames(styles['link'])}
+                                      to={`/mentors/${mentor.mentor_srl}/create`}>
+                                    <Button size="sm" variant="outline-dark"
+                                            className={classNames(styles['mentoring-button'])}>글 쓰기</Button>
+                                </Link>
+                            </div>
+                            : ""
+                        }
                     </div>
 
                     <div id="scrollableDiv" className={styles['scroll-container']}>
@@ -81,7 +88,7 @@ class Mentoring extends Component {
                                         {
                                             diary.image ?
                                                 <Col lg={{span: 3, order: 2}}><Image
-                                                    src='https://cdn.pixabay.com/photo/2015/07/30/21/49/nature-868401_960_720.jpg'
+                                                    src={diary.image}
                                                     className={styles['blog-image']} fluid/></Col>
                                                 : ""
                                         }

@@ -21,7 +21,7 @@ const schema = yup.object({
     contents: yup.string().required('내용을 입력해 주세요.'),
 });
 
-class MentorDiary extends Component {
+class MentorDiaryModify extends Component {
 
     constructor(props, context) {
 
@@ -29,10 +29,11 @@ class MentorDiary extends Component {
         this.state = {
             apiUserCreate: `${context.server_host}/api/v1/mentors/${this.props.match.params.mentor}/diary`,
             isLoading: false,
+            firstView: true,
             schemaDefaultValue: {
                 title: '',
+                contents: '',
                 image: '',
-                contents: Date.now(),
             }
         }
     }
@@ -60,7 +61,9 @@ class MentorDiary extends Component {
         });
         this.handleDiaryCreate();
     }
-
+    goBack = () =>{
+        this.props.history.goBack();
+    }
 
     handleDiaryCreate = () => {
 
@@ -90,20 +93,21 @@ class MentorDiary extends Component {
 
     render() {
 
-        const mentor = this.props.mapStateToPropsMentor;
+        const {mapStateToPropsMentor} = this.props;
 
         return (
 
             <div>
-                {/*<MentorProfile mentor={mentor}/>*/}
+                {/*<MentorProfile mentor={mapStateToPropsMentor}/>*/}
 
                 <div className={classNames('container', styles['blog-container'])}>
 
                     <div className={styles['blog-header']}>
                         <reactIconFa.FaPenNib className={styles['main-icon']}/>
-                        영농일지 작성
+                        영농일지 수정
                     </div>
                     <br/>
+
 
                     <Formik
                         onSubmit={(values, actions) => {
@@ -172,6 +176,8 @@ class MentorDiary extends Component {
                                         >
                                             {this.state.isLoading ? '처리 중' : '등록'}
                                         </Button>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <Button variant="info" onClick={this.goBack}>취소</Button>
                                     </Col>
                                 </Row>
                             </Form>
@@ -184,7 +190,25 @@ class MentorDiary extends Component {
     componentDidMount() {
 
         const {actionMentor, match} = this.props;
-        actionMentor.getMentor(match.params.mentor);
+        actionMentor.getDiary(match.params.diary_id);
+    }
+
+    // 이 메소드는 컴포넌트 초기화 또는 새로운 props를 받았을 때 일어납니다
+    static getDerivedStateFromProps(nextProps, prevState) {
+
+        if (prevState.firstView && nextProps.mapStateToPropsDiary.diary[0]) {
+
+            return {
+                firstView: false,
+                schemaDefaultValue: {
+                    title: nextProps.mapStateToPropsDiary.diary[0].title,
+                    contents: nextProps.mapStateToPropsDiary.diary[0].contents,
+                    image: '',
+                }
+            }
+        }
+
+        return null;
     }
 
 }
@@ -192,6 +216,7 @@ class MentorDiary extends Component {
 const mapStateToProps = (state) => ({
 
     mapStateToPropsMentor: state.mentor.mentor,
+    mapStateToPropsDiary: state.diary
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -199,6 +224,6 @@ const mapDispatchToProps = (dispatch) => ({
     actionMentor: bindActionCreators(importActions, dispatch),
 })
 
-MentorDiary.contextType = GlobalsContext;
+MentorDiaryModify.contextType = GlobalsContext;
 
-export default withRouter(compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MentorDiary));
+export default withRouter(compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MentorDiaryModify));
