@@ -2,8 +2,6 @@ import React from 'react';
 import styles from './Mentors.module.scss';
 import {Row, Col, Image, Container, Button} from 'react-bootstrap';
 import * as reactIconFa from "react-icons/fa";
-import {Link} from "react-router-dom";
-
 
 export const MentorProfile = (props) => {
 

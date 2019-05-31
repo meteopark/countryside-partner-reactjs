@@ -116,7 +116,7 @@ class MentorDiaryModify extends Component {
         return (
 
             <div>
-                {/*<MentorProfile mentor={mapStateToPropsMentor}/>*/}
+                <MentorProfile mentor={mapStateToPropsMentor}/>
 
                 <div className={classNames('container', styles['blog-container'])}>
 
@@ -143,6 +143,7 @@ class MentorDiaryModify extends Component {
 
     componentDidMount() {
         const {actionMentor, match} = this.props;
+        actionMentor.getMentor(match.params.mentor);
         actionMentor.getDiary(match.params.diary_id);
     }
 

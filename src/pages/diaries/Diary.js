@@ -16,16 +16,16 @@ class Diary extends Component {
 
     render() {
 
+        const {diary} = this.props;
+
         return (
 
             <div className={classNames('container', styles['in-container'])}>
 
-                {this.props.mapStateToPropsDiary.diary.map((diary, i) => (
+                {diary.map((diary, i) => (
 
                     <div className={styles['diary-container']} key={i}>
                         <h2 className={styles['diary-title']}>{diary.title}</h2>
-
-
                         <div className={styles['user-info']}>
                             <Link
                                 className={styles['link']}
@@ -81,22 +81,6 @@ class Diary extends Component {
             </div>
         );
     }
-
-    componentDidMount() {
-
-        const {actionMentor, match} = this.props;
-        actionMentor.getDiary(match.params.diary_id);
-    }
 }
 
-const mapStateToProps = (state) => ({
-
-    mapStateToPropsDiary: state.diary
-})
-
-const mapDispatchToProps = (dispatch) => ({
-
-    actionMentor: bindActionCreators(importActions, dispatch),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Diary);
+export default Diary;

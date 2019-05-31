@@ -3,7 +3,7 @@ import styles from './Mentors.module.scss';
 import {bindActionCreators, compose} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-import {Form, Row, Col, Button, Image} from "react-bootstrap";
+import {Form, Row, Col, Button} from "react-bootstrap";
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
 import {MentorProfile} from "./MentorProfile";
@@ -21,20 +21,18 @@ const schema = yup.object({
     contents: yup.string().required('내용을 입력해 주세요.'),
 });
 
-class MentorDiaryModify extends Component {
+class MentorDiaryCreate extends Component {
 
     constructor(props, context) {
 
         super(props);
         this.state = {
-            apiUserCreate: `${context.server_host}/api/v1/mentors/${this.props.match.params.mentor}/diary`,
+            apiUserCreate: `${context.server_host}/api/v1/mentors/${this.props.match.params.mentor}/diaries`,
             isLoading: false,
-            firstView: true,
-            hasImage: '',
             schemaDefaultValue: {
                 title: '',
-                contents: '',
                 image: '',
+                contents: '',
             }
         }
     }
@@ -58,20 +56,18 @@ class MentorDiaryModify extends Component {
         this.setState({isLoading: true}, () => {
             return new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
                 this.setState({isLoading: false});
+                this.handleDiaryCreate();
             });
         });
-        this.handleDiaryCreate();
     }
-    goBack = () =>{
-        this.props.history.goBack();
-    }
+
 
     handleDiaryCreate = () => {
 
         let formData = new FormData();
         formData.append('title', this.state.schemaDefaultValue.title);
-        formData.append('image', this.state.schemaDefaultValue.image);
         formData.append('contents', this.state.schemaDefaultValue.contents);
+        formData.append('image', this.state.schemaDefaultValue.image);
 
         let config = {
             headers: {
@@ -80,8 +76,7 @@ class MentorDiaryModify extends Component {
             }
         };
 
-        console.log("axiso", formData);
-        return axios.put(`${this.state.apiUserCreate}`, formData, config)
+        return axios.post(`${this.state.apiUserCreate}`, formData, config)
             .then(response => {
 
                 this.props.alert.show('등록 되었습니다.');
@@ -94,21 +89,20 @@ class MentorDiaryModify extends Component {
 
     render() {
 
-        const {mapStateToPropsMentor} = this.props;
+        const mentor = this.props.mapStateToPropsMentor;
 
         return (
 
             <div>
-                {/*<MentorProfile mentor={mapStateToPropsMentor}/>*/}
+                <MentorProfile mentor={mentor}/>
 
                 <div className={classNames('container', styles['blog-container'])}>
 
                     <div className={styles['blog-header']}>
                         <reactIconFa.FaPenNib className={styles['main-icon']}/>
-                        영농일지 수정
+                        영농일지 작성
                     </div>
                     <br/>
-
 
                     <Formik
                         onSubmit={(values, actions) => {
@@ -155,18 +149,6 @@ class MentorDiaryModify extends Component {
                                         {errors.contents}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-
-                                {
-                                    this.state.hasImage !== '' ?
-                                        <Form.Group controlId="formBasicChecbox">
-                                            <Form.Check type="checkbox" label="삭제여부" />
-                                            <Image
-                                                src={this.state.hasImage}
-                                                className={styles['diary-image']}/>
-                                        </Form.Group>
-                                         :
-                                        ""
-                                }
                                 <Form.Group controlId="image">
                                     <Form.Control
                                         type="file"
@@ -189,8 +171,6 @@ class MentorDiaryModify extends Component {
                                         >
                                             {this.state.isLoading ? '처리 중' : '등록'}
                                         </Button>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <Button variant="info" onClick={this.goBack}>취소</Button>
                                     </Col>
                                 </Row>
                             </Form>
@@ -203,26 +183,7 @@ class MentorDiaryModify extends Component {
     componentDidMount() {
 
         const {actionMentor, match} = this.props;
-        actionMentor.getDiary(match.params.diary_id);
-    }
-
-    // 이 메소드는 컴포넌트 초기화 또는 새로운 props를 받았을 때 일어납니다
-    static getDerivedStateFromProps(nextProps, prevState) {
-
-        if (prevState.firstView && nextProps.mapStateToPropsDiary.diary[0]) {
-
-            return {
-                firstView: false,
-                schemaDefaultValue: {
-                    title: nextProps.mapStateToPropsDiary.diary[0].title,
-                    contents: nextProps.mapStateToPropsDiary.diary[0].contents,
-                    image: '',
-                },
-                hasImage: nextProps.mapStateToPropsDiary.diary[0].image
-            }
-        }
-
-        return null;
+        actionMentor.getMentor(match.params.mentor);
     }
 
 }
@@ -230,7 +191,6 @@ class MentorDiaryModify extends Component {
 const mapStateToProps = (state) => ({
 
     mapStateToPropsMentor: state.mentor.mentor,
-    mapStateToPropsDiary: state.diary
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -238,6 +198,6 @@ const mapDispatchToProps = (dispatch) => ({
     actionMentor: bindActionCreators(importActions, dispatch),
 })
 
-MentorDiaryModify.contextType = GlobalsContext;
+MentorDiaryCreate.contextType = GlobalsContext;
 
-export default withRouter(compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MentorDiaryModify));
+export default withRouter(compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MentorDiaryCreate));

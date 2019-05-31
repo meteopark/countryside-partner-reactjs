@@ -19,8 +19,9 @@ import Diary from "./diaries/Diary";
 import Machine from "./openapis/Machine";
 import Dictionary from "./openapis/Dictionary";
 import SelectJoin from "./join/SelectJoin";
-import MentorDiary from "./mentors/MentorDiary";
+import MentorDiaryCreate from "./mentors/MentorDiaryCreate";
 import MentorDiaryModify from "./mentors/MentorDiaryModify";
+import MentorDiaryView from "./mentors/MentorDiaryView";
 
 
 
@@ -41,8 +42,8 @@ export class Root extends React.Component {
 
                         <Route exact path="/mentors" component={Mentors} />
                         <Route exact path="/mentors/:mentor" component={Mentor} />
-                        <Route exact path="/mentors/:mentor/create" component={MentorDiary} />
-                        <Route exact path="/mentors/:mentor/diaries/:diary_id" component={Diary} />
+                        <Route exact path="/mentors/:mentor/create" component={MentorDiaryCreate} />
+                        <Route exact path="/mentors/:mentor/diaries/:diary_id" component={MentorDiaryView} />
                         <Route exact path="/mentors/:mentor/diaries/:diary_id/modify" component={MentorDiaryModify} />
 
 
