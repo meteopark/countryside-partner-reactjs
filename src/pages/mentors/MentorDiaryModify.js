@@ -3,7 +3,7 @@ import styles from './Mentors.module.scss';
 import {bindActionCreators, compose} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-import {Form, Row, Col, Button} from "react-bootstrap";
+import {Form, Row, Col, Button, Image} from "react-bootstrap";
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
 import {MentorProfile} from "./MentorProfile";
@@ -14,6 +14,7 @@ import history from "../history";
 import {GlobalsContext} from '../../pages/globals';
 import {withRouter} from "react-router";
 import {withAlert} from "react-alert";
+import DiaryModify from "../diaries/DiaryModify";
 
 
 const schema = yup.object({
@@ -27,9 +28,11 @@ class MentorDiaryModify extends Component {
 
         super(props);
         this.state = {
-            apiUserCreate: `${context.server_host}/api/v1/mentors/${this.props.match.params.mentor}/diary`,
+            apiUpdateDiary: `${context.server_host}/api/v1/mentors/${this.props.match.params.mentor}/diaries/${this.props.match.params.diary_id}`,
             isLoading: false,
             firstView: true,
+            hasImage: '',
+            deleteImage: false,
             schemaDefaultValue: {
                 title: '',
                 contents: '',
@@ -38,53 +41,68 @@ class MentorDiaryModify extends Component {
         }
     }
 
-    handleText = (e, type = 'text') => {
+    handleChange = (e, type = 'text') => {
         const schemaDefaultValue = {...this.state.schemaDefaultValue};
 
         if (type === "text") {
 
             schemaDefaultValue[e.target.name] = e.target.value;
 
-        } else {
+        } else if(type === "image") {
 
             schemaDefaultValue[e.target.name] = e.target.files[0];
+
         }
 
         this.setState({schemaDefaultValue})
     }
+
+    handleCheckbox = (e) => {
+
+        this.setState({deleteImage: e.target.checked})
+    }
+
     handleClick = () => {
 
         this.setState({isLoading: true}, () => {
             return new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
                 this.setState({isLoading: false});
+                this.handleDiaryModify();
             });
         });
-        this.handleDiaryCreate();
+
+
     }
+
     goBack = () =>{
         this.props.history.goBack();
     }
 
-    handleDiaryCreate = () => {
+    handleDiaryModify = () => {
 
         let formData = new FormData();
+        formData.append('_method', 'PUT');
         formData.append('title', this.state.schemaDefaultValue.title);
-        formData.append('image', this.state.schemaDefaultValue.image);
         formData.append('contents', this.state.schemaDefaultValue.contents);
+        formData.append('image', this.state.schemaDefaultValue.image);
+        formData.append('deleteImage', this.state.deleteImage);
 
         let config = {
             headers: {
-                'content-type': 'multipart/form-data',
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
             }
         };
 
-        console.log("axiso", formData);
-        return axios.post(`${this.state.apiUserCreate}`, formData, config)
+        console.log(this.state.apiUpdateDiary);
+        return axios.post(`${this.state.apiUpdateDiary}`, formData, config)
             .then(response => {
 
-                this.props.alert.show('등록 되었습니다.');
-                history.push(`/mentors/${this.props.match.params.mentor}`);
+                if (response.status === 200) {
+                    this.props.alert.show('등록 되었습니다.');
+                    history.push(`/mentors/${this.props.match.params.mentor}`);
+                }
+
             })
             .catch(error => {
                 console.log("error", error);
@@ -108,87 +126,22 @@ class MentorDiaryModify extends Component {
                     </div>
                     <br/>
 
-
-                    <Formik
-                        onSubmit={(values, actions) => {
-                            this.handleClick()
-                        }}
-                        enableReinitialize={true}
-                        validationSchema={schema}
-                        initialValues={this.state.schemaDefaultValue}
-                        render={({
-                                     handleSubmit,
-                                     errors
-                                 }) => (
-
-                            <Form
-                                className="needs-validation"
-                                noValidate
-                                onSubmit={handleSubmit}
-                            >
-                                <Form.Group controlId="title">
-                                    <Form.Control
-                                        size="lg"
-                                        type="text"
-                                        name="title"
-                                        placeholder="제목을 입력하세요"
-                                        value={this.state.schemaDefaultValue.title}
-                                        onChange={(e) => this.handleText(e)}
-                                        isInvalid={!!errors.title}
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors.title}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                                <Form.Group controlId="contents">
-                                    <Form.Control
-                                        as="textarea"
-                                        name="contents"
-                                        placeholder="내용을 입력하세요"
-                                        rows="10"
-                                        value={this.state.schemaDefaultValue.contents}
-                                        onChange={(e) => this.handleText(e)}
-                                        isInvalid={!!errors.contents}
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors.contents}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                                <Form.Group controlId="image">
-                                    <Form.Control
-                                        type="file"
-                                        name="image"
-                                        onChange={(e) => this.handleText(e, 'file')}
-                                    />
-                                    <small className="text-muted">이미지 파일만 업로드 가능합니다 (jpg, png)</small>
-                                </Form.Group>
-
-
-                                <Row>
-                                    <Col className={classNames("text-center", styles['end-button-top'])}>
-                                        <hr/>
-                                        <Button
-                                            variant="dark"
-                                            type="submit"
-                                            disabled={this.state.isLoading}
-                                            onClick={!this.state.isLoading ? handleSubmit : null}
-
-                                        >
-                                            {this.state.isLoading ? '처리 중' : '등록'}
-                                        </Button>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <Button variant="info" onClick={this.goBack}>취소</Button>
-                                    </Col>
-                                </Row>
-                            </Form>
-                        )}/>
+                    <DiaryModify
+                        schema={schema}
+                        schemaDefaultValue={this.state.schemaDefaultValue}
+                        isLoading={this.state.isLoading}
+                        hasImage={this.state.hasImage}
+                        onClick={this.goBack}
+                        handleClick={this.handleClick}
+                        handleCheckbox={(e) => this.handleCheckbox(e)}
+                        handleChange={(e, type) => this.handleChange(e, type)}
+                    />
                 </div>
             </div>
         );
     }
 
     componentDidMount() {
-
         const {actionMentor, match} = this.props;
         actionMentor.getDiary(match.params.diary_id);
     }
@@ -204,7 +157,8 @@ class MentorDiaryModify extends Component {
                     title: nextProps.mapStateToPropsDiary.diary[0].title,
                     contents: nextProps.mapStateToPropsDiary.diary[0].contents,
                     image: '',
-                }
+                },
+                hasImage: nextProps.mapStateToPropsDiary.diary[0].image
             }
         }
 

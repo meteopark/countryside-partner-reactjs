@@ -87,13 +87,6 @@ class Diary extends Component {
         const {actionMentor, match} = this.props;
         actionMentor.getDiary(match.params.diary_id);
     }
-
-    shouldComponentUpdate(nextProps, nextState) {
-
-        // if(nextProps.mapStateToPropsMentor.mentor === undefined) return false;
-        return true;
-    }
-
 }
 
 const mapStateToProps = (state) => ({
