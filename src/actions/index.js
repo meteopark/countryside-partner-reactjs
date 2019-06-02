@@ -122,7 +122,10 @@ export const isLogged = () => {
 
     let is_logged = false;
 
-    if(localStorage.getItem('token')) is_logged = true;
+    if (localStorage.getItem('token')) {
+
+        is_logged = true;
+    }
 
     return {
         type: types.IS_LOGGED,

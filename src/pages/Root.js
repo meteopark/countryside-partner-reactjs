@@ -31,7 +31,7 @@ export class Root extends React.Component {
         return (
             <Router history={history}>
                 <TopBar />
-                {/*<Header/>*/}
+                <Header/>
                 <div>
                     {/*<SideNav />*/}
                     <Switch>
