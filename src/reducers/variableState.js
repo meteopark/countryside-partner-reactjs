@@ -1,7 +1,7 @@
 import * as types from '../actions/ActionTypes';
 
 const initialState = {
-    is_logged: localStorage.getItem('token') ? true : false,
+    is_logged: false,
 };
 
 export const variableState = (state = initialState, action) => {

@@ -8,7 +8,7 @@ export class LoginRequest extends Component {
 
         return (
             <div>
-                <Link className={styles['link']} to="/join">로그인</Link>&nbsp;&nbsp;&nbsp;&nbsp;
+                <Link className={styles['link']} to="/login">로그인</Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link className={styles['link']} to="/join">회원가입</Link>
             </div>
         )

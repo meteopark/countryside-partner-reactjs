@@ -47,6 +47,18 @@
 }
 
 
+.login-container {
+  margin-top: 20px;
+}
+.login-form {
+
+  padding: 30px;
+  margin: 0 auto;
+  width: 90%;
+  background: #ffffff;
+  border: 1px solid $under-line;
+}
+
 .user-create-container {
 }
 
@@ -77,6 +89,24 @@
 }
 
 @media (min-width: 1200px) {
+
+  .login-container {
+
+    height: 50%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+
+  }
+  .login-form {
+
+    padding: 30px;
+    margin: 0 auto;
+    width: 400px;
+    background: #ffffff;
+    border: 1px solid $under-line;
+  }
 
 
   .user-create-container {

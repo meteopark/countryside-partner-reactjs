@@ -22,6 +22,7 @@ import SelectJoin from "./join/SelectJoin";
 import MentorDiaryCreate from "./mentors/MentorDiaryCreate";
 import MentorDiaryModify from "./mentors/MentorDiaryModify";
 import MentorDiaryView from "./mentors/MentorDiaryView";
+import Login from "./join/Login";
 
 
 
@@ -31,7 +32,7 @@ export class Root extends React.Component {
         return (
             <Router history={history}>
                 <TopBar />
-                <Header/>
+                {/*<Header/>*/}
                 <div>
                     {/*<SideNav />*/}
                     <Switch>
@@ -53,6 +54,9 @@ export class Root extends React.Component {
 
 
                         {/*{localStorage.getItem('token') && <Route exact path="/join" component={SelectJoin} />}*/}
+
+
+                        <Route exact path="/login" component={Login} />
                         <Route exact path="/join" component={SelectJoin} />
                         <Route exact path="/join/mentor" component={MentorCreate} />
                         <Route exact path="/join/mentee" component={MenteeCreate} />

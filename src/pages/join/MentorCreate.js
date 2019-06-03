@@ -128,7 +128,7 @@ class MentorCreate extends Component {
                 .then(response => {
 
                     const res = response.data;
-                    this.props.actions.isLogged();
+                    this.props.actions.isLogged(true);
                     this.props.alert.show('등록 되었습니다.');
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('name', res.name);

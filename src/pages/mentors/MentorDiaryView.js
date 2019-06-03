@@ -63,6 +63,35 @@ class MentorDiaryView extends Component {
         });
     }
 
+    handleDiaries = () => {
+
+        history.push(`/mentors/${localStorage.getItem('srl')}`);
+    }
+    handleDiaryModify = (diary_srl) => {
+
+        history.push(`/mentors/${localStorage.getItem('srl')}/diaries/${diary_srl}/modify`);
+    }
+    handleDiaryDelete = (diary_srl) => {
+
+        let formData = new FormData();
+        formData.append('_method', 'DELETE');
+        formData.append('diary_srl', diary_srl);
+        let config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            }
+        };
+
+        return axios.post(`${this.state.apiUserCreate}/${diary_srl}`, formData, config)
+            .then(response => {
+                this.props.alert.show('삭제 되었습니다.');
+                history.push(`/mentors/${this.props.match.params.mentor}`);
+            })
+            .catch(error => {
+                console.log("error", error);
+            });
+    }
 
     handleDiaryCreate = () => {
 
@@ -96,8 +125,11 @@ class MentorDiaryView extends Component {
         return (
 
             <div>
-                <MentorProfile mentor={mapStateToPropsMentor}/>
+                {/*<MentorProfile mentor={mapStateToPropsMentor}/>*/}
                 <Diary
+                    handleDiaries={() => this.handleDiaries()}
+                    handleDiaryDelete={(diary_srl) => this.handleDiaryDelete(diary_srl)}
+                    handleDiaryModify={(diary_srl) => this.handleDiaryModify(diary_srl)}
                     diary={mapStateToPropsDiary.diary}
                 />
             </div>
@@ -125,4 +157,5 @@ const mapDispatchToProps = (dispatch) => ({
     actionMentor: bindActionCreators(importActions, dispatch),
 })
 
+MentorDiaryView.contextType = GlobalsContext;
 export default withRouter(compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MentorDiaryView));

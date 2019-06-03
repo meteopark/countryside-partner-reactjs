@@ -19,7 +19,6 @@ class TopBar extends Component {
         return (
             <div>
                 <div className={classNames("container", styles['top-bar'])}>
-                    {/*{localStorage.getItem('token') ? <LoginComplete /> : <LoginRequest/>}*/}
                     {this.props.variable_state.is_logged ? <LoginComplete /> : <LoginRequest/>}
                 </div>
             </div>

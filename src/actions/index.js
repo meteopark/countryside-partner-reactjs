@@ -90,11 +90,25 @@ export const getDiary = (diary_id) => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiDiary}/${diary_id}`)
+        let config = {headers: {}};
+
+        if ( localStorage.getItem('token') )
+        {
+            config = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                }
+            };
+        }
+
+        return axios.get(`${apiDiary}/${diary_id}`, config)
 
             .then(response => {
 
-                dispatch(Success(response.data, types.DIARY));
+                if (!response.data.error) {
+                    dispatch(Success(response.data, types.DIARY));
+                }
             })
             .catch(error => {
 
@@ -118,11 +132,11 @@ export const Success = (datas, type) => {
 }
 
 // 로그인 상태 관리
-export const isLogged = () => {
+export const isLogged = (stat) => {
 
     let is_logged = false;
 
-    if (localStorage.getItem('token')) {
+    if (stat) {
 
         is_logged = true;
     }
