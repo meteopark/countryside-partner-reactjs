@@ -28,8 +28,8 @@ class Login extends Component {
             apiLogin: context.server_host + '/api/v1/login',
             isLoading: false,
             schemaDefaultValue : {
-                id: 'Bot-1559031271832',
-                password: '1111',
+                id: '', // Bot-1559031271832
+                password: '', // 1111
                 is_mentor: false,
             }
         }
@@ -78,8 +78,8 @@ class Login extends Component {
                     } else {
 
                         const res = response.data;
-                        this.props.actions.isLogged(true);
                         this.props.alert.show('로그인 되었습니다.');
+                        localStorage.clear();
                         localStorage.setItem('token', res.token);
                         localStorage.setItem('name', res.name);
                         localStorage.setItem('user_type', res.user_type);
@@ -166,7 +166,6 @@ class Login extends Component {
                     </div>
                 </div>
             </div>
-
 
         )
     }

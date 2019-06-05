@@ -125,7 +125,7 @@ class MentorDiaryView extends Component {
         return (
 
             <div>
-                {/*<MentorProfile mentor={mapStateToPropsMentor}/>*/}
+                <MentorProfile mentor={mapStateToPropsMentor}/>
                 <Diary
                     handleDiaries={() => this.handleDiaries()}
                     handleDiaryDelete={(diary_srl) => this.handleDiaryDelete(diary_srl)}

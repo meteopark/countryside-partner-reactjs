@@ -101,13 +101,13 @@ class MenteeCreate extends Component {
 
         this.setState({ isLoading: true }, () => {
             this.simulateNetworkRequest().then(() => {
-                this.setState({ isLoading: false });
+                this.handleUserCreate();
             });
         });
-        this.handleUserCreate();
+
     }
     simulateNetworkRequest = () => {
-        return new Promise(resolve => setTimeout(resolve, 2000));
+        return new Promise(resolve => setTimeout(resolve, 1000));
     }
 
     handleUserCreate = () => {
@@ -136,11 +136,11 @@ class MenteeCreate extends Component {
             .then(response => {
 
                 const res = response.data;
-                this.props.actions.isLogged(true);
                 this.props.alert.show('등록 되었습니다.');
                 localStorage.setItem('token', res.token);
                 localStorage.setItem('user_type', 'mentee');
                 localStorage.setItem('srl', res.mentee_srl);
+                this.props.actions.isLogged(true);
                 history.push("/");
             })
             .catch(error => {

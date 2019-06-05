@@ -45,7 +45,7 @@ class Mentees extends Component {
     componentDidMount() {
 
         const {getMains} = this.props;
-        getMains.mentorLists();
+        getMains.menteeLists();
     }
 }
 

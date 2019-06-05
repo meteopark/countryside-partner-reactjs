@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import styles from './Header.module.scss';
 import * as reactIconFa from "react-icons/fa";
+import classNames from "classnames";
 
 const Footer = () => {
 
     return (
 
-        <div className={styles['footer']}>
+        <footer>
             <p>
                 박유성<br/>
                 email : <a href="mailto:yspark@meteopark.dev">yspark@meteopark.dev</a><br/>
@@ -17,7 +18,7 @@ const Footer = () => {
                 <reactIconFa.FaReact color="#5CD1E5" size="2em" className={styles['icon']}/>
                 <reactIconFa.FaAws color="#E0B94F" size="2em" className={styles['icon']}/>
             </p>
-        </div>
+        </footer>
     )
 }
 export default Footer

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter,Router, Route, Switch, withRouter} from "react-router-dom";
+import {BrowserRouter, Router, Route, Switch, withRouter} from "react-router-dom";
 import Main from "./main/Main";
 import TopBar from "./inc/TopBar";
 import {Header} from "./inc/Header";
@@ -23,58 +23,71 @@ import MentorDiaryCreate from "./mentors/MentorDiaryCreate";
 import MentorDiaryModify from "./mentors/MentorDiaryModify";
 import MentorDiaryView from "./mentors/MentorDiaryView";
 import Login from "./join/Login";
+import {Redirect} from "react-router";
+import * as importActions from "../actions";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 
 
-
-export class Root extends React.Component {
+class Root extends React.Component {
 
     render() {
+        console.log("---");
         return (
             <Router history={history}>
-                <TopBar />
-                {/*<Header/>*/}
-                <div>
-                    {/*<SideNav />*/}
-                    <Switch>
-                        <Route exact path="/" component={Main} />
+                <div className={styles['wrapper']}>
+                    <TopBar/>
+                    {/*<Header/>*/}
+                    <div className={styles['wrapper']}>
+                        {/*<SideNav />*/}
+
+                        <main>
+                            <Switch>
+                                <Route exact path="/" component={Main}/>
 
 
-                        <Route exact path="/mentees" component={Mentees} />
+                                <Route exact path="/mentees" component={Mentees}/>
 
-                        <Route exact path="/mentors" component={Mentors} />
-                        <Route exact path="/mentors/:mentor" component={Mentor} />
-                        <Route exact path="/mentors/:mentor/create" component={MentorDiaryCreate} />
-                        <Route exact path="/mentors/:mentor/diaries/:diary_id" component={MentorDiaryView} />
-                        <Route exact path="/mentors/:mentor/diaries/:diary_id/modify" component={MentorDiaryModify} />
-
-
-                        <Route exact path="/machines" component={Machine} />
-                        <Route exact path="/dictionary" component={Dictionary} />
+                                <Route exact path="/mentors" component={Mentors}/>
+                                <Route exact path="/mentors/:mentor" component={Mentor}/>
+                                <Route exact path="/mentors/:mentor/create" component={MentorDiaryCreate}/>
+                                <Route exact path="/mentors/:mentor/diaries/:diary_id" component={MentorDiaryView}/>
+                                <Route exact path="/mentors/:mentor/diaries/:diary_id/modify" component={MentorDiaryModify}/>
 
 
-
-                        {/*{localStorage.getItem('token') && <Route exact path="/join" component={SelectJoin} />}*/}
-
-
-                        <Route exact path="/login" component={Login} />
-                        <Route exact path="/join" component={SelectJoin} />
-                        <Route exact path="/join/mentor" component={MentorCreate} />
-                        <Route exact path="/join/mentee" component={MenteeCreate} />
+                                <Route exact path="/machines" component={Machine}/>
+                                <Route exact path="/dictionary" component={Dictionary}/>
 
 
+                                {!this.props.mapStateToPropsAuth.is_logged && <Route exact path="/login" component={Login}/>}
+                                {!this.props.mapStateToPropsAuth.is_logged && <Route exact path="/join" component={SelectJoin}/>}
+                                {!this.props.mapStateToPropsAuth.is_logged && <Route exact path="/join/mentor" component={MentorCreate}/>}
+                                {!this.props.mapStateToPropsAuth.is_logged && <Route exact path="/join/mentee" component={MenteeCreate}/>}
 
 
-                        {/*Route::get('diaries-mentors/articles/{diary_id}', array( //  멘토 - 영농일지 선택 조회*/}
-                        {/*'as' => 'diaries-mentors.articles.show',*/}
-                        {/*'uses' => 'MentorDiaryController@show'*/}
-                        {/*));*/}
+                                {/*Route::get('diaries-mentors/articles/{diary_id}', array( //  멘토 - 영농일지 선택 조회*/}
+                                {/*'as' => 'diaries-mentors.articles.show',*/}
+                                {/*'uses' => 'MentorDiaryController@show'*/}
+                                {/*));*/}
 
 
+                                <Redirect from='*' to="/" />
 
-                    </Switch>
+
+                            </Switch>
+                        </main>
+                        <Footer/>
+                    </div>
                 </div>
-                <Footer />
             </Router>
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    mapStateToPropsAuth: state.auth // state.variable_state 는 reducers/index.js 의 키값과 같아야 한다
+})
+const mapDispatchToProps = (dispatch) => ({
+    actionMentor: bindActionCreators(importActions, dispatch),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Root);

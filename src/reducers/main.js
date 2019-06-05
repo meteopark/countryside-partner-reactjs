@@ -16,7 +16,7 @@ export const mainLists = (state = initialState, action) => {
                 ]
             };
 
-        case types.MENTORS:
+        case types.MENTOR_LISTS:
 
             return {
                 // ...state,
@@ -25,8 +25,6 @@ export const mainLists = (state = initialState, action) => {
                     ...action.payload.datas
                 ]
             };
-
-
 
         default:
 

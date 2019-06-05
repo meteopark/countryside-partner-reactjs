@@ -92,11 +92,11 @@ class MentorCreate extends Component {
     handleClick = () => {
 
         this.setState({ isLoading: true }, () => {
-            return new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
-                this.setState({ isLoading: false });
+            return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+                this.handleUserCreate();
             });
         });
-        this.handleUserCreate();
+
     }
 
 
@@ -116,8 +116,6 @@ class MentorCreate extends Component {
         formData.append('introduce', this.state.schemaDefaultValue.introduce);
         formData.append('crops', this.state.schemaDefaultValue.crops);
 
-        console.log(this.state.schemaDefaultValue);
-
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
@@ -128,12 +126,12 @@ class MentorCreate extends Component {
                 .then(response => {
 
                     const res = response.data;
-                    this.props.actions.isLogged(true);
                     this.props.alert.show('등록 되었습니다.');
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('name', res.name);
                     localStorage.setItem('user_type', 'mentor');
                     localStorage.setItem('srl', res.mentor_srl);
+                    this.props.actions.isLogged(true);
                     history.push("/");
                 })
                 .catch(error => {

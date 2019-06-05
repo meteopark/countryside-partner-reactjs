@@ -11,7 +11,7 @@ class LoginComplete extends Component {
     handleLogOut = () => {
 
         localStorage.clear();
-        this.props.actions.isLogged();
+        this.props.actions.isLogged(false);
         history.push("/");
     }
 
@@ -20,12 +20,14 @@ class LoginComplete extends Component {
 
         return (
             <div>
+                {localStorage.getItem('name')}님 반갑습니다.&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link className={styles['link']} to={`/${localStorage.getItem('user_type')}s/${localStorage.getItem('srl')}`}>영농일지</Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link className={styles['link']} to="/join">마이페이지</Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a className={styles['link']} onClick={this.handleLogOut}>로그아웃</a>
             </div>
         )
     }
+
 }
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(importActions, dispatch),

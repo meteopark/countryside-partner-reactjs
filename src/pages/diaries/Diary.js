@@ -18,8 +18,6 @@ class Diary extends Component {
 
         const {diary} = this.props;
 
-        console.log(diary);
-
         return (
 
             <div className={classNames('container', styles['in-container'])}>

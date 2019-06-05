@@ -9,6 +9,7 @@ import * as reactIconFa from "react-icons/fa";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {Link} from "react-router-dom";
 import {MentorProfile} from "./MentorProfile";
+import {withRouter} from "react-router-dom";
 
 
 class Mentoring extends Component {
@@ -17,7 +18,11 @@ class Mentoring extends Component {
 
         super(props);
         this.state = {
-            hasMore: true
+            hasMore: true,
+            mentor: {
+                mentor_srl: null
+            },
+            diaries: [],
         }
     }
 
@@ -61,15 +66,13 @@ class Mentoring extends Component {
                     </div>
 
                     <div id="scrollableDiv" className={styles['scroll-container']}>
-                        {diaries.data.length < 1 ?
-                            <Row className={styles['empty-content']}><Col>등록 된 일지가 없습니다.</Col></Row> : ""}
+                        {diaries.data.length < 1 ? <div className={styles['empty-content']}><Col>등록 된 일지가 없습니다.</Col></div> : ""}
                         <InfiniteScroll
                             scrollableTarget="scrollableDiv"
                             dataLength={diaries.data.length}
                             next={this.loadItems}
                             hasMore={diaries.data.length < 1 ? false : this.state.hasMore}
-                            loader={<div className={classNames("text-center", styles['infinite-loader'])}><Spinner
-                                animation="border" variant="success"/></div>}
+                            loader={<div className={classNames("text-center", styles['infinite-loader'])}><Spinner animation="border" variant="success"/></div>}
                             endMessage={
                                 <Row className="text-center">
                                     <Col><img src="/images/ico/homi.png" className={styles['homi']}/></Col>
@@ -116,24 +119,28 @@ class Mentoring extends Component {
         actionMentor.getMentorDiaries(match.params.mentor, 1);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        /*
+        이 API는 컴포넌트에서 render() 를 호출하고난 다음에 발생하게 됩니다. 이 시점에선 this.props 와 this.state 가 바뀌어있습니다.
+        그리고 파라미터를 통해 이전의 값인 prevProps 와 prevState 를 조회 할 수 있습니다.
+        그리고, getSnapshotBeforeUpdate 에서 반환한 snapshot 값은 세번째 값으로 받아옵니다.
+         */
+        if (this.props.match.params.mentor !== prevProps.match.params.mentor) {
 
-        // if(nextProps.mapStateToPropsMentor === undefined) return false;
-        // if(nextProps.mapStateToPropsMentorDiaries.data && nextProps.mapStateToPropsMentorDiaries.data.length < 1)return false;
-        return true;
+            const {actionMentor, match} = this.props;
+            actionMentor.getMentor(match.params.mentor);
+            actionMentor.getMentorDiaries(match.params.mentor, 1);
+        }
     }
-
 }
 
 const mapStateToProps = (state) => ({
-
     mapStateToPropsMentor: state.mentor.mentor,
     mapStateToPropsMentorDiaries: state.mentor.diaries
 })
 
 const mapDispatchToProps = (dispatch) => ({
-
     actionMentor: bindActionCreators(importActions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Mentoring);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Mentoring));

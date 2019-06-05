@@ -3,10 +3,35 @@ import * as types from './ActionTypes';
 
 
 const apiMains          = 'http://countryside-partner-laravel.test/api/v1/main';
-const apiMentor         = 'http://countryside-partner-laravel.test/api/v1/mentors';
+const apiMentors         = 'http://countryside-partner-laravel.test/api/v1/mentors';
+const apiMentees         = 'http://countryside-partner-laravel.test/api/v1/mentees';
 const apiMentorDiaries  = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors'; // {mentor_srl}/articles
 const apiDiary          = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors/articles'; // {diary_srl}
+const apiAuthCheck      = 'http://countryside-partner-laravel.test/api/v1/auth'; // {diary_srl}
 
+
+export const authCheck = () => {
+
+    return (dispatch) => {
+
+        let config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            }
+        };
+
+        return axios.get(`${apiAuthCheck}`, config)
+            .then(response => {
+
+                dispatch(Success(response.data, types.AUTH_CHECK))
+            })
+            .catch(error => {
+                console.log("error", error);
+            });
+    }
+
+}
 
 export const mainLists = () => {
 
@@ -27,15 +52,34 @@ export const mainLists = () => {
     }
 }
 
+export const menteeLists = () => {
+
+    return (dispatch) => {
+
+        return axios.get(`${apiMentees}`)
+
+            .then(response => {
+
+                dispatch(Success(response.data, types.MENTEE_LISTS))
+            })
+            .catch(error => {
+
+                console.log("error : menteeLists() " , error);
+                throw(error);
+
+            });
+    }
+}
+
 export const mentorLists = () => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMentor}`)
+        return axios.get(`${apiMentors}`)
 
             .then(response => {
 
-                dispatch(Success(response.data, types.MENTORS))
+                dispatch(Success(response.data, types.MENTOR_LISTS))
             })
             .catch(error => {
 
@@ -50,7 +94,7 @@ export const getMentor = (mentor) => {
 
     return (dispatch) => {
 
-        const url = `${apiMentor}/${mentor}`;
+        const url = `${apiMentors}/${mentor}`;
 
         return axios.get(url)
 
@@ -112,13 +156,36 @@ export const getDiary = (diary_id) => {
             })
             .catch(error => {
 
-                console.log("error : getDiary() " , error);
-                throw(error);
+                isLogged(false);
 
             });
     }
 }
 
+export const isLogged = (stat = false) => {
+
+    if (stat === true) {
+
+        return {
+
+            type: types.IS_LOGGED,
+            payload: {
+                datas: true
+            }
+        }
+
+    } else {
+
+        return {
+
+            type: types.IS_LOGGED,
+            payload: {
+                datas: false
+            }
+        }
+    }
+
+}
 
 export const Success = (datas, type) => {
 
@@ -130,20 +197,3 @@ export const Success = (datas, type) => {
         }
     }
 }
-
-// 로그인 상태 관리
-export const isLogged = (stat) => {
-
-    let is_logged = false;
-
-    if (stat) {
-
-        is_logged = true;
-    }
-
-    return {
-        type: types.IS_LOGGED,
-        is_logged: is_logged
-    }
-
-};

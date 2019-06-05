@@ -2,7 +2,25 @@ $container-background: #F6F6F6;
 $main-color: #FFBB00;
 $under-line: #E7E7E7;
 
-
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+footer {
+  padding-top:20px;
+  padding-bottom: 10px;
+  margin-top: 1rem;
+  font-size: 14px;
+  height: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  background: #fff;
+  text-align: center;
+}
 
 
 .scroll-container {
@@ -10,7 +28,9 @@ $under-line: #E7E7E7;
   overflow: auto;
   height: 700px;
 
-  //background: #0b2e13;
+
+  //overflow-x:hidden;
+//background: red;
 }
 .custom-full-container {
   width: 100%;
@@ -49,6 +69,7 @@ $under-line: #E7E7E7;
 
 
 .empty-content {
+
   font-size: 1.3rem;
   height: 80px;
   line-height: 80px;
