@@ -89,7 +89,27 @@ export const mentorLists = () => {
             });
     }
 }
+export const getMentee = (mentee) => {
 
+    return (dispatch) => {
+
+        const url = `${apiMentees}/${mentee}`;
+
+        return axios.get(url)
+
+            .then(response => {
+
+                dispatch(Success(response.data, types.GET_MENTEE))
+
+            })
+            .catch(error => {
+
+                console.log("error : getMentee() " , error);
+                throw(error);
+
+            });
+    }
+}
 export const getMentor = (mentor) => {
 
     return (dispatch) => {
@@ -100,7 +120,7 @@ export const getMentor = (mentor) => {
 
             .then(response => {
 
-                dispatch(Success(response.data, types.MENTOR))
+                dispatch(Success(response.data, types.GET_MENTOR))
 
             })
             .catch(error => {

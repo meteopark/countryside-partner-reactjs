@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-import {MentorProfile} from "./MentorProfile";
+// import {MentorProfile} from "./MentorProfile";
 import {withRouter} from "react-router-dom";
 import Diaries from "../diaries/Diaries";
 
 
-class Mentor extends Component {
+class Mentee extends Component {
 
     constructor(props) {
 
@@ -30,20 +30,20 @@ class Mentor extends Component {
 
     render() {
 
-        const mentor = this.props.mapStateToPropsMentor;
+        const mentee = this.props.mapStateToPropsMentee;
         const diaries = this.props.mapStateToPropsMentorDiaries;
 
         return (
 
             <div>
-                <MentorProfile mentor={mentor}/>
+                {/*<MentorProfile mentor={mentee}/>*/}
 
-                <Diaries
-                    hasMore={this.state.hasMore}
-                    user={mentor}
-                    diaries={diaries}
-                    loadItems={this.loadItems}
-                />
+                {/*<Diaries*/}
+                {/*    hasMore={this.state.hasMore}*/}
+                {/*    user={mentee}*/}
+                {/*    diaries={diaries}*/}
+                {/*    loadItems={this.loadItems}*/}
+                {/*/>*/}
 
 
             </div>
@@ -52,9 +52,9 @@ class Mentor extends Component {
 
     componentDidMount() {
 
-        const {actionMentor, match} = this.props;
-        actionMentor.getMentor(match.params.mentor);
-        actionMentor.getMentorDiaries(match.params.mentor, 1);
+        const {actionMentee, match} = this.props;
+        actionMentee.getMentee(match.params.mentee);
+        // actionMentee.getMentorDiaries(match.params.mentor, 1);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -73,12 +73,12 @@ class Mentor extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    mapStateToPropsMentor: state.mentor.mentor,
-    mapStateToPropsMentorDiaries: state.mentor.diaries
+    mapStateToPropsMentee: state.mentee.mentee,
+    // mapStateToPropsMentorDiaries: state.mentor.diaries
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    actionMentor: bindActionCreators(importActions, dispatch),
+    actionMentee: bindActionCreators(importActions, dispatch),
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Mentor));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Mentee));

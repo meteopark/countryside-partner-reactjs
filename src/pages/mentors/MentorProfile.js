@@ -15,9 +15,9 @@ export const MentorProfile = (props) => {
     };
 
     return (
-        <div className={styles['blog-container-fluid']}>
+        <div className={styles['profile-container-fluid']}>
             <div style={jumbotronStyle}>
-                <div className={styles['blog-introduce']}>
+                <div className={styles['profile-introduce']}>
                     <Container className={styles['profile-container']}>
                         <Row className="justify-content-md-center">
                             <Col sm={3} className={styles['profile-image-container']}>

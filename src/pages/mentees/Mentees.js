@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-import styles from '../mentors/Mentors.module.scss';
+import styles from '../mentees/Mentees.module.scss';
 import {Link} from 'react-router-dom';
 import {CardColumns, Card} from 'react-bootstrap';
 import classNames from "classnames";
@@ -21,17 +21,17 @@ class Mentees extends Component {
                     멘티소개
                 </p>
                 <CardColumns bsPrefix={'card-columns-custom'}>
-                {this.props.mains.lists.map((mentors, i) => (
 
-                    <Link className={classNames(styles['link'])} to={`/mentors/${mentors.mentor_srl}`} key={i}>
+                {this.props.mains.lists.map((m, i) => (
+
+                    <Link className={classNames(styles['link'])} to={`/mentees/${m.mentee_srl}`} key={i}>
                         <Card className={styles['mentors-cards']}>
                             <Card.Body>
-                                <Card.Title className={styles['mentors-title']}>{mentors.profile_image ? <Card.Img src={mentors.profile_image} /> : ""}{mentors.farm_name}</Card.Title>
+                                <Card.Title className={styles['mentors-title']}>{m.name}</Card.Title>
                                 <Card.Text className={styles['mentors-contents']}>
-                                    <reactIconFa.FaUserAlt className={styles['icons']} />{mentors.name}<br/>
-                                    <reactIconFa.FaHome className={styles['icons']} />{mentors.address}<br/>
-                                    <reactIconFa.FaSeedling className={styles['icons']} />{mentors.crops}<br/>
-                                    <reactIconFa.FaTractor className={styles['icons']} />{mentors.career}
+                                    {m.introduce}<br/>
+                                    <reactIconFa.FaRunning className={styles['icons']} />{m.crops}<br/>
+                                    <reactIconFa.FaMapMarked className={styles['icons']} />{m.target_area}
                                 </Card.Text>
                             </Card.Body>
                         </Card>
@@ -51,7 +51,7 @@ class Mentees extends Component {
 
 const mapStateToProps = (state) => ({
 
-    mains: state.mains // state.mains 는 reducers/Village.js 의 키값과 같아야 한다
+    mains: state.mains
 })
 
 const mapDispatchToProps = (dispatch) => ({

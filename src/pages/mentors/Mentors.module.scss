@@ -1,76 +1,17 @@
 @import "../../index.module";
 
 
-.blog-container-fluid {
+.profile-container-fluid {
 
   width: 100%;
   background: #ffffff;
 }
-.blog-introduce{
+
+.profile-introduce {
   width: 100%;
   min-height: 300px;
   background: rgba(0, 0, 0, 0.4);
   color: #ffffff;
-}
-.blog-container {
-  background: #ffffff;
-  padding-bottom: 30px;
-
-  .blog-header {
-    font-family: 'Title_Medium', sans-serif;
-    font-size: 20px;
-    margin-top: 1rem;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid $under-line;
-    width: 100%;
-
-  }
-  .write {
-    float:right;
-  }
-
-  .blog-title {
-    margin-top: 1rem;
-    font-weight: bold;
-    margin-bottom: 0;
-  }
-
-  .blog-post-container {
-
-    margin-left:0;
-    margin-right:0;
-
-
-    padding-top: 1.5rem;
-    padding-bottom: 1rem;
-
-    .blog-image{
-
-      width: 100%;
-      max-height: 160px;
-      height: 160px;
-    }
-    .blog-post{
-
-      //margin-top: 20px;
-      margin-left: 10px;
-      min-height: 110px;
-
-      .blog-post-contents{
-
-        padding-top: 10px;
-        color: #5D5D5D;
-
-      }
-    }
-    .timestamp {
-      margin-left: 10px;
-      color: #4e555b;
-      font-size: 0.8rem;
-    }
-
-  }
 }
 
 .profile-container {
@@ -84,21 +25,22 @@
 
   .profile-image-container {
 
-    margin-top:20px;
+    margin-top: 20px;
 
-    .profile-image{
+    .profile-image {
 
       border: 1.5px solid #ffffff;
       width: 180px;
       height: 180px;
     }
   }
-  .profile-info{
+
+  .profile-info {
     text-align: left;
     margin-top: 20px;
     margin-left: 20px;
     line-height: 30px;
-    padding-bottom:20px;
+    padding-bottom: 20px;
   }
 }
 
@@ -121,9 +63,10 @@
     padding-bottom: 10px;
     border-bottom: 1px solid $under-line;
   }
+
   .mentors-contents {
-    color:#747474;
-    font-size:15px;
+    color: #747474;
+    font-size: 15px;
     line-height: 25px;
   }
 }
@@ -135,15 +78,9 @@
   border: 1px solid $main-color;
 }
 
-.infinite-loader {
-
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
 @media (min-width: 576px) {
 
-  .profile-info{
+  .profile-info {
     margin-top: 0px;
     margin-left: 20px;
   }

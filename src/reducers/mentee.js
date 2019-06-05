@@ -2,7 +2,7 @@ import * as types from '../actions/ActionTypes';
 
 const initialState = {
 
-    mentor: {},
+    mentee: {},
     diaries: {
         current_page: 0,
         last_page: 0,
@@ -10,15 +10,15 @@ const initialState = {
     },
 };
 
-export const mentor = (state = initialState, action) => {
+export const mentee = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case types.GET_MENTOR:
+        case types.GET_MENTEE:
 
             return {
 
-                mentor: action.payload.datas,
+                mentee: action.payload.datas,
                 diaries:{
                     current_page: 1,
                     last_page: 1,
@@ -30,7 +30,7 @@ export const mentor = (state = initialState, action) => {
 
             return {
 
-                mentor: state.mentor,
+                mentee: state.mentor,
                 diaries: {
                     ...state.diaries,
                     current_page: action.payload.datas.current_page,

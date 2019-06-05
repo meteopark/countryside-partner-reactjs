@@ -26,6 +26,14 @@ export const mainLists = (state = initialState, action) => {
                 ]
             };
 
+        case types.MENTEE_LISTS:
+
+            return {
+                lists: [
+                    ...action.payload.datas
+                ]
+            };
+
         default:
 
             return state;

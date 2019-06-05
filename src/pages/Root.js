@@ -15,7 +15,6 @@ import MenteeCreate from "./join/MenteeCreate";
 import Mentors from "./mentors/Mentors";
 import Mentees from "./mentees/Mentees";
 import Mentor from "./mentors/Mentor";
-import Diary from "./diaries/Diary";
 import Machine from "./openapis/Machine";
 import Dictionary from "./openapis/Dictionary";
 import SelectJoin from "./join/SelectJoin";
@@ -27,6 +26,7 @@ import {Redirect} from "react-router";
 import * as importActions from "../actions";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import Mentee from "./mentees/Mentee";
 
 
 class Root extends React.Component {
@@ -47,6 +47,7 @@ class Root extends React.Component {
 
 
                                 <Route exact path="/mentees" component={Mentees}/>
+                                <Route exact path="/mentees/:mentee" component={Mentee}/>
 
                                 <Route exact path="/mentors" component={Mentors}/>
                                 <Route exact path="/mentors/:mentor" component={Mentor}/>

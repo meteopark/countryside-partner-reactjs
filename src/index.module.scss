@@ -22,16 +22,6 @@ footer {
   text-align: center;
 }
 
-
-.scroll-container {
-
-  overflow: auto;
-  height: 700px;
-
-
-  //overflow-x:hidden;
-//background: red;
-}
 .custom-full-container {
   width: 100%;
   background: #ffffff;
@@ -71,8 +61,8 @@ footer {
 .empty-content {
 
   font-size: 1.3rem;
-  height: 80px;
-  line-height: 80px;
+  height: 50vh;
+  line-height: 50vh;
   text-align: center;
 }
 
