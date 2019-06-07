@@ -17,13 +17,21 @@ class Diary extends Component {
     render() {
 
         const {diary} = this.props;
+        let user_type = null;
 
         return (
 
             <div className={classNames('container', styles['in-container'])}>
 
-                {diary.map((diary, i) => (
+                {diary.map((diary, i) => {
 
+                    if(diary.mentor) {
+                        user_type = diary.mentor;
+                    }else {
+                        user_type = diary.mentee;
+                    }
+
+                    return (
                     <div className={styles['diary-container']} key={i}>
                         <h2 className={styles['diary-title']}>{diary.title}</h2>
                         <div className={styles['user-info']}>
@@ -34,9 +42,9 @@ class Diary extends Component {
                                 <Image
                                     className={styles['profile']}
                                     roundedCircle
-                                    src={diary.mentor.profile_image ? diary.mentor.profile_image : '/images/no-image.png'}
-                                />
-                                {diary.mentor.name}
+                                    src={user_type.profile_image ? user_type.profile_image : '/images/no-image.png'}
+                                />{user_type.name}
+                                }
                             </Link>
                             <span className={styles['timestamp']}>{diary.regdate}</span>
                         </div>
@@ -64,8 +72,8 @@ class Diary extends Component {
                                 </div>
                                 : ""
                         }
-                    </div>
-                ))}
+                    </div>)
+                })}
             </div>
         );
     }

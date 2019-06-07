@@ -2,21 +2,23 @@ import React, {Component} from 'react';
 import {bindActionCreators, compose} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-import {MentorProfile} from "./MentorProfile";
 import axios from "axios";
 import history from "../history";
 import {GlobalsContext} from '../../pages/globals';
 import {withRouter} from "react-router";
 import {withAlert} from "react-alert";
 import Diary from "../diaries/Diary";
+import {MenteeProfile} from "./MenteeProfile";
 
-class MentorDiaryView extends Component {
+
+
+class MenteeDiaryView extends Component {
 
     constructor(props, context) {
 
         super(props);
         this.state = {
-            apiMentorDiary: `${context.server_host}/api/v1/mentors/${this.props.match.params.mentor}/diaries`,
+            apiMenteeDiary: `${context.server_host}/api/v1/mentees/${this.props.match.params.mentor}/diaries`,
             isLoading: false,
             schemaDefaultValue: {
                 title: '',
@@ -52,11 +54,11 @@ class MentorDiaryView extends Component {
 
     handleDiaries = () => {
 
-        history.push(`/mentors/${localStorage.getItem('srl')}`);
+        history.push(`/mentees/${localStorage.getItem('srl')}`);
     }
     handleDiaryModify = (diary_srl) => {
 
-        history.push(`/mentors/${localStorage.getItem('srl')}/diaries/${diary_srl}/modify`);
+        history.push(`/mentees/${localStorage.getItem('srl')}/diaries/${diary_srl}/modify`);
     }
     handleDiaryDelete = (diary_srl) => {
 
@@ -70,10 +72,10 @@ class MentorDiaryView extends Component {
             }
         };
 
-        return axios.post(`${this.state.apiMentorDiary}/${diary_srl}`, formData, config)
+        return axios.post(`${this.state.apiUserCreate}/${diary_srl}`, formData, config)
             .then(response => {
                 this.props.alert.show('삭제 되었습니다.');
-                history.push(`/mentors/${this.props.match.params.mentor}`);
+                history.push(`/mentees/${this.props.match.params.mentor}`);
             })
             .catch(error => {
                 console.log("error", error);
@@ -94,11 +96,11 @@ class MentorDiaryView extends Component {
             }
         };
 
-        return axios.post(`${this.state.apiMentorDiary}`, formData, config)
+        return axios.post(`${this.state.apiUserCreate}`, formData, config)
             .then(response => {
 
                 this.props.alert.show('등록 되었습니다.');
-                history.push(`/mentors/${this.props.match.params.mentor}`);
+                history.push(`/mentees/${this.props.match.params.mentor}`);
             })
             .catch(error => {
                 console.log("error", error);
@@ -107,17 +109,15 @@ class MentorDiaryView extends Component {
 
     render() {
 
-        const {mapStateToPropsMentor, mapStateToPropsDiary} = this.props;
-
         return (
 
             <div>
-                <MentorProfile mentor={mapStateToPropsMentor}/>
+                <MenteeProfile mentee={this.props.mapStateToPropsMentee}/>
                 <Diary
                     handleDiaries={() => this.handleDiaries()}
                     handleDiaryDelete={(diary_srl) => this.handleDiaryDelete(diary_srl)}
                     handleDiaryModify={(diary_srl) => this.handleDiaryModify(diary_srl)}
-                    diary={mapStateToPropsDiary.diary}
+                    diary={this.props.mapStateToPropsDiary.diary}
                 />
             </div>
         );
@@ -125,24 +125,24 @@ class MentorDiaryView extends Component {
 
     componentDidMount() {
 
-        const {actionMentor, match} = this.props;
-        actionMentor.getMentor(match.params.mentor);
-        actionMentor.getDiary(match.params.diary_id);
+        const {actionMentee, match} = this.props;
+        actionMentee.getMentee(match.params.mentee);
+        actionMentee.getMenteeDiary(match.params.mentee, match.params.diary_id);
     }
 
 }
 
 const mapStateToProps = (state) => ({
 
-    mapStateToPropsMentor: state.mentor.mentor,
+    mapStateToPropsMentee: state.mentee.mentee,
     mapStateToPropsDiary: state.diary
 
 })
 
 const mapDispatchToProps = (dispatch) => ({
 
-    actionMentor: bindActionCreators(importActions, dispatch),
+    actionMentee: bindActionCreators(importActions, dispatch),
 })
 
-MentorDiaryView.contextType = GlobalsContext;
-export default withRouter(compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MentorDiaryView));
+MenteeDiaryView.contextType = GlobalsContext;
+export default withRouter(compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MenteeDiaryView));

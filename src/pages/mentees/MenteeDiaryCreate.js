@@ -2,22 +2,22 @@ import React, {Component} from 'react';
 import {bindActionCreators, compose} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-import {MentorProfile} from "./MentorProfile";
-import * as yup from "yup";
 import axios from "axios";
 import history from "../history";
 import {GlobalsContext} from '../../pages/globals';
 import {withRouter} from "react-router";
 import {withAlert} from "react-alert";
 import DiaryCreate from "../diaries/DiaryCreate";
+import {MenteeProfile} from "./MenteeProfile";
 
-class MentorDiaryCreate extends Component {
+
+class MenteeDiaryCreate extends Component {
 
     constructor(props, context) {
 
         super(props);
         this.state = {
-            apiUserCreate: `${context.server_host}/api/v1/mentors/${this.props.match.params.mentor}/diaries`,
+            apiUserDiaryCreate: `${context.server_host}/api/v1/mentees/${this.props.match.params.mentee}/diaries`,
             isLoading: false,
             schemaDefaultValue: {
                 title: '',
@@ -27,7 +27,7 @@ class MentorDiaryCreate extends Component {
         }
     }
 
-    handleChange = (e, type = 'text') => {
+    handleText = (e, type = 'text') => {
         const schemaDefaultValue = {...this.state.schemaDefaultValue};
 
         if (type === "text") {
@@ -51,10 +51,6 @@ class MentorDiaryCreate extends Component {
         });
     }
 
-    goBack = () =>{
-
-        this.props.history.goBack();
-    }
 
     handleDiaryCreate = () => {
 
@@ -70,25 +66,39 @@ class MentorDiaryCreate extends Component {
             }
         };
 
-        return axios.post(`${this.state.apiUserCreate}`, formData, config)
+        return axios.post(`${this.state.apiUserDiaryCreate}`, formData, config)
             .then(response => {
 
                 this.props.alert.show('등록 되었습니다.');
-                history.push(`/mentors/${this.props.match.params.mentor}`);
+                history.push(`/mentees/${this.props.match.params.mentee}`);
             })
             .catch(error => {
                 console.log("error", error);
             });
     }
 
+    handleChange = (e, type = 'text') => {
+        const schemaDefaultValue = {...this.state.schemaDefaultValue};
+
+        if (type === "text") {
+
+            schemaDefaultValue[e.target.name] = e.target.value;
+
+        } else {
+
+            schemaDefaultValue[e.target.name] = e.target.files[0];
+        }
+
+        this.setState({schemaDefaultValue})
+    }
     render() {
 
-        const mentor = this.props.mapStateToPropsMentor;
+        const mentee = this.props.mapStateToPropsMentee;
 
         return (
 
             <div>
-                <MentorProfile mentor={mentor}/>
+                <MenteeProfile mentee={mentee}/>
                 <DiaryCreate
                     schemaDefaultValue={this.state.schemaDefaultValue}
                     isLoading={this.state.isLoading}
@@ -102,22 +112,22 @@ class MentorDiaryCreate extends Component {
 
     componentDidMount() {
 
-        const {actionMentor, match} = this.props;
-        actionMentor.getMentor(match.params.mentor);
+        const {actionMentee, match} = this.props;
+        actionMentee.getMentee(match.params.mentee);
     }
 
 }
 
 const mapStateToProps = (state) => ({
 
-    mapStateToPropsMentor: state.mentor.mentor,
+    mapStateToPropsMentee: state.mentee.mentee,
 })
 
 const mapDispatchToProps = (dispatch) => ({
 
-    actionMentor: bindActionCreators(importActions, dispatch),
+    actionMentee: bindActionCreators(importActions, dispatch),
 })
 
-MentorDiaryCreate.contextType = GlobalsContext;
+MenteeDiaryCreate.contextType = GlobalsContext;
 
-export default withRouter(compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MentorDiaryCreate));
+export default withRouter(compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MenteeDiaryCreate));

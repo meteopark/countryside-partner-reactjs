@@ -27,12 +27,14 @@ import * as importActions from "../actions";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import Mentee from "./mentees/Mentee";
+import MenteeDiaryCreate from "./mentees/MenteeDiaryCreate";
+import MenteeDiaryView from "./mentees/MenteeDiaryView";
 
 
 class Root extends React.Component {
 
     render() {
-        console.log("---");
+
         return (
             <Router history={history}>
                 <div className={styles['wrapper']}>
@@ -48,10 +50,12 @@ class Root extends React.Component {
 
                                 <Route exact path="/mentees" component={Mentees}/>
                                 <Route exact path="/mentees/:mentee" component={Mentee}/>
+                                {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/mentees/:mentee/create" component={MenteeDiaryCreate}/>}
+                                <Route exact path="/mentees/:mentee/diaries/:diary_id" component={MenteeDiaryView}/>
 
                                 <Route exact path="/mentors" component={Mentors}/>
                                 <Route exact path="/mentors/:mentor" component={Mentor}/>
-                                <Route exact path="/mentors/:mentor/create" component={MentorDiaryCreate}/>
+                                {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/mentors/:mentor/create" component={MentorDiaryCreate}/>}
                                 <Route exact path="/mentors/:mentor/diaries/:diary_id" component={MentorDiaryView}/>
                                 <Route exact path="/mentors/:mentor/diaries/:diary_id/modify" component={MentorDiaryModify}/>
 
@@ -72,7 +76,7 @@ class Root extends React.Component {
                                 {/*));*/}
 
 
-                                <Redirect from='*' to="/" />
+                                {/*<Redirect from='*' to="/" />*/}
 
 
                             </Switch>
@@ -88,7 +92,4 @@ class Root extends React.Component {
 const mapStateToProps = (state) => ({
     mapStateToPropsAuth: state.auth // state.variable_state 는 reducers/index.js 의 키값과 같아야 한다
 })
-const mapDispatchToProps = (dispatch) => ({
-    actionMentor: bindActionCreators(importActions, dispatch),
-})
-export default connect(mapStateToProps, mapDispatchToProps)(Root);
+export default connect(mapStateToProps)(Root);

@@ -2,11 +2,15 @@ import axios from 'axios';
 import * as types from './ActionTypes';
 
 
-const apiMains          = 'http://countryside-partner-laravel.test/api/v1/main';
-const apiMentors         = 'http://countryside-partner-laravel.test/api/v1/mentors';
-const apiMentees         = 'http://countryside-partner-laravel.test/api/v1/mentees';
-const apiMentorDiaries  = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors'; // {mentor_srl}/articles
+const apiMains = 'http://countryside-partner-laravel.test/api/v1/main';
+const apiMentors = 'http://countryside-partner-laravel.test/api/v1/mentors';
+const apiMentees = 'http://countryside-partner-laravel.test/api/v1/mentees';
+const apiMentorDiaries = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors'; // {mentor_srl}/articles
+
+
+
 const apiDiary          = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors/articles'; // {diary_srl}
+
 const apiAuthCheck      = 'http://countryside-partner-laravel.test/api/v1/auth'; // {diary_srl}
 
 
@@ -92,9 +96,7 @@ export const mentorLists = () => {
 export const getMentee = (mentee) => {
 
     return (dispatch) => {
-
         const url = `${apiMentees}/${mentee}`;
-
         return axios.get(url)
 
             .then(response => {
@@ -131,6 +133,25 @@ export const getMentor = (mentor) => {
             });
     }
 }
+
+export const getMenteeDiaries = (mentee, page) => {
+
+    return (dispatch) => {
+
+        return axios.get(`${apiMentees}/${mentee}/diaries?page=${page}`)
+
+            .then(response => {
+
+                dispatch(Success(response.data, types.MENTEE_DIARIES));
+            })
+            .catch(error => {
+
+                console.log("error : getMenteeDiaries() " , error);
+                throw(error);
+
+            });
+    }
+}
 export const getMentorDiaries = (mentor, page) => {
 
     return (dispatch) => {
@@ -149,6 +170,41 @@ export const getMentorDiaries = (mentor, page) => {
             });
     }
 }
+
+
+export const getMenteeDiary = (mentee, diary_id) => {
+
+    return (dispatch) => {
+
+        let config = {headers: {}};
+
+        if ( localStorage.getItem('token') )
+        {
+            config = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                }
+            };
+        }
+
+        return axios.get(`${apiMentees}/${mentee}/diaries/${diary_id}`, config)
+
+            .then(response => {
+
+                if (!response.data.error) {
+
+                    dispatch(Success(response.data, types.DIARY));
+                }
+            })
+            .catch(error => {
+
+                isLogged(false);
+
+            });
+    }
+}
+
 
 export const getDiary = (diary_id) => {
 
@@ -171,6 +227,7 @@ export const getDiary = (diary_id) => {
             .then(response => {
 
                 if (!response.data.error) {
+
                     dispatch(Success(response.data, types.DIARY));
                 }
             })

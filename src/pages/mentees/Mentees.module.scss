@@ -2,6 +2,19 @@
 
 
 
+.profile-container-fluid {
+
+  width: 100%;
+  background: #ffffff;
+}
+
+.profile-introduce {
+  width: 100%;
+  min-height: auto;
+  background: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+}
+
 .profile-container {
 
   text-align: center;
@@ -13,21 +26,22 @@
 
   .profile-image-container {
 
-    margin-top:20px;
+    margin-top: 20px;
 
-    .profile-image{
+    .profile-image {
 
       border: 1.5px solid #ffffff;
-      width: 180px;
-      height: 180px;
+      width: 140px;
+      height: 140px;
     }
   }
-  .profile-info{
+
+  .profile-info {
     text-align: left;
     margin-top: 20px;
     margin-left: 20px;
     line-height: 30px;
-    padding-bottom:20px;
+    padding-bottom: 20px;
   }
 }
 
@@ -50,9 +64,10 @@
     padding-bottom: 10px;
     border-bottom: 1px solid $under-line;
   }
+
   .mentors-contents {
-    color:#747474;
-    font-size:15px;
+    color: #747474;
+    font-size: 15px;
     line-height: 25px;
   }
 }
@@ -64,11 +79,9 @@
   border: 1px solid $main-color;
 }
 
-
-
 @media (min-width: 576px) {
 
-  .profile-info{
+  .profile-info {
     margin-top: 0px;
     margin-left: 20px;
   }

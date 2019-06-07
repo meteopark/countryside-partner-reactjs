@@ -70,6 +70,10 @@
     width: 100%;
   }
 
+  .write {
+    float:right;
+  }
+
   .blog-title {
     margin-top: 1rem;
     font-weight: bold;
@@ -78,6 +82,8 @@
 
   .blog-post-container {
 
+    margin-left: 0;
+    margin-right: 0;
     padding-top: 1.5rem;
     padding-bottom: 1rem;
 
@@ -90,8 +96,6 @@
 
     .blog-post {
 
-      //margin-top: 20px;
-      margin-left: 10px;
       min-height: 110px;
 
       .blog-post-contents {

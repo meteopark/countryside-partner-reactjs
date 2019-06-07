@@ -29,7 +29,6 @@ export const mentor = (state = initialState, action) => {
         case types.MENTOR_DIARIES:
 
             return {
-
                 mentor: state.mentor,
                 diaries: {
                     ...state.diaries,

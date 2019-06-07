@@ -3,11 +3,9 @@ import styles from './Mentors.module.scss';
 import {bindActionCreators, compose} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-import {Form, Row, Col, Button, Image} from "react-bootstrap";
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
 import {MentorProfile} from "./MentorProfile";
-import {Formik} from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import history from "../history";
@@ -15,7 +13,6 @@ import {GlobalsContext} from '../../pages/globals';
 import {withRouter} from "react-router";
 import {withAlert} from "react-alert";
 import DiaryModify from "../diaries/DiaryModify";
-
 
 const schema = yup.object({
     title: yup.string().min(2, '제목을 입력해 주세요.').max(20, '제목을 20자 이하로 넣어주세요').required('제목을 입력해 주세요.'),
@@ -131,7 +128,7 @@ class MentorDiaryModify extends Component {
                         schemaDefaultValue={this.state.schemaDefaultValue}
                         isLoading={this.state.isLoading}
                         hasImage={this.state.hasImage}
-                        onClick={this.goBack}
+                        goBack={this.goBack}
                         handleClick={this.handleClick}
                         handleCheckbox={(e) => this.handleCheckbox(e)}
                         handleChange={(e, type) => this.handleChange(e, type)}

@@ -26,11 +26,10 @@ export const mentee = (state = initialState, action) => {
                 }
             };
 
-        case types.MENTOR_DIARIES:
-
+        case types.MENTEE_DIARIES:
             return {
 
-                mentee: state.mentor,
+                mentee: state.mentee,
                 diaries: {
                     ...state.diaries,
                     current_page: action.payload.datas.current_page,

@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
-// import {MentorProfile} from "./MentorProfile";
 import {withRouter} from "react-router-dom";
 import Diaries from "../diaries/Diaries";
+import {MenteeProfile} from "./MenteeProfile";
 
 
 class Mentee extends Component {
@@ -19,31 +19,30 @@ class Mentee extends Component {
 
     loadItems = () => {
 
-        const {actionMentor, match, mapStateToPropsMentorDiaries} = this.props;
+        const {actionMentee, match, mapStateToPropsMenteeDiaries} = this.props;
 
-        if (mapStateToPropsMentorDiaries.last_page === mapStateToPropsMentorDiaries.current_page) this.setState({hasMore: false});
+        if (mapStateToPropsMenteeDiaries.last_page === mapStateToPropsMenteeDiaries.current_page) this.setState({hasMore: false});
 
         setTimeout(() => {
-            actionMentor.getMentorDiaries(match.params.mentor, mapStateToPropsMentorDiaries.current_page + 1);
+            actionMentee.mapStateToPropsMenteeDiaries(match.params.mentor, mapStateToPropsMenteeDiaries.current_page + 1);
         }, 1000);
     }
 
     render() {
 
         const mentee = this.props.mapStateToPropsMentee;
-        const diaries = this.props.mapStateToPropsMentorDiaries;
+        const diaries = this.props.mapStateToPropsMenteeDiaries;
 
         return (
 
             <div>
-                {/*<MentorProfile mentor={mentee}/>*/}
-
-                {/*<Diaries*/}
-                {/*    hasMore={this.state.hasMore}*/}
-                {/*    user={mentee}*/}
-                {/*    diaries={diaries}*/}
-                {/*    loadItems={this.loadItems}*/}
-                {/*/>*/}
+                <MenteeProfile mentee={mentee}/>
+                <Diaries
+                    hasMore={this.state.hasMore}
+                    user={mentee}
+                    diaries={diaries}
+                    loadItems={this.loadItems}
+                />
 
 
             </div>
@@ -54,7 +53,7 @@ class Mentee extends Component {
 
         const {actionMentee, match} = this.props;
         actionMentee.getMentee(match.params.mentee);
-        // actionMentee.getMentorDiaries(match.params.mentor, 1);
+        actionMentee.getMenteeDiaries(match.params.mentee, 1);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -65,16 +64,16 @@ class Mentee extends Component {
          */
         if (this.props.match.params.mentor !== prevProps.match.params.mentor) {
 
-            const {actionMentor, match} = this.props;
-            actionMentor.getMentor(match.params.mentor);
-            actionMentor.getMentorDiaries(match.params.mentor, 1);
+            const {actionMentee, match} = this.props;
+            actionMentee.getMentee(match.params.mentor);
+            actionMentee.getMenteeDiaries(match.params.mentee, 1);
         }
     }
 }
 
 const mapStateToProps = (state) => ({
     mapStateToPropsMentee: state.mentee.mentee,
-    // mapStateToPropsMentorDiaries: state.mentor.diaries
+    mapStateToPropsMenteeDiaries: state.mentee.diaries
 })
 
 const mapDispatchToProps = (dispatch) => ({
