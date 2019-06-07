@@ -44,7 +44,6 @@ class Diary extends Component {
                                     roundedCircle
                                     src={user_type.profile_image ? user_type.profile_image : '/images/no-image.png'}
                                 />{user_type.name}
-                                }
                             </Link>
                             <span className={styles['timestamp']}>{diary.regdate}</span>
                         </div>
