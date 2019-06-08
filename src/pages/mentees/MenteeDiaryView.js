@@ -28,20 +28,6 @@ class MenteeDiaryView extends Component {
         }
     }
 
-    handleText = (e, type = 'text') => {
-        const schemaDefaultValue = {...this.state.schemaDefaultValue};
-
-        if (type === "text") {
-
-            schemaDefaultValue[e.target.name] = e.target.value;
-
-        } else {
-
-            schemaDefaultValue[e.target.name] = e.target.files[0];
-        }
-
-        this.setState({schemaDefaultValue})
-    }
     handleClick = () => {
 
         this.setState({isLoading: true}, () => {
@@ -72,10 +58,10 @@ class MenteeDiaryView extends Component {
             }
         };
 
-        return axios.post(`${this.state.apiUserCreate}/${diary_srl}`, formData, config)
+        return axios.post(`${this.state.apiMenteeDiary}/${diary_srl}`, formData, config)
             .then(response => {
                 this.props.alert.show('삭제 되었습니다.');
-                history.push(`/mentees/${this.props.match.params.mentor}`);
+                history.push(`/mentees/${this.props.match.params.mentee}`);
             })
             .catch(error => {
                 console.log("error", error);

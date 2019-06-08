@@ -26,20 +26,6 @@ class MentorDiaryView extends Component {
         }
     }
 
-    handleText = (e, type = 'text') => {
-        const schemaDefaultValue = {...this.state.schemaDefaultValue};
-
-        if (type === "text") {
-
-            schemaDefaultValue[e.target.name] = e.target.value;
-
-        } else {
-
-            schemaDefaultValue[e.target.name] = e.target.files[0];
-        }
-
-        this.setState({schemaDefaultValue})
-    }
     handleClick = () => {
 
         this.setState({isLoading: true}, () => {
