@@ -20,7 +20,7 @@ export const MenteeProfile = (props) => {
                 <div className={styles['profile-introduce']}>
                     <Container className={styles['profile-container']}>
                         <Row className="justify-content-md-center">
-                            <Col sm={2} className={styles['profile-image-container']}>
+                            <Col sm={3} className={styles['profile-image-container']}>
                                 <Image
                                     className={styles['profile-image']}
                                     roundedCircle

@@ -24,7 +24,7 @@ class Mentee extends Component {
         if (mapStateToPropsMenteeDiaries.last_page === mapStateToPropsMenteeDiaries.current_page) this.setState({hasMore: false});
 
         setTimeout(() => {
-            actionMentee.mapStateToPropsMenteeDiaries(match.params.mentor, mapStateToPropsMenteeDiaries.current_page + 1);
+            actionMentee.getMenteeDiaries(match.params.mentee, mapStateToPropsMenteeDiaries.current_page + 1);
         }, 1000);
     }
 

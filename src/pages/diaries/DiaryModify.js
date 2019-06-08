@@ -5,19 +5,30 @@ import classNames from "classnames";
 import {Formik} from "formik";
 import {withRouter} from "react-router";
 import {withAlert} from "react-alert";
+import * as yup from "yup";
+import * as reactIconFa from "react-icons/fa";
+
+const schema = yup.object({
+    title: yup.string().min(2, '제목을 입력해 주세요.').max(20, '제목을 20자 이하로 넣어주세요').required('제목을 입력해 주세요.'),
+    contents: yup.string().required('내용을 입력해 주세요.'),
+});
 
 class DiaryModify extends Component {
 
     render() {
 
-        const {
-            schema,
-            schemaDefaultValue
-        } = this.props;
+        const {schemaDefaultValue} = this.props;
 
         return (
 
-            <div>
+            <div className={classNames('container', styles['blog-container'])}>
+
+                <div className={styles['blog-header']}>
+                    <reactIconFa.FaPenNib className={styles['main-icon']}/>
+                    영농일지 수정
+                </div>
+                <br/>
+
                 <Formik
                     onSubmit={(values, actions) => {
                         this.props.handleClick()
