@@ -31,6 +31,7 @@ export class Header extends Component {
                                 <NavLink to="/mentees" className="nav-link"><div className={classNames(styles['header-menu'])}>멘티소개</div></NavLink>
                                 <NavLink to="/machines" className="nav-link"><div className={classNames(styles['header-menu'])}>전국 농기계 현황</div></NavLink>
                                 <NavLink to="/dictionary" className="nav-link"><div className={classNames(styles['header-menu'])}>우리말 농업용어</div></NavLink>
+                                <NavLink to="/chat" className="nav-link"><div className={classNames(styles['header-menu'])}>귀농귀촌 지능형 상담</div></NavLink>
 
 
 

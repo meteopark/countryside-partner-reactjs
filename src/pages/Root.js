@@ -30,6 +30,7 @@ import Mentee from "./mentees/Mentee";
 import MenteeDiaryCreate from "./mentees/MenteeDiaryCreate";
 import MenteeDiaryView from "./mentees/MenteeDiaryView";
 import MenteeDiaryModify from "./mentees/MenteeDiaryModify";
+import {Chat} from "./chat/Chat";
 
 
 class Root extends React.Component {
@@ -40,7 +41,7 @@ class Root extends React.Component {
             <Router history={history}>
                 <div className={styles['wrapper']}>
                     <TopBar/>
-                    {/*<Header/>*/}
+                    <Header/>
                     <div className={styles['wrapper']}>
                         {/*<SideNav />*/}
 
@@ -72,10 +73,9 @@ class Root extends React.Component {
                                 {!this.props.mapStateToPropsAuth.is_logged && <Route exact path="/join/mentee" component={MenteeCreate}/>}
 
 
-                                {/*Route::get('diaries-mentors/articles/{diary_id}', array( //  멘토 - 영농일지 선택 조회*/}
-                                {/*'as' => 'diaries-mentors.articles.show',*/}
-                                {/*'uses' => 'MentorDiaryController@show'*/}
-                                {/*));*/}
+
+
+                                <Route exact path="/chat" component={Chat}/>
 
 
                                 {/*<Redirect from='*' to="/" />*/}

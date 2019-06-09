@@ -6,7 +6,7 @@ export const globlas = {
         server_host: 'http://countryside-partner-laravel.test',
     },
     production: {
-        server_host: 'http://countryside-partner-laravel.test',
+        server_host: 'http://countryside-partner-laravel.test123',
     }
 }
 

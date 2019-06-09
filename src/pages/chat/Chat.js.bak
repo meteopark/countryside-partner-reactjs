@@ -1,0 +1,96 @@
+import React, {Component, useState, useEffect} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as importActions from '../../actions';
+import {GlobalsContext} from "../globals";
+import axios from "axios";
+import history from "../history";
+
+
+class Chat extends Component {
+
+
+    constructor(props, context) {
+
+
+        const [message, setMessage] = useState(null);
+
+        super(props);
+        this.state = {
+            apiIntroChat: context.server_host + "/api/openapi/chat/intro",
+            message: null,
+        }
+
+
+    }
+
+
+    handleIntro = () => {
+
+
+        return axios.get(this.state.apiIntroChat)
+            .then(response => {
+
+                if (response.data.status === "OK") {
+
+                    // response.data.result.message.text
+                }
+            })
+            .catch(error => {
+                console.log("error", error);
+            });
+    }
+
+    render() {
+
+
+        useEffect(() => {
+            console.log('마운트 될 때만 실행됩니다.');
+        }, []);
+
+
+        return (
+
+            <div>
+
+
+            </div>
+        );
+    }
+
+
+
+
+
+    componentDidMount() {
+
+        this.handleIntro();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        /*
+        이 API는 컴포넌트에서 render() 를 호출하고난 다음에 발생하게 됩니다. 이 시점에선 this.props 와 this.state 가 바뀌어있습니다.
+        그리고 파라미터를 통해 이전의 값인 prevProps 와 prevState 를 조회 할 수 있습니다.
+        그리고, getSnapshotBeforeUpdate 에서 반환한 snapshot 값은 세번째 값으로 받아옵니다.
+         */
+        if (this.props.match.params.mentor !== prevProps.match.params.mentor) {
+
+            const {actionMentee, match} = this.props;
+            actionMentee.getMentee(match.params.mentor);
+            actionMentee.getMenteeDiaries(match.params.mentee, 1);
+        }
+    }
+}
+
+const mapStateToProps = (state) => ({
+    mapStateToPropsMentee: state.mentee.mentee,
+    mapStateToPropsMenteeDiaries: state.mentee.diaries
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    actionMentee: bindActionCreators(importActions, dispatch),
+})
+
+Chat.contextType = GlobalsContext;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);
