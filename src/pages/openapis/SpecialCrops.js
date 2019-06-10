@@ -15,7 +15,7 @@ class SpecialCrops extends Component {
         super(props);
 
         this.state = {
-            loading: false,
+            loading: true,
             search: {
                 year: '2011',
                 ctprvn: '제주특별자치도',
@@ -50,13 +50,6 @@ class SpecialCrops extends Component {
         return (
 
             <div className={classNames('container', styles['in-container'])}>
-
-                { this.state.loading === true ?
-                <div className={styles['table_loading']}>
-                    <Spinner animation="border" variant="danger" />
-                </div>
-                    : ""}
-
 
                 <p className={styles['header-container']}>
                     <reactIconFa.FaTractor className={styles['main-icon']}/>
@@ -93,9 +86,18 @@ class SpecialCrops extends Component {
                             <option value="강원도">강원도</option>
                         </Form.Control>
                     </Col>
-                    &nbsp;&nbsp;<Button variant="secondary" onClick={this.handleSearch}>
-                    <reactIconFa.FaSearch className={styles['icons']}/>
-                    조회</Button>
+                    &nbsp;&nbsp;
+                    <Button variant="secondary" onClick={this.handleSearch}>
+                        <reactIconFa.FaSearch className={styles['icons']}/>조회
+                    </Button>
+                    {this.state.loading === true ?
+                        <Spinner
+                            className={styles['custom-spinner']}
+                            animation="grow"
+                            variant="danger"
+                        />
+                        : ""
+                    }
                 </Form.Row>
                 <p className={styles['source']}>농림축산식품 공공데이터포털 OpenAPI (특용작물 생산 통계)</p>
                 <Table responsive="sm" className={classNames("text-center", styles['table'])}>
@@ -107,7 +109,7 @@ class SpecialCrops extends Component {
                         <th width={"10%"}>재배 농가수(호)</th>
                         <th width={"10%"}>재배면적(ha)</th>
                         <th width={"10%"}>수확면적(ha)</th>
-                        <th>단위면적당 수확량(kg/10a)</th>
+                        <th width={"16%"}>단위면적당 수확량(kg/10a)</th>
                         <th width={"10%"}>생산량(M/T)</th>
                     </tr>
                     </thead>
