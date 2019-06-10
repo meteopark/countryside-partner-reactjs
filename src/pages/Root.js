@@ -31,6 +31,7 @@ import MenteeDiaryCreate from "./mentees/MenteeDiaryCreate";
 import MenteeDiaryView from "./mentees/MenteeDiaryView";
 import MenteeDiaryModify from "./mentees/MenteeDiaryModify";
 import {Chat} from "./chat/Chat";
+import SpecialCrops from "./openapis/SpecialCrops";
 
 
 class Root extends React.Component {
@@ -41,7 +42,7 @@ class Root extends React.Component {
             <Router history={history}>
                 <div className={styles['wrapper']}>
                     <TopBar/>
-                    <Header/>
+                    {/*<Header/>*/}
                     <div className={styles['wrapper']}>
                         {/*<SideNav />*/}
 
@@ -63,8 +64,14 @@ class Root extends React.Component {
                                 <Route exact path="/mentors/:mentor/diaries/:diary_id/modify" component={MentorDiaryModify}/>
 
 
+                                /*
+                                OpenApi Route ...
+                                 */
                                 <Route exact path="/machines" component={Machine}/>
                                 <Route exact path="/dictionary" component={Dictionary}/>
+                                <Route exact path="/special-crops" component={SpecialCrops}/>
+
+
 
 
                                 {!this.props.mapStateToPropsAuth.is_logged && <Route exact path="/login" component={Login}/>}

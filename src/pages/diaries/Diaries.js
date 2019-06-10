@@ -16,7 +16,6 @@ class Diaries extends Component {
     render() {
 
         const {diaries, loadItems, hasMore, user} = this.props;
-
         return (
 
             <div className={classNames('container', styles['blog-container'])}>

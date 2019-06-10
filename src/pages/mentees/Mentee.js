@@ -62,10 +62,10 @@ class Mentee extends Component {
         그리고 파라미터를 통해 이전의 값인 prevProps 와 prevState 를 조회 할 수 있습니다.
         그리고, getSnapshotBeforeUpdate 에서 반환한 snapshot 값은 세번째 값으로 받아옵니다.
          */
-        if (this.props.match.params.mentor !== prevProps.match.params.mentor) {
+        if (this.props.match.params.mentee !== prevProps.match.params.mentee) {
 
             const {actionMentee, match} = this.props;
-            actionMentee.getMentee(match.params.mentor);
+            actionMentee.getMentee(match.params.mentee);
             actionMentee.getMenteeDiaries(match.params.mentee, 1);
         }
     }

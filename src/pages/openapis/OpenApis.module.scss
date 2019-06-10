@@ -8,6 +8,22 @@
 
     background: #F6F6F6;
   }
+
+  .table-thead-min {
+
+    background: #F6F6F6;
+    font-size: 13px
+  }
+
+}
+
+.table_loading {
+
+  position: absolute;
+  text-align: center;
+  left: 50%;
+  top: 30%;
+  //height: 100vh;
 }
 
 

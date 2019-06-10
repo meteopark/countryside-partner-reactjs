@@ -23,6 +23,12 @@ export const openapi = (state = initialState, action) => {
                 lists: action.payload.datas,
             };
 
+        case types.OPENAPI_SPECIALCROPS:
+
+            return {
+                lists: action.payload.datas,
+            }
+
         default:
 
             return state;
