@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActionsOpenApi from '../../actions/openapi';
 import styles from './OpenApis.module.scss';
-import {Col, Button, Form, Table} from 'react-bootstrap';
+import {Col, Button, Form, Table, Spinner} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
 
@@ -15,6 +15,7 @@ class Machine extends Component {
         super(props);
 
         this.state = {
+            loading: false,
             search: {
                 ctprvn: '충청남도',
                 fch_knd: '',
@@ -24,7 +25,7 @@ class Machine extends Component {
 
 
     handleSearch = () => {
-
+        this.setState({loading: true})
         this.props.actionMachine.machineLists(this.state.search);
     }
 
@@ -88,6 +89,14 @@ class Machine extends Component {
                     &nbsp;&nbsp;<Button variant="secondary" onClick={this.handleSearch}>
                     <reactIconFa.FaSearch className={styles['icons']}/>
                     조회</Button>
+                    {this.state.loading === true ?
+                        <Spinner
+                            className={styles['custom-spinner']}
+                            animation="grow"
+                            variant="danger"
+                        />
+                        : ""
+                    }
                 </Form.Row>
                 <p className={styles['source']}>농림축산식품 공공데이터포털 OpenAPI (전국 농기계 현황)</p>
                 <Table responsive="sm" className={classNames("text-center", styles['table'])}>
@@ -127,8 +136,18 @@ class Machine extends Component {
     }
 
     componentDidMount() {
-
+        this.setState({loading: true});
         this.props.actionMachine.machineLists(this.state.search);
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        /*
+        이 API는 컴포넌트에서 render() 를 호출하고난 다음에 발생하게 됩니다. 이 시점에선 this.props 와 this.state 가 바뀌어있습니다.
+        그리고 파라미터를 통해 이전의 값인 prevProps 와 prevState 를 조회 할 수 있습니다.
+        그리고, getSnapshotBeforeUpdate 에서 반환한 snapshot 값은 세번째 값으로 받아옵니다.
+         */
+        if (prevState.loading === true) {
+            this.setState({loading: false})
+        }
     }
 }
 

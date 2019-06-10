@@ -42,7 +42,7 @@ class Root extends React.Component {
             <Router history={history}>
                 <div className={styles['wrapper']}>
                     <TopBar/>
-                    {/*<Header/>*/}
+                    <Header/>
                     <div className={styles['wrapper']}>
                         {/*<SideNav />*/}
 

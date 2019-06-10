@@ -15,7 +15,7 @@ class SpecialCrops extends Component {
         super(props);
 
         this.state = {
-            loading: true,
+            loading: false,
             search: {
                 year: '2011',
                 ctprvn: '제주특별자치도',
@@ -26,7 +26,7 @@ class SpecialCrops extends Component {
 
     handleSearch = () => {
 
-        this.setState({loading: true})
+        this.setState({loading: true});
         this.props.requestAction.specialCropsLists(
             this.state.search.year,
             this.state.search.ctprvn
@@ -150,7 +150,7 @@ class SpecialCrops extends Component {
     }
 
     componentDidMount() {
-
+        this.setState({loading: true});
         this.props.requestAction.specialCropsLists(2011, '충청남도');
     }
 
