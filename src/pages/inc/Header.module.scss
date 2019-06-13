@@ -37,6 +37,22 @@ body{
   }
 }
 
+.header-m {
+  width: 100%;
+  float:left;
+  .header-title-m {
+    text-align: center;
+    font-family: 'TitleV', sans-serif;
+    color:$main-color;
+    font-weight: bold;
+    font-size: 3vh;
+
+    img {
+      height: 35px;
+    }
+  }
+}
+
 .header-menu {
   font-family: 'Title_Medium', sans-serif;
 }
@@ -48,6 +64,21 @@ body{
   text-align: right;
   background: #d3d9df;
 }
+
+
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
 
 
 
