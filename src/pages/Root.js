@@ -32,6 +32,7 @@ import MenteeDiaryView from "./mentees/MenteeDiaryView";
 import MenteeDiaryModify from "./mentees/MenteeDiaryModify";
 import {Chat} from "./chat/Chat";
 import SpecialCrops from "./openapis/SpecialCrops";
+import EmptyHouses from "./openapis/EmptyHouses";
 
 
 class Root extends React.Component {
@@ -70,6 +71,7 @@ class Root extends React.Component {
                                 <Route exact path="/machines" component={Machine}/>
                                 <Route exact path="/dictionary" component={Dictionary}/>
                                 <Route exact path="/special-crops" component={SpecialCrops}/>
+                                <Route exact path="/empty-houses" component={EmptyHouses}/>
 
 
 

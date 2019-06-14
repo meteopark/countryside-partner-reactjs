@@ -5,6 +5,7 @@ import * as types from './ActionTypes';
 const apiMachine = 'http://countryside-partner-laravel.test/api/openapi/machines';
 const apiDicitionary = 'http://countryside-partner-laravel.test/api/openapi/dictionary';
 const apiSpecialCrops = 'http://countryside-partner-laravel.test/api/openapi/special-crops';
+const apiEmptyHouses = 'http://countryside-partner-laravel.test/api/openapi/empty-houses';
 
 export const machineLists = (search) => {
 
@@ -48,9 +49,28 @@ export const specialCropsLists = (year, ctprvn) => {
 
         return axios.get(`${apiSpecialCrops}${apiAdd}`)
             .then(response => {
-console.log(response.data);
+
                 if ( response.data.Grid_20141119000000000065_1 ) {
                     dispatch(Success(response.data.Grid_20141119000000000065_1.row, types.OPENAPI_SPECIALCROPS));
+                }
+
+            })
+            .catch(e => {
+                throw(e);
+            });
+    }
+}
+
+export const emptyHousesLists = (sidonm, gubuncd, dealtypecd) => {
+
+    return (dispatch) => {
+
+        let apiAdd = `?sidonm=${sidonm}&gubuncd=${gubuncd}&dealtypecd=${dealtypecd}`;
+
+        return axios.get(`${apiEmptyHouses}${apiAdd}`)
+            .then(response => {
+                if ( response.data.Grid_20150914000000000230_1 ) {
+                    dispatch(Success(response.data.Grid_20150914000000000230_1.row, types.OPENAPI_EMPTYHOUSES));
                 }
 
             })

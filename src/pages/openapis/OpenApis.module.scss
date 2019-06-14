@@ -14,7 +14,42 @@
     background: #F6F6F6;
     font-size: 13px
   }
+  .table-td-min {
+    font-size: 13px;
+  }
 
+  .pointer {
+    cursor: pointer;
+    color: #4374D9;
+  }
+  .left {
+    text-align: left;
+  }
+  .right{
+    text-align: right;
+  }
+}
+
+.modal {
+
+  font-size: 13px;
+
+  .modal-td-contents {
+    border-bottom: 1px solid $under-line;
+  }
+  .modal-td {
+    text-align: center;
+    width: 130px;
+    background: #EBF7FF;
+    border-bottom: 1px solid $under-line;
+  }
+}
+
+.image {
+  width: 400px;
+  max-width: 100%;
+  margin-bottom:10px;
+  margin-top:10px;
 }
 
 .custom-spinner {
