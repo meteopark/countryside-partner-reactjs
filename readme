@@ -28,3 +28,5 @@ npm install --save-dev style-loader css-loader
 
 *아이콘
 https://react-icons.netlify.com/#/
+*채팅
+https://www.npmjs.com/package/react-chat-elements#messagelist-component

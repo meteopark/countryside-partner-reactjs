@@ -1,4 +1,4 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, {Component, useState, useEffect, useRef} from 'react';
 import API from "../api/api";
 import classNames from "classnames";
 import styles from "../diaries/Diary.module.scss";
@@ -9,19 +9,43 @@ import {MessageList, Input, Button} from 'react-chat-elements'
 
 export function Mentoring() {
 
+    const whoami = `${localStorage.getItem('user_type')}|${localStorage.getItem('srl')}`;
     const [message, setMessage] = useState('');
+    const [chatLists, setChatLists] = useState([]);
+    const inputRef = useRef(null);
 
     const onChangeMessage = () => {
 
-        console.log("---",message);
+        if (message !== '') {
+
+            let formData = new FormData();
+            formData.append('to', 2231);
+            formData.append('from', `${localStorage.getItem('user_type')}|${localStorage.getItem('srl')}`);
+            formData.append('message', message);
+
+            API.sendMessage(formData).then((res) => {
+
+                let newMessage = {
+                    avatar: 'http://image.news1.kr/system/photos/2018/3/29/3036479/article.jpg',
+                    position: whoami === res.from ? 'right' : 'left',
+                    type: 'text',
+                    text: res.message,
+                    date: new Date(res.created_at)
+                }
+
+                onChangeChatLists(newMessage);
+
+            });
+        }
     };
 
-    useEffect(() => {
+    const onChangeChatLists = (newMessage) => {
 
-        // API.getOpenApiChatIntro().then((response) => {
-        //
-        //     setMessage(response.text);
-        // });
+        setChatLists([...chatLists, newMessage]);
+        console.log(chatLists);
+    }
+
+    useEffect(() => { // 렌더링 될때마다 실행되는 Hook
     }, []);
 
 
@@ -32,25 +56,10 @@ export function Mentoring() {
                 className='message-list'
                 lockable={true}
                 toBottomHeight={'100%'}
-                dataSource={
-                    [
-                        {
-                            position: 'right',
-                            type: 'text',
-                            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                            date: new Date(),
-                        },
-                        {
-                            position: 'left',
-                            type: 'text',
-                            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                            date: new Date(),
-                        },
-                    ]
-                }/>
+                dataSource={chatLists}/>
             <hr/>
             <Input
-                // value={() => setMessage(this.message)}
+                ref={inputRef}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="메세지를 입력하세요."
                 multiline={true}
