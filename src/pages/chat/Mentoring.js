@@ -48,10 +48,6 @@ export function Mentoring({match}) {
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
 
         setChatId(match.params.chat_id);
-
-        console.log(this.scrollIntoView());
-
-
         API.getMessageLists(match.params.chat_id).then((res) => {
 
             let messageLists = [];
