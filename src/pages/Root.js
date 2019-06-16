@@ -30,9 +30,10 @@ import Mentee from "./mentees/Mentee";
 import MenteeDiaryCreate from "./mentees/MenteeDiaryCreate";
 import MenteeDiaryView from "./mentees/MenteeDiaryView";
 import MenteeDiaryModify from "./mentees/MenteeDiaryModify";
-import {Chat} from "./chat/Chat";
+// import {Chat} from "./chat/Chat";
 import SpecialCrops from "./openapis/SpecialCrops";
 import EmptyHouses from "./openapis/EmptyHouses";
+import {Mentoring} from "./chat/Mentoring";
 
 
 class Root extends React.Component {
@@ -65,13 +66,20 @@ class Root extends React.Component {
                                 <Route exact path="/mentors/:mentor/diaries/:diary_id/modify" component={MentorDiaryModify}/>
 
 
+                                <Route exact path="/chat/mentoring" component={Mentoring} />
+                                {/*<Route exact path="/chat" component={Chat} />*/}
+
                                 /*
-                                OpenApi Route ...
-                                 */
+                                *   OpenApi Route ... Start
+                                */
                                 <Route exact path="/machines" component={Machine}/>
                                 <Route exact path="/dictionary" component={Dictionary}/>
                                 <Route exact path="/special-crops" component={SpecialCrops}/>
                                 <Route exact path="/empty-houses" component={EmptyHouses}/>
+                                /*
+                                *   OpenApi Route ... End
+                                */
+
 
 
 
