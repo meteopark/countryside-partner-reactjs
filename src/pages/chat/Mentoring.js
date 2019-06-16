@@ -7,11 +7,12 @@ import 'react-chat-elements/dist/main.css';
 import {MessageList, Input, Button} from 'react-chat-elements'
 
 
-export function Mentoring() {
+export function Mentoring({match}) {
 
     const whoami = `${localStorage.getItem('user_type')}|${localStorage.getItem('srl')}`;
     const [message, setMessage] = useState('');
     const [chatLists, setChatLists] = useState([]);
+    const [chatId, setChatId] = useState('');
     const inputRef = useRef(null);
 
     const onChangeMessage = () => {
@@ -20,6 +21,9 @@ export function Mentoring() {
 
             let formData = new FormData();
             formData.append('to', 2231);
+
+
+            formData.append('chat_lists_id', chatId);
             formData.append('from', `${localStorage.getItem('user_type')}|${localStorage.getItem('srl')}`);
             formData.append('message', message);
 
@@ -33,25 +37,41 @@ export function Mentoring() {
                     date: new Date(res.created_at)
                 }
 
-                onChangeChatLists(newMessage);
+                inputRef.current.clear();
 
+                setChatId(res.chat_lists_id);
+                setChatLists([...chatLists, newMessage]);
             });
         }
     };
 
-    const onChangeChatLists = (newMessage) => {
-
-        setChatLists([...chatLists, newMessage]);
-        console.log(chatLists);
-    }
-
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
-    }, []);
 
+        setChatId(match.params.chat_id);
+
+        console.log(this.scrollIntoView());
+
+
+        API.getMessageLists(match.params.chat_id).then((res) => {
+
+            let messageLists = [];
+            res.data.map((chat) => {
+                console.log('useEffect ...');
+                let newMessage = {
+                    avatar: 'http://image.news1.kr/system/photos/2018/3/29/3036479/article.jpg',
+                    position: whoami === chat.from ? 'right' : 'left',
+                    type: 'text',
+                    text: chat.message,
+                    date: new Date(chat.created_at)
+                };
+                messageLists.push(newMessage);
+            });
+            setChatLists(messageLists.reverse());
+        });
+    }, []);
 
     return (
         <div className="container">
-
             <MessageList
                 className='message-list'
                 lockable={true}
@@ -72,8 +92,6 @@ export function Mentoring() {
                         backgroundColor='black'
                         text='보내기'/>
                 }/>
-
-
         </div>
     )
 

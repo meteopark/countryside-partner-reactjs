@@ -67,6 +67,7 @@ class Root extends React.Component {
 
 
                                 <Route exact path="/chat/mentoring" component={Mentoring} />
+                                <Route exact path="/chat/mentoring/:chat_id" component={Mentoring} />
                                 {/*<Route exact path="/chat" component={Chat} />*/}
 
                                 /*
