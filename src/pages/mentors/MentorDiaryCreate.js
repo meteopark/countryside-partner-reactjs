@@ -3,7 +3,6 @@ import {bindActionCreators, compose} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
 import {MentorProfile} from "./MentorProfile";
-import * as yup from "yup";
 import axios from "axios";
 import history from "../history";
 import {GlobalsContext} from '../../pages/globals';
