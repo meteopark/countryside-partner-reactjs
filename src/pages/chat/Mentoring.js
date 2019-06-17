@@ -14,7 +14,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 export function Mentoring({match}) {
 
-    const whoami = `${localStorage.getItem('user_type')}|${localStorage.getItem('srl')}`;
+    const whoami = `${localStorage.getItem('user_type')}_${localStorage.getItem('srl')}`;
     const [message, setMessage] = useState('');
     const [chatId, setChatId] = useState('');
     const inputRef = useRef(null);
@@ -24,7 +24,22 @@ export function Mentoring({match}) {
     const [scrollHeight, setScrollHeight] = useState(0);
 
 
+
+
+
+
+
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
+
+        getMessageLists();
+
+        setInterval(() => {
+            getMessageLists();
+        }, 10000);
+
+    }, []);
+
+    const getMessageLists = () => {
 
         setChatId(match.params.chat_id);
 
@@ -45,8 +60,7 @@ export function Mentoring({match}) {
             });
             scrollTo(containerRef.current.scrollHeight);
         });
-
-    }, []);
+    }
 
     function scrollTo(height)
     {
@@ -81,7 +95,7 @@ export function Mentoring({match}) {
         if (message !== '') {
 
             let formData = new FormData();
-            formData.append('to', 2231);
+            formData.append('to', 'mentee_2017');
             formData.append('chat_lists_id', chatId);
             formData.append('from', `${localStorage.getItem('user_type')}_${localStorage.getItem('srl')}`);
             formData.append('message', message);
