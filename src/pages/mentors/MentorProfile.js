@@ -26,7 +26,7 @@ export const MentorProfile = (props) => {
         });
     }
     useEffect(() => {
-        setUserInfo(`mentor_${mentor.mentor_srl}`)
+        setUserInfo(`MENTOR_${mentor.mentor_srl}`)
     }, [mentor.mentor_srl]);
 
     return (

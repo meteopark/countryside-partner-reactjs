@@ -9,12 +9,10 @@ import {bindActionCreators} from 'redux';
 class LoginComplete extends Component {
 
     handleLogOut = () => {
-
         localStorage.clear();
         this.props.actions.isLogged(false);
         history.push("/");
     }
-
 
     render() {
 
