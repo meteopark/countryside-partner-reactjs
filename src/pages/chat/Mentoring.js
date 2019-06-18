@@ -7,12 +7,12 @@ import 'react-chat-elements/dist/main.css';
 import {MessageList, Input, Button as Btn} from 'react-chat-elements'
 import {Button} from "react-bootstrap";
 import * as reactIconFa from "react-icons/fa";
-
+import history from "../history";
 import {Link} from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 
-export function Mentoring({match}) {
+export function Mentoring({match, location}) {
 
     const whoami = `${localStorage.getItem('user_type')}_${localStorage.getItem('srl')}`;
     const [message, setMessage] = useState('');
@@ -23,25 +23,21 @@ export function Mentoring({match}) {
     const [messageLists, setMessageLists] = useState([]); // 메세지 리스트
     const [scrollHeight, setScrollHeight] = useState(0);
 
-
-
-
-
-
-
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
 
         getMessageLists();
 
         setInterval(() => {
             getMessageLists();
-        }, 10000);
+        }, 12000);
 
     }, []);
 
     const getMessageLists = () => {
 
-        setChatId(match.params.chat_id);
+        if (typeof match.params.chat_id !== 'undefined') {
+            setChatId(match.params.chat_id);
+        }
 
         API.getMessageLists(match.params.chat_id, 1).then((res) => {
 
@@ -92,10 +88,15 @@ export function Mentoring({match}) {
 
     const onSendMessage = () => {
 
+        if (typeof location.state === 'undefined') {
+            history.push('/');
+            return false;
+        }
+
         if (message !== '') {
 
             let formData = new FormData();
-            formData.append('to', 'mentee_2017');
+            formData.append('to', location.state.userInfo);
             formData.append('chat_lists_id', chatId);
             formData.append('from', `${localStorage.getItem('user_type')}_${localStorage.getItem('srl')}`);
             formData.append('message', message);
@@ -144,7 +145,7 @@ export function Mentoring({match}) {
                 maxHeight={100}
                 rightButtons={
                     <Btn
-                        onClick={() => onSendMessage()}
+                        onClick={onSendMessage}
                         color='white'
                         backgroundColor='black'
                         text='보내기'/>
