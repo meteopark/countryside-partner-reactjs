@@ -19,7 +19,7 @@ class LoginComplete extends Component {
         return (
             <div>
                 <Link className={styles['link']} to={`/${localStorage.getItem('user_type')}s/${localStorage.getItem('srl')}`}>영농일지</Link>&nbsp;&nbsp;&nbsp;&nbsp;
-                <Link className={styles['link']} to="/join">마이페이지</Link>&nbsp;&nbsp;&nbsp;&nbsp;
+                <Link className={styles['link']} to="/mypage">마이페이지</Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <a className={styles['link']} onClick={this.handleLogOut}>로그아웃</a>
             </div>
         )

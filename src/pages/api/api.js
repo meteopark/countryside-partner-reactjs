@@ -5,6 +5,7 @@ const API_HOST = GlobalsContext._currentValue.server_host;
 // const API_SEND_MESSAGE = "/api/v1/chat/message";
 const API_SEND_MESSAGE = "/api/v1/chat/message";
 const API_MESSAGE_LISTS = "/api/v1/chat/message";
+const API_CHAT_LISTS = "/api/v1/chat";
 
 export default {
 
@@ -21,7 +22,7 @@ export default {
         );
     },
 
-    getMessageLists: (chat_id, page) => {
+    getMessageLists: (chat_id, page) => { // 대화 목록 가져오기
 
         let headers = {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -34,7 +35,7 @@ export default {
         );
     },
 
-    sendMessage: (form) => {
+    sendMessage: (form) => { // 메세지 보내기
 
         let headers = {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -46,6 +47,22 @@ export default {
         }).then(
             res => res.json()
         );
+    },
+
+    getChatLists: () => { // 채팅목록 가져오기
+
+        let headers = {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        };
+
+        return fetch(`${API_HOST}${API_CHAT_LISTS}`,{
+            method: 'get',
+            headers: headers,
+        }).then(
+            res => res.json()
+        );
     }
+
+
 
 }

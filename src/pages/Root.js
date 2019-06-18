@@ -34,6 +34,8 @@ import MenteeDiaryModify from "./mentees/MenteeDiaryModify";
 import SpecialCrops from "./openapis/SpecialCrops";
 import EmptyHouses from "./openapis/EmptyHouses";
 import {Mentoring} from "./chat/Mentoring";
+import {MyPage} from "./inc/MyPage";
+import {Introduce} from "./main/Introduce";
 
 
 class Root extends React.Component {
@@ -47,27 +49,31 @@ class Root extends React.Component {
                     <Header/>
                     <div className={styles['wrapper']}>
                         {/*<SideNav />*/}
-
                         <main>
                             <Switch>
-                                <Route exact path="/" component={Main}/>
 
+                                {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/mentees/:mentee/create" component={MenteeDiaryCreate}/>}
+                                {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/mentors/:mentor/create" component={MentorDiaryCreate}/>}
+                                {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/chat/mentoring" component={Mentoring} />}
+                                {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/chat/mentoring/:chat_id" component={Mentoring} />}
+                                {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/mypage" component={MyPage} />}
+
+
+                                <Route exact path="/" component={Main}/>
+                                <Route exact path="/introduce" component={Introduce}/>
 
                                 <Route exact path="/mentees" component={Mentees}/>
                                 <Route exact path="/mentees/:mentee" component={Mentee}/>
-                                {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/mentees/:mentee/create" component={MenteeDiaryCreate}/>}
                                 <Route exact path="/mentees/:mentee/diaries/:diary_id" component={MenteeDiaryView}/>
                                 <Route exact path="/mentees/:mentee/diaries/:diary_id/modify" component={MenteeDiaryModify}/>
-
                                 <Route exact path="/mentors" component={Mentors}/>
                                 <Route exact path="/mentors/:mentor" component={Mentor}/>
-                                {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/mentors/:mentor/create" component={MentorDiaryCreate}/>}
                                 <Route exact path="/mentors/:mentor/diaries/:diary_id" component={MentorDiaryView}/>
                                 <Route exact path="/mentors/:mentor/diaries/:diary_id/modify" component={MentorDiaryModify}/>
 
 
-                                <Route exact path="/chat/mentoring" component={Mentoring} />
-                                <Route exact path="/chat/mentoring/:chat_id" component={Mentoring} />
+
+
                                 {/*<Route exact path="/chat" component={Chat} />*/}
 
                                 /*

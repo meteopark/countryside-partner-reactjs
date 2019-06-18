@@ -54,12 +54,18 @@ export function Mentoring({match, location}) {
                 };
                 setMessageLists(messageLists => messageLists.concat(newMessage));
             });
-            scrollTo(containerRef.current.scrollHeight);
+
+            if(containerRef.current !== null){
+                scrollTo(containerRef.current.scrollHeight);
+            }
+
         });
     }
 
     function scrollTo(height)
     {
+
+        if(height !== null){}
         window.scrollTo(0, height);
         setScrollHeight(containerRef.current.scrollHeight);
     }

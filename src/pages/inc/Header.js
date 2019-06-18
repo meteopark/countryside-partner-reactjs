@@ -67,6 +67,9 @@ export class Header extends Component {
 
                             <Navbar.Collapse bsPrefix={'navbar-collapse'}>
                                 <Nav className="mr-auto">
+                                    <NavLink to="/introduce" className="nav-link">
+                                        <div className={classNames(styles['header-menu'])}>시골짝꿍 소개</div>
+                                    </NavLink>
                                     <NavLink to="/mentors" className="nav-link">
                                         <div className={classNames(styles['header-menu'])}>멘토소개</div>
                                     </NavLink>
