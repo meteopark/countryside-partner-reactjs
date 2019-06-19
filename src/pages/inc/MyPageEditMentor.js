@@ -19,6 +19,9 @@ const schema = yup.object({
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     sex: yup.string().required('성별을 선택해 주세요.'),
+    introduce: yup.string().required('소개를 해주세요.'),
+
+
 });
 
 
