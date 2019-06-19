@@ -36,6 +36,7 @@ import EmptyHouses from "./openapis/EmptyHouses";
 import {Mentoring} from "./chat/Mentoring";
 import {MyPage} from "./inc/MyPage";
 import {Introduce} from "./main/Introduce";
+import {MyPageEndit} from "./inc/MyPageEdit";
 
 
 class Root extends React.Component {
@@ -46,7 +47,7 @@ class Root extends React.Component {
             <Router history={history}>
                 <div className={styles['wrapper']}>
                     <TopBar/>
-                    <Header/>
+                    {/*<Header/>*/}
                     <div className={styles['wrapper']}>
                         {/*<SideNav />*/}
                         <main>
@@ -57,6 +58,7 @@ class Root extends React.Component {
                                 {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/chat/mentoring" component={Mentoring} />}
                                 {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/chat/mentoring/:chat_id" component={Mentoring} />}
                                 {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/mypage" component={MyPage} />}
+                                {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/mypage/edit" component={MyPageEndit} />}
 
 
                                 <Route exact path="/" component={Main}/>

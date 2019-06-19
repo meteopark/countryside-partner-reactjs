@@ -148,7 +148,6 @@ class MentorDiaryModify extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
     mapStateToPropsMentor: state.mentor.mentor,
     mapStateToPropsDiary: state.diary
 })

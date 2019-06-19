@@ -1,18 +1,15 @@
 import axios from 'axios';
 import * as types from './ActionTypes';
+import history from "../pages/history";
 
 
 const apiMains = 'http://countryside-partner-laravel.test/api/v1/main';
 const apiMentors = 'http://countryside-partner-laravel.test/api/v1/mentors';
 const apiMentees = 'http://countryside-partner-laravel.test/api/v1/mentees';
 const apiMentorDiaries = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors'; // {mentor_srl}/articles
-
-
-
 const apiDiary          = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors/articles'; // {diary_srl}
-
 const apiAuthCheck      = 'http://countryside-partner-laravel.test/api/v1/auth'; // {diary_srl}
-
+const apiUsers = 'http://countryside-partner-laravel.test/api/v1/users';
 
 export const authCheck = () => {
 
@@ -119,6 +116,33 @@ export const getMentor = (mentor) => {
         const url = `${apiMentors}/${mentor}`;
 
         return axios.get(url)
+
+            .then(response => {
+
+                dispatch(Success(response.data, types.GET_MENTOR))
+
+            })
+            .catch(error => {
+
+                console.log("error : mentors() " , error);
+                throw(error);
+
+            });
+    }
+}
+
+export const getUserInfo = () => {
+
+    return (dispatch) => {
+
+        let config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            }
+        };
+
+        return axios.get(apiUsers, config)
 
             .then(response => {
 

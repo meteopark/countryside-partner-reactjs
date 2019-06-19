@@ -1,4 +1,4 @@
-import React, {Component, useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import API from "../api/api";
 import classNames from "classnames";
 
@@ -8,8 +8,6 @@ import {MessageList, Input, Button as Btn} from 'react-chat-elements'
 import {Button} from "react-bootstrap";
 import * as reactIconFa from "react-icons/fa";
 import history from "../history";
-import {Link} from "react-router-dom";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 
 export function Mentoring({match, location}) {

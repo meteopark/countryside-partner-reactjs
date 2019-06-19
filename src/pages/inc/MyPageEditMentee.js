@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 
-import styles from './Join.module.scss';
+import styles from '../join/Join.module.scss';
 import classNames from "classnames";
 import DaumPostcode from 'react-daum-postcode';
 import {Formik} from "formik";
 import * as yup from 'yup';
 import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
 import axios from 'axios';
-import { withAlert } from 'react-alert'
+import {withAlert} from 'react-alert'
 import history from '../history';
-import { withRouter } from "react-router";
 import {GlobalsContext} from '../../pages/globals';
 import * as importActions from "../../actions";
-import {bindActionCreators, compose} from 'redux';
+import {withRouter} from "react-router";
+import {bindActionCreators, compose} from "redux";
 import {connect} from "react-redux";
 
 const schema = yup.object({
@@ -21,31 +21,31 @@ const schema = yup.object({
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     sex: yup.string().required('성별을 선택해 주세요.'),
+    target_area: yup.string().required('관심지역을 선택해 주세요.'),
 });
 
-
-class MentorCreate extends Component {
+class MyPageEditMentee extends Component {
 
     constructor(props, context) {
 
         super(props);
+
         this.state = {
-            apiUserCreate: context.server_host + '/api/v1/join/mentor',
+            apiUserCreate: context.server_host + '/api/v1/join/mentee',
             isLoading: false,
             daumPostOpen: false,
-            schemaDefaultValue : {
-                id: 'Bot-'+Date.now(),
+            schemaDefaultValue: {
+                id: '',
                 profile_image: '',
-                password: '1111',
-                name: 'Bot-'+Date.now(),
-                birthday: '1984-11-24',
-                sex: 'male',
-                phone: '010-1234-5678',
-                address: '경기도 의정부시 장암 1동',
-                farm_name: '김농장',
-                career: '1-3',
-                introduce: '공기좋은 농장 입니다.',
-                crops: '콩',
+                password: '',
+                name: '',
+                birthday: '',
+                sex: '',
+                phone: '',
+                address: '',
+                introduce: '',
+                crops: '',
+                target_area: '',
             }
         }
     }
@@ -74,13 +74,14 @@ class MentorCreate extends Component {
         }));
     }
 
-    handleText = (e, type = 'text') => {
+    handleChange = (e, type = 'text') => {
+
         const schemaDefaultValue = {...this.state.schemaDefaultValue};
 
-        if(type === "text"){
+        if (type === "text") {
 
             schemaDefaultValue[e.target.name] = e.target.value;
-        }else{
+        } else {
 
             schemaDefaultValue[e.target.name] = e.target.files[0];
         }
@@ -91,16 +92,19 @@ class MentorCreate extends Component {
 
     handleClick = () => {
 
-        this.setState({ isLoading: true }, () => {
-            return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+        this.setState({isLoading: true}, () => {
+            this.simulateNetworkRequest().then(() => {
                 this.handleUserCreate();
             });
         });
 
     }
-
+    simulateNetworkRequest = () => {
+        return new Promise(resolve => setTimeout(resolve, 1000));
+    }
 
     handleUserCreate = () => {
+
 
         let formData = new FormData();
         formData.append('id', this.state.schemaDefaultValue.id);
@@ -111,58 +115,51 @@ class MentorCreate extends Component {
         formData.append('sex', this.state.schemaDefaultValue.sex);
         formData.append('phone', this.state.schemaDefaultValue.phone);
         formData.append('address', this.state.schemaDefaultValue.address);
-        formData.append('farm_name', this.state.schemaDefaultValue.farm_name);
-        formData.append('career', this.state.schemaDefaultValue.career);
         formData.append('introduce', this.state.schemaDefaultValue.introduce);
         formData.append('crops', this.state.schemaDefaultValue.crops);
+        formData.append('target_area', this.state.schemaDefaultValue.target_area);
 
-        const config = {
+        let config = {
             headers: {
                 'content-type': 'multipart/form-data',
             }
         };
 
         return axios.post(`${this.state.apiUserCreate}`, formData, config)
-                .then(response => {
+            .then(response => {
 
-                    const res = response.data;
-                    this.props.alert.show('등록 되었습니다.');
-                    localStorage.setItem('token', res.token);
-                    localStorage.setItem('name', res.name);
-                    localStorage.setItem('user_type', 'MENTOR');
-                    localStorage.setItem('srl', res.mentor_srl);
-                    this.props.actions.isLogged(true);
-                    history.push("/");
-                })
-                .catch(error => {
-                    console.log("error", error);
-                });
+                const res = response.data;
+                this.props.alert.show('등록 되었습니다.');
+                localStorage.setItem('token', res.token);
+                localStorage.setItem('user_type', 'MENTEE');
+                localStorage.setItem('srl', res.mentee_srl);
+                localStorage.setItem('name', res.name);
+
+                this.props.actions.isLogged(true);
+                history.push("/");
+            })
+            .catch(error => {
+
+                console.log("error", this.state.apiUserCreate + " @ " + error);
+            });
     }
 
 
     render() {
 
-
         return (
-
-
             <div className={classNames('container', styles['in-container'])}>
 
                 <div className={styles['user-create-container']}>
-                    <h3>회원가입 - 멘토</h3>
+                    <h3>회원정보수정 - 멘티</h3>
                     <br/>
                     <Formik
-                        onSubmit={(values, actions) => {
-                            this.handleClick()
-                        }}
+                        onSubmit={(values, actions) => {this.handleClick()}}
                         enableReinitialize={true}
                         validationSchema={schema}
                         initialValues={this.state.schemaDefaultValue}
                         render={({
                                      handleSubmit,
-                                     handleChange,
-                                     handleBlur,
-                                     values,
                                      errors
                                  }) => (
 
@@ -180,8 +177,8 @@ class MentorCreate extends Component {
                                         <Form.Control
                                             type="text"
                                             name="id"
-                                            value={this.state.schemaDefaultValue.id}
-                                            onChange={(e) => this.handleText(e)}
+                                            defaultValue={this.state.schemaDefaultValue.id}
+                                            onChange={(e) => this.handleChange(e)}
                                             isInvalid={!!errors.id}
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -195,8 +192,8 @@ class MentorCreate extends Component {
                                         <Form.Control
                                             type="password"
                                             name="password"
-                                            value={this.state.schemaDefaultValue.password}
-                                            onChange={(e) => this.handleText(e)}
+                                            defaultValue={this.state.schemaDefaultValue.password}
+                                            onChange={(e) => this.handleChange(e)}
                                             isInvalid={!!errors.password}
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -210,8 +207,8 @@ class MentorCreate extends Component {
                                         <Form.Control
                                             type="text"
                                             name="name"
-                                            value={this.state.schemaDefaultValue.name}
-                                            onChange={(e) => this.handleText(e)}
+                                            defaultValue={this.state.schemaDefaultValue.name}
+                                            onChange={(e) => this.handleChange(e)}
                                             isInvalid={!!errors.name}
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -226,8 +223,8 @@ class MentorCreate extends Component {
                                             type="text"
                                             placeholder="Ex : 1984-11-24"
                                             name="birthday"
-                                            value={this.state.schemaDefaultValue.birthday}
-                                            onChange={(e) => this.handleText(e)}
+                                            defaultValue={this.state.schemaDefaultValue.birthday}
+                                            onChange={(e) => this.handleChange(e)}
                                             isInvalid={!!errors.birthday}
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -243,26 +240,26 @@ class MentorCreate extends Component {
                                                 type="hidden"
                                                 id="sex"
                                                 name="sex"
-                                                value={this.state.schemaDefaultValue.sex}
-                                                onChange={(e) => this.handleText(e)}
+                                                defaultValue={this.state.schemaDefaultValue.sex}
+                                                onChange={(e) => this.handleChange(e)}
                                                 isInvalid={!!errors.sex}
                                             />
                                             <Form.Check
                                                 inline
                                                 type="radio"
-                                                value="male"
-                                                label="남"
+                                                defaultValue="male"
                                                 name="sex"
-                                                onChange={(e) => this.handleText(e)}
+                                                label="남"
+                                                onChange={(e) => this.handleChange(e)}
                                                 id="sex1"
                                             />
                                             <Form.Check
                                                 inline
                                                 type="radio"
-                                                value="female"
-                                                label="여"
+                                                defaultValue="female"
                                                 name="sex"
-                                                onChange={(e) => this.handleText(e)}
+                                                label="여"
+                                                onChange={(e) => this.handleChange(e)}
                                                 id="sex2"
                                             />
                                             <Form.Control.Feedback type="invalid">
@@ -271,43 +268,8 @@ class MentorCreate extends Component {
                                         </Col>
                                     </Form.Group>
                                 </fieldset>
-                                <br/><br/>
-                                <h5>*농장정보</h5>
-                                <hr/>
-                                <Form.Group as={Row} controlId="farm_name">
-                                    <Form.Label column sm="2">농장명</Form.Label>
-                                    <Col sm="10">
-                                        <Form.Control
-                                            type="text"
-                                            name="farm_name"
-                                            placeholder=""
-                                            value={this.state.schemaDefaultValue.farm_name}
-                                            onChange={(e) => this.handleText(e)}
-                                            isInvalid={!!errors.farm_name}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.farm_name}
-                                        </Form.Control.Feedback>
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="introduce">
-                                    <Form.Label column sm="2">농장소개</Form.Label>
-                                    <Col sm="10">
-                                        <Form.Control
-                                            type="text"
-                                            placeholder=""
-                                            name="introduce"
-                                            value={this.state.schemaDefaultValue.introduce}
-                                            onChange={(e) => this.handleText(e)}
-                                            isInvalid={!!errors.introduce}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.introduce}
-                                        </Form.Control.Feedback>
-                                    </Col>
-                                </Form.Group>
                                 <Form.Group as={Row} controlId="address">
-                                    <Form.Label column sm="2">농장주소</Form.Label>
+                                    <Form.Label column sm="2">주소</Form.Label>
                                     <Col sm="10">
                                         <InputGroup>
                                             <Form.Control
@@ -315,8 +277,8 @@ class MentorCreate extends Component {
                                                 name="address"
                                                 placeholder=""
                                                 readOnly
-                                                value={this.state.schemaDefaultValue.address}
-                                                onChange={(e) => this.handleText(e)}
+                                                defaultValue={this.state.schemaDefaultValue.address}
+                                                onChange={(e) => this.handleChange(e)}
                                                 isInvalid={!!errors.address}
                                             />
                                             <InputGroup.Append>
@@ -333,46 +295,72 @@ class MentorCreate extends Component {
                                         {this.state.daumPostOpen ? <DaumPostcode onComplete={this.handleAddress}/> : ''}
                                     </Col>
                                 </Form.Group>
-                                <Form.Group as={Row} controlId="career">
-                                    <Form.Label column sm="2">업종경력</Form.Label>
+
+                                <br/><br/>
+
+                                <h5>*맞춤정보</h5>
+                                <small className="text-muted">선택하신 정보를 통해 맞춤 멘토가 추천 됩니다.</small>
+                                <hr/>
+                                <Form.Group as={Row} controlId="introduce">
+                                    <Form.Label column sm="2">자기소개</Form.Label>
                                     <Col sm="10">
                                         <Form.Control
-                                            as="select"
-                                            name="career"
-                                            value={this.state.schemaDefaultValue.career}
-                                            onChange={(e) => this.handleText(e)}
-                                            isInvalid={!!errors.career}
-                                        >
-                                            <option value="">선택해 주세요.</option>
-                                            <option value="1-3">1년 ~ 3년</option>
-                                            <option value="5-9">5년 ~ 9년</option>
-                                            <option value="10-14">10년 ~ 14년</option>
-                                            <option value="15-0">15년 이상</option>
-                                        </Form.Control>
+                                            type="text"
+                                            placeholder=""
+                                            name="introduce"
+                                            defaultValue={this.state.schemaDefaultValue.introduce}
+                                            onChange={(e) => this.handleChange(e)}
+                                            isInvalid={!!errors.introduce}
+                                        />
                                         <Form.Control.Feedback type="invalid">
-                                            {errors.career}
+                                            {errors.introduce}
                                         </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="crops">
-                                    <Form.Label column sm="2">주요작물</Form.Label>
+                                    <Form.Label column sm="2">관심 작물</Form.Label>
                                     <Col sm="10">
                                         <Form.Control
                                             as="select"
                                             name="crops"
-                                            value={this.state.schemaDefaultValue.crops}
-                                            onChange={(e) => this.handleText(e)}
+                                            defaultValue={this.state.schemaDefaultValue.crops}
+                                            onChange={(e) => this.handleChange(e)}
                                             isInvalid={!!errors.crops}
                                         >
-                                            <option value="" label="선택해 주세요."/>
-                                            <option value="콩" label="콩"/>
+                                            <option value="">선택해 주세요.</option>
+                                            <option value="콩">콩</option>
                                         </Form.Control>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.crops}
                                         </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
-
+                                <Form.Group as={Row} controlId="target_area">
+                                    <Form.Label column sm="2">관심 지역{this.state.schemaDefaultValue.target_area}</Form.Label>
+                                    <Col sm="10">
+                                        <Form.Control
+                                            as="select"
+                                            name="target_area"
+                                            value={this.state.schemaDefaultValue.target_area}
+                                            onChange={(e) => this.handleChange(e)}
+                                            isInvalid={!!errors.crops}
+                                        >
+                                            <option value="">선택해 주세요.</option>
+                                            <option value="경기도">경기도</option>
+                                            <option value="강원도">강원도</option>
+                                            <option value="제주도">제주도</option>
+                                            <option value="충청북도">충청북도</option>
+                                            <option value="충청남도">충청남도</option>
+                                            <option value="경상북도">경상북도</option>
+                                            <option value="경상남도">경상남도</option>
+                                            <option value="전라북도">전라북도</option>
+                                            <option value="전라남도">전라남도</option>
+                                        </Form.Control>
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.target_area}
+                                        </Form.Control.Feedback>
+                                    </Col>
+                                </Form.Group>
                                 <br/><br/>
                                 <h5>선택항목</h5>
                                 <hr/>
@@ -382,12 +370,14 @@ class MentorCreate extends Component {
                                         <Form.Control
                                             type="file"
                                             name="profile_image"
-                                            onChange={(e) => this.handleText(e, 'file')}
+                                            onChange={(e) => this.handleChange(e, 'file')}
                                         />
+                                        <small className="text-muted">프로필 사진을 업로드 시 멘토에게 우선적으로 노출됩니다.</small>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.profile_image}
                                         </Form.Control.Feedback>
                                     </Col>
+
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="phone">
                                     <Form.Label column sm="2">연락처</Form.Label>
@@ -397,7 +387,7 @@ class MentorCreate extends Component {
                                             placeholder="010-1234-5678"
                                             name="phone"
                                             value={this.state.schemaDefaultValue.phone}
-                                            onChange={(e) => this.handleText(e)}
+                                            onChange={(e) => this.handleChange(e)}
                                             isInvalid={!!errors.phone}
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -414,9 +404,8 @@ class MentorCreate extends Component {
                                             type="submit"
                                             disabled={this.state.isLoading}
                                             onClick={!this.state.isLoading ? handleSubmit : null}
-
                                         >
-                                            {this.state.isLoading ? '처리 중' : '가입하기'}
+                                            {this.state.isLoading ? '처리 중' : '수정하기'}
                                         </Button>
                                     </Col>
                                 </Row>
@@ -428,14 +417,46 @@ class MentorCreate extends Component {
 
         )
     }
+
+    componentDidMount() {
+        this.props.actionMentee.getUserInfo();
+    }
+
+    // 이 메소드는 컴포넌트 초기화 또는 새로운 props를 받았을 때 일어납니다
+    static getDerivedStateFromProps(nextProps, prevState) {
+
+        if (nextProps.mapStateToPropsMentor.id !== prevState.schemaDefaultValue.id) {
+
+            let mentor = nextProps.mapStateToPropsMentor;
+
+            return {
+                schemaDefaultValue: {
+                    id: mentor.id,
+                    profile_image: mentor.profile_image,
+                    name: mentor.name,
+                    birthday: mentor.birthday,
+                    sex: mentor.sex,
+                    phone: mentor.phone,
+                    address: mentor.address,
+                    introduce: mentor.introduce,
+                    crops: mentor.crops,
+                    target_area: mentor.target_area,
+                }
+            };
+        }
+
+        return null;
+    }
 }
 
-MentorCreate.contextType = GlobalsContext;
+MyPageEditMentee.contextType = GlobalsContext;
 
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(importActions, dispatch),
+const mapStateToProps = (state) => ({
+    mapStateToPropsMentor: state.mentor.mentor,
 })
 
-export default withRouter(compose(withAlert(),connect(null, mapDispatchToProps))(MentorCreate));
+const mapDispatchToProps = (dispatch) => ({
+    actionMentee: bindActionCreators(importActions, dispatch),
+})
 
-
+export default compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MyPageEditMentee);

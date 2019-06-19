@@ -25,11 +25,6 @@ const schema = yup.object({
     target_area: yup.string().required('관심지역을 선택해 주세요.'),
 });
 
-
-
-
-
-
 class MenteeCreate extends Component {
 
     constructor(props, context) {

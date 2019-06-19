@@ -34,8 +34,6 @@ export class Header extends Component {
         this.setState({hideNav: window.innerWidth <= 991});
     }
 
-
-
     render() {
 
         return (

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import styles from './Join.module.scss';
+import styles from '../join/Join.module.scss';
 import classNames from "classnames";
 import DaumPostcode from 'react-daum-postcode';
 import {Formik} from "formik";
@@ -9,7 +9,6 @@ import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
 import axios from 'axios';
 import { withAlert } from 'react-alert'
 import history from '../history';
-import { withRouter } from "react-router";
 import {GlobalsContext} from '../../pages/globals';
 import * as importActions from "../../actions";
 import {bindActionCreators, compose} from 'redux';
@@ -17,35 +16,33 @@ import {connect} from "react-redux";
 
 const schema = yup.object({
     id: yup.string().min(5, '아이디를 5자 이상 넣어 주세요.').max(20, '아이디를 20자 이하로 넣어주세요').required('아이디를 입력해 주세요.'),
-    password: yup.string().required('비밀번호를 입력해 주세요.'),
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     sex: yup.string().required('성별을 선택해 주세요.'),
 });
 
 
-class MentorCreate extends Component {
+class MyPageEditMentor extends Component {
 
     constructor(props, context) {
 
         super(props);
         this.state = {
-            apiUserCreate: context.server_host + '/api/v1/join/mentor',
+            apiUserUpdate: context.server_host + '/api/v1/users',
             isLoading: false,
             daumPostOpen: false,
             schemaDefaultValue : {
-                id: 'Bot-'+Date.now(),
+                id: '',
                 profile_image: '',
-                password: '1111',
-                name: 'Bot-'+Date.now(),
-                birthday: '1984-11-24',
-                sex: 'male',
-                phone: '010-1234-5678',
-                address: '경기도 의정부시 장암 1동',
-                farm_name: '김농장',
-                career: '1-3',
-                introduce: '공기좋은 농장 입니다.',
-                crops: '콩',
+                name: '',
+                birthday: '',
+                sex: '',
+                phone: '',
+                address: '',
+                farm_name: '',
+                career: '',
+                introduce: '',
+                crops: '',
             }
         }
     }
@@ -93,19 +90,19 @@ class MentorCreate extends Component {
 
         this.setState({ isLoading: true }, () => {
             return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
-                this.handleUserCreate();
+                this.handleUserUpdate();
             });
         });
 
     }
 
 
-    handleUserCreate = () => {
+    handleUserUpdate = () => {
 
         let formData = new FormData();
+        formData.append('_method', 'PUT');
         formData.append('id', this.state.schemaDefaultValue.id);
         formData.append('profile_image', this.state.schemaDefaultValue.profile_image);
-        formData.append('password', this.state.schemaDefaultValue.password);
         formData.append('name', this.state.schemaDefaultValue.name);
         formData.append('birthday', this.state.schemaDefaultValue.birthday);
         formData.append('sex', this.state.schemaDefaultValue.sex);
@@ -118,25 +115,21 @@ class MentorCreate extends Component {
 
         const config = {
             headers: {
-                'content-type': 'multipart/form-data',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
             }
         };
 
-        return axios.post(`${this.state.apiUserCreate}`, formData, config)
-                .then(response => {
+        return axios.post(`${this.state.apiUserUpdate}`, formData, config)
+            .then(response => {
 
-                    const res = response.data;
-                    this.props.alert.show('등록 되었습니다.');
-                    localStorage.setItem('token', res.token);
-                    localStorage.setItem('name', res.name);
-                    localStorage.setItem('user_type', 'MENTOR');
-                    localStorage.setItem('srl', res.mentor_srl);
-                    this.props.actions.isLogged(true);
-                    history.push("/");
-                })
-                .catch(error => {
-                    console.log("error", error);
-                });
+                const res = response.data;
+                this.props.alert.show('수정 되었습니다.');
+                history.push("/mypage");
+            })
+            .catch(error => {
+                console.log("error", error);
+            });
     }
 
 
@@ -149,7 +142,7 @@ class MentorCreate extends Component {
             <div className={classNames('container', styles['in-container'])}>
 
                 <div className={styles['user-create-container']}>
-                    <h3>회원가입 - 멘토</h3>
+                    <h3>회원정보수정</h3>
                     <br/>
                     <Formik
                         onSubmit={(values, actions) => {
@@ -160,9 +153,6 @@ class MentorCreate extends Component {
                         initialValues={this.state.schemaDefaultValue}
                         render={({
                                      handleSubmit,
-                                     handleChange,
-                                     handleBlur,
-                                     values,
                                      errors
                                  }) => (
 
@@ -180,27 +170,13 @@ class MentorCreate extends Component {
                                         <Form.Control
                                             type="text"
                                             name="id"
-                                            value={this.state.schemaDefaultValue.id}
+                                            defaultValue={this.state.schemaDefaultValue.id}
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.id}
+                                            readOnly
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {errors.id}
-                                        </Form.Control.Feedback>
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="password">
-                                    <Form.Label column sm="2">비밀번호</Form.Label>
-                                    <Col sm="10">
-                                        <Form.Control
-                                            type="password"
-                                            name="password"
-                                            value={this.state.schemaDefaultValue.password}
-                                            onChange={(e) => this.handleText(e)}
-                                            isInvalid={!!errors.password}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.password}
                                         </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
@@ -210,7 +186,7 @@ class MentorCreate extends Component {
                                         <Form.Control
                                             type="text"
                                             name="name"
-                                            value={this.state.schemaDefaultValue.name}
+                                            defaultValue={this.state.schemaDefaultValue.name}
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.name}
                                         />
@@ -226,7 +202,7 @@ class MentorCreate extends Component {
                                             type="text"
                                             placeholder="Ex : 1984-11-24"
                                             name="birthday"
-                                            value={this.state.schemaDefaultValue.birthday}
+                                            defaultValue={this.state.schemaDefaultValue.birthday}
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.birthday}
                                         />
@@ -243,26 +219,28 @@ class MentorCreate extends Component {
                                                 type="hidden"
                                                 id="sex"
                                                 name="sex"
-                                                value={this.state.schemaDefaultValue.sex}
+                                                defaultValue={this.state.schemaDefaultValue.sex}
                                                 onChange={(e) => this.handleText(e)}
                                                 isInvalid={!!errors.sex}
                                             />
                                             <Form.Check
                                                 inline
                                                 type="radio"
-                                                value="male"
+                                                defaultValue="male"
                                                 label="남"
                                                 name="sex"
                                                 onChange={(e) => this.handleText(e)}
+                                                checked={this.state.schemaDefaultValue.sex === "male" ? true : false}
                                                 id="sex1"
                                             />
                                             <Form.Check
                                                 inline
                                                 type="radio"
-                                                value="female"
+                                                defaultValue="female"
                                                 label="여"
                                                 name="sex"
                                                 onChange={(e) => this.handleText(e)}
+                                                checked={this.state.schemaDefaultValue.sex === "female" ? true: false}
                                                 id="sex2"
                                             />
                                             <Form.Control.Feedback type="invalid">
@@ -281,7 +259,7 @@ class MentorCreate extends Component {
                                             type="text"
                                             name="farm_name"
                                             placeholder=""
-                                            value={this.state.schemaDefaultValue.farm_name}
+                                            defaultValue={this.state.schemaDefaultValue.farm_name}
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.farm_name}
                                         />
@@ -297,7 +275,7 @@ class MentorCreate extends Component {
                                             type="text"
                                             placeholder=""
                                             name="introduce"
-                                            value={this.state.schemaDefaultValue.introduce}
+                                            defaultValue={this.state.schemaDefaultValue.introduce}
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.introduce}
                                         />
@@ -315,7 +293,7 @@ class MentorCreate extends Component {
                                                 name="address"
                                                 placeholder=""
                                                 readOnly
-                                                value={this.state.schemaDefaultValue.address}
+                                                defaultValue={this.state.schemaDefaultValue.address}
                                                 onChange={(e) => this.handleText(e)}
                                                 isInvalid={!!errors.address}
                                             />
@@ -344,7 +322,7 @@ class MentorCreate extends Component {
                                             isInvalid={!!errors.career}
                                         >
                                             <option value="">선택해 주세요.</option>
-                                            <option value="1-3">1년 ~ 3년</option>
+                                            <option value="1-3" >1년 ~ 3년</option>
                                             <option value="5-9">5년 ~ 9년</option>
                                             <option value="10-14">10년 ~ 14년</option>
                                             <option value="15-0">15년 이상</option>
@@ -396,7 +374,7 @@ class MentorCreate extends Component {
                                             type="text"
                                             placeholder="010-1234-5678"
                                             name="phone"
-                                            value={this.state.schemaDefaultValue.phone}
+                                            defaultValue={this.state.schemaDefaultValue.phone}
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.phone}
                                         />
@@ -410,13 +388,13 @@ class MentorCreate extends Component {
                                     <Col className={classNames("text-center", styles['end-button-top'])}>
                                         <hr/>
                                         <Button
-                                            variant="dark"
+                                            variant="warning"
                                             type="submit"
                                             disabled={this.state.isLoading}
                                             onClick={!this.state.isLoading ? handleSubmit : null}
 
                                         >
-                                            {this.state.isLoading ? '처리 중' : '가입하기'}
+                                            {this.state.isLoading ? '처리 중' : '정보변경'}
                                         </Button>
                                     </Col>
                                 </Row>
@@ -428,14 +406,48 @@ class MentorCreate extends Component {
 
         )
     }
+
+    componentDidMount() {
+        this.props.actionMentor.getUserInfo();
+    }
+
+    // 이 메소드는 컴포넌트 초기화 또는 새로운 props를 받았을 때 일어납니다
+    static getDerivedStateFromProps(nextProps, prevState) {
+
+        if (nextProps.mapStateToPropsMentor.id !== prevState.schemaDefaultValue.id) {
+
+            let mentor = nextProps.mapStateToPropsMentor;
+
+            return {
+                schemaDefaultValue: {
+                    id: mentor.id,
+                    profile_image: mentor.profile_image,
+                    name: mentor.name,
+                    birthday: mentor.birthday,
+                    sex: mentor.sex,
+                    phone: mentor.phone,
+                    address: mentor.address,
+                    farm_name: mentor.farm_name,
+                    career: mentor.career,
+                    introduce: mentor.introduce,
+                    crops: mentor.crops,
+                }
+            };
+        }
+
+        return null;
+    }
 }
 
-MentorCreate.contextType = GlobalsContext;
+MyPageEditMentor.contextType = GlobalsContext;
 
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(importActions, dispatch),
+const mapStateToProps = (state) => ({
+    mapStateToPropsMentor: state.mentor.mentor,
 })
 
-export default withRouter(compose(withAlert(),connect(null, mapDispatchToProps))(MentorCreate));
+const mapDispatchToProps = (dispatch) => ({
+    actionMentor: bindActionCreators(importActions, dispatch),
+})
+export default compose(withAlert(),connect(mapStateToProps, mapDispatchToProps))(MyPageEditMentor);
 
 

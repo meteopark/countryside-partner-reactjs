@@ -38,6 +38,7 @@ body{
   }
 }
 
+
 .header-m {
   width: 100%;
   float:left;
@@ -57,8 +58,6 @@ body{
 .header-menu {
   font-family: 'Title_Medium', sans-serif;
 }
-
-
 .member-bar {
   margin: 0;
   padding:0;
@@ -71,6 +70,29 @@ body{
   padding-bottom: 15px;
 }
 
+.mypage-h {
+  margin:0;
+}
+.mypage-container {
+
+  padding-bottom: 15px;
+
+  .mypage-image {
+
+    width: 135px;
+    height: 135px;
+    background: $under-line;
+    border: 1px solid #BDBDBD;
+    border-radius: 120px;
+  }
+  .mypage-row{
+
+    padding-top: 10px;
+    //padding-bottom: 5px;
+    //border-bottom: 1px solid red;
+  }
+
+}
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {

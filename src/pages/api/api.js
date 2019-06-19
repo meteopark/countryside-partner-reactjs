@@ -6,6 +6,7 @@ const API_HOST = GlobalsContext._currentValue.server_host;
 const API_SEND_MESSAGE = "/api/v1/chat/message";
 const API_MESSAGE_LISTS = "/api/v1/chat/message";
 const API_CHAT_LISTS = "/api/v1/chat";
+const API_CHAT_USER = "/api/v1/users";
 
 export default {
 
@@ -56,6 +57,20 @@ export default {
         };
 
         return fetch(`${API_HOST}${API_CHAT_LISTS}`,{
+            method: 'get',
+            headers: headers,
+        }).then(
+            res => res.json()
+        );
+    },
+
+    getUserInfo: () => { // 회원정보 가져오기
+
+        let headers = {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        };
+
+        return fetch(`${API_HOST}${API_CHAT_USER}`,{
             method: 'get',
             headers: headers,
         }).then(
