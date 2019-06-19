@@ -131,16 +131,23 @@ export function Mentoring({match, location}) {
             {
                 nextPageUrl !== null ?
                 <Button variant="secondary" onClick={() => hasMoreMessage()}><reactIconFa.FaArrowUp className={styles['main-icon']}/>더 보기</Button> :
-                <reactIconFa.FaPaperPlane className={styles['main-icon']}/>
+                ''
             }
             <hr/>
             </div>
+            {
+                messageLists.length > 0 ?
+                    <MessageList
+                        className='message-list'
+                        lockable={true}
+                        toBottomHeight={'100%'}
+                        dataSource={messageLists}/>
+                        :
+                    <div className={styles['empty-content']}>
+                        <reactIconFa.FaCommentDots/>
 
-            <MessageList
-                className='message-list'
-                lockable={true}
-                toBottomHeight={'100%'}
-                dataSource={messageLists}/>
+                    </div>
+            }
             <hr/>
             <Input
                 ref={inputRef}
