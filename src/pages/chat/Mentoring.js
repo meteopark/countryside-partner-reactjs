@@ -52,10 +52,6 @@ export function Mentoring({match, location}) {
             }
 
         });
-
-        // setInterval(() => {
-        //     getMessageLists();
-        // }, 12000);
     }
 
     function scrollTo(height)
@@ -117,6 +113,10 @@ export function Mentoring({match, location}) {
                 setMessageLists([...messageLists, newMessage]);
                 scrollTo(containerRef.current.scrollHeight);
             });
+
+            setInterval(() => {
+                getMessageLists();
+            }, 12000);
         }
     };
 
