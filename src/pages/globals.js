@@ -6,10 +6,10 @@ export const globlas = {
         server_host: 'http://countryside-partner-laravel.test',
     },
     production: {
-        server_host: 'http://countryside-partner-laravel.test123',
+        server_host: 'https://api-countryside-partner.meteopark.dev',
     }
 }
 
 export const GlobalsContext = React.createContext(
-  globlas.dev
+  globlas.production
 );

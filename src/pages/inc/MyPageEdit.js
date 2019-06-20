@@ -14,6 +14,7 @@ import {ChatList} from 'react-chat-elements'
 import API from "../api/api";
 import {Link} from "react-router-dom";
 import MyPageEditMentor from "./MyPageEditMentor";
+import MyPageEditMentee from "./MyPageEditMentee";
 
 
 export const MyPageEndit = () => {
@@ -67,7 +68,7 @@ export const MyPageEndit = () => {
 
     return (
         <div>
-            <MyPageEditMentor/>
+            {whoAmI === "MENTOR" ? <MyPageEditMentor/> : <MyPageEditMentee/>}
         </div>
     )
 }

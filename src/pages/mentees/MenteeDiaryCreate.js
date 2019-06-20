@@ -130,4 +130,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 MenteeDiaryCreate.contextType = GlobalsContext;
 
-export default withRouter(compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MenteeDiaryCreate));
+export default compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MenteeDiaryCreate);

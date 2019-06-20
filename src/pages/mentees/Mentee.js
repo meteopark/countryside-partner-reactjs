@@ -25,13 +25,15 @@ class Mentee extends Component {
 
         setTimeout(() => {
             actionMentee.getMenteeDiaries(match.params.mentee, mapStateToPropsMenteeDiaries.current_page + 1);
-        }, 1000);
+        }, 500);
     }
 
     render() {
 
         const mentee = this.props.mapStateToPropsMentee;
         const diaries = this.props.mapStateToPropsMenteeDiaries;
+
+        console.log(diaries);
 
         return (
 

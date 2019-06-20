@@ -20,7 +20,6 @@ const schema = yup.object({
     password: yup.string().required('비밀번호를 입력해 주세요.'),
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
-    sex: yup.string().required('성별을 선택해 주세요.'),
     target_area: yup.string().required('관심지역을 선택해 주세요.'),
 });
 
@@ -31,13 +30,11 @@ class MyPageEditMentee extends Component {
         super(props);
 
         this.state = {
-            apiUserCreate: context.server_host + '/api/v1/join/mentee',
+            apiUserUpdate: context.server_host + '/api/v1/users',
             isLoading: false,
             daumPostOpen: false,
             schemaDefaultValue: {
-                id: '',
                 profile_image: '',
-                password: '',
                 name: '',
                 birthday: '',
                 sex: '',
@@ -107,9 +104,8 @@ class MyPageEditMentee extends Component {
 
 
         let formData = new FormData();
-        formData.append('id', this.state.schemaDefaultValue.id);
+        formData.append('_method', 'PUT');
         formData.append('profile_image', this.state.schemaDefaultValue.profile_image);
-        formData.append('password', this.state.schemaDefaultValue.password);
         formData.append('name', this.state.schemaDefaultValue.name);
         formData.append('birthday', this.state.schemaDefaultValue.birthday);
         formData.append('sex', this.state.schemaDefaultValue.sex);
@@ -121,22 +117,16 @@ class MyPageEditMentee extends Component {
 
         let config = {
             headers: {
-                'content-type': 'multipart/form-data',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
             }
         };
 
-        return axios.post(`${this.state.apiUserCreate}`, formData, config)
+        return axios.post(`${this.state.apiUserUpdate}`, formData, config)
             .then(response => {
 
-                const res = response.data;
-                this.props.alert.show('등록 되었습니다.');
-                localStorage.setItem('token', res.token);
-                localStorage.setItem('user_type', 'MENTEE');
-                localStorage.setItem('srl', res.mentee_srl);
-                localStorage.setItem('name', res.name);
-
-                this.props.actions.isLogged(true);
-                history.push("/");
+                this.props.alert.show('수정 되었습니다.');
+                history.push("/mypage");
             })
             .catch(error => {
 
@@ -151,7 +141,7 @@ class MyPageEditMentee extends Component {
             <div className={classNames('container', styles['in-container'])}>
 
                 <div className={styles['user-create-container']}>
-                    <h3>회원정보수정 - 멘티</h3>
+                    <h3>회원정보수정</h3>
                     <br/>
                     <Formik
                         onSubmit={(values, actions) => {this.handleClick()}}
@@ -177,27 +167,13 @@ class MyPageEditMentee extends Component {
                                         <Form.Control
                                             type="text"
                                             name="id"
+                                            readOnly
                                             defaultValue={this.state.schemaDefaultValue.id}
                                             onChange={(e) => this.handleChange(e)}
                                             isInvalid={!!errors.id}
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {errors.id}
-                                        </Form.Control.Feedback>
-                                    </Col>
-                                </Form.Group>
-                                <Form.Group as={Row} controlId="password">
-                                    <Form.Label column sm="2">비밀번호</Form.Label>
-                                    <Col sm="10">
-                                        <Form.Control
-                                            type="password"
-                                            name="password"
-                                            defaultValue={this.state.schemaDefaultValue.password}
-                                            onChange={(e) => this.handleChange(e)}
-                                            isInvalid={!!errors.password}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.password}
                                         </Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
@@ -336,7 +312,7 @@ class MyPageEditMentee extends Component {
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="target_area">
-                                    <Form.Label column sm="2">관심 지역{this.state.schemaDefaultValue.target_area}</Form.Label>
+                                    <Form.Label column sm="2">관심 지역</Form.Label>
                                     <Col sm="10">
                                         <Form.Control
                                             as="select"
@@ -425,22 +401,22 @@ class MyPageEditMentee extends Component {
     // 이 메소드는 컴포넌트 초기화 또는 새로운 props를 받았을 때 일어납니다
     static getDerivedStateFromProps(nextProps, prevState) {
 
-        if (nextProps.mapStateToPropsMentor.id !== prevState.schemaDefaultValue.id) {
+        if (nextProps.mapStateToPropsMentee.id !== prevState.schemaDefaultValue.id) {
 
-            let mentor = nextProps.mapStateToPropsMentor;
+            let mentee = nextProps.mapStateToPropsMentee;
 
             return {
                 schemaDefaultValue: {
-                    id: mentor.id,
-                    profile_image: mentor.profile_image,
-                    name: mentor.name,
-                    birthday: mentor.birthday,
-                    sex: mentor.sex,
-                    phone: mentor.phone,
-                    address: mentor.address,
-                    introduce: mentor.introduce,
-                    crops: mentor.crops,
-                    target_area: mentor.target_area,
+                    id: mentee.id,
+                    profile_image: mentee.profile_image,
+                    name: mentee.name,
+                    birthday: mentee.birthday,
+                    sex: mentee.sex,
+                    phone: mentee.phone,
+                    address: mentee.address,
+                    introduce: mentee.introduce,
+                    crops: mentee.crops,
+                    target_area: mentee.target_area,
                 }
             };
         }
@@ -452,7 +428,7 @@ class MyPageEditMentee extends Component {
 MyPageEditMentee.contextType = GlobalsContext;
 
 const mapStateToProps = (state) => ({
-    mapStateToPropsMentor: state.mentor.mentor,
+    mapStateToPropsMentee: state.user.user,
 })
 
 const mapDispatchToProps = (dispatch) => ({

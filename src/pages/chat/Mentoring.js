@@ -24,11 +24,6 @@ export function Mentoring({match, location}) {
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
 
         getMessageLists();
-
-        setInterval(() => {
-            getMessageLists();
-        }, 12000);
-
     }, []);
 
     const getMessageLists = () => {
@@ -36,7 +31,6 @@ export function Mentoring({match, location}) {
         if (typeof match.params.chat_id !== 'undefined') {
             setChatId(match.params.chat_id);
         }
-
         API.getMessageLists(match.params.chat_id, 1).then((res) => {
 
             setNextPageUrl(res.next_page_url);
@@ -58,6 +52,10 @@ export function Mentoring({match, location}) {
             }
 
         });
+
+        // setInterval(() => {
+        //     getMessageLists();
+        // }, 12000);
     }
 
     function scrollTo(height)

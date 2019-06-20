@@ -16,6 +16,7 @@ class Diaries extends Component {
     render() {
 
         const {diaries, loadItems, hasMore, user} = this.props;
+
         return (
 
             <div className={classNames('container', styles['blog-container'])}>
@@ -25,7 +26,7 @@ class Diaries extends Component {
                     영농일지
 
                     {
-                        parseInt(localStorage.getItem('srl')) === user.srl && localStorage.getItem('user_type') === user.user_type ?
+                        parseInt(localStorage.getItem('srl')) === user.srl && localStorage.getItem('user_type') === user.user_type.toUpperCase() ?
                             <div className={styles['write']}>
                                 <Link className={classNames(styles['link'])}
                                       to={`/${user.user_type}s/${user.srl}/create`}>

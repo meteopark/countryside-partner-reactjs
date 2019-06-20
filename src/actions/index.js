@@ -1,15 +1,16 @@
 import axios from 'axios';
 import * as types from './ActionTypes';
-import history from "../pages/history";
+import {GlobalsContext} from "../pages/globals";
 
+const API_HOST = GlobalsContext._currentValue.server_host;
 
-const apiMains = 'http://countryside-partner-laravel.test/api/v1/main';
-const apiMentors = 'http://countryside-partner-laravel.test/api/v1/mentors';
-const apiMentees = 'http://countryside-partner-laravel.test/api/v1/mentees';
-const apiMentorDiaries = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors'; // {mentor_srl}/articles
-const apiDiary          = 'http://countryside-partner-laravel.test/api/v1/diaries-mentors/articles'; // {diary_srl}
-const apiAuthCheck      = 'http://countryside-partner-laravel.test/api/v1/auth'; // {diary_srl}
-const apiUsers = 'http://countryside-partner-laravel.test/api/v1/users';
+const API_MAIN = '/api/v1/main';
+const API_MENTORS = '/api/v1/mentors';
+const API_MENTEES = '/api/v1/mentees';
+const API_MENTOR_DIARIES = '/api/v1/diaries-mentors'; // {mentor_srl}/articles
+const API_DIARY  = '/api/v1/diaries-mentors/articles'; // {diary_srl}
+const API_AUTH_CHECK = '/api/v1/auth'; // {diary_srl}
+const API_USERS = '/api/v1/users';
 
 export const authCheck = () => {
 
@@ -22,7 +23,7 @@ export const authCheck = () => {
             }
         };
 
-        return axios.get(`${apiAuthCheck}`, config)
+        return axios.get(`${API_HOST}${API_AUTH_CHECK}`, config)
             .then(response => {
 
                 dispatch(Success(response.data, types.AUTH_CHECK))
@@ -38,7 +39,7 @@ export const mainLists = () => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMains}`)
+        return axios.get(`${API_HOST}${API_MAIN}`)
 
             .then(response => {
 
@@ -57,7 +58,7 @@ export const menteeLists = () => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMentees}`)
+        return axios.get(`${API_HOST}${API_MENTEES}`)
 
             .then(response => {
 
@@ -76,7 +77,7 @@ export const mentorLists = () => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMentors}`)
+        return axios.get(`${API_HOST}${API_MENTORS}`)
 
             .then(response => {
 
@@ -93,7 +94,7 @@ export const mentorLists = () => {
 export const getMentee = (mentee) => {
 
     return (dispatch) => {
-        const url = `${apiMentees}/${mentee}`;
+        const url = `${API_HOST}${API_MENTEES}/${mentee}`;
         return axios.get(url)
 
             .then(response => {
@@ -113,7 +114,7 @@ export const getMentor = (mentor) => {
 
     return (dispatch) => {
 
-        const url = `${apiMentors}/${mentor}`;
+        const url = `${API_HOST}${API_MENTORS}/${mentor}`;
 
         return axios.get(url)
 
@@ -142,11 +143,12 @@ export const getUserInfo = () => {
             }
         };
 
-        return axios.get(apiUsers, config)
+        let url = `${API_HOST}${API_USERS}`;
+        return axios.get(url, config)
 
             .then(response => {
 
-                dispatch(Success(response.data, types.GET_MENTOR))
+                dispatch(Success(response.data, types.GET_USER))
 
             })
             .catch(error => {
@@ -162,8 +164,9 @@ export const getMenteeDiaries = (mentee, page) => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMentees}/${mentee}/diaries?page=${page}`)
+        const url = `${API_HOST}${API_MENTEES}/${mentee}/diaries?page=${page}`;
 
+        return axios.get(url)
             .then(response => {
 
                 dispatch(Success(response.data, types.MENTEE_DIARIES));
@@ -180,7 +183,7 @@ export const getMentorDiaries = (mentor, page) => {
 
     return (dispatch) => {
 
-        return axios.get(`${apiMentorDiaries}/${mentor}/articles?page=${page}`)
+        return axios.get(`${API_HOST}${API_MENTOR_DIARIES}/${mentor}/articles?page=${page}`)
 
             .then(response => {
 
@@ -212,7 +215,7 @@ export const getMenteeDiary = (mentee, diary_id) => {
             };
         }
 
-        return axios.get(`${apiMentees}/${mentee}/diaries/${diary_id}`, config)
+        return axios.get(`${API_HOST}${API_MENTEES}/${mentee}/diaries/${diary_id}`, config)
 
             .then(response => {
 
@@ -246,7 +249,7 @@ export const getDiary = (diary_id) => {
             };
         }
 
-        return axios.get(`${apiDiary}/${diary_id}`, config)
+        return axios.get(`${API_HOST}${API_DIARY}/${diary_id}`, config)
 
             .then(response => {
 
