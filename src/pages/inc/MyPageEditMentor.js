@@ -19,6 +19,9 @@ const schema = yup.object({
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     sex: yup.string().required('성별을 선택해 주세요.'),
+    introduce: yup.string().required('소개를 해주세요.'),
+
+
 });
 
 
@@ -31,6 +34,7 @@ class MyPageEditMentor extends Component {
             apiUserUpdate: context.server_host + '/api/v1/users',
             isLoading: false,
             daumPostOpen: false,
+            isNew: false,
             schemaDefaultValue : {
                 id: '',
                 profile_image: '',
@@ -130,15 +134,10 @@ class MyPageEditMentor extends Component {
             });
     }
 
-
     render() {
 
-
         return (
-
-
             <div className={classNames('container', styles['in-container'])}>
-
                 <div className={styles['user-create-container']}>
                     <h3>회원정보수정</h3>
                     <br/>
@@ -321,6 +320,7 @@ class MyPageEditMentor extends Component {
                                         >
                                             <option value="">선택해 주세요.</option>
                                             <option value="1년~3년" >1년~3년</option>
+                                            <option value="1년~3년">1년~3년</option>
                                             <option value="5년~9년">5년~9년</option>
                                             <option value="10년~14년">10년~14년</option>
                                             <option value="15년 이상">15년 이상</option>

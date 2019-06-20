@@ -383,7 +383,6 @@ class MenteeCreate extends Component {
                                             {errors.profile_image}
                                         </Form.Control.Feedback>
                                     </Col>
-
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="phone">
                                     <Form.Label column sm="2">연락처</Form.Label>

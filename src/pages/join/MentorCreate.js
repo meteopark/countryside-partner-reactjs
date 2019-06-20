@@ -344,10 +344,10 @@ class MentorCreate extends Component {
                                             isInvalid={!!errors.career}
                                         >
                                             <option value="">선택해 주세요.</option>
-                                            <option value="1-3">1년 ~ 3년</option>
-                                            <option value="5-9">5년 ~ 9년</option>
-                                            <option value="10-14">10년 ~ 14년</option>
-                                            <option value="15-0">15년 이상</option>
+                                            <option value="1년~3년">1년~3년</option>
+                                            <option value="5년~9년">5년~9년</option>
+                                            <option value="10년~14년">10년~14년</option>
+                                            <option value="15년 이상">15년 이상</option>
                                         </Form.Control>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.career}

@@ -7,28 +7,26 @@ import {Formik} from "formik";
 import * as yup from 'yup';
 import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
 import axios from 'axios';
-import {withAlert} from 'react-alert'
+import { withAlert } from 'react-alert'
 import history from '../history';
 import {GlobalsContext} from '../../pages/globals';
 import * as importActions from "../../actions";
-import {withRouter} from "react-router";
-import {bindActionCreators, compose} from "redux";
+import {bindActionCreators, compose} from 'redux';
 import {connect} from "react-redux";
 
 const schema = yup.object({
     id: yup.string().min(5, '아이디를 5자 이상 넣어 주세요.').max(20, '아이디를 20자 이하로 넣어주세요').required('아이디를 입력해 주세요.'),
-    password: yup.string().required('비밀번호를 입력해 주세요.'),
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     target_area: yup.string().required('관심지역을 선택해 주세요.'),
 });
+
 
 class MyPageEditMentee extends Component {
 
     constructor(props, context) {
 
         super(props);
-
         this.state = {
             apiUserUpdate: context.server_host + '/api/v1/users',
             isLoading: false,
@@ -72,13 +70,12 @@ class MyPageEditMentee extends Component {
     }
 
     handleChange = (e, type = 'text') => {
-
         const schemaDefaultValue = {...this.state.schemaDefaultValue};
 
-        if (type === "text") {
+        if(type === "text"){
 
             schemaDefaultValue[e.target.name] = e.target.value;
-        } else {
+        }else{
 
             schemaDefaultValue[e.target.name] = e.target.files[0];
         }
@@ -89,19 +86,16 @@ class MyPageEditMentee extends Component {
 
     handleClick = () => {
 
-        this.setState({isLoading: true}, () => {
-            this.simulateNetworkRequest().then(() => {
-                this.handleUserCreate();
+        this.setState({ isLoading: true }, () => {
+            return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+                this.handleUserUpdate();
             });
         });
 
     }
-    simulateNetworkRequest = () => {
-        return new Promise(resolve => setTimeout(resolve, 1000));
-    }
 
-    handleUserCreate = () => {
 
+    handleUserUpdate = () => {
 
         let formData = new FormData();
         formData.append('_method', 'PUT');
@@ -111,11 +105,12 @@ class MyPageEditMentee extends Component {
         formData.append('sex', this.state.schemaDefaultValue.sex);
         formData.append('phone', this.state.schemaDefaultValue.phone);
         formData.append('address', this.state.schemaDefaultValue.address);
+        formData.append('farm_name', this.state.schemaDefaultValue.farm_name);
+        formData.append('career', this.state.schemaDefaultValue.career);
         formData.append('introduce', this.state.schemaDefaultValue.introduce);
         formData.append('crops', this.state.schemaDefaultValue.crops);
-        formData.append('target_area', this.state.schemaDefaultValue.target_area);
 
-        let config = {
+        const config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -129,22 +124,21 @@ class MyPageEditMentee extends Component {
                 history.push("/mypage");
             })
             .catch(error => {
-
-                console.log("error", this.state.apiUserCreate + " @ " + error);
+                console.log("error", error);
             });
     }
-
 
     render() {
 
         return (
             <div className={classNames('container', styles['in-container'])}>
-
                 <div className={styles['user-create-container']}>
                     <h3>회원정보수정</h3>
                     <br/>
                     <Formik
-                        onSubmit={(values, actions) => {this.handleClick()}}
+                        onSubmit={(values, actions) => {
+                            this.handleClick()
+                        }}
                         enableReinitialize={true}
                         validationSchema={schema}
                         initialValues={this.state.schemaDefaultValue}
@@ -224,6 +218,7 @@ class MyPageEditMentee extends Component {
                                                 inline
                                                 type="radio"
                                                 defaultValue="male"
+                                                checked={this.state.schemaDefaultValue.sex === "male" ? true : false}
                                                 name="sex"
                                                 label="남"
                                                 onChange={(e) => this.handleChange(e)}
@@ -233,6 +228,7 @@ class MyPageEditMentee extends Component {
                                                 inline
                                                 type="radio"
                                                 defaultValue="female"
+                                                checked={this.state.schemaDefaultValue.sex === "female" ? true: false}
                                                 name="sex"
                                                 label="여"
                                                 onChange={(e) => this.handleChange(e)}
@@ -353,7 +349,6 @@ class MyPageEditMentee extends Component {
                                             {errors.profile_image}
                                         </Form.Control.Feedback>
                                     </Col>
-
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="phone">
                                     <Form.Label column sm="2">연락처</Form.Label>
@@ -362,7 +357,7 @@ class MyPageEditMentee extends Component {
                                             type="text"
                                             placeholder="010-1234-5678"
                                             name="phone"
-                                            value={this.state.schemaDefaultValue.phone}
+                                            defaultValue={this.state.schemaDefaultValue.phone}
                                             onChange={(e) => this.handleChange(e)}
                                             isInvalid={!!errors.phone}
                                         />
@@ -379,9 +374,10 @@ class MyPageEditMentee extends Component {
                                             variant="dark"
                                             type="submit"
                                             disabled={this.state.isLoading}
-                                            onClick={!this.state.isLoading ? handleSubmit : null}
+                                            onClick={!this.state.isLoading ? handleSubmit: null}
+
                                         >
-                                            {this.state.isLoading ? '처리 중' : '수정하기'}
+                                            {this.state.isLoading ? '처리 중' : '가입하기'}
                                         </Button>
                                     </Col>
                                 </Row>
@@ -395,7 +391,7 @@ class MyPageEditMentee extends Component {
     }
 
     componentDidMount() {
-        this.props.actionMentee.getUserInfo();
+        this.props.actionMentor.getUserInfo();
     }
 
     // 이 메소드는 컴포넌트 초기화 또는 새로운 props를 받았을 때 일어납니다
@@ -417,6 +413,7 @@ class MyPageEditMentee extends Component {
                     introduce: mentee.introduce,
                     crops: mentee.crops,
                     target_area: mentee.target_area,
+
                 }
             };
         }
@@ -432,7 +429,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    actionMentee: bindActionCreators(importActions, dispatch),
+    actionMentor: bindActionCreators(importActions, dispatch),
 })
+export default compose(withAlert(),connect(mapStateToProps, mapDispatchToProps))(MyPageEditMentee);
 
-export default compose(withAlert(), connect(mapStateToProps, mapDispatchToProps))(MyPageEditMentee);
+

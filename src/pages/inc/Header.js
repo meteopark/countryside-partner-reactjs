@@ -38,8 +38,6 @@ export class Header extends Component {
 
         return (
             <div>
-
-
                 {this.state.hideNav === false ?
                     <div className={classNames('container-fluid', styles['custom-container-fluid-top'])}>
                         <Link to="/" className={styles['link']}>
@@ -61,8 +59,6 @@ export class Header extends Component {
                                     </Link>
                                 </div>
                                 : <Navbar.Toggle />}
-
-
                             <Navbar.Collapse bsPrefix={'navbar-collapse'}>
                                 <Nav className="mr-auto">
                                     <NavLink to="/introduce" className="nav-link">
