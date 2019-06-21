@@ -7,7 +7,7 @@ export function Introduce() {
     return (
         <div className={classNames('container', styles['in-container-introduce'])}>
             <br/><hr/>
-            <h2 className="text-center">본 서비스는 농업사회 발전을 이루기 위해<br/>해당 분야의 전문가와 예비 귀농인을 이어주는 플랫폼 입니다.</h2>
+            <div className={styles['title']}>본 서비스는 농업사회 발전을 이루기 위해<br/>해당 분야의 전문가와 예비 귀농인을 이어주는 플랫폼 입니다.</div>
             <hr/><br/>
             <img src="/images/bg/introduce_human.jpg" className={styles['introduce-image']}/><br/><br/>
             <p>
@@ -22,10 +22,8 @@ export function Introduce() {
                 농업이라는 직업에 많은 관심을 가져주시길 바랍니다.<br/><br/>
                 고맙습니다<br/><br/>
             </p>
-            <hr/>
-            <p className="text-center">
-                <h2>시골짝꿍</h2>
-            </p>
+            <hr/><br/>
+            <div className={styles['title']}>시골짝꿍</div>
         </div>
     );
 }

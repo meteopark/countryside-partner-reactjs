@@ -5,7 +5,6 @@ import TopBar from "./inc/TopBar";
 import {Header} from "./inc/Header";
 import Footer from "./inc/Footer";
 import styles from "../index.module.scss";
-import SideNav from "./inc/SideNav";
 import history from './history';
 
 import MentorCreate from "./join/MentorCreate";
