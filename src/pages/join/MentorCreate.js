@@ -21,6 +21,11 @@ const schema = yup.object({
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     sex: yup.string().required('성별을 선택해 주세요.'),
+    introduce: yup.string().required('소개를 해주세요.'),
+    address: yup.string().required('주소를 입력해 주세요.'),
+    farm_name: yup.string().required('농장명을 입력해 주세요.'),
+    career: yup.string().required('경력을 선택해 주세요.'),
+    crops: yup.string().required('주요작물을 선택해 주세요.'),
 });
 
 
@@ -343,7 +348,7 @@ class MentorCreate extends Component {
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.career}
                                         >
-                                            <option value="">선택해 주세요.</option>
+                                            <option value="1년~3년" >1년~3년</option>
                                             <option value="1년~3년">1년~3년</option>
                                             <option value="5년~9년">5년~9년</option>
                                             <option value="10년~14년">10년~14년</option>

@@ -19,6 +19,12 @@ const schema = yup.object({
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     introduce: yup.string().required('소개를 해주세요.'),
+    address: yup.string().required('주소를 입력해 주세요.'),
+    farm_name: yup.string().required('농장명을 입력해 주세요.'),
+    career: yup.string().required('경력을 선택해 주세요.'),
+    crops: yup.string().required('주요작물을 선택해 주세요.'),
+
+
 });
 
 class MyPageEditMentor extends Component {

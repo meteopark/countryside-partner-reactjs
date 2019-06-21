@@ -22,7 +22,9 @@ const schema = yup.object({
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
     sex: yup.string().required('성별을 선택해 주세요.'),
-    target_area: yup.string().required('관심지역을 선택해 주세요.'),
+    target_area: yup.string().required('관심 지역을 선택해 주세요.'),
+    introduce: yup.string().required('소개를 해주세요.'),
+    crops: yup.string().required('관심 작물을 선택해 주세요.'),
 });
 
 class MenteeCreate extends Component {
@@ -347,7 +349,7 @@ class MenteeCreate extends Component {
                                             name="target_area"
                                             value={this.state.schemaDefaultValue.target_area}
                                             onChange={(e) => this.handleText(e)}
-                                            isInvalid={!!errors.crops}
+                                            isInvalid={!!errors.target_area}
                                         >
                                             <option value="">선택해 주세요.</option>
                                             <option value="경기도">경기도</option>

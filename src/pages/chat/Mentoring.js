@@ -20,21 +20,36 @@ export function Mentoring({match, location}) {
     const [nextPageUrl, setNextPageUrl] = useState(null); // 다음 페이지 url
     const [messageLists, setMessageLists] = useState([]); // 메세지 리스트
     const [scrollHeight, setScrollHeight] = useState(0);
+    const [isFirst, setIsFirst] = useState(false);
+
+
 
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
 
-        getMessageLists();
-    }, []);
+        if(!isFirst){
+            console.log('------111',isFirst);
+            getMessageLists();
+            setIsFirst(true);
+        }else{
+            console.log('------222',isFirst);
+            const interval = setInterval(() => {
+                getMessageLists();
+            }, 11000);
+
+            return () => clearInterval(interval)
+        }
+
+    }, [isFirst]);
 
     const getMessageLists = () => {
-
+        console.log('------getMessageLists');
         if (typeof match.params.chat_id !== 'undefined') {
             setChatId(match.params.chat_id);
         }
         API.getMessageLists(match.params.chat_id, 1).then((res) => {
 
             setNextPageUrl(res.next_page_url);
-
+            setMessageLists([]);
             res.data.reverse().map((chat) => {
 
                 let newMessage = {
@@ -44,7 +59,9 @@ export function Mentoring({match, location}) {
                     text: chat.message,
                     date: new Date(chat.created_at)
                 };
+
                 setMessageLists(messageLists => messageLists.concat(newMessage));
+
             });
 
             if(containerRef.current !== null){
@@ -113,10 +130,6 @@ export function Mentoring({match, location}) {
                 setMessageLists([...messageLists, newMessage]);
                 scrollTo(containerRef.current.scrollHeight);
             });
-
-            setInterval(() => {
-                getMessageLists();
-            }, 12000);
         }
     };
 
@@ -134,7 +147,7 @@ export function Mentoring({match, location}) {
             {
                 messageLists.length > 0 ?
                     <MessageList
-                        className='message-list'
+                        className={classNames('message-list', styles['chat-container'])}
                         lockable={true}
                         toBottomHeight={'100%'}
                         dataSource={messageLists}/>

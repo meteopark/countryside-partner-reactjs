@@ -295,7 +295,7 @@ class MyPageEditMentee extends Component {
                                         <Form.Control
                                             as="select"
                                             name="crops"
-                                            defaultValue={this.state.schemaDefaultValue.crops}
+                                            value={this.state.schemaDefaultValue.crops}
                                             onChange={(e) => this.handleChange(e)}
                                             isInvalid={!!errors.crops}
                                         >
@@ -315,7 +315,7 @@ class MyPageEditMentee extends Component {
                                             name="target_area"
                                             value={this.state.schemaDefaultValue.target_area}
                                             onChange={(e) => this.handleChange(e)}
-                                            isInvalid={!!errors.crops}
+                                            isInvalid={!!errors.target_area}
                                         >
                                             <option value="">선택해 주세요.</option>
                                             <option value="경기도">경기도</option>
