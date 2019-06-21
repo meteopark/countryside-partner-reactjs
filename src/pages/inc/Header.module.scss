@@ -96,7 +96,7 @@ body{
 
 }
 .in-container-introduce {
-  font-family: 'Title_Light', sans-serif;
+
   margin-top: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom:80px;
@@ -110,7 +110,7 @@ body{
     border-radius: 10px;
   }
   .title {
-    text-align: center;
+    text-align: left;
     font-size: 21px;
   }
   b {
@@ -141,7 +141,7 @@ body{
   }
 
   .in-container-introduce {
-    font-family: 'Title_Light', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     margin-top: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding-top:15px;
@@ -160,15 +160,15 @@ body{
     .title {
       text-align: center;
       line-height: 55px;
-      font-size: 32px;
+      font-size: 28px;
     }
     b {
       color:#F15F5F;
     }
     p {
-      font-size: 20px;
-      padding-left:65px;
-      padding-right:65px;
+      font-size: 17px;
+      padding-left:75px;
+      padding-right:75px;
     }
   }
 }

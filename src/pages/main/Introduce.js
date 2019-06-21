@@ -9,7 +9,7 @@ export function Introduce() {
             <br/><hr/>
             <div className={styles['title']}>본 서비스는 농업사회 발전을 이루기 위해<br/>해당 분야의 전문가와 예비 귀농인을 이어주는 플랫폼 입니다.</div>
             <hr/><br/>
-            <img src="/images/bg/introduce_human.jpg" className={styles['introduce-image']}/><br/><br/>
+
             <p>
                 2013년도 이후 귀농에 대한 관심이 커짐으로써 더 이상 귀농은 특별한 사람들만의 직업이 아니게 되었습니다.<br/><br/>
                 정부에서는 영농정착지원금과 농지확보 등 다양한 지원 사업을 통해 농업인력 확충에 힘을 쏟았습니다.<br/><br/>
@@ -22,8 +22,8 @@ export function Introduce() {
                 농업이라는 직업에 많은 관심을 가져주시길 바랍니다.<br/><br/>
                 고맙습니다<br/><br/>
             </p>
-            <hr/><br/>
-            <div className={styles['title']}>시골짝꿍</div>
+
+            <img src="/images/bg/introduce_human.jpg" className={styles['introduce-image']}/><br/><hr/>
         </div>
     );
 }
