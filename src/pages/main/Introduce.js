@@ -22,8 +22,8 @@ export function Introduce() {
                 농업이라는 직업에 많은 관심을 가져주시길 바랍니다.<br/><br/>
                 고맙습니다<br/><br/>
             </p>
-
-            <img src="/images/bg/introduce_human.jpg" className={styles['introduce-image']}/><br/><hr/>
+            {/*<img src="/images/bg/introduce_human.jpg" className={styles['introduce-image']}/><br/>*/}
+            <hr/>
         </div>
     );
 }
