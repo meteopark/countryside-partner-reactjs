@@ -94,7 +94,25 @@ body{
   }
 
 }
+.in-container-introduce {
+  font-family: 'Title_Light', sans-serif;
+  margin-top: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  padding-top:60px;
+  min-height: 800px;
 
+  b {
+    color:#F15F5F;
+  }
+  p {
+    font-size: 20px;
+    padding-left:60px;
+    padding-right:60px;
+  }
+
+
+}
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left .5s;
