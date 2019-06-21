@@ -2,15 +2,14 @@ import React from 'react';
 import classNames from "classnames";
 import styles from "../inc/Header.module.scss";
 
-
-
 export function Introduce() {
 
     return (
         <div className={classNames('container', styles['in-container-introduce'])}>
-            <hr/>
+            <br/><hr/>
             <h2 className="text-center">본 서비스는 농업사회 발전을 이루기 위해<br/>해당 분야의 전문가와 예비 귀농인을 이어주는 플랫폼 입니다.</h2>
             <hr/><br/>
+            <img src="/images/bg/introduce_human.jpg" className={styles['introduce-image']}/><br/><br/>
             <p>
                 2013년도 이후 귀농에 대한 관심이 커짐으로써 더 이상 귀농은 특별한 사람들만의 직업이 아니게 되었습니다.<br/><br/>
                 정부에서는 영농정착지원금과 농지확보 등 다양한 지원 사업을 통해 농업인력 확충에 힘을 쏟았습니다.<br/><br/>
@@ -21,7 +20,11 @@ export function Introduce() {
                 귀농에 관심이 있고, 준비 중인 예비 귀농인에게는 <b>올바른 지식</b>을 전달하고, 해당 분야의 전문가는 <b>지도(mentoring)</b>를 함으로써<br/><br/>
                 불안정한 농업 생태계가 잘 자리 잡을 수 있도록 기여하는 것이 본 서비스가 추구하는 길입니다.<br/><br/>
                 농업이라는 직업에 많은 관심을 가져주시길 바랍니다.<br/><br/>
-                고맙습니다.<br/><br/>
+                고맙습니다<br/><br/>
+            </p>
+            <hr/>
+            <p className="text-center">
+                <h2>시골짝꿍</h2>
             </p>
         </div>
     );

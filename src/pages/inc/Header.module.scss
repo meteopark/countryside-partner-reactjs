@@ -98,20 +98,35 @@ body{
   font-family: 'Title_Light', sans-serif;
   margin-top: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top:15px;
+  padding-bottom:80px;
   background: #ffffff;
-  padding-top:60px;
-  min-height: 800px;
 
+  .introduce-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    height: auto;
+    border-radius: 30px;
+  }
+
+  h2 {
+    line-height: 60px;
+  }
   b {
     color:#F15F5F;
   }
   p {
     font-size: 20px;
-    padding-left:60px;
-    padding-right:60px;
+    padding-left:65px;
+    padding-right:65px;
   }
+}
 
-
+.footer{
+  color: #ffffff;
+  background: #2D3742;
 }
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
