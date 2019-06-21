@@ -68,7 +68,7 @@ export const MyPageEndit = () => {
 
     return (
         <div>
-            {whoAmI === "MENTOR" ? <MyPageEditMentor/> : <MyPageEditMentee/>}
+            {localStorage.getItem('user_type') === "MENTOR" ? <MyPageEditMentor/> : <MyPageEditMentee/>}
         </div>
     )
 }

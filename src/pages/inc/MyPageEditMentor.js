@@ -18,12 +18,8 @@ const schema = yup.object({
     id: yup.string().min(5, '아이디를 5자 이상 넣어 주세요.').max(20, '아이디를 20자 이하로 넣어주세요').required('아이디를 입력해 주세요.'),
     name: yup.string().required('이름을 입력해 주세요.'),
     birthday: yup.string().required('생년월일 입력해 주세요.'),
-    sex: yup.string().required('성별을 선택해 주세요.'),
     introduce: yup.string().required('소개를 해주세요.'),
-
-
 });
-
 
 class MyPageEditMentor extends Component {
 
@@ -139,7 +135,7 @@ class MyPageEditMentor extends Component {
         return (
             <div className={classNames('container', styles['in-container'])}>
                 <div className={styles['user-create-container']}>
-                    <h3>회원정보수정</h3>
+                    <h3>회원정보수정 - 멘토</h3>
                     <br/>
                     <Formik
                         onSubmit={(values, actions) => {
@@ -390,7 +386,6 @@ class MyPageEditMentor extends Component {
                                             type="submit"
                                             disabled={this.state.isLoading}
                                             onClick={!this.state.isLoading ? handleSubmit : null}
-
                                         >
                                             {this.state.isLoading ? '처리 중' : '정보변경'}
                                         </Button>

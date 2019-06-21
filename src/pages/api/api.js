@@ -8,6 +8,8 @@ const API_MESSAGE_LISTS = "/api/v1/chat/message";
 const API_CHAT_LISTS = "/api/v1/chat";
 const API_CHAT_USER = "/api/v1/users";
 
+console.log('server... ', API_HOST);
+
 export default {
 
     getBasicNextPage: (url) => {

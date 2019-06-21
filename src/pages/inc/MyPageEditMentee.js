@@ -133,7 +133,7 @@ class MyPageEditMentee extends Component {
         return (
             <div className={classNames('container', styles['in-container'])}>
                 <div className={styles['user-create-container']}>
-                    <h3>회원정보수정</h3>
+                    <h3>회원정보수정 - 멘티</h3>
                     <br/>
                     <Formik
                         onSubmit={(values, actions) => {
@@ -371,13 +371,12 @@ class MyPageEditMentee extends Component {
                                     <Col className={classNames("text-center", styles['end-button-top'])}>
                                         <hr/>
                                         <Button
-                                            variant="dark"
+                                            variant="warning"
                                             type="submit"
                                             disabled={this.state.isLoading}
                                             onClick={!this.state.isLoading ? handleSubmit: null}
-
                                         >
-                                            {this.state.isLoading ? '처리 중' : '가입하기'}
+                                            {this.state.isLoading ? '처리 중' : '정보변경'}
                                         </Button>
                                     </Col>
                                 </Row>
@@ -391,7 +390,7 @@ class MyPageEditMentee extends Component {
     }
 
     componentDidMount() {
-        this.props.actionMentor.getUserInfo();
+        this.props.actionMentee.getUserInfo();
     }
 
     // 이 메소드는 컴포넌트 초기화 또는 새로운 props를 받았을 때 일어납니다
@@ -429,7 +428,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    actionMentor: bindActionCreators(importActions, dispatch),
+    actionMentee: bindActionCreators(importActions, dispatch),
 })
 export default compose(withAlert(),connect(mapStateToProps, mapDispatchToProps))(MyPageEditMentee);
 
