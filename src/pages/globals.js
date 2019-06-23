@@ -11,5 +11,5 @@ export const globlas = {
 }
 
 export const GlobalsContext = React.createContext(
-  globlas.dev
+  globlas.production
 );
