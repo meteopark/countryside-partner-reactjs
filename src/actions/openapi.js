@@ -1,11 +1,13 @@
 import axios from 'axios';
 import * as types from './ActionTypes';
+import {GlobalsContext} from "../pages/globals";
 
+const API_HOST = GlobalsContext._currentValue.server_host;
 
-const apiMachine = 'http://countryside-partner-laravel.test/api/openapi/machines';
-const apiDicitionary = 'http://countryside-partner-laravel.test/api/openapi/dictionary';
-const apiSpecialCrops = 'http://countryside-partner-laravel.test/api/openapi/special-crops';
-const apiEmptyHouses = 'http://countryside-partner-laravel.test/api/openapi/empty-houses';
+const API_MACHINE = '/api/openapi/machines';
+const API_DICITIONARY = '/api/openapi/dictionary';
+const API_SPECIALCROPS = '/api/openapi/special-crops';
+const API_EMPTYHOUSES = '/api/openapi/empty-houses';
 
 export const machineLists = (search) => {
 
@@ -15,7 +17,7 @@ export const machineLists = (search) => {
 
         if(search.fch_knd !== "") apiAdd += "&FCH_KND="+search.fch_knd;
 
-        return axios.get(`${apiMachine}${apiAdd}`)
+        return axios.get(`${API_HOST}${API_MACHINE}${apiAdd}`)
             .then(response => {
                 dispatch(Success(response.data.Grid_20141119000000000080_1.row, types.OPENAPI_MACHINE));
             })
@@ -31,7 +33,7 @@ export const dictionaryLists = (cl_nm) => {
 
         let apiAdd = "?CL_NM="+cl_nm;
 
-        return axios.get(`${apiDicitionary}${apiAdd}`)
+        return axios.get(`${API_HOST}${API_DICITIONARY}${apiAdd}`)
             .then(response => {
                 dispatch(Success(response.data.Grid_20151230000000000339_1.row, types.OPENAPI_DICTIONARY));
             })
@@ -47,7 +49,7 @@ export const specialCropsLists = (year, ctprvn) => {
 
         let apiAdd = `?year=${year}&ctprvn=${ctprvn}`;
 
-        return axios.get(`${apiSpecialCrops}${apiAdd}`)
+        return axios.get(`${API_HOST}${API_SPECIALCROPS}${apiAdd}`)
             .then(response => {
 
                 if ( response.data.Grid_20141119000000000065_1 ) {
@@ -67,7 +69,7 @@ export const emptyHousesLists = (sidonm, gubuncd, dealtypecd) => {
 
         let apiAdd = `?sidonm=${sidonm}&gubuncd=${gubuncd}&dealtypecd=${dealtypecd}`;
 
-        return axios.get(`${apiEmptyHouses}${apiAdd}`)
+        return axios.get(`${API_HOST}${API_EMPTYHOUSES}${apiAdd}`)
             .then(response => {
                 if ( response.data.Grid_20150914000000000230_1 ) {
                     dispatch(Success(response.data.Grid_20150914000000000230_1.row, types.OPENAPI_EMPTYHOUSES));
