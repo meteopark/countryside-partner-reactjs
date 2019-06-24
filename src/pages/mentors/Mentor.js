@@ -34,7 +34,6 @@ class Mentor extends Component {
         const diaries = this.props.mapStateToPropsMentorDiaries;
 
         return (
-
             <div>
                 <MentorProfile mentor={mentor}/>
 
@@ -44,8 +43,6 @@ class Mentor extends Component {
                     diaries={diaries}
                     loadItems={this.loadItems}
                 />
-
-
             </div>
         );
     }

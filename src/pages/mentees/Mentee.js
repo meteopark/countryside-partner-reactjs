@@ -33,8 +33,6 @@ class Mentee extends Component {
         const mentee = this.props.mapStateToPropsMentee;
         const diaries = this.props.mapStateToPropsMenteeDiaries;
 
-        console.log(diaries);
-
         return (
 
             <div>

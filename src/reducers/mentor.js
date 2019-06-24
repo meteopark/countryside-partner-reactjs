@@ -22,19 +22,15 @@ export const mentor = (state = initialState, action) => {
         case types.GET_MENTOR:
 
             return {
-
+                ...state,
                 mentor: action.payload.datas,
-                diaries:{
-                    current_page: 1,
-                    last_page: 1,
-                    data: []
-                }
             };
 
         case types.MENTOR_LISTS:
 
             return {
 
+                ...state,
                 lists: {
                     ...state.lists,
                     current_page: action.payload.datas.current_page,
@@ -49,7 +45,7 @@ export const mentor = (state = initialState, action) => {
         case types.MENTOR_DIARIES:
 
             return {
-                mentor: state.mentor,
+                ...state,
                 diaries: {
                     ...state.diaries,
                     current_page: action.payload.datas.current_page,
@@ -58,7 +54,7 @@ export const mentor = (state = initialState, action) => {
                         ...action.payload.datas.data
                     ],
                     last_page: action.payload.datas.last_page,
-                }
+                },
             };
 
         default:

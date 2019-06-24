@@ -22,19 +22,14 @@ export const mentee = (state = initialState, action) => {
         case types.GET_MENTEE:
 
             return {
-
+                ...state,
                 mentee: action.payload.datas,
-                diaries:{
-                    current_page: 1,
-                    last_page: 1,
-                    data: []
-                }
             };
 
         case types.MENTEE_LISTS:
 
             return {
-
+                ...state,
                 lists: {
                     ...state.lists,
                     current_page: action.payload.datas.current_page,
@@ -48,8 +43,7 @@ export const mentee = (state = initialState, action) => {
 
         case types.MENTEE_DIARIES:
             return {
-
-                mentee: state.mentee,
+                ...state,
                 diaries: {
                     ...state.diaries,
                     current_page: action.payload.datas.current_page,
@@ -58,7 +52,7 @@ export const mentee = (state = initialState, action) => {
                         ...action.payload.datas.data
                     ],
                     last_page: action.payload.datas.last_page,
-                }
+                },
             };
 
         default:
