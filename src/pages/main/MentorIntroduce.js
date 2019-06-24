@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import styles from './Main.module.scss';
 import classNames from 'classnames';
 import * as reactIconFa from "react-icons/fa";
+import * as importActions from "../../actions";
+import {bindActionCreators} from 'redux';
 
 export class MentorIntroduce extends Component {
 
@@ -12,7 +14,6 @@ export class MentorIntroduce extends Component {
 
         return (
             <div className={classNames('container', styles['in-container'])}>
-
                 <p className={styles['header-container']}>
                     <reactIconFa.FaChessQueen className={styles['main-icon']}/>
                     금주의 베스트 멘토
@@ -35,12 +36,23 @@ export class MentorIntroduce extends Component {
             </div>
         )
     }
+
+    componentDidMount() {
+        const { getMains } = this.props;
+        getMains.mainLists();
+    }
 }
+
 
 const mapStateToProps = (state) => ({
 
-    mains: state.mains // state.mains 는 reducers/mentors.jsjs 의 키값과 같아야 한다
+    mains: state.mains // state.mains 는 reducers/Village.jsjs 의 키값과 같아야 한다
 })
 
-export default connect(mapStateToProps)(MentorIntroduce);
+const mapDispatchToProps = (dispatch) => ({
+
+    getMains: bindActionCreators(importActions, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MentorIntroduce);
 

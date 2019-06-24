@@ -7,6 +7,7 @@ const API_SEND_MESSAGE = "/api/v1/chat/message";
 const API_MESSAGE_LISTS = "/api/v1/chat/message";
 const API_CHAT_LISTS = "/api/v1/chat";
 const API_CHAT_USER = "/api/v1/users";
+const API_BEST_DIARIES = "/api/v1/main/best-diaries";
 
 console.log('server... ', API_HOST);
 
@@ -78,7 +79,13 @@ export default {
         }).then(
             res => res.json()
         );
-    }
+    },
+
+    getBestDiaries: () => { // 베스트 글 가져오기
+        return fetch(`${API_HOST}${API_BEST_DIARIES}`).then(
+            res => res.json()
+        );
+    },
 
 
 

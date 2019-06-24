@@ -51,6 +51,8 @@ class Diary extends Component {
 
                         <div className={styles['diary-contents']}>
 
+                            <p className={styles['contents']}>{diary.contents}</p>
+
                             {
                                 diary.image ?
                                     <Image src={diary.image}
@@ -58,7 +60,6 @@ class Diary extends Component {
                                     : ""
                             }
 
-                            <p className={styles['contents']}>{diary.contents}</p>
                         </div>
                         {
                             diary.is_owner === true ?
