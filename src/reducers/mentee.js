@@ -8,6 +8,11 @@ const initialState = {
         last_page: 0,
         data: []
     },
+    lists: {
+        current_page: 0,
+        last_page: 0,
+        data: []
+    },
 };
 
 export const mentee = (state = initialState, action) => {
@@ -23,6 +28,21 @@ export const mentee = (state = initialState, action) => {
                     current_page: 1,
                     last_page: 1,
                     data: []
+                }
+            };
+
+        case types.MENTEE_LISTS:
+
+            return {
+
+                lists: {
+                    ...state.lists,
+                    current_page: action.payload.datas.current_page,
+                    data: [
+                        ...state.lists.data,
+                        ...action.payload.datas.data
+                    ],
+                    last_page: action.payload.datas.last_page,
                 }
             };
 

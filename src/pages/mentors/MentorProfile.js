@@ -43,10 +43,14 @@ export const MentorProfile = (props) => {
                                     src={mentor.profile_image ? mentor.profile_image : '/images/no-image.png'}
                                 />
                                 <br/>
-                                <Button variant="success" className={styles['mentoring-button']} onClick={handleToMentoring}>
+
+                                {
+                                    `MENTOR_${mentor.mentor_srl}` !== `${localStorage.getItem('user_type')}_${localStorage.getItem('srl')}` ?
+                                    <Button variant="success" className={styles['mentoring-button']} onClick={handleToMentoring}>
                                     <reactIconFa.FaPaperPlane className={styles['icon']}/>
                                     멘토링 요청
                                 </Button>
+                                    : ""}
                             </Col>
                             <Col className={styles['profile-info']}>
                                 <h1>{mentor.farm_name ? mentor.farm_name : "NULL"}</h1>

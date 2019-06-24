@@ -54,18 +54,17 @@ export const mainLists = () => {
     }
 }
 
-export const menteeLists = () => {
+export const menteeLists = (page) => {
 
     return (dispatch) => {
 
-        return axios.get(`${API_HOST}${API_MENTEES}`)
+        return axios.get(`${API_HOST}${API_MENTEES}?page=${page}`)
 
             .then(response => {
 
                 dispatch(Success(response.data, types.MENTEE_LISTS))
             })
             .catch(error => {
-
                 console.log("error : menteeLists() " , error);
                 throw(error);
 
@@ -73,18 +72,17 @@ export const menteeLists = () => {
     }
 }
 
-export const mentorLists = () => {
+export const mentorLists = (page) => {
 
     return (dispatch) => {
 
-        return axios.get(`${API_HOST}${API_MENTORS}`)
+        return axios.get(`${API_HOST}${API_MENTORS}?page=${page}`)
 
             .then(response => {
 
                 dispatch(Success(response.data, types.MENTOR_LISTS))
             })
             .catch(error => {
-
                 console.log("error : mentors() " , error);
                 throw(error);
 
