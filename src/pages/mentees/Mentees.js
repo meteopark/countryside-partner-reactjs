@@ -61,7 +61,9 @@ class Mentees extends Component {
                             <Link className={classNames(styles['link'])} to={`/mentees/${m.mentee_srl}`} key={i}>
                                 <Card className={styles['mentors-cards']}>
                                     <Card.Body>
-                                        <Card.Title className={styles['mentors-title']}>{m.name}</Card.Title>
+                                        <Card.Title className={styles['mentors-title']}>
+                                            {m.profile_image ? <Card.Img src={m.profile_image} /> : ""}
+                                            {m.name}</Card.Title>
                                         <Card.Text className={styles['mentors-contents']}>
                                             {m.introduce}<br/>
                                             <reactIconFa.FaRunning className={styles['icons']}/>
