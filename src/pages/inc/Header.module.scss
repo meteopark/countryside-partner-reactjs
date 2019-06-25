@@ -128,6 +128,21 @@ body{
   padding: 20px;
 }
 
+.recommend-container{
+
+  margin-top: 18px;
+  padding-bottom: 20px;
+
+  .recommend-image {
+    width:100%;
+    max-width: 349px;
+    max-height: 160px;
+  }
+  .recommend-txt {
+    height: 100%;
+    //max-height: 200px;
+  }
+}
 
 @media (min-width: 576px) {
 

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Mentees.module.scss';
 import {Row, Col, Image, Container} from 'react-bootstrap';
 import * as reactIconFa from "react-icons/fa";
+import {Link} from "react-router-dom";
 
 export const MenteeProfile = (props) => {
 
@@ -21,11 +22,13 @@ export const MenteeProfile = (props) => {
                     <Container className={styles['profile-container']}>
                         <Row className="justify-content-md-center">
                             <Col sm={3} className={styles['profile-image-container']}>
+                                <Link to={`/mentees/${mentee.mentee_srl}`} className={styles['link-w']}>
                                 <Image
                                     className={styles['profile-image']}
                                     roundedCircle
                                     src={mentee.profile_image ? mentee.profile_image : '/images/no-image.png'}
                                 />
+                                </Link>
                                 {/*<br/>*/}
                                 {/*<Button variant="success" className={styles['menteeing-button']}>*/}
                                 {/*    <reactIconFa.FaPaperPlane className={styles['icon']}/>*/}
@@ -33,7 +36,8 @@ export const MenteeProfile = (props) => {
                                 {/*</Button>*/}
                             </Col>
                             <Col className={styles['profile-info']}>
-                                <reactIconFa.FaUserAlt className={styles['icon']}/>{mentee.name} ({mentee.id})
+                                <reactIconFa.FaUserAlt className={styles['icon']}/>
+                                <Link to={`/mentees/${mentee.mentee_srl}`} className={styles['link-w']}>{mentee.name} ({mentee.id})</Link>
                                 <br/>
                                 <reactIconFa.FaRunning className={styles['icon']}/>{mentee.crops}
                                 <br/>

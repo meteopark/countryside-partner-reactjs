@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Card, CardColumns, Badge, Row, Col, Image} from 'react-bootstrap';
+import {Row, Col, Image} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import styles from './Main.module.scss';
 import classNames from 'classnames';
@@ -17,12 +17,10 @@ export function BestDiaries() {
 
     }, []);
 
-
     const getBestDiaries = () => {
 
         API.getBestDiaries().then((res) => {
 
-            console.log(res);
             let contents = res.map((best, i) => {
 
                 return (
@@ -62,19 +60,3 @@ export function BestDiaries() {
         </div>
     )
 }
-
-//
-//
-//
-// const mapStateToProps = (state) => ({
-//
-//     mains: state.mains // state.mains 는 reducers/Village.jsjs 의 키값과 같아야 한다
-// })
-//
-// const mapDispatchToProps = (dispatch) => ({
-//
-//     getMains: bindActionCreators(importActions, dispatch),
-// })
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(MentorIntroduce);
-

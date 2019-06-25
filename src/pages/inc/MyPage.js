@@ -2,12 +2,13 @@ import React, {useState, useEffect} from 'react';
 
 import styles from './Header.module.scss';
 import classNames from "classnames";
-import {Form, Row, Col, Button, InputGroup} from "react-bootstrap";
+import {Row, Col, Button} from "react-bootstrap";
 import history from '../history';
 import * as reactIconFa from "react-icons/fa";
 import {ChatList} from 'react-chat-elements'
 import API from "../api/api";
 import {Link} from "react-router-dom";
+import {RecommendDiaries} from "./RecommendDiaries";
 
 
 export const MyPage = () => {
@@ -73,7 +74,7 @@ export const MyPage = () => {
         <div>
             <div className={classNames('container', styles['in-container'])}>
                 <Row>
-                    <Col><h4 className={styles['mypage-h']}>내 정보</h4></Col>
+                    <Col><h4><reactIconFa.FaUserAlt className={styles['main-icon']}/>내 정보</h4></Col>
                     <Col className="text-right">
                         <Link to="/mypage/edit" className={styles['link']}>
                             <Button variant="warning" size="sm">
@@ -98,7 +99,7 @@ export const MyPage = () => {
             </div>
 
             <div className={classNames('container', styles['in-container'])}>
-                <h4>채팅목록</h4>
+                <h4><reactIconFa.FaStream className={styles['main-icon']}/>채팅목록</h4>
                 <hr/>
                 <div className={styles['mypage-chat-container']}>
                     <ChatList
@@ -114,6 +115,8 @@ export const MyPage = () => {
                     }
                 </div>
             </div>
+
+            <RecommendDiaries/>
         </div>
     )
 }

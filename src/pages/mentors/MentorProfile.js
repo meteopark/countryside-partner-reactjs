@@ -3,6 +3,7 @@ import styles from './Mentors.module.scss';
 import {Row, Col, Image, Container, Button} from 'react-bootstrap';
 import * as reactIconFa from "react-icons/fa";
 import history from "../history";
+import {Link} from "react-router-dom";
 
 export const MentorProfile = (props) => {
 
@@ -37,23 +38,29 @@ export const MentorProfile = (props) => {
                     <Container className={styles['profile-container']}>
                         <Row className="justify-content-md-center">
                             <Col sm={3} className={styles['profile-image-container']}>
-                                <Image
-                                    className={styles['profile-image']}
-                                    roundedCircle
-                                    src={mentor.profile_image ? mentor.profile_image : '/images/no-image.png'}
-                                />
+                                <Link to={`/mentors/${mentor.mentor_srl}`} className={styles['link-w']}>
+                                    <Image
+                                        className={styles['profile-image']}
+                                        roundedCircle
+                                        src={mentor.profile_image ? mentor.profile_image : '/images/no-image.png'}
+                                    />
+                                </Link>
                                 <br/>
 
                                 {
                                     `MENTOR_${mentor.mentor_srl}` !== `${localStorage.getItem('user_type')}_${localStorage.getItem('srl')}` ?
-                                    <Button variant="success" className={styles['mentoring-button']} onClick={handleToMentoring}><reactIconFa.FaPaperPlane className={styles['icon']}/>멘토링 요청</Button>
-                                    : ""
+                                        <Button variant="success" className={styles['mentoring-button']}
+                                                onClick={handleToMentoring}>
+                                            <reactIconFa.FaPaperPlane className={styles['icon']}/>
+                                            멘토링 요청</Button>
+                                        : ""
                                 }
                             </Col>
                             <Col className={styles['profile-info']}>
                                 <h1>{mentor.farm_name ? mentor.farm_name : "NULL"}</h1>
                                 <reactIconFa.FaUserAlt className={styles['icon']}/>
-                                {mentor.name} ({mentor.id})
+                                <Link to={`/mentors/${mentor.mentor_srl}`}
+                                      className={styles['link-w']}>{mentor.name} ({mentor.id})</Link>
                                 <br/>
                                 <reactIconFa.FaHome className={styles['icon']}/>
                                 {mentor.address}

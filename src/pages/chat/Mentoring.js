@@ -20,43 +20,44 @@ export function Mentoring({match, location}) {
     const [nextPageUrl, setNextPageUrl] = useState(null); // 다음 페이지 url
     const [messageLists, setMessageLists] = useState([]); // 메세지 리스트
     const [scrollHeight, setScrollHeight] = useState(0);
-    const [isFirst, setIsFirst] = useState(false);
+    const [isFirst, setIsFirst] = useState(true);
 
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
 
-        if(!isFirst){
-            getMessageLists();
-            setIsFirst(true);
-        }else{
+        if(isFirst){
+
+            if(typeof match.params.chat_id !== "undefined"){
+
+                setChatId(match.params.chat_id);
+            }
+            setIsFirst(false);
+        }
+
+        if(chatId !== ""){
             const interval = setInterval(() => {
                 getMessageLists();
-            }, 11000);
+            }, 7000);// 11000
 
             return () => clearInterval(interval)
         }
 
-    }, [isFirst]);
+    }, [isFirst, chatId]);
 
     const getMessageLists = () => {
-        if (typeof match.params.chat_id !== 'undefined') {
-            setChatId(match.params.chat_id);
-        }
-        API.getMessageLists(match.params.chat_id, 1).then((res) => {
+
+        API.getMessageLists(chatId, 1).then((res) => {
 
             setNextPageUrl(res.next_page_url);
             setMessageLists([]);
             res.data.reverse().map((chat) => {
 
                 let newMessage = {
-                    avatar: 'http://image.news1.kr/system/photos/2018/3/29/3036479/article.jpg',
                     position: whoami === chat.from ? 'right' : 'left',
                     type: 'text',
                     text: chat.message,
                     date: new Date(chat.created_at)
                 };
-
                 setMessageLists(messageLists => messageLists.concat(newMessage));
-
             });
 
             if(containerRef.current !== null){
@@ -82,7 +83,6 @@ export function Mentoring({match, location}) {
             res.data.map(chat => {
 
                 let newMessage = {
-                    avatar: 'http://image.news1.kr/system/photos/2018/3/29/3036479/article.jpg',
                     position: whoami === chat.from ? 'right' : 'left',
                     type: 'text',
                     text: chat.message,
@@ -113,8 +113,13 @@ export function Mentoring({match, location}) {
 
             API.sendMessage(formData).then((res) => {
 
+                if(res.stat > 0){
+                    alert(res.error.message);
+                    return false;
+                }
+
                 let newMessage = {
-                    avatar: 'http://image.news1.kr/system/photos/2018/3/29/3036479/article.jpg',
+                    // avatar: 'http://image.news1.kr/system/photos/2018/3/29/3036479/article.jpg',
                     position: whoami === res.from ? 'right' : 'left',
                     type: 'text',
                     text: res.message,
@@ -122,7 +127,8 @@ export function Mentoring({match, location}) {
                 }
                 inputRef.current.clear();
                 setChatId(res.chat_lists_id);
-                setMessageLists([...messageLists, newMessage]);
+
+                setMessageLists(messageLists => messageLists.concat(newMessage));
                 scrollTo(containerRef.current.scrollHeight);
             });
         }
