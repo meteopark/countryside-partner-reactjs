@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import MentorIntroduce from "./MentorIntroduce";
 import {ControlledCarousel} from "./ControlledCarousel";
 import {BestDiaries} from "./BestDiaries";
+import {EducationFarms} from "./EducationFarms";
+import {WeekFarmInfo} from "./WeekFarmInfo";
 
 
 class Main extends Component {
@@ -13,9 +15,10 @@ class Main extends Component {
 
             <div>
                 {/*<ControlledCarousel/>*/}
+                {/*<MentorIntroduce />*/}
+                {/*<BestDiaries/>*/}
                 {/*<br/>*/}
-                <MentorIntroduce />
-                <BestDiaries/>
+                <EducationFarms/>
                 <br/>
             </div>
         );

@@ -8,6 +8,8 @@ const API_MESSAGE_LISTS = "/api/v1/chat/message";
 const API_CHAT_LISTS = "/api/v1/chat";
 const API_CHAT_USER = "/api/v1/users";
 const API_BEST_DIARIES = "/api/v1/main/best-diaries";
+const OPEN_API_EDUCATION_FARMS = "/api/openapi/education-farms";
+const OPEN_API_WEEK_FARM_INFO = "/api/openapi/weekFarmInfo";
 
 console.log('server... ', API_HOST);
 
@@ -83,6 +85,18 @@ export default {
 
     getBestDiaries: () => { // 베스트 글 가져오기
         return fetch(`${API_HOST}${API_BEST_DIARIES}`).then(
+            res => res.json()
+        );
+    },
+
+    getOpenApiEducationFarms: (page, sType, sText) => { // 농촌교육농장
+        return fetch(`${API_HOST}${OPEN_API_EDUCATION_FARMS}?page=${page}&sType=${sType}&sText=${sText}`).then(
+            res => res.json()
+        );
+    },
+
+    getOpenApiWeekFarmInfo: (page) => { // 주간농사정보
+        return fetch(`${API_HOST}${OPEN_API_WEEK_FARM_INFO}?page=${page}`).then(
             res => res.json()
         );
     },

@@ -22,6 +22,11 @@ footer {
   text-align: center;
 }
 
+
+.auto-container {
+  height: 100%;
+}
+
 .custom-full-container {
   width: 100%;
   background: #ffffff;
@@ -56,7 +61,6 @@ footer {
     padding-bottom: 20px;
   }
 }
-
 
 
 .empty-content {
@@ -120,3 +124,11 @@ footer {
   padding-right: 10px;
 }
 
+
+.col-p-t {
+  padding-top:2px;
+}
+.date {
+  color: #BDBDBD;
+  font-size: 13px;
+}
