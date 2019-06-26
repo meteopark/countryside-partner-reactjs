@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Row, Col, Image, CardDeck, Card} from 'react-bootstrap';
+import {CardDeck, Card} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import styles from './Header.module.scss';
 import classNames from 'classnames';

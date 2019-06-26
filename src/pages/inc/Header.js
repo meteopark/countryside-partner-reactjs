@@ -70,8 +70,11 @@ export class Header extends Component {
                                     <NavLink to="/mentees" className="nav-link">
                                         <div className={classNames(styles['header-menu'])}>멘티소개</div>
                                     </NavLink>
+                                    <NavLink to="/educationFarms" className="nav-link">
+                                        <div className={classNames(styles['header-menu'])}>농촌 교육농장</div>
+                                    </NavLink>
                                     <NavLink to="/empty-houses" className="nav-link">
-                                        <div className={classNames(styles['header-menu'])}>농촌빈집정보</div>
+                                        <div className={classNames(styles['header-menu'])}>농촌 빈집정보</div>
                                     </NavLink>
                                     <NavLink to="/machines" className="nav-link">
                                         <div className={classNames(styles['header-menu'])}>전국 농기계 현황</div>

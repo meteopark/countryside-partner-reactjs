@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
-import {bindActionCreators, compose} from 'redux';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActionsOpenApi from '../../actions/openapi';
 import styles from './OpenApis.module.scss';
 import {Col, Button, Form, Table, Spinner, Modal} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
-import {withAlert} from "react-alert";
 
-    class EmptyHouses extends Component {
+class EmptyHouses extends Component {
 
     constructor(props) {
 
@@ -219,7 +218,7 @@ import {withAlert} from "react-alert";
                         : ""
                     }
                 </Form.Row>
-                <p className={styles['source']}>농림축산식품 공공데이터포털 OpenAPI (농촌빈집정보)</p>
+                <p className={styles['source']}>농림축산식품 공공데이터포털 OpenAPI (농촌 빈집정보)</p>
                 <Table responsive="sm" className={classNames("text-center", styles['table'])}>
                     <thead>
                     <tr className={styles['table-thead-min']}>

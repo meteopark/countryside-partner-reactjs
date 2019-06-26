@@ -36,6 +36,7 @@ import {Mentoring} from "./chat/Mentoring";
 import {MyPage} from "./inc/MyPage";
 import {Introduce} from "./main/Introduce";
 import {MyPageEndit} from "./inc/MyPageEdit";
+import {EducationFarms} from "./openapis/EducationFarms";
 
 
 class Root extends React.Component {
@@ -80,10 +81,12 @@ class Root extends React.Component {
                                 /*
                                 *   OpenApi Route ... Start
                                 */
+
                                 <Route exact path="/machines" component={Machine}/>
                                 <Route exact path="/dictionary" component={Dictionary}/>
                                 <Route exact path="/special-crops" component={SpecialCrops}/>
                                 <Route exact path="/empty-houses" component={EmptyHouses}/>
+                                <Route exact path="/educationFarms" component={EducationFarms}/>
                                 /*
                                 *   OpenApi Route ... End
                                 */
