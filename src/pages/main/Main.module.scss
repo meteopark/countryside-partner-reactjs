@@ -88,13 +88,23 @@
     height: 100px;
   }
 
-  .best-contents {
-    padding-top: 5px;
-    color: #5D5D5D;
+  .sns-contents {
+    padding-top: 0;
+    color: #000000;
 
+  }
+  .sns-time {
+    width:100%;
+    padding-bottom: 7px;
+    color: #5D5D5D;
+    text-align: left;
   }
 }
 
+.small-r {
+  text-align: right;
+
+}
 .sns_hr {
   padding:0;
   margin:0;

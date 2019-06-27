@@ -17,7 +17,7 @@ class Main extends Component {
                 <ControlledCarousel/>
                 <MentorIntroduce />
                 <Sns/><br/>
-                <EducationFarmsMain/><br/>
+                <EducationFarmsMain/>
                 <BestDiaries/><br/>
 
             </div>
