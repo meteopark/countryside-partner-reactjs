@@ -10,6 +10,7 @@ const API_CHAT_USER = "/api/v1/users";
 const API_BEST_DIARIES = "/api/v1/main/best-diaries";
 const OPEN_API_EDUCATION_FARMS = "/api/openapi/educationFarms";
 const OPEN_API_WEEK_FARM_INFO = "/api/openapi/weekFarmInfo";
+const OPEN_API_SNS = "/api/openapi/sns";
 
 console.log('server... ', API_HOST);
 
@@ -103,6 +104,12 @@ export default {
 
     getOpenApiWeekFarmInfo: (page) => { // 주간농사정보
         return fetch(`${API_HOST}${OPEN_API_WEEK_FARM_INFO}?page=${page}`).then(
+            res => res.json()
+        );
+    },
+
+    getSns: () => { // SNS
+        return fetch(`${API_HOST}${OPEN_API_SNS}`).then(
             res => res.json()
         );
     },

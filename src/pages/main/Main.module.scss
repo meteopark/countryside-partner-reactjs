@@ -69,7 +69,47 @@
     color: #5D5D5D;
 
   }
+}
 
+.sns-contents-container {
+
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  font-size: 14px;
+
+  line-height: 15px;
+
+  .blog-image {
+
+    width: 100%;
+    min-width: 100px;
+    max-height: 100px;
+    height: 100px;
+  }
+
+  .best-contents {
+    padding-top: 5px;
+    color: #5D5D5D;
+
+  }
+}
+
+.sns_hr {
+  padding:0;
+  margin:0;
+}
+.naverblog-color {
+  background: #BFFFB8;
+}
+.twitter-color {
+  background: #B4FFFF;
+}
+
+.image-ico {
+  border-radius: 20px;
+  width:32px;
+  height: 32px;
 }
 
 

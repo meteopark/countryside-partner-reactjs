@@ -4,6 +4,7 @@ import MentorIntroduce from "./MentorIntroduce";
 import {ControlledCarousel} from "./ControlledCarousel";
 import {BestDiaries} from "./BestDiaries";
 import {EducationFarmsMain} from "./EducationFarmsMain";
+import {Sns} from "./Sns";
 
 
 class Main extends Component {
@@ -13,12 +14,12 @@ class Main extends Component {
         return (
 
             <div>
-                {/*<ControlledCarousel/>*/}
+                <ControlledCarousel/>
                 <MentorIntroduce />
-                <BestDiaries/>
-                <br/>
-                <EducationFarmsMain/>
-                <br/>
+                <Sns/><br/>
+                <EducationFarmsMain/><br/>
+                <BestDiaries/><br/>
+
             </div>
         );
     }
