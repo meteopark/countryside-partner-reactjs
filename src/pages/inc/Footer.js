@@ -10,6 +10,10 @@ const Footer = () => {
             <p>
                 Email : <a href="mailto:yspark@meteopark.dev">yspark@meteopark.dev</a><br/>
                 © 2019 <b>METEOPARK</b> All rights reserved.
+
+                <br/><br/>
+                <img src="/images/banner/mafra_banner.jpg" className={styles['footer_banner']}/>&nbsp;&nbsp;
+                <img src="/images/banner/nongsaro_banner.jpg" className={styles['footer_banner']}/>
             </p>
             {/*<p>*/}
             {/*    <reactIconFa.FaLaravel color="#F15F5F" size="1.5em" className={styles['icon']}/>*/}

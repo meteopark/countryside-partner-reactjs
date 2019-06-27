@@ -111,7 +111,9 @@ export function EducationFarms() {
                     : ""
                 }
             </Form.Row>
-            <p className={styles['source']}>농촌진흥청 공공데이터포털 OpenAPI (농촌 교육농장)</p>
+            <p className={styles['source']}>
+                농촌진흥청 공공데이터포털 OpenAPI (농촌 교육농장)
+            </p>
             <hr/>
             {
                 educationFarms.length > 0 ?

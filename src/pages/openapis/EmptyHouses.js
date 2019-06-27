@@ -222,7 +222,7 @@ class EmptyHouses extends Component {
                 <Table responsive="sm" className={classNames("text-center", styles['table'])}>
                     <thead>
                     <tr className={styles['table-thead-min']}>
-                        <th width={"5%"}>순번</th>
+                        <th width={"10%"}>순번</th>
                         <th width={"40%"}>주소</th>
                         <th>거래 참고사항</th>
                         <th width={"15%"}>희망매매가격</th>

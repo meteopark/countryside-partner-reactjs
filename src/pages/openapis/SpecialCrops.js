@@ -103,14 +103,14 @@ class SpecialCrops extends Component {
                 <Table responsive="sm" className={classNames("text-center", styles['table'])}>
                     <thead>
                     <tr className={styles['table-thead-min']}>
-                        <th width={"5%"}>순번</th>
+                        <th width={"10%"}>순번</th>
                         <th width={"13%"}>특용작물 분류</th>
                         <th>세부 품목명</th>
-                        <th width={"10%"}>재배 농가수(호)</th>
-                        <th width={"10%"}>재배면적(ha)</th>
-                        <th width={"10%"}>수확면적(ha)</th>
-                        <th width={"16%"}>단위면적당 수확량(kg/10a)</th>
-                        <th width={"10%"}>생산량(M/T)</th>
+                        <th width={"10%"}>재배 농가수<br/>(호)</th>
+                        <th width={"10%"}>재배면적<br/>(ha)</th>
+                        <th width={"10%"}>수확면적<br/>(ha)</th>
+                        <th width={"16%"}>단위면적당 수확량<br/>(kg/10a)</th>
+                        <th width={"10%"}>생산량<br/>(M/T)</th>
                     </tr>
                     </thead>
                     <tbody>
