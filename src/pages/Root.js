@@ -37,6 +37,7 @@ import {MyPage} from "./inc/MyPage";
 import {Introduce} from "./main/Introduce";
 import {MyPageEndit} from "./inc/MyPageEdit";
 import {EducationFarms} from "./openapis/EducationFarms";
+import {EducationFarmDetail} from "./openapis/EducationFarmDetail";
 
 
 class Root extends React.Component {
@@ -87,7 +88,7 @@ class Root extends React.Component {
                                 <Route exact path="/special-crops" component={SpecialCrops}/>
                                 <Route exact path="/empty-houses" component={EmptyHouses}/>
                                 <Route exact path="/educationFarms" component={EducationFarms}/>
-                                <Route exact path="/educationFarms/:cntntsNo" component={EducationFarms}/>
+                                <Route exact path="/educationFarms/:cntntsNo" component={EducationFarmDetail}/>
                                 /*
                                 *   OpenApi Route ... End
                                 */

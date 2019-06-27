@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styles from './OpenApis.module.scss';
-import {Col, Button, Form, Spinner, Card, CardColumns, CardDeck} from 'react-bootstrap';
+import {Col, Button, Form, Spinner, Card, CardColumns} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
 import API from "../api/api";
@@ -30,7 +30,6 @@ export function EducationFarms() {
 
             if (currentPage < 2) setEducationFarms([]);
             setTotalCount(res.totalCount);
-            console.log("---",currentPage);
             let farms = res.data.map((farm) => {
 
                 return (

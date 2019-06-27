@@ -95,6 +95,12 @@ export default {
         );
     },
 
+    getOpenApiEducationFarmDetail: (cntntsNo) => { // 농촌교육농장 상세
+        return fetch(`${API_HOST}${OPEN_API_EDUCATION_FARMS}/${cntntsNo}`).then(
+            res => res.json()
+        );
+    },
+
     getOpenApiWeekFarmInfo: (page) => { // 주간농사정보
         return fetch(`${API_HOST}${OPEN_API_WEEK_FARM_INFO}?page=${page}`).then(
             res => res.json()
