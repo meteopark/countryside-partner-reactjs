@@ -47,7 +47,7 @@ class Root extends React.Component {
             <Router history={history}>
                 <div className={styles['wrapper']}>
                     <TopBar/>
-                    <Header/>
+                    {/*<Header/>*/}
                     <div className={styles['wrapper']}>
                         {/*<SideNav />*/}
                         <main>
@@ -87,6 +87,7 @@ class Root extends React.Component {
                                 <Route exact path="/special-crops" component={SpecialCrops}/>
                                 <Route exact path="/empty-houses" component={EmptyHouses}/>
                                 <Route exact path="/educationFarms" component={EducationFarms}/>
+                                <Route exact path="/educationFarms/:cntntsNo" component={EducationFarms}/>
                                 /*
                                 *   OpenApi Route ... End
                                 */

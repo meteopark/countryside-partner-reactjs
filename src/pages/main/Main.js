@@ -4,7 +4,6 @@ import MentorIntroduce from "./MentorIntroduce";
 import {ControlledCarousel} from "./ControlledCarousel";
 import {BestDiaries} from "./BestDiaries";
 import {EducationFarmsMain} from "./EducationFarmsMain";
-import {WeekFarmInfo} from "./WeekFarmInfo";
 
 
 class Main extends Component {

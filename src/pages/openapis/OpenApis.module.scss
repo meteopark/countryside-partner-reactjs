@@ -67,4 +67,16 @@
 }
 .card-text{
   font-size: 13px;
+  color: #6c757d !important;
+}
+.card-body{
+  max-height: 150px;
+
+}
+.card-image{
+  height: 100%;
+  max-height: 130px;
+}
+.muted-color {
+  color: red;
 }
