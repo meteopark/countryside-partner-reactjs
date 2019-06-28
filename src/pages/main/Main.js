@@ -16,9 +16,9 @@ class Main extends Component {
 
                 {/*<ControlledCarousel/>*/}
                 <MentorIntroduce />
-                {/*<Sns/><br/>*/}
-                {/*<EducationFarmsMain/>*/}
-                {/*<BestDiaries/><br/>*/}
+                <Sns/><br/>
+                <EducationFarmsMain/>
+                <BestDiaries/><br/>
 
 
             </div>

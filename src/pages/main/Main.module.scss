@@ -14,16 +14,18 @@
 
   .image-blank {
     display: block; margin: 0px auto;
-    height: 130px;
+    height: 200px;
 
   }
 
   .badge-crops {
+    font-size: 16px;
     position: absolute;
     top: 6%;
     left: 6%;
   }
   .badge{
+    font-size: 17px;
     position: absolute;
     bottom: 6%;
     right: 6%;
@@ -75,10 +77,9 @@
 
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 10px;
+  padding-top: 5px;
   font-size: 14px;
-
-  line-height: 15px;
+  line-height: 14px;
 
   .blog-image {
 
@@ -110,10 +111,10 @@
   margin:0;
 }
 .naverblog-color {
-  background: #BFFFB8;
+  background: #F2FFED;
 }
 .twitter-color {
-  background: #B4FFFF;
+  background: #EBFFFF;
 }
 
 .image-ico {
