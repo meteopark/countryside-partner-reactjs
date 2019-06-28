@@ -6,7 +6,7 @@ import {Header} from "./inc/Header";
 import Footer from "./inc/Footer";
 import styles from "../index.module.scss";
 import history from './history';
-
+import * as reactIconFa from "react-icons/fa";
 import MentorCreate from "./join/MentorCreate";
 import MenteeCreate from "./join/MenteeCreate";
 
@@ -41,6 +41,10 @@ import {EducationFarmDetail} from "./openapis/EducationFarmDetail";
 
 
 class Root extends React.Component {
+
+    scrollToTop = () => {
+        window.scrollTo(0, 0);
+    }
 
     render() {
 
@@ -110,6 +114,10 @@ class Root extends React.Component {
 
 
                             </Switch>
+
+                            <div className={styles['float-button-position']}>
+                                <div className={styles['float-button']} onClick={() => {this.scrollToTop();}}><reactIconFa.FaChevronUp/></div>
+                            </div>
                         </main>
                         <Footer/>
                     </div>

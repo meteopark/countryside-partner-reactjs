@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import MentorIntroduce from "./MentorIntroduce";
 import {ControlledCarousel} from "./ControlledCarousel";
 import {BestDiaries} from "./BestDiaries";
@@ -14,11 +13,13 @@ class Main extends Component {
         return (
 
             <div>
+
                 <ControlledCarousel/>
                 <MentorIntroduce />
                 <Sns/><br/>
                 <EducationFarmsMain/>
                 <BestDiaries/><br/>
+
 
             </div>
         );

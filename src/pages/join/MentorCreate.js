@@ -97,7 +97,7 @@ class MentorCreate extends Component {
     handleClick = () => {
 
         this.setState({ isLoading: true }, () => {
-            return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+            return new Promise(resolve => setTimeout(resolve, 0)).then(() => {
                 this.handleUserCreate();
             });
         });

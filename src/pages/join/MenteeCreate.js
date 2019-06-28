@@ -104,7 +104,7 @@ class MenteeCreate extends Component {
 
     }
     simulateNetworkRequest = () => {
-        return new Promise(resolve => setTimeout(resolve, 1000));
+        return new Promise(resolve => setTimeout(resolve, 0));
     }
 
     handleUserCreate = () => {

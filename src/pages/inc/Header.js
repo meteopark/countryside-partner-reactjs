@@ -50,16 +50,27 @@ export class Header extends Component {
                 <div className={classNames('container-fluid', styles['custom-container-fluid'])}>
                     <div className="container">
                         <Navbar bg="light" variant="light" expand="lg">
+                            {this.state.hideNav === false ? <Navbar.Brand href="/" className={styles['empty-brand']}>&nbsp;</Navbar.Brand> : ""}
 
                             {this.state.hideNav === true ?
                                 <div className={styles['header-m']}>
+                                    {this.state.hideNav === false ?
+                                        <div className={classNames('container-fluid', styles['custom-container-fluid-top'])}>
+                                            <Link to="/" className={styles['link']}>
+                                                <div className={styles['header-title']}><img src="/images/ico/homi.png" alt=""/>시골짝꿍
+                                                </div>
+                                            </Link>
+                                        </div>
+                                        : ""}
                                     <Navbar.Toggle />
                                     <Link to="/" className={styles['link']}>
                                         <div className={styles['header-title-m']}><img src="/images/ico/homi.png" alt=""/>시골짝꿍</div>
                                     </Link>
                                 </div>
                                 : <Navbar.Toggle />}
+
                             <Navbar.Collapse bsPrefix={'navbar-collapse'}>
+                                <div className={styles['navbar-coll']}>
                                 <Nav className="mr-auto">
                                     <NavLink to="/introduce" className="nav-link">
                                         <div className={classNames(styles['header-menu'])}>시골짝꿍 소개</div>
@@ -94,7 +105,9 @@ export class Header extends Component {
                                 {/*    <FormControl type="text" placeholder="찾고싶은 마을 검색해보세요" className="mr-sm-2" />*/}
                                 {/*    <Button variant="outline-success">검색</Button>*/}
                                 {/*</Form>*/}
+                                </div>
                             </Navbar.Collapse>
+
                             {/*<Navbar.Brand href="#home">React-</Navbar.Brand>*/}
                         </Navbar>
                     </div>
