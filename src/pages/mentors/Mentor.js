@@ -48,7 +48,6 @@ class Mentor extends Component {
     }
 
     componentDidMount() {
-
         const {actionMentor, match} = this.props;
         actionMentor.getMentor(match.params.mentor);
         actionMentor.getMentorDiaries(match.params.mentor, 1);
@@ -78,4 +77,4 @@ const mapDispatchToProps = (dispatch) => ({
     actionMentor: bindActionCreators(importActions, dispatch),
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Mentor));
+export default connect(mapStateToProps, mapDispatchToProps)(Mentor);

@@ -22,8 +22,18 @@ export const mentor = (state = initialState, action) => {
         case types.GET_MENTOR:
 
             return {
-                ...state,
+                // ...state,
                 mentor: action.payload.datas,
+                diaries: {
+                    current_page: 0,
+                    last_page: 0,
+                    data: []
+                },
+                lists: {
+                    current_page: 0,
+                    last_page: 0,
+                    data: []
+                },
             };
 
         case types.MENTOR_LISTS:
