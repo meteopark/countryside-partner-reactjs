@@ -139,7 +139,7 @@ class MenteeCreate extends Component {
                 localStorage.setItem('srl', res.mentee_srl);
                 localStorage.setItem('name', res.name);
 
-                this.props.actions.isLogged(true);
+                this.props.actions.isLogged(true, res.mentee_srl, 'mentee');
                 history.push("/");
             })
             .catch(error => {

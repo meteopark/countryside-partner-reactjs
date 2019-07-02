@@ -264,7 +264,7 @@ export const getDiary = (diary_id) => {
     }
 }
 
-export const isLogged = (stat = false) => {
+export const isLogged = (stat = false, srl = null, user_type = null) => {
 
     if (stat === true) {
 
@@ -272,7 +272,11 @@ export const isLogged = (stat = false) => {
 
             type: types.IS_LOGGED,
             payload: {
-                datas: true
+                datas: {
+                    logged: true,
+                    srl: srl,
+                    user_type: user_type,
+                },
             }
         }
 
@@ -282,7 +286,9 @@ export const isLogged = (stat = false) => {
 
             type: types.IS_LOGGED,
             payload: {
-                datas: false
+                datas: {
+                    logged: false
+                }
             }
         }
     }

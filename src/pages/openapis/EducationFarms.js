@@ -16,12 +16,12 @@ export function EducationFarms() {
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
-    useEffect(() => { // 렌더링 될때마다 실행되는 Hook
+    useEffect( () => { // 렌더링 될때마다 실행되는 Hook
 
         if (loading) {
             getEducationFarms(currentPage, inputSelect, inputText);
-            setLoading(false);
         }
+
     }, [loading, currentPage]);
 
     const getEducationFarms = (page, sType, sText) => {
@@ -52,9 +52,12 @@ export function EducationFarms() {
             });
             setEducationFarms(eduFarm => eduFarm.concat(farms));
 
-            if(currentPage === 1) loadItems();
-
         });
+
+        // if(currentPage === 1) loadItems();
+        setLoading(false);
+
+
     }
 
     const loadItems = () => {

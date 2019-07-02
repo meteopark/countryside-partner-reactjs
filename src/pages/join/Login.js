@@ -28,8 +28,8 @@ class Login extends Component {
             apiLogin: context.server_host + '/api/v1/login',
             isLoading: false,
             schemaDefaultValue : {
-                id: '', // Bot-1559031271832
-                password: '', // 1111
+                id: '',
+                password: '',
                 is_mentor: false,
             }
         }
@@ -53,7 +53,7 @@ class Login extends Component {
     handleClick = () => {
 
         this.setState({ isLoading: true }, () => {
-            return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+            return new Promise(resolve => setTimeout(resolve, 300)).then(() => {
                 this.handleUserLogin();
             });
         });
@@ -71,25 +71,29 @@ class Login extends Component {
         return axios.post(`${this.state.apiLogin}`, formData)
                 .then(response => {
 
-                    if (response.data.stat === 0) {
+                    const res = response.data;
 
-                        this.props.alert.show(response.data.error.message);
+                    if (res.stat === 1) {
+
+                        this.setState({isLoading: false});
+                        this.props.alert.show(res.error.message);
 
                     } else {
 
-                        const res = response.data;
-                        this.props.alert.show('로그인 되었습니다.');
+                        this.props.actions.isLogged(true, res.srl, res.user_type);
                         localStorage.clear();
                         localStorage.setItem('token', res.token);
                         localStorage.setItem('name', res.name);
                         localStorage.setItem('user_type', res.user_type);
                         localStorage.setItem('srl', res.srl);
+                        this.props.alert.show('로그인 되었습니다.');
                         history.push("/");
                     }
 
                 })
                 .catch(error => {
                     console.log("error", error);
+                    this.setState({isLoading: false});
                 });
     }
 

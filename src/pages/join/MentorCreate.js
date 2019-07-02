@@ -134,9 +134,9 @@ class MentorCreate extends Component {
                     this.props.alert.show('등록 되었습니다.');
                     localStorage.setItem('token', res.token);
                     localStorage.setItem('name', res.name);
-                    localStorage.setItem('user_type', 'MENTOR');
+                    localStorage.setItem('user_type', 'mentor');
                     localStorage.setItem('srl', res.mentor_srl);
-                    this.props.actions.isLogged(true);
+                    this.props.actions.isLogged(true, res.mentor_srl, 'mentor');
                     history.push("/");
                 })
                 .catch(error => {

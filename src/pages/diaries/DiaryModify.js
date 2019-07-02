@@ -9,7 +9,7 @@ import * as yup from "yup";
 import * as reactIconFa from "react-icons/fa";
 
 const schema = yup.object({
-    title: yup.string().min(2, '제목을 입력해 주세요.').max(20, '제목을 20자 이하로 넣어주세요').required('제목을 입력해 주세요.'),
+    title: yup.string().min(2, '제목을 입력해 주세요.').max(40, '제목을 40자 이하로 넣어주세요').required('제목을 입력해 주세요.'),
     contents: yup.string().required('내용을 입력해 주세요.'),
 });
 

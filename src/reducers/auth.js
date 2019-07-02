@@ -12,7 +12,11 @@ export const auth = (state = initialState, action) => {
 
             if (action.payload.datas.stat === 0) {
 
-                return {is_logged: true};
+                return {
+                    is_logged: true,
+                    srl: action.payload.datas.response.srl,
+                    user_type: action.payload.datas.response.user_type,
+                };
             }
 
             localStorage.clear();
@@ -20,9 +24,13 @@ export const auth = (state = initialState, action) => {
 
         case types.IS_LOGGED:
 
-            if (action.payload.datas === true) {
+            if (action.payload.datas.logged === true) {
 
-                return {is_logged: true};
+                return {
+                    is_logged: true,
+                    srl: action.payload.datas.srl,
+                    user_type: action.payload.datas.user_type,
+                };
             }
             localStorage.clear();
             return {is_logged: false};
