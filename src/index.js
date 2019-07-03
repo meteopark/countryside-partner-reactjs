@@ -24,8 +24,8 @@ const options = {
 ReactDOM.render(
     <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...options}>
-            {/*<Root />*/}
-            <Splash/>
+            <Root />
+            {/*<Splash/>*/}
         </AlertProvider>
     </Provider>,
     document.getElementById('root')
