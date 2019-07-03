@@ -75,7 +75,6 @@ export default {
         let headers = {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
         };
-
         return fetch(`${API_HOST}${API_CHAT_USER}`,{
             method: 'get',
             headers: headers,

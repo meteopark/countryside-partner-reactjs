@@ -135,7 +135,7 @@ class MenteeCreate extends Component {
                 const res = response.data;
                 this.props.alert.show('등록 되었습니다.');
                 localStorage.setItem('token', res.token);
-                localStorage.setItem('user_type', 'MENTEE');
+                localStorage.setItem('user_type', 'mentee');
                 localStorage.setItem('srl', res.mentee_srl);
                 localStorage.setItem('name', res.name);
 

@@ -22,6 +22,8 @@ export function Mentoring({match, location}) {
     const [scrollHeight, setScrollHeight] = useState(0);
     const [isFirst, setIsFirst] = useState(true);
 
+    let time = 7000;
+
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
 
         if(isFirst){
@@ -30,13 +32,12 @@ export function Mentoring({match, location}) {
 
                 setChatId(match.params.chat_id);
             }
-            setIsFirst(false);
         }
 
         if(chatId !== ""){
             const interval = setInterval(() => {
                 getMessageLists();
-            }, 7000);// 11000
+            }, isFirst === true ? 0 : 7000);// 11000
 
             return () => clearInterval(interval)
         }
@@ -44,6 +45,10 @@ export function Mentoring({match, location}) {
     }, [isFirst, chatId]);
 
     const getMessageLists = () => {
+
+        if(isFirst){
+            setIsFirst(false);
+        }
 
         API.getMessageLists(chatId, 1).then((res) => {
 
