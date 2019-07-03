@@ -10,6 +10,7 @@ import AlertTemplate from 'react-alert-template-basic';
 import './gg-font.css';
 import './bootstrap.css';
 import './index.css';
+import {Splash} from "./pages/Splash";
 
 const options = {
     // you can also just use 'bottom center'
@@ -23,7 +24,8 @@ const options = {
 ReactDOM.render(
     <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...options}>
-            <Root />
+            {/*<Root />*/}
+            <Splash/>
         </AlertProvider>
     </Provider>,
     document.getElementById('root')

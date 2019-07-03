@@ -6,6 +6,7 @@ import {EducationFarmsMain} from "./EducationFarmsMain";
 import {Sns} from "./Sns";
 
 
+
 class Main extends Component {
 
     render() {
@@ -13,14 +14,11 @@ class Main extends Component {
         return (
 
             <div>
-
                 {/*<ControlledCarousel/>*/}
                 <MentorIntroduce />
                 <Sns/><br/>
                 <EducationFarmsMain/>
                 <BestDiaries/><br/>
-
-
             </div>
         );
     }

@@ -124,3 +124,46 @@
 }
 
 
+
+//.splash {
+//  background: #ffffff;
+//  height: 100vh;
+//  width: 100%;
+//  color:$main-color;
+//  .title {
+//    font-family: 'TitleV', sans-serif;
+//    font-weight: bold;
+//    font-size: 7vh;
+//  }
+//  .sub{
+//    //font-family: 'TitleV', sans-serif;
+//    font-size: 1.6vh;
+//    padding-top:400px;
+//  }
+//  img{
+//    width: 120px;
+//    height: 120px;
+//  }
+//}
+
+.splash {
+  background: $main-color;
+  height: 100vh;
+  width: 100%;
+  color:#2D3742;
+  .title {
+    font-family: 'TitleV', sans-serif;
+    font-weight: bold;
+    font-size: 7vh;
+  }
+  .sub{
+    //font-family: 'TitleV', sans-serif;
+    color:#2D3742;
+    font-size: 1.6vh;
+    padding-top:400px;
+  }
+  img{
+    width: 120px;
+    height: 120px;
+  }
+}
