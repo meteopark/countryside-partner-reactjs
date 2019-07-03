@@ -21,9 +21,12 @@ export const MyPage = () => {
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
 
         setWhoAmI(localStorage.getItem('user_type') + "_" + localStorage.getItem('srl'));
-        getUserInfo();
-        getChatLists();
-    }, []);
+
+        if(whoAmI !== null){
+            getUserInfo();
+            getChatLists();
+        }
+    }, [whoAmI]);
 
     const handleClickItem = (e) => {
 

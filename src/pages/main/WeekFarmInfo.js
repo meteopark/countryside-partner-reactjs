@@ -29,7 +29,7 @@ export function WeekFarmInfo() {
                         <Row key={i}>
                             <Col className={styles['col-p-t']}>
                                 ◇ {w.subject}&nbsp;&nbsp;
-                                <a href={w.downUrl} target="_self" className={styles['link']}><reactIconFa.FaFileDownload className={styles['icon']}/>Download</a>
+                                <a href={w.downUrl} target="_self" className={styles['link']}><reactIconFa.FaFileDownload className={styles['icon']}/></a>
                                 <hr/>
                             </Col>
                         </Row>
