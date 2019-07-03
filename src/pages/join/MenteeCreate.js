@@ -38,17 +38,17 @@ class MenteeCreate extends Component {
             isLoading: false,
             daumPostOpen: false,
             schemaDefaultValue: {
-                id: 'Bot-' + Date.now(),
+                id: '',
                 profile_image: '',
-                password: '1111',
-                name: 'Bot-' + Date.now(),
-                birthday: '1984-11-24',
-                sex: 'male',
-                phone: '010-1234-5678',
-                address: '경기도 의정부시 장암 1동',
-                introduce: '영농 꿈나무 입니다.',
-                crops: '콩',
-                target_area: '전라남도',
+                password: '',
+                name: '',
+                birthday: '',
+                sex: '',
+                phone: '',
+                address: '',
+                introduce: '',
+                crops: '',
+                target_area: '',
             }
         }
     }
