@@ -7,7 +7,7 @@ export const MyPageEndit = () => {
 
     return (
         <div>
-            {localStorage.getItem('user_type') === "MENTOR" ? <MyPageEditMentor/> : <MyPageEditMentee/>}
+            {localStorage.getItem('user_type') === "mentor" ? <MyPageEditMentor/> : <MyPageEditMentee/>}
         </div>
     )
 }

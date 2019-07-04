@@ -321,7 +321,6 @@ class MyPageEditMentor extends Component {
                                             isInvalid={!!errors.career}
                                         >
                                             <option value="">선택해 주세요.</option>
-                                            <option value="1년~3년" >1년~3년</option>
                                             <option value="1년~3년">1년~3년</option>
                                             <option value="5년~9년">5년~9년</option>
                                             <option value="10년~14년">10년~14년</option>
@@ -342,8 +341,17 @@ class MyPageEditMentor extends Component {
                                             onChange={(e) => this.handleText(e)}
                                             isInvalid={!!errors.crops}
                                         >
-                                            <option value="" label="선택해 주세요."/>
-                                            <option value="콩" label="콩"/>
+                                            <option value="">선택해 주세요.</option>
+                                            <option value="콩">콩</option>
+                                            <option value="감">감</option>
+                                            <option value="밀">밀</option>
+                                            <option value="밤">밤</option>
+                                            <option value="배">배</option>
+                                            <option value="사과">사과</option>
+                                            <option value="수수">수수</option>
+                                            <option value="옥수수">옥수수</option>
+                                            <option value="조">조</option>
+                                            <option value="팥">팥</option>
                                         </Form.Control>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.crops}
