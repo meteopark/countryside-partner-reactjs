@@ -63,9 +63,9 @@ export const MentorProfile = (props) => {
                                 <Link to={`/mentors/${mentor.mentor_srl}`}
                                       className={styles['link-w']}>{mentor.name} ({mentor.id})</Link>
                                 <br/>
-                                <reactIconFa.FaHome className={styles['icon']}/>
-                                {mentor.address}
-                                <br/>
+                                {/*<reactIconFa.FaHome className={styles['icon']}/>*/}
+                                {/*{mentor.address}*/}
+                                {/*<br/>*/}
                                 <reactIconFa.FaSeedling className={styles['icon']}/>
                                 {mentor.crops}
                                 <br/>

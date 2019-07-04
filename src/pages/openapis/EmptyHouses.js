@@ -51,6 +51,8 @@ class EmptyHouses extends Component {
                 MODI_DT: null
             }
         }
+
+        this.resize = this.resize.bind(this);
     }
 
     handleModal = (house) => {
@@ -248,7 +250,7 @@ class EmptyHouses extends Component {
             this.state.house.dealtypecd
         );
 
-        window.addEventListener("resize", this.resize.bind(this));
+        window.addEventListener("resize", this.resize, false);
         this.resize();
     }
 
@@ -261,6 +263,10 @@ class EmptyHouses extends Component {
         if (prevState.loading === true) {
             this.setState({loading: false})
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize, false);
     }
 }
 

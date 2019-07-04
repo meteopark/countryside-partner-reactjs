@@ -24,6 +24,7 @@ class Machine extends Component {
                 fch_knd: '',
             }
         }
+        this.resize = this.resize.bind(this);
     }
 
 
@@ -123,7 +124,7 @@ class Machine extends Component {
         this.setState({loading: true});
         this.props.actionMachine.machineLists(this.state.search);
 
-        window.addEventListener("resize", this.resize.bind(this));
+        window.addEventListener("resize", this.resize, false);
         this.resize();
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -135,6 +136,10 @@ class Machine extends Component {
         if (prevState.loading === true) {
             this.setState({loading: false})
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize, false);
     }
 }
 

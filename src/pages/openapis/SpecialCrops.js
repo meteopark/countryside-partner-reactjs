@@ -3,13 +3,11 @@ import {bindActionCreators, compose} from 'redux';
 import {connect} from 'react-redux';
 import * as importActionsOpenApi from '../../actions/openapi';
 import styles from './OpenApis.module.scss';
-import {Col, Button, Form, Table, Spinner} from 'react-bootstrap';
+import {Col, Button, Form, Spinner} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
 import {withAlert} from "react-alert";
 import {SpecialCropsPC} from "./SpecialCropsPC";
-import {DictionaryMobile} from "./DictionaryMobile";
-import {DictionaryPC} from "./DictionaryPC";
 import {SpecialCropsMobile} from "./SpecialCropsMobile";
 
 class SpecialCrops extends Component {
@@ -26,6 +24,7 @@ class SpecialCrops extends Component {
                 ctprvn: '제주특별자치도',
             }
         }
+        this.resize = this.resize.bind(this);
     }
 
 
@@ -128,7 +127,7 @@ class SpecialCrops extends Component {
         this.setState({loading: true});
         this.props.requestAction.specialCropsLists(2011, '충청남도');
 
-        window.addEventListener("resize", this.resize.bind(this));
+        window.addEventListener("resize", this.resize, false);
         this.resize();
     }
 
@@ -141,6 +140,10 @@ class SpecialCrops extends Component {
         if (prevState.loading === true) {
             this.setState({loading: false})
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize, false);
     }
 }
 

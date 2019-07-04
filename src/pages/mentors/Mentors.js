@@ -61,7 +61,7 @@ class Mentors extends Component {
                                     <Card.Title className={styles['mentors-title']}>{mentors.profile_image ? <Card.Img src={mentors.profile_image} /> : ""}{mentors.farm_name}</Card.Title>
                                     <Card.Text className={styles['mentors-contents']}>
                                         <reactIconFa.FaUserAlt className={styles['icons']} />{mentors.name}<br/>
-                                        <reactIconFa.FaHome className={styles['icons']} />{mentors.address}<br/>
+                                        {/*<reactIconFa.FaHome className={styles['icons']} />{mentors.address}<br/>*/}
                                         <reactIconFa.FaSeedling className={styles['icons']} />{mentors.crops}<br/>
                                         <reactIconFa.FaTractor className={styles['icons']} />{mentors.career}
                                     </Card.Text>

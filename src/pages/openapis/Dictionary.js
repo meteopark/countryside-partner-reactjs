@@ -21,6 +21,7 @@ class Dictionary extends Component {
             loading: false,
             cl_nm: '농업기반',
         }
+        this.resize = this.resize.bind(this);
     }
 
 
@@ -91,7 +92,7 @@ class Dictionary extends Component {
         this.setState({loading: true});
         this.props.actionDictionary.dictionaryLists(this.state.cl_nm);
 
-        window.addEventListener("resize", this.resize.bind(this));
+        window.addEventListener("resize", this.resize, false);
         this.resize();
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -103,6 +104,10 @@ class Dictionary extends Component {
         if (prevState.loading === true) {
             this.setState({loading: false})
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize, false);
     }
 }
 
