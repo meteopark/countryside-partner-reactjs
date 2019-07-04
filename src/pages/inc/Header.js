@@ -57,8 +57,7 @@ export class Header extends Component {
                                     {this.state.hideNav === false ?
                                         <div className={classNames('container-fluid', styles['custom-container-fluid-top'])}>
                                             <Link to="/" className={styles['link']}>
-                                                <div className={styles['header-title']}><img src="/images/ico/homi.png" alt=""/>시골짝꿍
-                                                </div>
+                                                <div className={styles['header-title']}><img src="/images/ico/homi.png" alt=""/>시골짝꿍</div>
                                             </Link>
                                         </div>
                                         : ""}
