@@ -90,7 +90,7 @@ class Root extends React.Component {
                                 <Route exact path="/machines" component={Machine}/>
                                 <Route exact path="/dictionary" component={Dictionary}/>
                                 <Route exact path="/special-crops" component={SpecialCrops}/>
-                                <Route exact path="/empty-houses" component={EmptyHouses}/>
+                                <Route exact path="/emptyHouses" component={EmptyHouses}/>
                                 <Route exact path="/educationFarms" component={EducationFarms}/>
                                 <Route exact path="/educationFarms/:cntntsNo" component={EducationFarmDetail}/>
                                 /*

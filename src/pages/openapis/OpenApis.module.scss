@@ -1,5 +1,27 @@
 @import "../../index.module";
 
+
+
+.m-row {
+  font-size: 15px;
+  padding-top:20px;
+  padding-bottom:10px;
+  border-bottom: 1px solid $under-line;
+  font-weight: bold;
+
+  span {
+    color:$main-green;
+  }
+  .m-money {
+    font-size: 14px;
+    padding-top:10px;
+    text-align: right;
+    font-weight: normal;
+    color: $main-gray;
+  }
+}
+
+
 .table{
 
   margin-top: 20px;

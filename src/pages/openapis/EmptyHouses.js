@@ -6,6 +6,8 @@ import styles from './OpenApis.module.scss';
 import {Col, Button, Form, Table, Spinner, Modal} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
+import {EmptyHousesPC} from "./EmptyHousesPC";
+import {EmptyHousesMobile} from "./EmptyHousesMobile";
 
 class EmptyHouses extends Component {
 
@@ -15,8 +17,9 @@ class EmptyHouses extends Component {
 
         this.state = {
             loading: false,
+            isMobile: false,
             house: {
-                sidonm: '제주특별자치도',
+                sidonm: '충청남도', // 제주특별자치도
                 dealtypecd: 'DLTC01',
                 gubuncd: 'F',
             },
@@ -100,13 +103,20 @@ class EmptyHouses extends Component {
     }
 
 
+    resize(){
+        let currentHideNav = (window.innerWidth <= 760);
+        if (currentHideNav !== this.state.isMobile) {
+            this.setState({isMobile: currentHideNav});
+        }
+    }
+
     render() {
 
         const areas = [
-            '제주특별자치도', '충청남도', '충청북도', '전라남도', '전라북도',
+            '충청남도', '충청북도', '전라남도', '전라북도',
             '경상남도', '경상북도', '세종특별자치시', '서울특별시', '부산광역시',
             '대구광역시', '인천광역시', '광주광역시', '대전광역시', '울산광역시',
-            '경기도', '강원도'
+            '경기도', '강원도', '제주특별자치도'
         ];
 
         const deal_type = [
@@ -173,12 +183,6 @@ class EmptyHouses extends Component {
                         </Table>
                     </Modal.Body>
                 </Modal>
-
-
-
-
-
-
                 <p className={styles['header-container']}>
                     <reactIconFa.FaHome className={styles['main-icon']}/>
                     농촌 빈집 정보
@@ -218,48 +222,20 @@ class EmptyHouses extends Component {
                         : ""
                     }
                 </Form.Row>
+
+
                 <p className={styles['source']}>농림축산식품 공공데이터포털 OpenAPI (농촌 빈집정보)</p>
-                <Table responsive="sm" className={classNames("text-center", styles['table'])}>
-                    <thead>
-                    <tr className={styles['table-thead-min']}>
-                        <th width={"10%"}>순번</th>
-                        <th width={"40%"}>주소</th>
-                        <th>거래 참고사항</th>
-                        <th width={"15%"}>희망매매가격</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <tr className={styles['no-underline']}>
-
-                    </tr>
-                    {houses.length > 0 ?
-
-                        houses.map((house, i) => (
-
-                            <tr key={i} onClick={() => this.handleModal(house)}>
-                                <td className={classNames(styles['pointer'], styles['table-td-min'])}>{house.ROW_NUM}</td>
-                                <td className={classNames(styles['table-td-min'], styles['left'])}>{(`${house.SIDO_NM} ${house.SIGUN_NM} ${house.ADDR}`)}</td>
-                                <td className={classNames(styles['table-td-min'], styles['left'])}>{house.DEAL_BIGO}</td>
-                                <td className={styles['table-td-min']}>
-                                    {
-                                      !isNaN(house.DEAL_AMOUNT*1) ?
-                                          (house.DEAL_AMOUNT*1).toLocaleString(navigator.language, {minimumFractionDigits: 0})+"원" :
-                                          house.DEAL_AMOUNT
-                                    }
-                                </td>
-                            </tr>
-                        ))
-                        :
-                        <tr>
-                            <td colSpan={4} className={styles['empty-content']}>
-                                결과가 존재하지 않습니다.
-                            </td>
-                        </tr>
-                    }
-
-                    </tbody>
-                </Table>
+                {
+                    this.state.isMobile ?
+                    <EmptyHousesMobile
+                        houses={houses}
+                        handleModal={this.handleModal}
+                    /> :
+                    <EmptyHousesPC
+                        houses={houses}
+                        handleModal={this.handleModal}
+                    />
+                }
 
 
             </div>
@@ -273,6 +249,9 @@ class EmptyHouses extends Component {
             this.state.house.gubuncd,
             this.state.house.dealtypecd
         );
+
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {

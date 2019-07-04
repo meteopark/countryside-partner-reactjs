@@ -15,6 +15,7 @@ class Machine extends Component {
         super(props);
 
         this.state = {
+            isMobile: false,
             loading: false,
             search: {
                 ctprvn: '충청남도',
@@ -36,6 +37,12 @@ class Machine extends Component {
         this.setState({search});
     }
 
+    resize(){
+        let currentHideNav = (window.innerWidth <= 760);
+        if (currentHideNav !== this.state.isMobile) {
+            this.setState({isMobile: currentHideNav});
+        }
+    }
 
     render() {
 
@@ -138,6 +145,9 @@ class Machine extends Component {
     componentDidMount() {
         this.setState({loading: true});
         this.props.actionMachine.machineLists(this.state.search);
+
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         /*

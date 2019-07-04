@@ -1,7 +1,14 @@
 $container-background: #F6F6F6;
 $main-color: #FFBB00;
 $under-line: #E7E7E7;
+$main-gray: #4e555b;
+$main-green: #2F9D27;
 
+
+.selector {
+  padding-top:5px;
+  padding-bottom:5px;
+}
 .wrapper {
   height: 100vh;
   display: flex;
