@@ -3,9 +3,11 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActionsOpenApi from '../../actions/openapi';
 import styles from './OpenApis.module.scss';
-import {Col, Button, Form, Table, Spinner} from 'react-bootstrap';
+import {Col, Button, Form, Spinner} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
+import {DictionaryMobile} from "./DictionaryMobile";
+import {DictionaryPC} from "./DictionaryPC";
 
 
 class Dictionary extends Component {
@@ -15,6 +17,7 @@ class Dictionary extends Component {
         super(props);
 
         this.state = {
+            isMobile: false,
             loading: false,
             cl_nm: '농업기반',
         }
@@ -31,7 +34,12 @@ class Dictionary extends Component {
         this.setState({cl_nm: e.target.value});
     }
 
-
+    resize(){
+        let currentHideNav = (window.innerWidth <= 760);
+        if (currentHideNav !== this.state.isMobile) {
+            this.setState({isMobile: currentHideNav});
+        }
+    }
     render() {
 
         const dictionary = this.props.mapStateToDictionary.lists.filter(d => d.ROW_NUM);
@@ -66,36 +74,12 @@ class Dictionary extends Component {
                     }
                 </Form.Row>
                 <p className={styles['source']}>농림축산식품 공공데이터포털 OpenAPI (우리말 농업용어)</p>
-                <Table responsive="sm" className={classNames("text-center", styles['table'])}>
-                    <thead>
-                    <tr className={styles['table-thead']}>
-                        <th width={"10%"}>순번</th>
-                        <th width={"18%"}>분류</th>
-                        <th width={"20%"}>기존용어</th>
-                        <th width={"20%"}>한자어(원어)</th>
-                        <th>쉬운용어</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {dictionary.length > 0 ?
-                        dictionary.map((d, i) => (
 
-                            <tr key={i}>
-                                <td>{d.ROW_NUM}</td>
-                                <td>{d.CL_NM}</td>
-                                <td>{d.LEGACY_WORD_NM}</td>
-                                <td>{d.SRCLANG_NM}</td>
-                                <td>{d.EASY_WORD_NM}</td>
-                            </tr>
-                        ))
-                        :
-                        <tr>
-                            <td colSpan={5} className={styles['empty-content']}>해당 농업용어가 존재하지 않습니다.</td>
-                        </tr>
-                    }
-
-                    </tbody>
-                </Table>
+                {
+                    this.state.isMobile ?
+                        <DictionaryMobile dictionary={dictionary}/> :
+                        <DictionaryPC dictionary={dictionary}/>
+                }
 
 
             </div>
@@ -105,6 +89,9 @@ class Dictionary extends Component {
     componentDidMount() {
         this.setState({loading: true});
         this.props.actionDictionary.dictionaryLists(this.state.cl_nm);
+
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         /*
