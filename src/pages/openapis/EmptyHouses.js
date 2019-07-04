@@ -236,8 +236,6 @@ class EmptyHouses extends Component {
                         handleModal={this.handleModal}
                     />
                 }
-
-
             </div>
         );
     }
