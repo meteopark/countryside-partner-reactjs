@@ -12,6 +12,7 @@ const Footer = () => {
                 © 2019 <b>METEOPARK</b> All rights reserved.
 
                 <br/><br/>
+                OpenApi 사용처<br/><br/>
                 <img src="/images/banner/mafra_banner.jpg" className={styles['footer_banner']}/>&nbsp;&nbsp;
                 <img src="/images/banner/nongsaro_banner.jpg" className={styles['footer_banner']}/>
             </p>

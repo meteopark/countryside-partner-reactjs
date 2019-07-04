@@ -19,6 +19,21 @@
     font-weight: normal;
     color: $main-gray;
   }
+  .m-sub-title{
+    font-weight: normal;
+    padding-left:10px;
+    padding-top:10px;
+
+    ul {
+      margin:0;
+      li{
+        padding:5px;
+      }
+    }
+    span {
+      color:red;
+    }
+  }
 }
 
 

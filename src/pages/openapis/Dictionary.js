@@ -40,6 +40,7 @@ class Dictionary extends Component {
             this.setState({isMobile: currentHideNav});
         }
     }
+
     render() {
 
         const dictionary = this.props.mapStateToDictionary.lists.filter(d => d.ROW_NUM);
