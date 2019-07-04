@@ -49,7 +49,7 @@ export const MentorProfile = (props) => {
                                 <br/>
 
                                 {
-                                    `MENTOR_${mentor.mentor_srl}` !== `${localStorage.getItem('user_type')}_${localStorage.getItem('srl')}` ?
+                                    `mentor_${mentor.mentor_srl}` !== `${localStorage.getItem('user_type')}_${localStorage.getItem('srl')}` ?
                                         <Button variant="success" className={styles['mentoring-button']}
                                                 onClick={handleToMentoring}>
                                             <reactIconFa.FaPaperPlane className={styles['icon']}/>
@@ -58,7 +58,7 @@ export const MentorProfile = (props) => {
                                 }
                             </Col>
                             <Col className={styles['profile-info']}>
-                                <h1>{mentor.farm_name ? mentor.farm_name : "NULL"}</h1>
+                                <h1 className={styles['h1']}>{mentor.farm_name ? mentor.farm_name : "NULL"}</h1>
                                 <reactIconFa.FaUserAlt className={styles['icon']}/>
                                 <Link to={`/mentors/${mentor.mentor_srl}`}
                                       className={styles['link-w']}>{mentor.name} ({mentor.id})</Link>

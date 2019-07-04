@@ -8,42 +8,39 @@
   background: #ffffff;
 }
 
+
+
 .profile-introduce {
   width: 100%;
-  min-height: auto;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.5);
   color: #ffffff;
 }
-
 .profile-container {
-
   text-align: center;
-
   .mentoring-button {
-
-    margin-top: 20px;
+    margin-top: 10px;
+    font-size: 13px;
   }
-
   .profile-image-container {
-
     margin-top: 20px;
-
     .profile-image {
-
-      border: 1.5px solid #ffffff;
-      width: 140px;
-      height: 140px;
+      border: 1px solid #ffffff;
+      width: 100px;
+      height: 100px;
     }
   }
-
   .profile-info {
+    font-size: 13px;
     text-align: left;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-left: 20px;
-    line-height: 30px;
-    padding-bottom: 20px;
+    line-height: 20px;
+    padding-bottom: 10px;
   }
 }
+
+
+
 
 
 .mentors-cards {
@@ -79,10 +76,36 @@
   border: 1px solid $main-color;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 760px) {
 
-  .profile-info {
-    margin-top: 0px;
-    margin-left: 20px;
+  .profile-introduce {
+    width: 100%;
+    min-height: auto;
+    background: rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+  }
+
+  .profile-container {
+    text-align: center;
+    .mentoring-button {
+      margin-top: 20px;
+    }
+
+    .profile-image-container {
+      margin-top: 20px;
+      .profile-image {
+        border: 1.5px solid #ffffff;
+        width: 140px;
+        height: 140px;
+      }
+    }
+    .profile-info {
+      font-size: 16px;
+      text-align: left;
+      margin-top: 20px;
+      margin-left: 20px;
+      line-height: 30px;
+      padding-bottom: 20px;
+    }
   }
 }
