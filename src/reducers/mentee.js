@@ -22,8 +22,17 @@ export const mentee = (state = initialState, action) => {
         case types.GET_MENTEE:
 
             return {
-                ...state,
                 mentee: action.payload.datas,
+                diaries: {
+                    current_page: 0,
+                    last_page: 0,
+                    data: []
+                },
+                lists: {
+                    current_page: 0,
+                    last_page: 0,
+                    data: []
+                },
             };
 
         case types.MENTEE_LISTS:
