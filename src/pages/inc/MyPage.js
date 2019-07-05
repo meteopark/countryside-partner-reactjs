@@ -57,9 +57,9 @@ export const MyPage = () => {
 
         API.getChatLists().then((res) => {
 
-            res.map((chat) => {
+            let lists = res.map((chat) => {
 
-                let list = {
+                return {
                     id: chat.id,
                     userInfo: whoAmI !== chat.constructor ? chat.participants : chat.constructor,
                     avatar: whoAmI !== chat.constructor ? chat.constructor_image : chat.participants_image,
@@ -68,8 +68,8 @@ export const MyPage = () => {
                     date: new Date(chat.updated_at),
                     unread: 0,
                 };
-                setChatLists(lists => lists.concat(list));
             });
+            setChatLists(lists);
         });
     }
 
