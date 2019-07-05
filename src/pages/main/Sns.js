@@ -76,7 +76,7 @@ export function Sns() {
                     <div
                         className={classNames('container', styles['in-container'], styles['auto-container'], styles['naverblog-color'])}>
                         <p className={styles['header-container']}>
-                            <img src="/images/ico/blog.png" className={styles['image-ico']}/>&nbsp;농촌진흥청 공식 네이버블로그
+                            <img src="/images/ico/blog.png" className={styles['image-ico']} alt="아이콘" />&nbsp;농촌진흥청 공식 네이버블로그
                         </p>
                         {blogRss}
                     </div>
@@ -85,7 +85,7 @@ export function Sns() {
                     <div
                         className={classNames('container', styles['in-container'], styles['auto-container'], styles['twitter-color'])}>
                         <p className={styles['header-container']}>
-                            <img src="/images/ico/twitter.png" className={styles['image-ico']}/>&nbsp;농촌진흥청 공식 트위터
+                            <img src="/images/ico/twitter.png" className={styles['image-ico']} alt="아이콘" />&nbsp;농촌진흥청 공식 트위터
                         </p>
                         {twitter}
                     </div>

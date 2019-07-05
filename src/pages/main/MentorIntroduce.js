@@ -25,7 +25,7 @@ export class MentorIntroduce extends Component {
                         <Card key={i}>
                             <Link className={styles['link']} to={`/mentors/${mentors.mentor_srl}`}>
                                 <div className={styles['image-container']}>
-                                    <Card.Img variant="top" className={styles['image-blank']} src={mentors.profile_image.substring((mentors.profile_image.length)-11) === "homi_bg.png" ? '/images/empty.jpeg' : mentors.profile_image } />
+                                    <Card.Img variant="top" className={styles['image-blank']} src={mentors.profile_image.substring((mentors.profile_image.length)-11) === "homi_bg.png" ? '/images/no-image.png' : mentors.profile_image } />
                                     <Badge variant="warning" className={styles['badge-crops']}>{mentors.crops}</Badge>
                                     <Badge variant="dark" className={styles['badge']} >{mentors.farm_name.substring(0, 6)}{mentors.farm_name.length > 6 ? "..." : ""} ({mentors.career})</Badge>
                                 </div>

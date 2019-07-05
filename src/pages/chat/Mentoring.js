@@ -52,16 +52,16 @@ export function Mentoring({match, location}) {
 
             setNextPageUrl(res.next_page_url);
             setMessageLists([]);
-            res.data.reverse().map((chat) => {
+            const newMessages = res.data.reverse().map((chat) => {
 
-                let newMessage = {
+                return {
                     position: whoami === chat.from ? 'right' : 'left',
                     type: 'text',
                     text: chat.message,
                     date: new Date(chat.created_at)
                 };
-                setMessageLists(messageLists => messageLists.concat(newMessage));
             });
+            setMessageLists(messageLists => messageLists.concat(newMessages));
 
             if(containerRef.current !== null){
                 scrollTo(containerRef.current.scrollHeight);
@@ -83,16 +83,16 @@ export function Mentoring({match, location}) {
         API.getBasicNextPage(nextPageUrl).then((res) => {
 
             let beforeMessage = [];
-            res.data.map(chat => {
+            let moreMessages = res.data.map(chat => {
 
-                let newMessage = {
+                return {
                     position: whoami === chat.from ? 'right' : 'left',
                     type: 'text',
                     text: chat.message,
                     date: new Date(chat.created_at)
                 };
-                beforeMessage.unshift(newMessage);
             });
+            beforeMessage.unshift(moreMessages);
             setNextPageUrl(res.next_page_url);
             setMessageLists(messageLists => beforeMessage.concat(messageLists));
             scrollTo(containerRef.current.scrollHeight-scrollHeight);

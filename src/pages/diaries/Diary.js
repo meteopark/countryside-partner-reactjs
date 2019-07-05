@@ -6,11 +6,6 @@ import {Link} from "react-router-dom";
 
 class Diary extends Component {
 
-    constructor(props) {
-
-        super(props);
-    }
-
     render() {
 
         const {diary} = this.props;

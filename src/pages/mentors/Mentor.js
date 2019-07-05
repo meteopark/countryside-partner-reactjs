@@ -3,7 +3,6 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as importActions from '../../actions';
 import {MentorProfile} from "./MentorProfile";
-import {withRouter} from "react-router-dom";
 import Diaries from "../diaries/Diaries";
 
 

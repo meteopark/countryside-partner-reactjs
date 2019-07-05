@@ -57,7 +57,7 @@ export class Header extends Component {
                                         : ""}
                                     <Navbar.Toggle />
                                     <Link to="/" className={styles['link']}>
-                                        <div className={styles['header-title-m']}><img src="/images/ico/homi.png" alt=""/>시골짝꿍</div>
+                                        <div className={styles['header-title-m']}>시골짝꿍</div>
                                     </Link>
                                 </div>
                                 : <Navbar.Toggle />}

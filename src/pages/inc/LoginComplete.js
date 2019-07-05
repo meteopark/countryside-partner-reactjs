@@ -11,7 +11,7 @@ export function LoginComplete({loginInfo, handleLogOut}){
         <div>
             <Link className={styles['link']} to={`/${loginInfo.user_type}s/${loginInfo.srl}`}>영농일지</Link>&nbsp;&nbsp;&nbsp;&nbsp;
             <Link className={styles['link']} to="/mypage">마이페이지</Link>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a className={styles['link']} onClick={handleLogOut} >로그아웃</a>
+            <span className={styles['link']} onClick={handleLogOut} >로그아웃</span>
         </div>
     )
 }

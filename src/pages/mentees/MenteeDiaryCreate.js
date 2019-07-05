@@ -5,7 +5,6 @@ import * as importActions from '../../actions';
 import axios from "axios";
 import history from "../history";
 import {GlobalsContext} from '../../pages/globals';
-import {withRouter} from "react-router";
 import {withAlert} from "react-alert";
 import DiaryCreate from "../diaries/DiaryCreate";
 import {MenteeProfile} from "./MenteeProfile";
