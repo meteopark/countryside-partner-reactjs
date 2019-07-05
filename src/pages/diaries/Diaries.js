@@ -8,11 +8,6 @@ import * as reactIconFa from "react-icons/fa";
 
 class Diaries extends Component {
 
-    constructor(props) {
-
-        super(props);
-    }
-
     render() {
 
         const {diaries, loadItems, hasMore, user} = this.props;
@@ -49,7 +44,7 @@ class Diaries extends Component {
                             animation="border" variant="success"/></div>}
                         endMessage={
                             <Row className="text-center">
-                                <Col><img src="/images/ico/homi.png" className={styles['homi']}/></Col>
+                                <Col><img src="/images/ico/homi.png" className={styles['homi']} alt="호미"/></Col>
                             </Row>
                         }
                     >

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Row, Col, Image} from 'react-bootstrap';
+import {Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import styles from './Main.module.scss';
 import classNames from 'classnames';

@@ -157,9 +157,9 @@ class EmptyHouses extends Component {
                             <tbody>
                             <tr><td className={styles['modal-td']}>주소</td><td className={styles['modal-td-contents']}>{this.state.modal.addr}</td></tr>
                             <tr><td className={styles['modal-td']}>이미지</td><td className={styles['modal-td-contents']}>
-                                <img src={this.state.modal.FILE_PATH1} className={styles['image']}/>
-                                <img src={this.state.modal.FILE_PATH2} className={styles['image']}/>
-                                <img src={this.state.modal.FILE_PATH3} className={styles['image']}/>
+                                {this.state.modal.FILE_PATH1 ? <img src={this.state.modal.FILE_PATH1} className={styles['image']} alt="이미지1"/> : ""}
+                                {this.state.modal.FILE_PATH2 ? <img src={this.state.modal.FILE_PATH2} className={styles['image']} alt="이미지2"/> : ""}
+                                {this.state.modal.FILE_PATH3 ? <img src={this.state.modal.FILE_PATH3} className={styles['image']} alt="이미지3"/> : ""}
                             </td></tr>
                             <tr><td className={styles['modal-td']}>희망매매가격</td><td className={styles['modal-td-contents']}>{!isNaN(this.state.modal.DEAL_AMOUNT*1) ? (this.state.modal.DEAL_AMOUNT*1).toLocaleString(navigator.language, {minimumFractionDigits: 0})+"원" : this.state.modal.DEAL_AMOUNT}</td></tr>
                             <tr><td className={styles['modal-td']}>전세희망가격</td><td className={styles['modal-td-contents']}>{this.state.modal.LEASE_AMOUNT}</td></tr>
@@ -175,7 +175,7 @@ class EmptyHouses extends Component {
                             <tr><td className={styles['modal-td']}>소유주연락처</td><td className={styles['modal-td-contents']}>{this.state.modal.OWNER_CONTACT}</td></tr>
                             <tr><td className={styles['modal-td']}>정보제공자</td><td className={styles['modal-td-contents']}>{this.state.modal.INSPECTOR}</td></tr>
                             <tr><td className={styles['modal-td']}>참고사항</td><td className={styles['modal-td-contents']}>{this.state.modal.BIGO}</td></tr>
-                            <tr><td className={styles['modal-td']}>상세보기</td><td className={styles['modal-td-contents']}>{ this.state.modal.DETAIL_URL === "" ? "" :<a href={this.state.modal.DETAIL_URL} target="_blank">바로가기</a>}</td></tr>
+                            <tr><td className={styles['modal-td']}>상세보기</td><td className={styles['modal-td-contents']}>{ this.state.modal.DETAIL_URL === "" ? "" :<a href={this.state.modal.DETAIL_URL} target="_blank" rel="noopener noreferrer">바로가기</a>}</td></tr>
                             <tr><td className={styles['modal-td']}>거래협의가능여부</td><td className={styles['modal-td-contents']}>{this.state.modal.DEAL_NEGO_YN}</td></tr>
                             <tr><td className={styles['modal-td']}>빈집 농지 구분</td><td className={styles['modal-td-contents']}>{this.state.modal.GUBUN}</td></tr>
                             <tr><td className={styles['modal-td']}>거래종류</td><td className={styles['modal-td-contents']}>{this.state.modal.DEAL_TYPE}</td></tr>

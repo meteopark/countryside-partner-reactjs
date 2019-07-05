@@ -13,7 +13,7 @@ export function EducationFarmsMain() {
 
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
 
-        const randomPage = Math.floor(Math.random() * 15) + 1;{} // 1 ~ 15
+        const randomPage = Math.floor(Math.random() * 15) + 1; // 1 ~ 15
         getEducationFarms(randomPage, '', '');
 
     }, []);

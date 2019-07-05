@@ -335,6 +335,15 @@ class MenteeCreate extends Component {
                                         >
                                             <option value="">선택해 주세요.</option>
                                             <option value="콩">콩</option>
+                                            <option value="감">감</option>
+                                            <option value="밀">밀</option>
+                                            <option value="밤">밤</option>
+                                            <option value="배">배</option>
+                                            <option value="사과">사과</option>
+                                            <option value="수수">수수</option>
+                                            <option value="옥수수">옥수수</option>
+                                            <option value="조">조</option>
+                                            <option value="팥">팥</option>
                                         </Form.Control>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.crops}

@@ -51,7 +51,7 @@ class Mentees extends Component {
                             <br/></div>}
                         endMessage={
                             <div className="text-center">
-                                <img src="/images/ico/homi.png" className={styles['homi']}/>
+                                <img src="/images/ico/homi.png" className={styles['homi']} alt="호미"/>
                             </div>
                         }
                     >

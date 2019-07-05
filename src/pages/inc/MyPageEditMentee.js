@@ -105,10 +105,9 @@ class MyPageEditMentee extends Component {
         formData.append('sex', this.state.schemaDefaultValue.sex);
         formData.append('phone', this.state.schemaDefaultValue.phone);
         formData.append('address', this.state.schemaDefaultValue.address);
-        formData.append('farm_name', this.state.schemaDefaultValue.farm_name);
-        formData.append('career', this.state.schemaDefaultValue.career);
         formData.append('introduce', this.state.schemaDefaultValue.introduce);
         formData.append('crops', this.state.schemaDefaultValue.crops);
+        formData.append('target_area', this.state.schemaDefaultValue.crops);
 
         const config = {
             headers: {
@@ -301,6 +300,15 @@ class MyPageEditMentee extends Component {
                                         >
                                             <option value="">선택해 주세요.</option>
                                             <option value="콩">콩</option>
+                                            <option value="감">감</option>
+                                            <option value="밀">밀</option>
+                                            <option value="밤">밤</option>
+                                            <option value="배">배</option>
+                                            <option value="사과">사과</option>
+                                            <option value="수수">수수</option>
+                                            <option value="옥수수">옥수수</option>
+                                            <option value="조">조</option>
+                                            <option value="팥">팥</option>
                                         </Form.Control>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.crops}

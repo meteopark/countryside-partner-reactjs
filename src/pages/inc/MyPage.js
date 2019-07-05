@@ -89,7 +89,7 @@ export const MyPage = () => {
                 <hr/>
                 <Row className={styles['mypage-container']}>
                     <Col sm={3} className={classNames('text-center',styles['mypage-row'])}>
-                        <img src={user.profile_image} className={styles['mypage-image']}/>
+                        <img src={user.profile_image} className={styles['mypage-image']} alt="프로필 이미지"/>
                     </Col>
                     <Col>
                         <Row className={styles['mypage-row']}><Col><li>아이디 : {user.id}</li></Col></Row>

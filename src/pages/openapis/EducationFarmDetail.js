@@ -31,18 +31,18 @@ export function EducationFarmDetail({match}) {
                     <tr><td className={styles['modal-td-g']}>주제</td><td className={styles['modal-td-contents']}>{res.thema}</td></tr>
                     <tr><td className={styles['modal-td-g']}>주소</td><td className={styles['modal-td-contents']}>{res.locplc}</td></tr>
                     <tr><td className={styles['modal-td-g']}>지정연도</td><td className={styles['modal-td-contents']}>{res.appnYear}</td></tr>
-                    <tr><td className={styles['modal-td-g']}>홈페이지</td><td className={styles['modal-td-contents']}><a href={res.url} target="_blank">{res.url}</a></td></tr>
+                    <tr><td className={styles['modal-td-g']}>홈페이지</td><td className={styles['modal-td-contents']}><a href={res.url} target="_blank" rel="noopener noreferrer" >{res.url}</a></td></tr>
                     <tr><td className={styles['modal-td-g']}>연락처</td><td className={styles['modal-td-contents']}>{res.telno}</td></tr>
                     <tr><td className={styles['modal-td-g']}>품질인증연도</td><td className={styles['modal-td-contents']}>{res.crtfcYearInfo}</td></tr>
                     <tr><td className={styles['modal-td-g']}>내용</td><td className={styles['modal-td-contents']}>{res.cn}</td></tr>
 
                     <tr><td className={styles['modal-td-g']}>주소 </td><td className={styles['modal-td-contents']}>
-                        <img src={res.imgUrl1} className={styles['image']}/>
-                        <img src={res.imgUrl2} className={styles['image']}/>
-                        <img src={res.imgUrl3} className={styles['image']}/>
-                        <img src={res.imgUrl4} className={styles['image']}/>
-                        <img src={res.imgUrl5} className={styles['image']}/>
-                        <img src={res.imgUrl6} className={styles['image']}/>
+                        <img src={res.imgUrl1} className={styles['image']} alt="이미지"/>
+                        <img src={res.imgUrl2} className={styles['image']} alt="이미지"/>
+                        <img src={res.imgUrl3} className={styles['image']} alt="이미지"/>
+                        <img src={res.imgUrl4} className={styles['image']} alt="이미지"/>
+                        <img src={res.imgUrl5} className={styles['image']} alt="이미지"/>
+                        <img src={res.imgUrl6} className={styles['image']} alt="이미지"/>
                     </td></tr>
                     </tbody>
                 </Table>

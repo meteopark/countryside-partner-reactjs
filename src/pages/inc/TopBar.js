@@ -12,12 +12,6 @@ import history from "../history";
 
 class TopBar extends Component {
 
-     constructor(props){
-
-         super(props);
-
-     }
-
     handleLogOut = () => {
         localStorage.clear();
         this.props.actions.isLogged(false);

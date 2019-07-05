@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
-import {Link, NavLink, Route, Switch} from "react-router-dom";
-import {
-    Form,
-    FormControl,
-    Button,
-    Nav,
-    Navbar
-} from 'react-bootstrap';
+import {Link, NavLink} from "react-router-dom";
+import {Nav, Navbar} from 'react-bootstrap';
 
 import styles from './Header.module.scss';
 import classNames from 'classnames';

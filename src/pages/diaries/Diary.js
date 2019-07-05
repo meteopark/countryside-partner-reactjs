@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as importActions from '../../actions';
 import styles from './Diary.module.scss';
-import {Button, ButtonToolbar, Image} from 'react-bootstrap';
+import {Button, Image} from 'react-bootstrap';
 import classNames from "classnames";
 import {Link} from "react-router-dom";
 

@@ -10,9 +10,7 @@ import axios from 'axios';
 import { withAlert } from 'react-alert'
 import history from '../history';
 import {GlobalsContext} from '../../pages/globals';
-import * as importActions from "../../actions";
-import {bindActionCreators, compose} from 'redux';
-import {connect} from "react-redux";
+import API from "../api/api";
 
 const schema = yup.object({
     id: yup.string().min(5, '아이디를 5자 이상 넣어 주세요.').max(20, '아이디를 20자 이하로 넣어주세요').required('아이디를 입력해 주세요.'),
@@ -23,8 +21,6 @@ const schema = yup.object({
     farm_name: yup.string().required('농장명을 입력해 주세요.'),
     career: yup.string().required('경력을 선택해 주세요.'),
     crops: yup.string().required('주요작물을 선택해 주세요.'),
-
-
 });
 
 class MyPageEditMentor extends Component {
@@ -409,23 +405,14 @@ class MyPageEditMentor extends Component {
                         )}/>
                 </div>
             </div>
-
-
         )
     }
 
     componentDidMount() {
-        this.props.actionMentor.getUserInfo();
-    }
 
-    // 이 메소드는 컴포넌트 초기화 또는 새로운 props를 받았을 때 일어납니다
-    static getDerivedStateFromProps(nextProps, prevState) {
+        API.getUserInfo().then((mentor) => {
 
-        if (nextProps.mapStateToPropsMentor.id !== prevState.schemaDefaultValue.id) {
-
-            let mentor = nextProps.mapStateToPropsMentor;
-
-            return {
+            this.setState({
                 schemaDefaultValue: {
                     id: mentor.id,
                     profile_image: mentor.profile_image,
@@ -439,22 +426,14 @@ class MyPageEditMentor extends Component {
                     introduce: mentor.introduce,
                     crops: mentor.crops,
                 }
-            };
-        }
-
-        return null;
+            })
+        });
     }
+
 }
 
 MyPageEditMentor.contextType = GlobalsContext;
 
-const mapStateToProps = (state) => ({
-    mapStateToPropsMentor: state.user.user,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    actionMentor: bindActionCreators(importActions, dispatch),
-})
-export default compose(withAlert(),connect(mapStateToProps, mapDispatchToProps))(MyPageEditMentor);
+export default withAlert()(MyPageEditMentor);
 
 

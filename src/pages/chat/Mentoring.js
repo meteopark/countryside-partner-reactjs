@@ -22,8 +22,6 @@ export function Mentoring({match, location}) {
     const [scrollHeight, setScrollHeight] = useState(0);
     const [isFirst, setIsFirst] = useState(true);
 
-    let time = 7000;
-
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
 
         if(isFirst){

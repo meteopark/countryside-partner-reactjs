@@ -26,7 +26,7 @@ export function Sns() {
 
                 return (
 
-                    <a href={b.link} target="_blank" key={i} className={styles['link']}>
+                    <a href={b.link} target="_blank" key={i} className={styles['link']} rel="noopener noreferrer" >
                         <Row className={styles['sns-contents-container']}>
                             <Col>
                                 <div className={styles['sns-time']}><small className="text-right">{b.text_created_at}</small></div>
@@ -48,7 +48,7 @@ export function Sns() {
 
                 return (
 
-                    <a href={t.url} target="_blank" key={i} className={styles['link']}>
+                    <a href={t.url} target="_blank" key={i} className={styles['link']} rel="noopener noreferrer" >
                         <Row className={styles['sns-contents-container']}>
                             <Col>
                                 <div className={styles['sns-time']}><small className="text-right">{t.text_created_at}</small></div>
