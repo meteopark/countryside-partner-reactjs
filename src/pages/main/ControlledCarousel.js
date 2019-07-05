@@ -1,42 +1,54 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Carousel} from 'react-bootstrap';
 import styles from './Main.module.scss';
 import classNames from 'classnames';
 
-export class ControlledCarousel extends Component {
+export function ControlledCarousel() {
 
-
-    render() {
-
-        return (
-            <div className={classNames('container', styles['full-width'])}>
-                <Carousel>
-                    <Carousel.Item>
+    return (
+        <div className={classNames('container', styles['full-width'])}>
+            <Carousel>
+                <Carousel.Item>
+                    <a href="http://www.mafra.go.kr/mafra/1246/subview.do" target="_blank" rel="noopener noreferrer">
                         <img
-                            height="300px"
-                            className="d-block w-100"
-                            src="http://www.welchon.com/upload/2013/05/18/79869481845947687247_thumbnail1.jpg"
-                            alt="First slide"
+                            className={classNames("d-block", "w-100", styles['cc-banner'])}
+                            src="/images/banner/banner1.jpg"
+                            alt="slide1"
                         />
                         <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            {/*<h3>First slide label</h3>*/}
+                            {/*<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>*/}
                         </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
+                    </a>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <a href="http://www.mafra.go.kr/FMD-AI/1510/subview.do" target="_blank" rel="noopener noreferrer">
                         <img
-                            height="300px"
-                            className="d-block w-100"
-                            src="http://www.welchon.com/upload/2013/04/09/79869590845248258632_thumbnail1.jpg"
-                            alt="Second slide"
+                            className={classNames("d-block", "w-100", styles['cc-banner'])}
+                            src="/images/banner/banner2.jpg"
+                            alt="slide2"
                         />
-                        <Carousel.Caption>
-                            <h3>Second slide label</h3>
-                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
-            </div>
-        );
-    }
+                    </a>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <a href="http://www.mafra.go.kr/mafra/2115/subview.do" target="_blank" rel="noopener noreferrer">
+                        <img
+                            className={classNames("d-block", "w-100", styles['cc-banner'])}
+                            src="/images/banner/banner3.jpg"
+                            alt="slide3"
+                        />
+                    </a>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <a href="https://www.together100.go.kr" target="_blank" rel="noopener noreferrer">
+                        <img
+                            className={classNames("d-block", "w-100", styles['cc-banner'])}
+                            src="/images/banner/banner4.jpg"
+                            alt="slide4"
+                        />
+                    </a>
+                </Carousel.Item>
+            </Carousel>
+        </div>
+    );
 }

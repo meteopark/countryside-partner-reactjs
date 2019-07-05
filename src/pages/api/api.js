@@ -12,7 +12,7 @@ const OPEN_API_EDUCATION_FARMS = "/api/openapi/educationFarms";
 const OPEN_API_WEEK_FARM_INFO = "/api/openapi/weekFarmInfo";
 const OPEN_API_SNS = "/api/openapi/sns";
 
-console.log('server... ', API_HOST);
+// console.log('server... ', API_HOST);
 
 export default {
 
