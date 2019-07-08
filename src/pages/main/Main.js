@@ -12,7 +12,7 @@ export function Main(){
         <div>
             <ControlledCarousel/>
             <MentorIntroduce />
-            <Sns/><br/>
+            <Sns/>
             <EducationFarmsMain/>
             <BestDiaries/><br/>
         </div>

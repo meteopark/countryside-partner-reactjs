@@ -3,6 +3,7 @@ import {Row, Col} from 'react-bootstrap';
 import styles from './Main.module.scss';
 import classNames from 'classnames';
 import API from "../api/api";
+import * as reactIconFa from "react-icons/fa";
 
 
 export function Sns() {
@@ -66,15 +67,22 @@ export function Sns() {
     }
 
     const styleContainer = {
-        padding: 0,
+        marginTop:'20px',
+        paddingBottom:'20px',
+        paddingTop:'20px',
+        backgroundColor: '#ffffff'
     };
 
     return (
-        <div className={classNames('container')} style={styleContainer}>
+
+
+        <div className={classNames('container', styles['in-container'])} style={styleContainer}>
+
+            <p className={styles['header-container']}><reactIconFa.FaRss className={styles['main-icon']}/>SNS</p>
             <Row className="justify-content-md-center">
                 <Col sm>
                     <div
-                        className={classNames('container', styles['in-container'], styles['auto-container'], styles['naverblog-color'])}>
+                        className={classNames('container', styles['in-container-two-row'], styles['auto-container'], styles['naverblog-color'])}>
                         <p className={styles['header-container']}>
                             <img src="/images/ico/blog.png" className={styles['image-ico']} alt="아이콘" />&nbsp;농촌진흥청 공식 네이버블로그
                         </p>
@@ -83,7 +91,7 @@ export function Sns() {
                 </Col>
                 <Col sm>
                     <div
-                        className={classNames('container', styles['in-container'], styles['auto-container'], styles['twitter-color'])}>
+                        className={classNames('container', styles['in-container-two-row'], styles['auto-container'], styles['twitter-color'])}>
                         <p className={styles['header-container']}>
                             <img src="/images/ico/twitter.png" className={styles['image-ico']} alt="아이콘" />&nbsp;농촌진흥청 공식 트위터
                         </p>

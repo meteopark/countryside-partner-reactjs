@@ -11,12 +11,21 @@ import {WeekFarmInfo} from "./WeekFarmInfo";
 export function BestDiaries() {
 
     const [bestDiaries, setBestDiaries] = useState([]);
+    const [isMobile, setMobile] = useState(false);
+    const [isFirst, setFirst] = useState(true);
 
     useEffect(() => { // 렌더링 될때마다 실행되는 Hook
 
-        getBestDiaries();
+        if(isFirst){
+            getBestDiaries();
+            setFirst(false);
+        }
 
-    }, []);
+        window.addEventListener("resize", resize, false);
+        return () => window.removeEventListener("resize", resize);
+
+
+    }, [isMobile]);
 
     const getBestDiaries = () => {
 
@@ -44,12 +53,15 @@ export function BestDiaries() {
         });
     }
 
-    const styleContainer = {
-        padding:0,
-    };
+    const resize = () => {
+        let currentHideNav = (window.innerWidth <= 760);
+        if (currentHideNav !== isMobile) {
+            setMobile(currentHideNav);
+        }
+    }
 
     return (
-        <div className={classNames('container')} style={styleContainer}>
+        <div className={classNames('container')} style={!isMobile ? {padding: '0'}: {}} >
             <Row className="justify-content-md-center">
                 <Col sm>
                     <div className={classNames('container', styles['in-container'], styles['auto-container'])}>
