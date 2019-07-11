@@ -1,3 +1,7 @@
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
@@ -9,9 +13,6 @@ import AlertTemplate from 'react-alert-template-basic';
 import './gg-font.css';
 import './bootstrap.css';
 import './index.css';
-
-import 'promise-polyfill/src/polyfill';
-
 
 
 
@@ -34,3 +35,5 @@ ReactDOM.render(
 );
 
 serviceWorker.unregister();
+
+
