@@ -49,7 +49,7 @@ class Root extends React.Component {
                     <Header/>
                     <div className={styles['wrapper']}>
                         {/*<SideNav />*/}
-                        <div className={styles['main']}>
+                        <main role="main">
                             <Switch>
 
                                 {this.props.mapStateToPropsAuth.is_logged && <Route exact path="/mentees/:mentee/create" component={MenteeDiaryCreate}/>}
@@ -88,7 +88,7 @@ class Root extends React.Component {
                             <div className={styles['float-button-position']}>
                                 <div className={styles['float-button']} onClick={() => {this.scrollToTop();}}><reactIconFa.FaChevronUp/></div>
                             </div>
-                        </div>
+                        </main>
                         <Footer/>
                     </div>
                 </div>

@@ -14,14 +14,26 @@ $main-green: #2F9D27;
   padding-bottom:5px;
 }
 .wrapper {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  //height: 100vh;
+  //display: flex;
+  //flex-direction: column;
+
+
+  //position:relative;
+  min-height:100%;
+
+
 }
-.main {
+main {
+  //display:block;
   flex: 1;
+  min-height:80vh;
 }
+
 footer {
+  //position:absolute;
+  bottom:0;
+
   padding-top:20px;
   padding-bottom: 10px;
   margin-top: 1rem;
