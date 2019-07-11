@@ -10,16 +10,8 @@ import './gg-font.css';
 import './bootstrap.css';
 import './index.css';
 
+import 'promise-polyfill/src/polyfill';
 
-import 'core-js/es6/map';
-import 'core-js/es6/set';
-import 'raf/polyfill';
-import 'core-js/es6/string';
-
-
-import 'react-app-polyfill/ie9';
-import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
 
 
 
