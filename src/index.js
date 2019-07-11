@@ -4,15 +4,24 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from "react-redux";
 import {store} from "./store";
 import Root from "./pages/Root";
-import 'react-app-polyfill/ie9';
-import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
-
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import './gg-font.css';
 import './bootstrap.css';
 import './index.css';
+
+
+import 'core-js/es6/map';
+import 'core-js/es6/set';
+import 'raf/polyfill';
+import 'core-js/es6/string';
+
+
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+
+
 
 const options = {
     // you can also just use 'bottom center'
