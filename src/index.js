@@ -4,7 +4,8 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from "react-redux";
 import {store} from "./store";
 import Root from "./pages/Root";
-
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import './gg-font.css';
