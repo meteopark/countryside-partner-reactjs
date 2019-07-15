@@ -33,7 +33,6 @@ import {MyPageEndit} from "./inc/MyPageEdit";
 import {EducationFarms} from "./openapis/EducationFarms";
 import {EducationFarmDetail} from "./openapis/EducationFarmDetail";
 
-
 class Root extends React.Component {
 
     scrollToTop = () => {

@@ -133,8 +133,13 @@ class Login extends Component {
                                     type="text"
                                     name="id"
                                     placeholder="아이디"
+                                    value={this.state.schemaDefaultValue.id}
                                     onChange={(e) => this.handleForm(e, 'text')}
+                                    isInvalid={!!errors.id}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.id}
+                                </Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group controlId="password">
@@ -142,8 +147,13 @@ class Login extends Component {
                                     type="password"
                                     name="password"
                                     placeholder="바밀번호"
+                                    value={this.state.schemaDefaultValue.password}
                                     onChange={(e) => this.handleForm(e, 'text')}
+                                    isInvalid={!!errors.password}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.password}
+                                </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group controlId="is_mentor">
                                 <Form.Check

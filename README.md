@@ -25,5 +25,4 @@ Google Play : https://play.google.com/store/apps/details?id=com.kr.countrysidepa
 * Redux
 
 ## 개발후기
-<!-- 첫번째 토이프로젝트에서는 리액트를 stackoverflow 로 배웠습니다. 필요한 부분만 검색해서 -->
 
