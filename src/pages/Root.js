@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Router, Route, Switch} from "react-router-dom";
 import {Main} from "./main/Main";
 import TopBar from "./inc/TopBar";
@@ -33,7 +33,7 @@ import {MyPageEndit} from "./inc/MyPageEdit";
 import {EducationFarms} from "./openapis/EducationFarms";
 import {EducationFarmDetail} from "./openapis/EducationFarmDetail";
 
-class Root extends React.Component {
+class Root extends Component {
 
     scrollToTop = () => {
         window.scrollTo(0, 0);
@@ -43,7 +43,7 @@ class Root extends React.Component {
 
         return (
             <Router history={history}>
-                <div className={styles['wrapper']}>
+            <div className={styles['wrapper']}>
                     <TopBar/>
                     <Header/>
                     <div className={styles['wrapper']}>
