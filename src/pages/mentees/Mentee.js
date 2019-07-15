@@ -5,6 +5,7 @@ import * as importActions from '../../actions';
 import {withRouter} from "react-router-dom";
 import Diaries from "../diaries/Diaries";
 import {MenteeProfile} from "./MenteeProfile";
+import API from "../api/api";
 
 
 class Mentee extends Component {
@@ -13,25 +14,21 @@ class Mentee extends Component {
 
         super(props);
         this.state = {
-            hasMore: true
+            hasMore: true,
+            diaries: [],
+            current_page: 1,
+            last_page: 1,
         }
     }
 
     loadItems = () => {
-
-        const {actionMentee, match, mapStateToPropsMenteeDiaries} = this.props;
-
-        if (mapStateToPropsMenteeDiaries.last_page === mapStateToPropsMenteeDiaries.current_page) this.setState({hasMore: false});
-
-        setTimeout(() => {
-            actionMentee.getMenteeDiaries(match.params.mentee, mapStateToPropsMenteeDiaries.current_page + 1);
-        }, 500);
+        if (this.state.last_page === this.state.current_page) this.setState({hasMore: false});
+        this.getMenteeDiaries(this.props.match.params.mentee, this.state.current_page + 1);
     }
 
     render() {
 
         const mentee = this.props.mapStateToPropsMentee;
-        const diaries = this.props.mapStateToPropsMenteeDiaries;
 
         return (
 
@@ -40,43 +37,34 @@ class Mentee extends Component {
                 <Diaries
                     hasMore={this.state.hasMore}
                     user={mentee}
-                    diaries={diaries}
+                    diaries={this.state.diaries}
                     loadItems={this.loadItems}
                 />
-
-
             </div>
         );
     }
 
     componentDidMount() {
-
         const {actionMentee, match} = this.props;
         actionMentee.getMentee(match.params.mentee);
-        actionMentee.getMenteeDiaries(match.params.mentee, 1);
-
-
-
+        this.getMenteeDiaries(match.params.mentee, 1);
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     /*
-    //     이 API는 컴포넌트에서 render() 를 호출하고난 다음에 발생하게 됩니다. 이 시점에선 this.props 와 this.state 가 바뀌어있습니다.
-    //     그리고 파라미터를 통해 이전의 값인 prevProps 와 prevState 를 조회 할 수 있습니다.
-    //     그리고, getSnapshotBeforeUpdate 에서 반환한 snapshot 값은 세번째 값으로 받아옵니다.
-    //      */
-    //     if (this.props.match.params.mentee !== prevProps.match.params.mentee) {
-    //
-    //         const {actionMentee, match} = this.props;
-    //         actionMentee.getMentee(match.params.mentee);
-    //         actionMentee.getMenteeDiaries(match.params.mentee, 1);
-    //     }
-    // }
+    getMenteeDiaries = async (mentee, page) => {
+
+        const res = await API.getMenteeDiaries(mentee, page);
+
+        this.setState({
+            diaries: this.state.diaries.concat(res.data),
+            current_page: res.current_page,
+            last_page: res.last_page,
+        });
+    }
+
 }
 
 const mapStateToProps = (state) => ({
     mapStateToPropsMentee: state.mentee.mentee,
-    mapStateToPropsMenteeDiaries: state.mentee.diaries
 })
 
 const mapDispatchToProps = (dispatch) => ({

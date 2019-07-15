@@ -54,41 +54,6 @@ export const mainLists = () => {
     }
 }
 
-export const menteeLists = (page) => {
-
-    return (dispatch) => {
-
-        return axios.get(`${API_HOST}${API_MENTEES}?page=${page}`)
-
-            .then(response => {
-
-                dispatch(Success(response.data, types.MENTEE_LISTS))
-            })
-            .catch(error => {
-                console.log("error : menteeLists() " , error);
-                throw(error);
-
-            });
-    }
-}
-
-export const mentorLists = (page) => {
-
-    return (dispatch) => {
-
-        return axios.get(`${API_HOST}${API_MENTORS}?page=${page}`)
-
-            .then(response => {
-
-                dispatch(Success(response.data, types.MENTOR_LISTS))
-            })
-            .catch(error => {
-                console.log("error : mentors() " , error);
-                throw(error);
-
-            });
-    }
-}
 export const getMentee = (mentee) => {
 
     return (dispatch) => {
@@ -157,45 +122,6 @@ export const getUserInfo = () => {
             });
     }
 }
-
-export const getMenteeDiaries = (mentee, page) => {
-
-    return (dispatch) => {
-
-        const url = `${API_HOST}${API_MENTEES}/${mentee}/diaries?page=${page}`;
-
-        return axios.get(url)
-            .then(response => {
-
-                dispatch(Success(response.data, types.MENTEE_DIARIES));
-            })
-            .catch(error => {
-
-                console.log("error : getMenteeDiaries() " , error);
-                throw(error);
-
-            });
-    }
-}
-export const getMentorDiaries = (mentor, page) => {
-
-    return (dispatch) => {
-
-        return axios.get(`${API_HOST}${API_MENTOR_DIARIES}/${mentor}/articles?page=${page}`)
-
-            .then(response => {
-
-                dispatch(Success(response.data, types.MENTOR_DIARIES));
-            })
-            .catch(error => {
-
-                console.log("error : getMentorDiaries() " , error);
-                throw(error);
-
-            });
-    }
-}
-
 
 export const getMenteeDiary = (mentee, diary_id) => {
 

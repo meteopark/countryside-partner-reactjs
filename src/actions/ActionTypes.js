@@ -1,5 +1,4 @@
 export const MAIN_LISTS = "MAIN_LISTS";
-export const MENTOR_LISTS = "MENTOR_LISTS";
 export const MENTEE_LISTS = "MENTEE_LISTS";
 export const GET_USER = "GET_USER";
 export const GET_MENTOR = "GET_MENTOR";

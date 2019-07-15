@@ -13,7 +13,6 @@ class Diaries extends Component {
         const {diaries, loadItems, hasMore, user} = this.props;
 
         return (
-
             <div className={classNames('container', styles['blog-container'])}>
 
                 <div className={styles['blog-header']}>
@@ -33,13 +32,13 @@ class Diaries extends Component {
                     }
                 </div>
 
-                {diaries.data.length < 1 ?
+                {diaries.length < 1 ?
                     <div className={styles['empty-content']}><Col>등록 된 일지가 없습니다.</Col></div>
                     :
                     <InfiniteScroll
-                        dataLength={diaries.data.length}
+                        dataLength={diaries.length}
                         next={loadItems}
-                        hasMore={diaries.data.length < 1 ? false : hasMore}
+                        hasMore={diaries.length < 1 ? false : hasMore}
                         loader={<div className={classNames("text-center", styles['infinite-loader'])}><Spinner
                             animation="border" variant="success"/></div>}
                         endMessage={
@@ -48,7 +47,7 @@ class Diaries extends Component {
                             </Row>
                         }
                     >
-                        {diaries.data.map((diary, i) => (
+                        {diaries.map((diary, i) => (
                             <Link
                                 className={styles['link']}
                                 to={`/${diary.user_type}s/${diary.srl}/diaries/${diary.diary_srl}`}

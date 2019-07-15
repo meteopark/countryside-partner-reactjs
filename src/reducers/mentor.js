@@ -36,22 +36,6 @@ export const mentor = (state = initialState, action) => {
                 },
             };
 
-        case types.MENTOR_LISTS:
-
-            return {
-
-                ...state,
-                lists: {
-                    ...state.lists,
-                    current_page: action.payload.datas.current_page,
-                    data: [
-                        ...state.lists.data,
-                        ...action.payload.datas.data
-                    ],
-                    last_page: action.payload.datas.last_page,
-                }
-            };
-
         case types.MENTOR_DIARIES:
 
             return {

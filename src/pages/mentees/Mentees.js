@@ -1,35 +1,32 @@
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as importActions from '../../actions';
 import styles from '../mentees/Mentees.module.scss';
 import {Link} from 'react-router-dom';
 import {CardColumns, Card, Spinner} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
 import InfiniteScroll from "react-infinite-scroll-component";
+import API from "../api/api";
 
 class Mentees extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            hasMore: true
+            hasMore: true,
+            mentees: [],
+            current_page: 1,
+            last_page: 1,
         }
     }
 
     loadItems = () => {
 
-        const {mentee, getMains} = this.props;
-        if (mentee.lists.last_page === mentee.lists.current_page) this.setState({hasMore: false});
-        setTimeout(() => {
-            getMains.menteeLists(mentee.lists.current_page + 1);
-        }, 1000);
+        if (this.state.last_page <= this.state.current_page) this.setState({hasMore: false});
+
+        this.getMentees(this.state.current_page + 1);
     }
 
     render() {
-
-        const {mentee} = this.props;
 
         return (
 
@@ -42,9 +39,9 @@ class Mentees extends Component {
                 <CardColumns bsPrefix={'card-columns-custom'}>
 
                     <InfiniteScroll
-                        dataLength={mentee.lists.data.length}
+                        dataLength={this.state.mentees.length}
                         next={this.loadItems}
-                        hasMore={mentee.lists.data.length < 1 ? false : this.state.hasMore}
+                        hasMore={this.state.mentees.length < 1 ? false : this.state.hasMore}
                         loader={<div><br/>
                             <div className={classNames("text-center", styles['infinite-loader'])}><Spinner
                                 animation="border" variant="success"/></div>
@@ -56,13 +53,13 @@ class Mentees extends Component {
                         }
                     >
 
-                        {mentee.lists.data.map((m, i) => (
+                        {this.state.mentees.map((m, i) => (
 
                             <Link className={classNames(styles['link'])} to={`/mentees/${m.mentee_srl}`} key={i}>
                                 <Card className={styles['mentors-cards']}>
                                     <Card.Body>
                                         <Card.Title className={styles['mentors-title']}>
-                                            {m.profile_image ? <Card.Img src={m.profile_image} /> : ""}
+                                            {m.profile_image ? <Card.Img src={m.profile_image}/> : ""}
                                             {m.name}</Card.Title>
                                         <Card.Text className={styles['mentors-contents']}>
                                             {m.introduce}<br/>
@@ -83,19 +80,19 @@ class Mentees extends Component {
 
     componentDidMount() {
 
-        const {getMains} = this.props;
-        getMains.menteeLists(1);
+        this.getMentees(1);
+    }
+
+    getMentees = async (page) => {
+
+        const res = await API.getMentees(page);
+
+        this.setState({
+            mentees: this.state.mentees.concat(res.data),
+            current_page: res.current_page,
+            last_page: res.last_page,
+        });
     }
 }
 
-const mapStateToProps = (state) => ({
-
-    mentee: state.mentee
-})
-
-const mapDispatchToProps = (dispatch) => ({
-
-    getMains: bindActionCreators(importActions, dispatch),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Mentees);
+export default Mentees;
