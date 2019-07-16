@@ -36,6 +36,7 @@ class Mentors extends Component {
                 <CardColumns bsPrefix={'card-columns-custom'}>
 
                     <InfiniteScroll
+                        className={styles['infinite-scroll']}
                         dataLength={this.state.mentors.length}
                         next={this.loadItems}
                         hasMore={this.state.mentors.length < 1 ? false : this.state.hasMore}
