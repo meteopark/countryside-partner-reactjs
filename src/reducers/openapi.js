@@ -9,13 +9,6 @@ export const openapi = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case types.OPENAPI_MACHINE:
-
-            return {
-
-                lists: action.payload.datas,
-            };
-
         case types.OPENAPI_DICTIONARY:
 
             return {

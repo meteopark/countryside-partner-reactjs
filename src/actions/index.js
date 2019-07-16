@@ -1,13 +1,10 @@
 import axios from 'axios';
 import * as types from './ActionTypes';
 import {GlobalsContext} from "../pages/globals";
-
 const API_HOST = GlobalsContext._currentValue.server_host;
-
 const API_MAIN = '/api/v1/main';
 const API_MENTORS = '/api/v1/mentors';
 const API_MENTEES = '/api/v1/mentees';
-const API_MENTOR_DIARIES = '/api/v1/diaries-mentors'; // {mentor_srl}/articles
 const API_DIARY  = '/api/v1/diaries-mentors/articles'; // {diary_srl}
 const API_AUTH_CHECK = '/api/v1/auth'; // {diary_srl}
 const API_USERS = '/api/v1/users';

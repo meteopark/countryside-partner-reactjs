@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as importActionsOpenApi from '../../actions/openapi';
 import styles from './OpenApis.module.scss';
 import {Col, Button, Form, Spinner} from 'react-bootstrap';
 import classNames from "classnames";
 import * as reactIconFa from "react-icons/fa";
 import {MachinePC} from "./MachinePC";
 import {MachineMobile} from "./MachineMobile";
+import API from "../api/api";
 
 
 class Machine extends Component {
@@ -19,6 +17,7 @@ class Machine extends Component {
         this.state = {
             isMobile: false,
             loading: false,
+            machines: [],
             search: {
                 ctprvn: '충청남도',
                 fch_knd: '',
@@ -30,7 +29,7 @@ class Machine extends Component {
 
     handleSearch = () => {
         this.setState({loading: true})
-        this.props.actionMachine.machineLists(this.state.search);
+        this.getMachineLists(this.state.search);
     }
 
     handleChange = (e) => {
@@ -49,7 +48,7 @@ class Machine extends Component {
 
     render() {
 
-        const machines = this.props.mapStateToMachine.lists.filter(m => m.ROW_NUM);
+        // const machines = this.props.mapStateToMachine.lists.filter(m => m.ROW_NUM);
 
         return (
 
@@ -111,8 +110,8 @@ class Machine extends Component {
                 <p className={styles['source']}>농림축산식품 공공데이터포털 OpenAPI (전국 농기계 현황)</p>
                 {
                     this.state.isMobile ?
-                        <MachineMobile machines={machines}/> :
-                        <MachinePC machines={machines}/>
+                        <MachineMobile machines={this.state.machines}/> :
+                        <MachinePC machines={this.state.machines}/>
                 }
 
 
@@ -122,11 +121,20 @@ class Machine extends Component {
 
     componentDidMount() {
         this.setState({loading: true});
-        this.props.actionMachine.machineLists(this.state.search);
+        this.getMachineLists(this.state.search);
 
         window.addEventListener("resize", this.resize, false);
         this.resize();
     }
+
+    getMachineLists = async (search) => {
+
+        const res = await API.getMachineLists(search);
+        this.setState({
+            machines: res.Grid_20141119000000000080_1.row,
+        });
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         /*
         이 API는 컴포넌트에서 render() 를 호출하고난 다음에 발생하게 됩니다. 이 시점에선 this.props 와 this.state 가 바뀌어있습니다.
@@ -143,14 +151,4 @@ class Machine extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-
-    mapStateToMachine: state.openapi,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-
-    actionMachine: bindActionCreators(importActionsOpenApi, dispatch),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Machine);
+export default Machine;

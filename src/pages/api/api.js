@@ -12,7 +12,7 @@ const API_MENTEES = "/api/v1/mentees";
 const OPEN_API_EDUCATION_FARMS = "/api/openapi/educationFarms";
 const OPEN_API_WEEK_FARM_INFO = "/api/openapi/weekFarmInfo";
 const OPEN_API_SNS = "/api/openapi/sns";
-
+const OPEN_API_MACHINE = '/api/openapi/machines';
 // console.log('server... ', API_HOST);
 
 export default {
@@ -91,7 +91,7 @@ export default {
     },
 
     getOpenApiEducationFarms: (page, sType, sText) => { // 농촌교육농장
-        return fetch(`${API_HOST}${OPEN_API_EDUCATION_FARMS}?page=${page}&sType=${sType}&sText=${sText}`).then(
+        return fetch(`${API_HOST}${OPEN_API_EDUCATION_FARMS}?page=${page}&sType=${encodeURI(sType)}&sText=${encodeURI(sText)}`).then(
             res => res.json()
         );
     },
@@ -136,6 +136,16 @@ export default {
         return fetch(`${API_HOST}${API_MENTORS}/${mentor}/diaries?page=${page}`).then(
             res => res.json()
         );
+    },
+
+    getMachineLists: (search) => {
+
+        let apiAdd = "?CTPRVN="+encodeURI(search.ctprvn);
+        if(search.fch_knd !== "") apiAdd += "&FCH_KND="+encodeURI(search.fch_knd);
+
+        return fetch(`${API_HOST}${OPEN_API_MACHINE}${apiAdd}`).then(res => {
+            return res.json();
+        });
     },
 
 
