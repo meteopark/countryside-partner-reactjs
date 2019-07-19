@@ -14,12 +14,8 @@ Google Play : https://play.google.com/store/apps/details?id=com.kr.countrysidepa
 ## 주요기능
 * 각 회원별 영농일지(블로그) 개설
 * 멘토와 멘티의 멘토링을 위한 채팅
-* 최신 농업소식을 구독할 수 있도록 외부데이터 적극활용 ( 농림축산식품부/농촌진흥청 OpenAPI, 트위터, 네이버블로그 Rss )
+* 최신 농업소식을 구독할 수 있도록 외부데이터 활용 ( 농림축산식품부/농촌진흥청 OpenAPI, 트위터, 네이버블로그 Rss )
 
 ## 개발
 * ReactJs ( State Hook, Effect Hook, Redux )
 * react-bootstrap
-
-## 개발후기
-지난 2019년 3월 주말동안 리액트 재직자 교육(4주)을 통해 배운 지식은 기반으로 약 3개월(프론트+백엔드) 걸려 완성한 프로젝트 입니다.
-
