@@ -12,6 +12,7 @@ Google Play : https://play.google.com/store/apps/details?id=com.kr.countrysidepa
 농업사회 발전과 성공적인 귀농을 위해 해당 분야의 전문가(멘토)와 예비 귀농인(멘티)을 이어주는 서비스
 
 ## 주요기능
+* 회원가입
 * 각 회원별 영농일지(블로그) 개설
 * 멘토와 멘티의 멘토링을 위한 채팅
 * 최신 농업소식을 구독할 수 있도록 외부데이터 활용 ( 농림축산식품부/농촌진흥청 OpenAPI, 트위터, 네이버블로그 Rss )
